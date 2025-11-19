@@ -43,6 +43,9 @@ blueprints = files(
   'ui/widgets/message/global_message_textview.blp',
   'ui/widgets/message/global_action_stack.blp',
   'ui/widgets/message/global_footer.blp',
+  'ui/widgets/attachments/attachment_container.blp',
+  'ui/widgets/attachments/global_attachment_button.blp',
+  'ui/widgets/tools/selector.blp',
 )
 
 blueprints = custom_target('blueprints',

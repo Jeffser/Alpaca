@@ -39,7 +39,7 @@ class ModelCreatorDialog(Adw.Dialog):
 
         self.context_attachment_button.connect('clicked', lambda *_: self.context_attachment_container.get_child().attachment_request(True))
 
-        self.context_attachment_container.set_child(attachments.GlobalAttachmentContainer())
+        self.context_attachment_container.set_child(attachments.AttachmentContainer())
         self.context_attachment_container.get_child().force_dialog = True
         self.context_attachment_container.get_child().set_margin_bottom(10)
 

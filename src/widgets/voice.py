@@ -159,7 +159,7 @@ class DictateToggleButton(Gtk.Stack):
 class MicrophoneButton(Gtk.Stack):
     __gtype_name__ = 'AlpacaMicrophoneButton'
 
-    def __init__(self, text_view):
+    def __init__(self, text_view=None):
         self.text_view = text_view
 
         super().__init__(
@@ -181,6 +181,9 @@ class MicrophoneButton(Gtk.Stack):
             self.set_sensitive(False)
 
         self.pulling_model = None
+
+    def set_text_view(self, text_view):
+        self.text_view = text_view
 
     def toggled(self, button):
         global loaded_whisper_models

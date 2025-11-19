@@ -1,0 +1,8 @@
+using Gtk 4.0;
+
+template $AlpacaToolSelector: Gtk.DropDown {
+  factory: Gtk.SignalListItemFactory {
+    setup => $on_item_setup();
+    bind => $on_item_bind();
+  };
+}

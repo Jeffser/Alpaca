@@ -1,0 +1,21 @@
+using Gtk 4.0;
+
+template $AlpacaGlobalAttachmentButton: Gtk.Button {
+  vexpand: false;
+  valign: center;
+  icon-name: "chain-link-loose-symbolic";
+  tooltip-text: _("Attach File");
+  styles [
+    "circular"
+  ]
+  clicked => $request_attachment();
+
+  Gtk.GestureClick {
+    button: 3;
+    released => $show_popup();
+  }
+
+  Gtk.GestureLongPress {
+    pressed => $show_popup();
+  }
+}

@@ -1,0 +1,15 @@
+using Gtk 4.0;
+
+template $AlpacaAttachmentContainer: Gtk.ScrolledWindow {
+  hexpand: true;
+  vscrollbar-policy: never;
+  visible: false;
+  vexpand-set: true;
+  valign: start;
+  propagate-natural-width: true;
+
+  child: Gtk.Box container {
+    spacing: 10;
+    valign: start;
+  };
+}

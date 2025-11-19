@@ -3,27 +3,18 @@ from gi.repository import Gtk, GObject, Gio, Adw
 import importlib.util
 from .tools import Base
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/tools/selector.ui')
 class ToolSelector(Gtk.DropDown):
     __gtype_name__ = 'AlpacaToolSelector'
 
     def __init__(self):
-        factory = Gtk.SignalListItemFactory()
-        factory.connect('setup', self.on_item_setup)
-        factory.connect('bind', self.on_item_bind)
-
-        super().__init__(
-            factory=factory,
-            model=Gio.ListStore.new(Base),
-            css_classes=['raised']
-        )
+        super().__init__()
+        self.set_model(Gio.ListStore.new(Base))
 
         for t in Base.__subclasses__():
             if all(importlib.util.find_spec(lib) for lib in t.required_libraries) or len(t.required_libraries) == 0:
                 self.get_model().append(t())
 
-        self.connect('realize', lambda *_: self.on_realize())
-
-    def on_realize(self):
         list(list(self)[1].get_child())[1].set_propagate_natural_width(True)
         list(self)[0].add_css_class('flat')
 
@@ -37,9 +28,11 @@ class ToolSelector(Gtk.DropDown):
             self.set_selected(0)
             self.set_tooltip_text(_('Selected Model is Not Compatible With Tools'))
 
+    @Gtk.Template.Callback()
     def on_item_setup(self, factory, item):
         item.set_child(Adw.Bin())
 
+    @Gtk.Template.Callback()
     def on_item_bind(self, factory, item):
         item_data = item.get_item()
         icon = Gtk.Image.new_from_icon_name(

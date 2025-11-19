@@ -508,49 +508,31 @@ class GlobalActionStack(Gtk.Stack):
 class GlobalFooter(Gtk.Box):
     __gtype_name__ = 'AlpacaGlobalFooter'
 
+    attachment_container = Gtk.Template.Child()
     message_text_view_container = Gtk.Template.Child()
     message_text_view = Gtk.Template.Child()
     action_stack = Gtk.Template.Child()
-    wrap_box = Gtk.Template.Child()
+    attachment_button = Gtk.Template.Child()
+    microphone_button = Gtk.Template.Child()
+    model_manager_shortcut = Gtk.Template.Child()
+    model_selector = Gtk.Template.Child()
+    tool_selector = Gtk.Template.Child()
 
     def __init__(self, send_callback:callable, hide_mm_shortcut:bool=False):
-        settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
         self.send_callback = send_callback
         super().__init__()
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.connect('drop', self.on_file_drop)
         self.add_controller(drop_target)
 
-        self.attachment_container = attachments.GlobalAttachmentContainer()
-        self.prepend(self.attachment_container)
+        self.microphone_button.set_text_view(self.message_text_view)
+        self.attachment_button.set_attachment_container(self.attachment_container)
 
-        self.attachment_button = attachments.GlobalAttachmentButton()
-        self.wrap_box.append(self.attachment_button)
-
-        self.microphone_button = voice.MicrophoneButton(self.message_text_view)
-        self.wrap_box.append(self.microphone_button)
-
-        self.model_manager_shortcut = Gtk.Button(
-            icon_name='brain-augemnted-symbolic',
-            valign=3,
-            css_classes=['circular'],
-            tooltip_text=_("Manage Models"),
-            action_name="app.model_manager",
-            visible=not hide_mm_shortcut
-        )
+        settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
         settings.bind('show-model-manager-shortcut', self.model_manager_shortcut, 'visible', Gio.SettingsBindFlags.DEFAULT)
-        self.wrap_box.append(self.model_manager_shortcut)
 
-        self.model_selector = models.added.AddedModelSelector()
-        self.model_selector.set_hexpand(True)
-        self.model_selector.set_halign(1)
         self.model_selector.connect('notify::selected', lambda dropdown, gparam: self.tool_selector.model_changed(dropdown))
-        self.action_stack.set_sensitive(False)
         models.added.model_selector_model.connect('notify::n-items', lambda m, p: self.action_stack.set_sensitive(len(m) > 0))
-        self.wrap_box.append(self.model_selector)
-
-        self.tool_selector = tools.ToolSelector()
-        self.wrap_box.append(self.tool_selector)
 
     def on_file_drop(self, drop_target, value, x, y):
         files = value.get_files()

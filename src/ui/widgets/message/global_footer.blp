@@ -7,7 +7,10 @@ template $AlpacaGlobalFooter: Gtk.Box {
   styles [
     "p10"
   ]
-  //TODO when GlobalAttachmentContainer is blp put it here instead of prepend in code
+
+  Adw.Bin {
+    child: $AlpacaAttachmentContainer attachment_container {};
+  }
 
   Gtk.Box message_text_view_container {
     overflow: hidden;
@@ -26,15 +29,45 @@ template $AlpacaGlobalFooter: Gtk.Box {
     }
 
     Adw.Bin {
-      child: $AlpacaGlobalActionStack action_stack {};
+      child: $AlpacaGlobalActionStack action_stack {
+        sensitive: false;
+      };
     }
   }
 
-  Adw.WrapBox wrap_box {
+  Adw.WrapBox {
     child-spacing: 10;
     line-spacing: 10;
     justify-last-line: true;
 
-    //TODO once ready add globalattachmentbutton microphonebutton modelmanagershortcut modelselector and toolselector
+    Adw.Bin {
+      child: $AlpacaGlobalAttachmentButton attachment_button {};
+    }
+
+    Adw.Bin {
+      child: $AlpacaMicrophoneButton microphone_button {};
+    }
+
+    Adw.Bin {
+      child: Gtk.Button model_manager_shortcut {
+        icon-name: "brain-augemnted-symbolic";
+        valign: center;
+        tooltip-text: _("Manage Models");
+        action-name: "app.model_manager";
+        styles [
+          "circular"
+        ]
+      };
+    }
+
+    Adw.Bin {
+      child: $AlpacaAddedModelSelector model_selector {};
+      hexpand: true;
+      halign: start;
+    }
+
+    Adw.Bin {
+      child: $AlpacaToolSelector tool_selector {};
+    }
   }
 }

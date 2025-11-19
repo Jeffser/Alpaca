@@ -122,7 +122,7 @@ class AddedModelDialog(Adw.Dialog):
         if self.model.data.get('system'):
             system = self.model.data.get('system')
 
-            attachment_container = attachments.GlobalAttachmentContainer()
+            attachment_container = attachments.AttachmentContainer()
             self.context_attachment_container.set_child(attachment_container)
 
             pattern = re.compile(r"```(.+?)\n(.*?)```", re.DOTALL)

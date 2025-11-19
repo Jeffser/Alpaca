@@ -669,27 +669,12 @@ class ImageAttachment(Gtk.Button):
         popup.set_pointing_to(rect)
         popup.popup()
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/attachments/attachment_container.ui')
 class AttachmentContainer(Gtk.ScrolledWindow):
     __gtype_name__ = 'AlpacaAttachmentContainer'
 
     force_dialog = False
-
-    def __init__(self):
-        self.container = Gtk.Box(
-            orientation=0,
-            spacing=10,
-            valign=1
-        )
-
-        super().__init__(
-            hexpand=True,
-            child=self.container,
-            vscrollbar_policy=2,
-            visible=False,
-            vexpand_set=True,
-            valign=1,
-            propagate_natural_width=True
-        )
+    container = Gtk.Template.Child()
 
     def get_content(self) -> list:
         files = []
@@ -705,44 +690,6 @@ class AttachmentContainer(Gtk.ScrolledWindow):
     def add_attachment(self, attachment:Attachment) -> None:
         self.set_visible(True)
         self.container.append(attachment)
-
-class ImageAttachmentContainer(Gtk.ScrolledWindow):
-    __gtype_name__ = 'AlpacaImageAttachmentContainer'
-
-    force_dialog = False
-
-    def __init__(self):
-        self.container = Gtk.Box(
-            orientation=0,
-            spacing=12
-        )
-
-        super().__init__(
-            height_request=240,
-            min_content_width=240,
-            child=self.container,
-            visible=False
-        )
-
-    def get_content(self) -> list:
-        files = []
-        for f in list(self.container):
-            files.append({
-                'id': f.get_name(),
-                'name': f.file_name,
-                'type': f.file_type,
-                'content': f.file_content
-            })
-        return files
-
-    def add_attachment(self, attachment:ImageAttachment) -> None:
-        self.set_visible(True)
-        self.container.append(attachment)
-
-class GlobalAttachmentContainer(AttachmentContainer):
-    __gtype_name__ = 'AlpacaGlobalAttachmentContainer'
-
-    force_dialog = False
 
     def attach_website(self, url:str):
         GLib.idle_add(self.get_root().global_footer.remove_text, url)
@@ -872,33 +819,67 @@ class GlobalAttachmentContainer(AttachmentContainer):
             None
         )
 
+class ImageAttachmentContainer(Gtk.ScrolledWindow):
+    __gtype_name__ = 'AlpacaImageAttachmentContainer'
+
+    force_dialog = False
+
+    def __init__(self):
+        self.container = Gtk.Box(
+            orientation=0,
+            spacing=12
+        )
+
+        super().__init__(
+            height_request=240,
+            min_content_width=240,
+            child=self.container,
+            visible=False
+        )
+
+    def get_content(self) -> list:
+        files = []
+        for f in list(self.container):
+            files.append({
+                'id': f.get_name(),
+                'name': f.file_name,
+                'type': f.file_type,
+                'content': f.file_content
+            })
+        return files
+
+    def add_attachment(self, attachment:ImageAttachment) -> None:
+        self.set_visible(True)
+        self.container.append(attachment)
+
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/attachments/global_attachment_button.ui')
 class GlobalAttachmentButton(Gtk.Button):
     __gtype_name__ = 'AlpacaGlobalAttachmentButton'
 
     def __init__(self):
-        super().__init__(
-            vexpand=False,
-            valign=3,
-            icon_name='chain-link-loose-symbolic',
-            css_classes=['circular'],
-            tooltip_text=_('Attach File')
-        )
-        self.connect('clicked', lambda button: self.get_root().global_footer.attachment_container.attachment_request())
-        gesture_click = Gtk.GestureClick(button=3)
-        gesture_click.connect("released", lambda gesture, _n_press, x, y: self.show_popup(gesture, x, y))
-        self.add_controller(gesture_click)
-        gesture_long_press = Gtk.GestureLongPress()
-        gesture_long_press.connect("pressed", self.show_popup)
-        self.add_controller(gesture_long_press)
+        super().__init__()
+        self.attachment_container = None
 
-    def show_popup(self, gesture, x, y):
+    def set_attachment_container(self, attachment_container):
+        self.attachment_container = attachment_container
+
+    @Gtk.Template.Callback()
+    def request_attachment(self, button=None):
+        self.attachment_container.attachment_request()
+
+    @Gtk.Template.Callback()
+    def show_popup(self, *args):
         rect = Gdk.Rectangle()
-        rect.x, rect.y, = x, y
+        if len(args) == 4:
+            rect.x, rect.y = args[2], args[3]
+        else:
+            rect.x, rect.y = args[1], args[2]
+
         actions = [
             [
                 {
                     'label': _('Attach File'),
-                    'callback': lambda: self.get_root().global_footer.attachment_container.attachment_request(),
+                    'callback': self.request_attachment,
                     'icon': 'document-text-symbolic'
                 },
                 {
@@ -907,7 +888,7 @@ class GlobalAttachmentButton(Gtk.Button):
                         parent=self.get_root(),
                         heading=_('Attach Website? (Experimental)'),
                         body=_('Please enter a website URL'),
-                        callback=self.get_root().global_footer.attachment_container.attach_website,
+                        callback=self.attachment_container.attach_website,
                         entries={'placeholder': 'https://jeffser.com/alpaca/'}
                     ),
                     'icon': 'globe-symbolic'
@@ -918,14 +899,14 @@ class GlobalAttachmentButton(Gtk.Button):
                         parent=self.get_root(),
                         heading=_('Attach YouTube Captions?'),
                         body=_('Please enter a YouTube video URL'),
-                        callback=lambda url: threading.Thread(target=self.get_root().global_footer.attachment_container.attach_youtube, args=(url,), daemon=True).start(),
+                        callback=lambda url: threading.Thread(target=self.attachment_container.attach_youtube, args=(url,), daemon=True).start(),
                         entries={'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'}
                     ),
                     'icon': 'play-symbolic'
                 },
                 {
                     'label': _('Attach Screenshot'),
-                    'callback': lambda: self.get_root().global_footer.attachment_container.request_screenshot(),
+                    'callback': lambda: self.attachment_container.request_screenshot(),
                     'icon': 'image-x-generic-symbolic'
                 },
                 {
