@@ -488,7 +488,8 @@ class OllamaManaged(BaseInstance):
             'HSA_OVERRIDE_GFX_VERSION': '',
             'CUDA_VISIBLE_DEVICES': '0',
             'ROCR_VISIBLE_DEVICES': '1',
-            'HIP_VISIBLE_DEVICES': '1'
+            'HIP_VISIBLE_DEVICES': '1',
+            'OLLAMA_VULKAN': '1'
         },
         'think': False,
         'expose': False,

@@ -43,6 +43,7 @@ class InstancePreferencesDialog(Adw.Dialog):
     override_1_el = Gtk.Template.Child()
     override_2_el = Gtk.Template.Child()
     override_3_el = Gtk.Template.Child()
+    override_4_el = Gtk.Template.Child()
 
     model_group = Gtk.Template.Child()
     model_directory_el = Gtk.Template.Child()
@@ -106,7 +107,7 @@ class InstancePreferencesDialog(Adw.Dialog):
             self.keep_alive_selector_el.get_ancestor(Adw.PreferencesGroup).set_visible(True)
 
         # OVERRIDES GROUP
-        for el in [self.override_0_el, self.override_1_el, self.override_2_el, self.override_3_el]:
+        for el in [self.override_0_el, self.override_1_el, self.override_2_el, self.override_3_el, self.override_4_el]:
             self.set_simple_element_value(el)
 
         #MODEL GROUP
