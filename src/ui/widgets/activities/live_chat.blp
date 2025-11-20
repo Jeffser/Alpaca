@@ -22,47 +22,41 @@ template $AlpacaLiveChat: Adw.Bin {
 
       [overlay]
       Gtk.ScrolledWindow {
-        child: Adw.Clamp {
-          maximum-size: 1000;
-          tightening-threshold: 800;
-          child: Gtk.Box {
-            orientation: vertical;
+        child: Gtk.Box {
+          orientation: vertical;
 
-            Adw.Bin {
-              vexpand: true;
-              child: Gtk.Overlay {
-                margin-top: 20;
-                margin-bottom: 20;
+          Adw.Bin {
+            vexpand: true;
+            child: Gtk.Overlay {
+              margin-top: 50;
+              margin-bottom: 20;
+              valign: center;
+              halign: center;
+              overflow: hidden;
+              styles [
+                "model_pfp"
+              ]
+              child: Adw.Avatar pfp_avatar {
                 valign: center;
-                halign: center;
+                size: 200;
+              };
+
+              [overlay]
+              Adw.Spinner pfp_spinner {
+                visible: false;
                 overflow: hidden;
                 styles [
-                  "model_pfp"
+                  "osd"
                 ]
-                child: Adw.Avatar pfp_avatar {
-                  valign: center;
-                  size: 200;
-                };
+              }
+            };
+          }
 
-                [overlay]
-                Adw.Spinner pfp_spinner {
-                  visible: false;
-                  overflow: hidden;
-                  styles [
-                    "osd"
-                  ]
-                }
-              };
-            }
-
-            Adw.Bin microphone_container {
-              valign: end;
-            }
-
-            Adw.Bin global_footer_container {
-              valign: end;
-            }
-          };
+          Adw.Clamp {
+            maximum-size: 1000;
+            tightening-threshold: 800;
+            child: $AlpacaGlobalFooter global_footer {};
+          }
         };
       }
     };

@@ -458,6 +458,9 @@ class GlobalActionStack(Gtk.Stack):
     @Gtk.Template.Callback()
     def use_default_mode(self, button=None):
         parent_footer = self.get_ancestor(GlobalFooter)
+        if not parent_footer.send_callback:
+            return
+
         selected_tool = parent_footer.tool_selector.get_selected_item()
         if selected_tool.runnable:
             parent_footer.send_callback(0, {selected_tool.name: selected_tool})
@@ -468,6 +471,9 @@ class GlobalActionStack(Gtk.Stack):
 
     @Gtk.Template.Callback()
     def show_popup(self, *args):
+        if not self.get_ancestor(GlobalFooter).send_callback:
+            return
+
         rect = Gdk.Rectangle()
         if len(args) == 4:
             rect.x, rect.y = args[2], args[3]
@@ -508,8 +514,8 @@ class GlobalFooter(Gtk.Box):
     tool_selector = Gtk.Template.Child()
     wrap_box = Gtk.Template.Child()
 
-    def __init__(self, send_callback:callable):
-        self.send_callback = send_callback
+    def __init__(self):
+        self.send_callback = None
         super().__init__()
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.connect('drop', self.on_file_drop)
@@ -523,6 +529,9 @@ class GlobalFooter(Gtk.Box):
 
         self.model_selector.selector.connect('notify::selected', lambda dropdown, gparam: self.tool_selector.model_changed(dropdown))
         models.added.model_selector_model.connect('notify::n-items', lambda m, p: self.action_stack.set_sensitive(len(m) > 0))
+
+    def set_send_callback(self, send_callback:callable):
+        self.send_callback = send_callback
 
     def on_file_drop(self, drop_target, value, x, y):
         files = value.get_files()
@@ -540,4 +549,5 @@ class GlobalFooter(Gtk.Box):
         current_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
         current_text = current_text.replace(text, '')
         buffer.set_text(current_text, len(current_text.encode('utf-8')))
+
 

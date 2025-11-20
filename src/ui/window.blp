@@ -228,9 +228,10 @@ template $AlpacaWindow: Adw.ApplicationWindow {
                     }
                   }
 
-                  Adw.Clamp global_footer_container {
+                  Adw.Clamp {
                     maximum-size: 1000;
                     tightening-threshold: 800;
+                    child: $AlpacaGlobalFooter global_footer {};
                   }
                 }
               };

@@ -33,10 +33,7 @@ template $AlpacaQuickAskWindow: Adw.ApplicationWindow {
       Adw.Clamp global_footer_container {
         maximum-size: 1000;
         tightening-threshold: 800;
-
-        styles [
-          "bottom_clamp",
-        ]
+        child: $AlpacaGlobalFooter global_footer {};
       }
     };
   }

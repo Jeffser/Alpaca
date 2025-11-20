@@ -57,7 +57,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     toast_overlay = Gtk.Template.Child()
     chat_bin = Gtk.Template.Child()
     chat_list_navigationview = Gtk.Template.Child()
-    global_footer_container = Gtk.Template.Child()
+    global_footer = Gtk.Template.Child()
     model_searchbar = Gtk.Template.Child()
     searchentry_models = Gtk.Template.Child()
     model_search_button = Gtk.Template.Child()
@@ -453,8 +453,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.model_searchbar.connect('notify::search-mode-enabled', lambda *_: self.model_search_changed(self.searchentry_models))
 
         # Global Footer
-        self.global_footer = Widgets.message.GlobalFooter(self.send_message)
-        self.global_footer_container.set_child(self.global_footer)
+        self.global_footer.set_send_callback(self.send_message)
         self.set_focus(self.global_footer.message_text_view)
 
         self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")

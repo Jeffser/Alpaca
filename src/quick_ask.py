@@ -21,7 +21,7 @@ class QuickAskWindow(Adw.ApplicationWindow):
 
     toast_overlay = Gtk.Template.Child()
     save_button = Gtk.Template.Child()
-    global_footer_container = Gtk.Template.Child()
+    global_footer = Gtk.Template.Child()
 
     # tts
     message_dictated = None
@@ -119,9 +119,8 @@ class QuickAskWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.global_footer = Widgets.message.GlobalFooter(self.send_message)
+        self.global_footer.set_send_callback(self.send_message)
         self.global_footer.model_manager_shortcut.set_visible(False)
-        self.global_footer_container.set_child(self.global_footer)
 
         self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
         self.set_focus(self.global_footer.message_text_view)

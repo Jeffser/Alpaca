@@ -18,8 +18,7 @@ class LiveChat(Adw.Bin):
     background = Gtk.Template.Child()
     pfp_avatar = Gtk.Template.Child()
     pfp_spinner = Gtk.Template.Child()
-    microphone_container = Gtk.Template.Child()
-    global_footer_container = Gtk.Template.Child()
+    global_footer = Gtk.Template.Child()
 
     show_messages_button = Gtk.Template.Child()
     close_button = Gtk.Template.Child()
@@ -45,19 +44,17 @@ class LiveChat(Adw.Bin):
         list(self.sheet)[2].set_margin_end(10)
 
         # Prepare Global Footer
-        self.global_footer = message.GlobalFooter(self.send_message)
+        self.global_footer.set_send_callback(self.send_message)
         self.global_footer.model_manager_shortcut.set_visible(False)
         self.global_footer.wrap_box.set_wrap_policy(0)
         self.global_footer.attachment_button.set_visible(False)
         self.global_footer.action_stack.set_visible(False)
         self.global_footer.tool_selector.set_visible(False)
-        self.global_footer.microphone_button.unparent()
         self.global_footer.wrap_box.prepend(self.show_messages_button)
         self.global_footer.wrap_box.append(self.close_button)
         self.global_footer.model_selector.selector.connect('notify::selected', self.model_dropdown_changed)
         GLib.idle_add(self.model_dropdown_changed, self.global_footer.model_selector.selector)
         self.global_footer.model_selector.set_halign(3)
-        self.global_footer_container.set_child(self.global_footer)
 
         # Prepare Text To Speech
         self.global_footer.microphone_button.button.add_css_class('circular')
@@ -65,7 +62,8 @@ class LiveChat(Adw.Bin):
         self.global_footer.microphone_button.button.get_child().set_icon_size(2)
         self.global_footer.microphone_button.button.remove_css_class('br0')
         self.global_footer.microphone_button.set_halign(3)
-        self.microphone_container.set_child(self.global_footer.microphone_button)
+        self.global_footer.microphone_button.unparent()
+        self.global_footer.prepend(self.global_footer.microphone_button )
 
         # Prepare Avatar
         self.model_avatar_animation = Adw.TimedAnimation(
