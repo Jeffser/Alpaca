@@ -452,8 +452,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.model_searchbar.connect_entry(self.searchentry_models)
         self.model_searchbar.connect('notify::search-mode-enabled', lambda *_: self.model_search_changed(self.searchentry_models))
 
-        # Global Footer
-        self.global_footer.set_send_callback(self.send_message)
         self.set_focus(self.global_footer.message_text_view)
 
         self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")

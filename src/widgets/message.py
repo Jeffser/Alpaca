@@ -7,7 +7,8 @@ import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GtkSource, Spelling
 import os, datetime, threading, sys, base64, logging, re, tempfile
 from ..sql_manager import prettify_model_name, generate_uuid, format_datetime, Instance as SQL
-from . import attachments, blocks, dialog, voice, tools, models, chat
+from . import attachments, blocks, dialog, voice, tools, models, chat, activities
+
 
 logger = logging.getLogger(__name__)
 
@@ -529,9 +530,14 @@ class GlobalFooter(Gtk.Box):
 
         self.model_selector.selector.connect('notify::selected', lambda dropdown, gparam: self.tool_selector.model_changed(dropdown))
         models.added.model_selector_model.connect('notify::n-items', lambda m, p: self.action_stack.set_sensitive(len(m) > 0))
+        GLib.idle_add(self.set_send_callback)
 
-    def set_send_callback(self, send_callback:callable):
-        self.send_callback = send_callback
+    def set_send_callback(self):
+        live_chat = self.get_ancestor(activities.LiveChat)
+        if live_chat:
+            self.send_callback = live_chat.send_message
+        else:
+            self.send_callback = self.get_root().send_message
 
     def on_file_drop(self, drop_target, value, x, y):
         files = value.get_files()

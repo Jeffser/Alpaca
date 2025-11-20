@@ -67,7 +67,7 @@ template $AlpacaChat: Gtk.Stack {
               "accent"
             ]
           }
-          Gtk.Button {
+          Gtk.Button use_template_button {
             label: _("Use Template");
             tooltip-text: _("Use Template");
             clicked => $show_template_selector();

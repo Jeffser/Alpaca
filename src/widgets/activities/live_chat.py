@@ -44,7 +44,6 @@ class LiveChat(Adw.Bin):
         list(self.sheet)[2].set_margin_end(10)
 
         # Prepare Global Footer
-        self.global_footer.set_send_callback(self.send_message)
         self.global_footer.model_manager_shortcut.set_visible(False)
         self.global_footer.wrap_box.set_wrap_policy(0)
         self.global_footer.attachment_button.set_visible(False)

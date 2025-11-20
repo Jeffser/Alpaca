@@ -28,7 +28,11 @@ template $AlpacaQuickAskWindow: Adw.ApplicationWindow {
     content: Box {
       orientation: vertical;
 
-      Adw.ToastOverlay toast_overlay {}
+      Adw.ToastOverlay toast_overlay {
+        child: $AlpacaChat chat {
+          name: _("Quick Ask");
+        };
+      }
 
       Adw.Clamp global_footer_container {
         maximum-size: 1000;

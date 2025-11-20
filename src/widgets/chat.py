@@ -353,6 +353,7 @@ class Chat(Gtk.Stack):
     container = Gtk.Template.Child()
     prompt_container = Gtk.Template.Child()
     welcome_screen = Gtk.Template.Child()
+    use_template_button = Gtk.Template.Child()
 
     def __init__(self, chat_id:str=None, name:str=_("New Chat"), folder_id:str=None, is_template=False):
         super().__init__()
@@ -362,6 +363,7 @@ class Chat(Gtk.Stack):
         self.folder_id = folder_id
         self.is_template = is_template
         self.row = ChatRow(self)
+        self.use_template_button.set_visible(bool(self.chat_id))
         GLib.idle_add(self.update_prompts)
 
     def stop_message(self):

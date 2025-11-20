@@ -19,7 +19,7 @@ class QuickAskWindow(Adw.ApplicationWindow):
 
     __gtype_name__ = 'AlpacaQuickAskWindow'
 
-    toast_overlay = Gtk.Template.Child()
+    chat = Gtk.Template.Child()
     save_button = Gtk.Template.Child()
     global_footer = Gtk.Template.Child()
 
@@ -34,9 +34,8 @@ class QuickAskWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def save_chat(self, button):
-        chat = self.toast_overlay.get_child()
-        new_chat = self.get_application().get_main_window().get_chat_list_page().new_chat(chat.get_name())
-        for message in list(chat.container):
+        new_chat = self.get_application().get_main_window().get_chat_list_page().new_chat(self.chat.get_name())
+        for message in list(self.chat.container):
             SQL.insert_or_update_message(message, new_chat.chat_id)
             for attachment in list(message.attachment_container.container) + list(message.image_attachment_container.container):
                 SQL.insert_or_update_attachment(message, attachment)
@@ -77,14 +76,12 @@ class QuickAskWindow(Adw.ApplicationWindow):
 
         buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
 
-        chat = self.toast_overlay.get_child()
-
         m_element = Widgets.message.Message(
             dt=datetime.now(),
             message_id=generate_uuid(),
             mode=mode*2
         )
-        chat.add_message(m_element)
+        self.chat.add_message(m_element)
 
         for old_attachment in list(self.global_footer.attachment_container.container):
             attachment = m_element.add_attachment(
@@ -104,8 +101,8 @@ class QuickAskWindow(Adw.ApplicationWindow):
                 mode=1,
                 author=current_model
             )
-            chat.add_message(m_element_bot)
-            chat.busy=True
+            self.chat.add_message(m_element_bot)
+            self.chat.busy=True
             if len(available_tools) > 0:
                 threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, available_tools, True), daemon=True).start()
             else:
@@ -119,18 +116,12 @@ class QuickAskWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.global_footer.set_send_callback(self.send_message)
         self.global_footer.model_manager_shortcut.set_visible(False)
 
         self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
         self.set_focus(self.global_footer.message_text_view)
 
-        chat = Widgets.chat.Chat(
-            name=_('Quick Ask')
-        )
-        chat.set_visible_child_name('welcome-screen')
-        self.chat_bin = Adw.Bin(child=chat)
-        self.toast_overlay.set_child(self.chat_bin)
+        self.chat.set_visible_child_name('welcome-screen')
         if self.get_application().args.ask:
             self.write_and_send_message(self.get_application().args.ask)
             
