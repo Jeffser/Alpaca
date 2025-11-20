@@ -108,6 +108,7 @@ class BlockContainer(Gtk.Box):
     def __init__(self):
         super().__init__()
         self.generating_block = None
+        self.thinking_block = None
 
     def prepare_generating_block(self):
         """
@@ -132,21 +133,7 @@ class BlockContainer(Gtk.Box):
         self.clear()
         message = self.get_ancestor(Message)
 
-        #Thought
-        think_pattern = r'(<think>(.*?)</think>)|(<\|begin_of_thought\|>(.*?)<\|end_of_thought\|>)'
-        matches = re.findall(think_pattern, content, flags=re.DOTALL)
-        for thought in [m[1].strip() if m[1] else m[3].strip() for m in matches]:
-            attachment = attachments.Attachment(
-                generate_uuid(),
-                _('Thought'),
-                'thought',
-                thought
-            )
-            message.attachment_container.add_attachment(attachment)
-            SQL.insert_or_update_attachment(message, attachment)
-
-        clean_content = re.sub(think_pattern, '', content, flags=re.DOTALL).strip()
-        for block in blocks.text_to_block_list(clean_content):
+        for block in blocks.text_to_block_list(content):
             self.append(block)
         message.main_stack.set_visible_child_name('content')
 
@@ -156,22 +143,7 @@ class BlockContainer(Gtk.Box):
         """
         message = self.get_ancestor(Message)
 
-        #Thought
-        think_pattern = r'(<think>(.*?)</think>)|(<\|begin_of_thought\|>(.*?)<\|end_of_thought\|>)'
-        matches = re.findall(think_pattern, content, flags=re.DOTALL)
-        for thought in [m[1].strip() if m[1] else m[3].strip() for m in matches]:
-            attachment = attachments.Attachment(
-                generate_uuid(),
-                _('Thought'),
-                'thought',
-                thought
-            )
-            message.attachment_container.add_attachment(attachment)
-            SQL.insert_or_update_attachment(message, attachment)
-
-        clean_content = re.sub(think_pattern, '', content, flags=re.DOTALL)
-
-        for block in blocks.text_to_block_list(clean_content):
+        for block in blocks.text_to_block_list(content):
             if len(list(self)) <= 1:
                 GLib.idle_add(self.prepend, block)
             else:
@@ -192,6 +164,12 @@ class BlockContainer(Gtk.Box):
 
     def get_content(self) -> list:
         return [block.get_content() for block in list(self)]
+
+    def add_thinking(self, content:str) -> None:
+        if not self.thinking_block or not self.thinking_block.get_parent():
+            self.thinking_block = blocks.Thinking()
+            self.prepend(self.thinking_block)
+        self.thinking_block.append_content(content)
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/message/message.ui')
 class Message(Gtk.Box):
@@ -322,7 +300,27 @@ class Message(Gtk.Box):
                 vadjustment = chat_element.scrolledwindow.get_vadjustment()
                 if vadjustment.get_value() + 150 >= vadjustment.get_upper() - vadjustment.get_page_size():
                     GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
+        if self.block_container.thinking_block and self.block_container.thinking_block.get_parent():
+            attachment = attachments.Attachment(
+                generate_uuid(),
+                _('Thought'),
+                'thought',
+                self.block_container.thinking_block.get_content()
+            )
+            self.attachment_container.add_attachment(attachment)
+            SQL.insert_or_update_attachment(self, attachment)
+            self.block_container.thinking_block.unparent()
 
+    def update_thinking(self, content):
+        if content:
+            GLib.idle_add(self.main_stack.set_visible_child_name, 'content')
+            GLib.idle_add(self.block_container.add_thinking, content)
+
+            chat_element = self.get_ancestor(chat.Chat)
+            if chat_element:
+                vadjustment = chat_element.scrolledwindow.get_vadjustment()
+                if vadjustment.get_value() + 150 >= vadjustment.get_upper() - vadjustment.get_page_size():
+                    GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
 
     def finish_generation(self, response_metadata:str=None):
         chat_element = self.get_ancestor(chat.Chat)

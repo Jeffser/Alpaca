@@ -7,6 +7,7 @@ from .text import Text, GeneratingText, EditingText
 from .table import Table
 from .code import Code
 from .separator import Separator
+from .thinking import Thinking
 from collections import namedtuple
 
 from .. import attachments

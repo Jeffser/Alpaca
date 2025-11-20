@@ -1,0 +1,52 @@
+using Gtk 4.0;
+
+template $AlpacaThinking: Gtk.Box {
+  orientation: vertical;
+  hexpand: true;
+  margin-top: 5;
+  margin-start: 5;
+  margin-end: 5;
+
+  styles [
+    "card"
+  ]
+
+  Gtk.Box {
+    margin-start: 10;
+    margin-end: 10;
+    margin-top: 10;
+    margin-bottom: 10;
+    spacing: 10;
+    Gtk.ToggleButton toggle {
+      icon-name: "brain-augemnted-symbolic";
+      valign: center;
+      active: true;
+      styles [
+        "flat"
+      ]
+    }
+
+    Gtk.Label {
+      label: _("Thinking...");
+      hexpand: true;
+      halign: start;
+      styles [
+        "heading"
+      ]
+    }
+  }
+
+  Gtk.Revealer revealer {
+    transition-type: slide_down;
+    reveal-child: bind toggle.active;
+    child: Gtk.Box{
+      orientation: vertical;
+      Gtk.Separator {}
+      $AlpacaText label {
+        styles [
+          "p10"
+        ]
+      }
+    };
+  }
+}

@@ -117,6 +117,7 @@ class EditingText(Gtk.Box):
             if next_message.mode == 1 and next_message.get_root().settings.get_value('regenerate-after-edit').unpack():
                 next_message.popup.regenerate_message()
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/blocks/text.ui')
 class Text(Gtk.Label):
     __gtype_name__ = 'AlpacaText'
 

@@ -187,7 +187,12 @@ class BaseInstance:
                     for line in response.iter_lines():
                         if line:
                             data = json.loads(line.decode('utf-8'))
-                            bot_message.update_message(data.get('message', {}).get('content'))
+                            content = data.get('message', {}).get('content')
+                            think_content = data.get('message', {}).get('thinking')
+                            if content:
+                                bot_message.update_message(content)
+                            if think_content:
+                                bot_message.update_thinking(think_content)
                         if not chat.busy or data.get('done'):
                             break
                 else:
