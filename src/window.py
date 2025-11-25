@@ -407,6 +407,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.get_chat_list_page().add_chat(
                     chat_name=chat[1],
                     chat_id=chat[0],
+                    is_template=False,
                     mode=1
                 )
             Widgets.dialog.show_toast(_("Chat imported successfully"), self)
