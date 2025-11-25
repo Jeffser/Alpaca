@@ -200,13 +200,14 @@ class Message(Gtk.Box):
 
         super().__init__()
         self.popup = OptionPopup()
+        self.popup.regenerate_button.set_visible(self.author)
 
         self.set_halign(2 if mode == 0 else 0)
         self.main_container.set_css_classes(['card', 'user_message'] if mode==0 else ['response_message'])
         self.main_container.set_size_request(100 if mode==0 else -1, -1)
 
         if self.mode == 2:
-            self.block_container.set_css_classes('dim-label')
+            self.block_container.set_css_classes(['dim-label'])
 
         self.update_profile_picture()
 
