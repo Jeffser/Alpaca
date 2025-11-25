@@ -657,7 +657,7 @@ class FolderRow(Gtk.ListBoxRow):
         if len(list(self.get_parent())) == 1:
             self.get_parent().set_visible(False)
             list(self.get_parent().get_parent())[1].set_visible(False)
-        self.unparent()
+        self.get_parent().remove(self)
         SQL.remove_folder(self.folder_id)
 
     def prompt_delete(self):
