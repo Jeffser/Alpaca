@@ -128,7 +128,8 @@ class Attachment(Gtk.Button):
             "tool": "processor-symbolic",
             "link": "globe-symbolic",
             "image": "image-x-generic-symbolic",
-            "audio": "music-note-single-symbolic"
+            "audio": "music-note-single-symbolic",
+            "metadata": "table-symbolic",
         }.get(self.file_type, "document-text-symbolic"))
 
     @Gtk.Template.Callback()
@@ -637,5 +638,6 @@ class GlobalAttachmentButton(Gtk.Button):
         popup.set_parent(self)
         popup.set_pointing_to(rect)
         popup.popup()
+
 
 
