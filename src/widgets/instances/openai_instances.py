@@ -180,7 +180,10 @@ class BaseInstance:
         }
 
         if self.properties.get('max_tokens', 0) > 0:
-            params["max_tokens"] = int(self.properties.get('max_tokens', 0))
+            if 'use_max_completion_tokens' in self.limitations:
+                params["max_completion_tokens"] = int(self.properties.get('max_tokens', 0))
+            else:
+                params["max_tokens"] = int(self.properties.get('max_tokens', 0))
 
         if self.properties.get("override_parameters"):
             params["temperature"] = self.properties.get('temperature', 0.7)
@@ -306,12 +309,13 @@ class ChatGPT(BaseInstance):
     instance_type = 'chatgpt'
     instance_type_display = 'OpenAI ChatGPT'
     instance_url = 'https://api.openai.com/v1/'
+    limitations = ('use_max_completion_tokens',)
 
 class Gemini(BaseInstance):
     instance_type = 'gemini'
     instance_type_display = 'Google Gemini'
     instance_url = 'https://generativelanguage.googleapis.com/v1beta/openai/'
-    limitations = ('no-system-messages')
+    limitations = ('no-system-messages',)
 
     def __init__(self, instance_id:str, properties:dict):
         super().__init__(instance_id, properties)
@@ -389,7 +393,7 @@ class Venice(BaseInstance):
     instance_type = 'venice'
     instance_type_display = 'Venice'
     instance_url = 'https://api.venice.ai/api/v1/'
-    limitations = ('no-system-messages')
+    limitations = ('no-system-messages',)
 
     def __init__(self, instance_id:str, properties:dict):
         super().__init__(instance_id, properties)
@@ -400,7 +404,7 @@ class Deepseek(BaseInstance):
     instance_type = 'deepseek'
     instance_type_display = 'Deepseek'
     instance_url = 'https://api.deepseek.com/v1/'
-    limitations = ('text-only')
+    limitations = ('text-only',)
 
     def __init__(self, instance_id:str, properties:dict):
         super().__init__(instance_id, properties)
@@ -411,13 +415,13 @@ class Groq(BaseInstance):
     instance_type = 'groq'
     instance_type_display = 'Groq Cloud'
     instance_url = 'https://api.groq.com/openai/v1'
-    limitations = ('text-only')
+    limitations = ('text-only',)
 
 class Anthropic(BaseInstance):
     instance_type = 'anthropic'
     instance_type_display = 'Anthropic'
     instance_url = 'https://api.anthropic.com/v1/'
-    limitations = ('no-system-messages')
+    limitations = ('no-system-messages',)
 
 class OpenRouter(BaseInstance):
     instance_type = 'openrouter'
@@ -542,7 +546,7 @@ class Mistral(BaseInstance):
     instance_type_display = 'Mistral AI'
     instance_url = 'https://api.mistral.ai/v1/'
     description = _('Mistral AI large language models')
-    limitations = ('text-only')
+    limitations = ('text-only',)
 
 class LlamaAPI(BaseInstance):
     instance_type = 'llama-api'
