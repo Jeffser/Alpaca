@@ -396,8 +396,8 @@ template $AlpacaWindow: Adw.ApplicationWindow {
                   description: _("It looks a bit empty in here. Try downloading some models or change your AI instance to get started!");
 
                   child: Button {
-                    tooltip-text: _("Manage Instances");
-                    action-name: "app.instance_manager";
+                    tooltip-text: _("Explore Available Models");
+                    clicked => $explore_available_models();
                     halign: center;
 
                     styles [
@@ -406,8 +406,8 @@ template $AlpacaWindow: Adw.ApplicationWindow {
                     ]
 
                     child: Adw.ButtonContent {
-                      icon-name: "processor-symbolic";
-                      label: _("Manage Instances");
+                      icon-name: "globe-symbolic";
+                      label: _("Explore Available Models");
                     };
                   };
                 };
@@ -452,7 +452,7 @@ template $AlpacaWindow: Adw.ApplicationWindow {
           }
 
           Adw.ViewStackPage available_models_stack_page {
-            name: "available_models";
+            name: "";
             title: _("Available");
             icon-name: "globe-symbolic";
 

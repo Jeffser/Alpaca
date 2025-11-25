@@ -84,6 +84,19 @@ class AlpacaWindow(Adw.ApplicationWindow):
     chat_searchbar = Gtk.Template.Child()
 
     @Gtk.Template.Callback()
+    def explore_available_models(self, button):
+        if len(Widgets.models.common.available_models_data) == 0:
+            Widgets.dialog.simple(
+                parent = self,
+                heading = _("No Models"),
+                body = _("This instance does not provide any models"),
+                callback = self.get_application().lookup_action('instance_manager').activate,
+                button_name = _("Manage Instances")
+            )
+        else:
+            self.model_manager_stack.set_visible_child_name('available_models')
+
+    @Gtk.Template.Callback()
     def chat_list_page_changed(self, navigationview, page=None):
         if self.chat_searchbar.get_search_mode():
             self.chat_searchbar.set_search_mode(False)
