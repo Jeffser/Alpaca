@@ -101,6 +101,31 @@ class ImageViewer(Gtk.ScrolledWindow):
         self.scrollable = self.scale != min_scale
         self.reset_button.set_sensitive(self.scrollable)
 
+    def prepare_to_zoom(self, new_scale):
+        mx = self.pointer_x
+        my = self.pointer_y
+
+        old_scale, self.scale = self.scale, new_scale
+
+        if self.scale < self.get_min_scale() + 5.0:
+            adj = self.get_hadjustment()
+            adj.set_value((adj.get_value() + mx) * self.scale / old_scale - mx)
+            vadj = self.get_vadjustment()
+            vadj.set_value((vadj.get_value() + my) * self.scale / old_scale - my)
+
+        self.scrollable = True
+        self.reset_button.set_sensitive(True)
+        self.update_picture()
+
+    @Gtk.Template.Callback()
+    def on_gesture_zoom(self, gesture, value):
+        print(value)
+        if value >= 1:
+            value = self.scale + value / 10
+        else:
+            value = self.scale - value / 10
+        self.prepare_to_zoom(value)
+
     @Gtk.Template.Callback()
     def delete_requested(self, button=None):
         if self.delete_callback:
@@ -134,21 +159,7 @@ class ImageViewer(Gtk.ScrolledWindow):
         if event is None:
             return False
 
-        mx = self.pointer_x
-        my = self.pointer_y
-
-        old_scale = self.scale
-        self.scale *= 1.1 if dy < 0 else 0.9
-
-        if self.scale < self.get_min_scale() + 5.0:
-            adj = self.get_hadjustment()
-            adj.set_value((adj.get_value() + mx) * self.scale / old_scale - mx)
-            vadj = self.get_vadjustment()
-            vadj.set_value((vadj.get_value() + my) * self.scale / old_scale - my)
-
-        self.scrollable = True
-        self.reset_button.set_sensitive(True)
-        self.update_picture()
+        self.prepare_to_zoom(self.scale * 1.1 if dy < 0 else 0.9)
         return True
 
     @Gtk.Template.Callback()

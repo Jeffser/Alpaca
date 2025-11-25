@@ -7,6 +7,9 @@ template $AlpacaImageViewer: Gtk.ScrolledWindow {
         flags: vertical;
         scroll => $on_scroll();
       }
+      Gtk.GestureZoom {
+        scale-changed => $on_gesture_zoom();
+      }
       Gtk.GestureDrag {
         drag-update => $on_drag_update();
       }
