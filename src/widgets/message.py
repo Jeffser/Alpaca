@@ -530,6 +530,7 @@ class GlobalFooter(Gtk.Box):
         settings.bind('show-model-manager-shortcut', self.model_manager_shortcut, 'visible', Gio.SettingsBindFlags.DEFAULT)
 
         self.model_selector.selector.connect('notify::selected', lambda dropdown, gparam: self.tool_selector.model_changed(dropdown))
+        self.action_stack.set_sensitive(len(models.added.model_selector_model) > 0)
         models.added.model_selector_model.connect('notify::n-items', lambda m, p: self.action_stack.set_sensitive(len(m) > 0))
         GLib.idle_add(self.set_send_callback)
 
@@ -556,5 +557,6 @@ class GlobalFooter(Gtk.Box):
         current_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
         current_text = current_text.replace(text, '')
         buffer.set_text(current_text, len(current_text.encode('utf-8')))
+
 
 
