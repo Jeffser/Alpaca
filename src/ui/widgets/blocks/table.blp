@@ -9,20 +9,24 @@ template $AlpacaTable: Gtk.Box {
   ]
 
   Gtk.Box {
-    spacing: 10;
+    spacing: 5;
     margin-start: 5;
     margin-end: 5;
     margin-top: 5;
     margin-bottom: 5;
+    Gtk.Image {
+      margin-start: 5;
+      icon-name: "table-symbolic";
+    }
     Gtk.Label {
       label: _("Spreadsheet");
       hexpand: true;
       halign: start;
-      margin-start: 5;
       styles [
         "heading"
       ]
     }
+    Gtk.Separator {}
     Gtk.Button {
       icon-name: "folder-download-symbolic";
       tooltip-text: _("Export Spreadsheet");
@@ -33,6 +37,8 @@ template $AlpacaTable: Gtk.Box {
       ]
     }
   }
+
+  Gtk.Separator {}
 
   Gtk.ScrolledWindow {
     vscrollbar-policy: never;
