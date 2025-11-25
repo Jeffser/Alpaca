@@ -52,7 +52,6 @@ class InstancePreferencesDialog(Adw.Dialog):
 
     def __init__(self, instance):
         super().__init__()
-        print(self.connection_group)
 
         self.instance = instance
         self.set_title(_('Edit Instance') if self.instance.instance_id else _('Create Instance'))
@@ -148,14 +147,14 @@ class InstancePreferencesDialog(Adw.Dialog):
                 in_properties = len(list(el.get_model())) > 0
                 if value:
                     for i, model in enumerate(list(el.get_model())):
-                        if model.get_string() == prettify_model_name(value):
+                        if model.get_string() == prettify_model_name(value.get('name')):
                             el.set_selected(i)
                             break
             elif el.get_name() == 'title_model':
                 in_properties = len(list(el.get_model())) > 1
                 if value:
                     for i, model in enumerate(list(el.get_model())):
-                        if model.get_string() == prettify_model_name(value):
+                        if model.get_string() == prettify_model_name(value.get('name')):
                             el.set_selected(i+1)
                             break
             elif el.get_name() == 'model_directory':
