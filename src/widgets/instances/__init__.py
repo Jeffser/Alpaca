@@ -147,14 +147,14 @@ class InstancePreferencesDialog(Adw.Dialog):
                 in_properties = len(list(el.get_model())) > 0
                 if value:
                     for i, model in enumerate(list(el.get_model())):
-                        if model.get_string() == prettify_model_name(value.get('name')):
+                        if model.get_string() == prettify_model_name(value):
                             el.set_selected(i)
                             break
             elif el.get_name() == 'title_model':
                 in_properties = len(list(el.get_model())) > 1
                 if value:
                     for i, model in enumerate(list(el.get_model())):
-                        if model.get_string() == prettify_model_name(value.get('name')):
+                        if model.get_string() == prettify_model_name(value):
                             el.set_selected(i+1)
                             break
             elif el.get_name() == 'model_directory':
