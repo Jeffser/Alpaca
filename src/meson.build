@@ -61,6 +61,7 @@ blueprints = files(
   'ui/widgets/tools/selector.blp',
   'ui/widgets/voice/microphone_button.blp',
   'ui/widgets/voice/dictate_button.blp',
+  'ui/widgets/voice/podcast_dialog.blp',
 )
 
 blueprints = custom_target('blueprints',

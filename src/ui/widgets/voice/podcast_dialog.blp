@@ -1,0 +1,94 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaPodcastDialog: Adw.Dialog {
+  title: _("Podcast Generator");
+  follows-content-size: true;
+  can-close: false;
+  close-attempt => $close_attempted();
+
+  child: Gtk.Stack main_stack {
+    Gtk.StackPage {
+      name: "preferences";
+      child: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {
+          show-start-title-buttons: false;
+          show-end-title-buttons: false;
+          [start]
+          Gtk.Button {
+            label: _("Cancel");
+            tooltip-text: _("Cancel");
+            clicked => $cancel();
+            styles [
+              "raised"
+            ]
+          }
+
+          [end]
+          Gtk.Button {
+            label: _("Generate");
+            tooltip-text: _("Generate");
+            clicked => $generate_requested();
+            styles [
+              "suggested-action"
+            ]
+          }
+        }
+        content: Adw.PreferencesPage {
+          Adw.PreferencesGroup {
+            title: _("General Voices");
+            Adw.ComboRow title_voice_combo {
+              title: _("Title Announcer Voice");
+            }
+            Adw.ComboRow user_voice_combo {
+              title: _("User Voice");
+            }
+            Adw.ComboRow system_voice_combo {
+              title: _("System Voice");
+            }
+          }
+          Adw.PreferencesGroup model_group {
+            title: _("Model Voices");
+          }
+        };
+      };
+    }
+    Gtk.StackPage {
+      name: "progress";
+      child: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {
+          show-title: false;
+        }
+        content: Adw.StatusPage progress_status_page {
+          icon-name: "audio-input-microphone-symbolic";
+          title: _("Generating Podcast");
+          child: Gtk.ProgressBar {};
+        };
+      };
+    }
+    Gtk.StackPage {
+      name: "ready";
+      child: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {
+          show-title: false;
+        }
+        content: Adw.StatusPage {
+          icon-name: "audio-input-microphone-symbolic";
+          title: _("Podcast is Ready");
+          child: Gtk.Button {
+            halign: center;
+            tooltip-text: _("Export Podcast");
+            clicked => $export_requested();
+            child: Adw.ButtonContent {
+              icon-name: "folder-download-symbolic";
+              label: _("Export Podcast");
+            };
+          };
+        };
+      };
+    }
+  };
+}

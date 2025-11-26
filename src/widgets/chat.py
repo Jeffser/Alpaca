@@ -5,7 +5,7 @@ Handles the chat widget
 
 import gi
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
-import logging, os, datetime, random, json, threading, re
+import logging, os, datetime, random, json, threading, re, importlib.util
 from ..constants import SAMPLE_PROMPTS, cache_dir
 from ..sql_manager import generate_uuid, prettify_model_name, generate_numbered_name, Instance as SQL
 from . import dialog, voice, models
@@ -750,6 +750,12 @@ class ChatRow(Gtk.ListBoxRow):
                 }
             ]
         ]
+        if importlib.util.find_spec('kokoro'):
+            actions[0].append({
+                'label': _('Generate Podcast'),
+                'callback': lambda: voice.PodcastDialog(self.chat).present(self.get_root()),
+                'icon': 'audio-input-microphone-symbolic'
+            })
         popup = dialog.Popover(actions)
         popup.set_parent(self)
         popup.set_pointing_to(rect)

@@ -6,11 +6,11 @@ Manages TTS and STT code
 
 import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk
-from ..sql_manager import Instance as SQL
+from ..sql_manager import Instance as SQL, prettify_model_name
 from ..constants import data_dir, cache_dir, STT_MODELS, SPEACH_RECOGNITION_LANGUAGES, TTS_VOICES
 from . import dialog, models, blocks, activities, message
 
-import os, threading, importlib.util, re, unicodedata, gc, queue, time, logging
+import os, threading, importlib.util, re, unicodedata, gc, queue, time, logging, wave
 import numpy as np
 
 logger = logging.getLogger(__name__)
@@ -280,3 +280,198 @@ class MicrophoneButton(Gtk.Stack):
             button.set_sensitive(False)
             GLib.timeout_add(2000, lambda button: button.set_sensitive(True) and False, button)
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/voice/podcast_dialog.ui')
+class PodcastDialog(Adw.Dialog):
+    __gtype_name__ = 'AlpacaPodcastDialog'
+
+    main_stack = Gtk.Template.Child()
+
+    title_voice_combo = Gtk.Template.Child()
+    user_voice_combo = Gtk.Template.Child()
+    system_voice_combo = Gtk.Template.Child()
+
+    model_group = Gtk.Template.Child()
+
+    progress_status_page = Gtk.Template.Child()
+
+    sample_rate = 24000
+
+    def __init__(self, chat):
+        self.chat = chat
+        self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
+        super().__init__()
+        self.set_title(self.chat.get_name())
+        self.final_audio = []
+        threading.Thread(target=self.prepare_preferences_page, daemon=True).start()
+
+    def prepare_preferences_page(self):
+        # run in separate thread
+        if len(list(self.chat.container)) == 0: #maybe not loaded
+            self.chat.load_messages()
+
+        self.default_index = self.settings.get_value('tts-model').unpack()
+
+        model_combo_model = Gtk.StringList() # for model voices
+        simple_combo_model = Gtk.StringList() # for general voices
+        simple_combo_model.append(_("Skip"))
+
+        for name in TTS_VOICES:
+            model_combo_model.append(name)
+            simple_combo_model.append(name)
+
+        GLib.idle_add(self.title_voice_combo.set_model, simple_combo_model)
+        GLib.idle_add(self.user_voice_combo.set_model, simple_combo_model)
+        GLib.idle_add(self.system_voice_combo.set_model, simple_combo_model)
+        GLib.idle_add(self.user_voice_combo.set_selected, self.default_index+1)
+
+
+        self.added_models = []
+        for message_element in list(self.chat.container):
+            if message_element.mode == 1 and message_element.author:
+                if message_element.author not in [m.get_name() for m in self.added_models]:
+                    voice_id = SQL.get_model_preferences(message_element.author).get('voice', None)
+                    voice_index = self.default_index
+                    if voice_id in list(TTS_VOICES.values()):
+                        voice_index = list(TTS_VOICES.values()).index(voice_id)
+
+                    combo_element = Adw.ComboRow(
+                        title=prettify_model_name(message_element.author),
+                        name=message_element.author,
+                        model=model_combo_model
+                    )
+                    combo_element.set_selected(voice_index)
+                    GLib.idle_add(self.model_group.add, combo_element)
+                    self.added_models.append(combo_element)
+
+        if len(self.added_models) == 0:
+            GLib.idle_add(dialog.show_toast,
+                _("This chat has no model messages"),
+                self.get_root()
+            )
+            GLib.idle_add(self.force_close)
+
+    def get_title_voice_id(self) -> str or None:
+        if self.title_voice_combo.get_selected() == 0:
+            return None
+        else:
+            return TTS_VOICES.get(self.title_voice_combo.get_selected_item().get_string())
+
+    def get_user_voice_id(self) -> str or None:
+        if self.user_voice_combo.get_selected() == 0:
+            return None
+        else:
+            return TTS_VOICES.get(self.user_voice_combo.get_selected_item().get_string())
+
+    def get_system_voice_id(self) -> str or None:
+        if self.system_voice_combo.get_selected() == 0:
+            return None
+        else:
+            return TTS_VOICES.get(self.system_voice_combo.get_selected_item().get_string())
+
+    def get_model_voice_id(self, model_name:str) -> str or None:
+        model_element_names = [m.get_name() for m in self.added_models]
+        if model_name not in model_element_names:
+            return list(TTS_VOICES.values())[self.default_index]
+
+        model_element = self.added_models[model_element_names.index(model_name)]
+        return TTS_VOICES[model_element.get_selected_item().get_string()]
+
+    def generate_audio(self, voice_id:str, content:str):
+        kokoro = libraries.get('kokoro')
+        speed = self.settings.get_value('tts-speed').unpack()
+        pipeline = kokoro.KPipeline(lang_code=voice_id[0])
+        generator = pipeline(content, voice=voice_id, speed=speed, split_pattern=r'\n+')
+        for gs, ps, audio in generator:
+            self.final_audio.append(audio)
+
+    def generate(self):
+        # run in separate thread
+        self.set_can_close(False)
+        GLib.idle_add(self.main_stack.set_visible_child_name, 'progress')
+
+        gap_seconds = 0.3
+        silence = np.zeros(int(self.sample_rate * gap_seconds), dtype=np.float32)
+
+        message_list = list(self.chat.container)
+        self.final_audio = []
+
+        self.progress_status_page.set_description('{} / {}'.format(0, len(message_list)))
+
+        title_voice_id = self.get_title_voice_id()
+        if title_voice_id:
+            allowed_characters = (',', '.', ':', ';', '+', '/', '-', '(', ')', '[', ']', '=', '<', '>', '’', '\'', '"', '¿', '?', '¡', '!')
+            cleaned_text = ''.join(c for c in self.chat.get_name() if unicodedata.category(c).startswith(('L', 'N', 'Zs')) or c in allowed_characters)
+            self.generate_audio(title_voice_id, cleaned_text)
+
+        for i, message in enumerate(message_list):
+            voice_id = None
+            if message.mode == 0:
+                voice_id = self.get_user_voice_id()
+            elif message.mode == 1 and message.author:
+                voice_id = self.get_model_voice_id(message.author)
+            elif message.mode == 2:
+                voice_id = self.get_system_voice_id()
+
+            if voice_id:
+                content = message.get_content_for_dictation()
+                if content:
+                    self.generate_audio(voice_id, content)
+                    if not self.get_root():
+                        return
+                    self.final_audio.append(silence)
+                    self.progress_status_page.set_description('{} / {}'.format(i+1, len(message_list)))
+                    self.progress_status_page.get_child().set_fraction((i+1)/len(message_list))
+
+        if len(self.final_audio) <= 1:
+            self.cancel()
+
+        # Remove final silence
+        self.final_audio = self.final_audio[:-1]
+        self.final_audio = np.concatenate(self.final_audio)
+        self.set_can_close(True)
+        GLib.idle_add(self.main_stack.set_visible_child_name, 'ready')
+
+    @Gtk.Template.Callback()
+    def generate_requested(self, button):
+        threading.Thread(target=self.generate).start()
+
+    def export(self, file_dialog, result, gdata):
+        file = file_dialog.save_finish(result)
+        if file and file.get_path():
+            audio_int16 = (self.final_audio * 32767).astype(np.int16)
+            with wave.open(file.get_path(), 'w') as wf:
+                wf.setnchannels(1)  # Mono
+                wf.setsampwidth(2)  # 16-bit
+                wf.setframerate(self.sample_rate)
+                wf.writeframes(audio_int16.tobytes())
+            dialog.show_toast(
+                message=_("Podcast exported successfully"),
+                root_widget=self.get_root()
+            )
+            self.force_close()
+
+    @Gtk.Template.Callback()
+    def export_requested(self, button):
+        file_dialog = Gtk.FileDialog(
+            initial_name='{}.wav'.format(self.chat.get_name().replace('/', ' '))
+        )
+        file_dialog.save(self.get_root(), None, self.export, None)
+
+    @Gtk.Template.Callback()
+    def cancel(self, button):
+        self.force_close()
+
+    @Gtk.Template.Callback()
+    def close_attempted(self, dia):
+        if self.get_can_close():
+            self.force_close()
+        else:
+            dialog.simple(
+                parent=self.get_root(),
+                heading=_("Stop Generation"),
+                body=_("Are you sure you want to stop the podcast generation?"),
+                callback=self.force_close,
+                button_name=_("Stop"),
+                button_appearance="destructive"
+            )
+        return True
