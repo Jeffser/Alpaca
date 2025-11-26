@@ -175,12 +175,12 @@ class InstancePreferencesDialog(Adw.Dialog):
             group.set_visible(group.get_visible() or in_properties)
 
     def get_value(self, el):
-        if el.get_name() == 'default_model':
-            if len(self.model_list) > 0:
-                return self.model_list[el.get_selected()]
-        elif el.get_name() == 'title_model':
-            if len(self.model_list) > 0:
-                return self.model_list[el.get_selected() + 1]
+        if el.get_name() in ('default_model', 'title_model'):
+            index = el.get_selected()
+            if index == 0 or len(self.model_list) == 0:
+                return None
+            else:
+                return self.model_list[index + 1]
         elif el.get_name() == 'model_directory':
             return el.get_subtitle()
         elif isinstance(el, Adw.PasswordEntryRow):
@@ -200,15 +200,16 @@ class InstancePreferencesDialog(Adw.Dialog):
     def save_requested(self, button=None):
         def save_elements_values(elements:list):
             for el in elements:
-                key = el.get_name()
-                new_value = self.get_value(el)
-                if key in self.instance.properties:
-                    self.instance.properties[key] = new_value
-                elif key.removeprefix('override:') in self.instance.properties.get('overrides', {}):
-                    self.instance.properties['overrides'][key.removeprefix('override:')] = new_value
+                if el.get_visible():
+                    key = el.get_name()
+                    new_value = self.get_value(el)
+                    if key in self.instance.properties:
+                        self.instance.properties[key] = new_value
+                    elif key.removeprefix('override:') in self.instance.properties.get('overrides', {}):
+                        self.instance.properties['overrides'][key.removeprefix('override:')] = new_value
 
-                if isinstance(el, Adw.ExpanderRow):
-                    save_elements_values(list(list(list(list(el)[0])[1])[0]))
+                    if isinstance(el, Adw.ExpanderRow):
+                        save_elements_values(list(list(list(list(el)[0])[1])[0]))
 
         for group in (self.connection_group, self.tweak_group, self.parameters_group, self.overrides_group, self.model_group):
             save_elements_values(list(list(list(list(group)[0])[1])[0]))
