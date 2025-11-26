@@ -2,6 +2,10 @@ using Gtk 4.0;
 
 template $AlpacaFolderRow: Gtk.ListBoxRow {
   height-request: 45;
+  Gtk.GestureClick {
+    button: 3;
+    released => $show_popup();
+  }
   styles [
     "p0"
   ]

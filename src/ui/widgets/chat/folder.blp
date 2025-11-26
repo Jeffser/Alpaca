@@ -28,7 +28,10 @@ template $AlpacaFolder: Adw.NavigationPage {
                 ]
               }
 
-              Gtk.Separator separator {}
+              Gtk.Separator separator {
+                margin-start: 5;
+                margin-end: 5;
+              }
 
               Gtk.ListBox chat_list_box {
                 selection-mode: single;

@@ -3,6 +3,13 @@ using Adw 1;
 
 template $AlpacaChatRow: Gtk.ListBoxRow {
   height-request: 45;
+  Gtk.GestureClick {
+    button: 3;
+    released => $show_popup();
+  }
+  Gtk.GestureLongPress {
+    pressed => $show_popup();
+  }
   // CODE set name and tooltip-text
 
   child: Gtk.Box {

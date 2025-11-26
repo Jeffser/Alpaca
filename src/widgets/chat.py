@@ -75,7 +75,7 @@ class Folder(Adw.NavigationPage):
         folder_page = self.get_root().chat_list_navigationview.get_previous_page(self)
         if row.folder_id != folder_page.folder_id:
             SQL.move_folder_to_folder(row.folder_id, folder_page.folder_id)
-            row.unparent()
+            row.get_parent().remove(row)
             folder_page.folder_list_box.prepend(row)
             row.set_visible(True)
             self.update_visibility()
@@ -85,7 +85,7 @@ class Folder(Adw.NavigationPage):
         folder_page = self.get_root().chat_list_navigationview.get_previous_page(self)
         row.chat.folder_id = folder_page.folder_id
         SQL.insert_or_update_chat(row.chat)
-        row.unparent()
+        row.get_parent().remove(row)
         folder_page.chat_list_box.prepend(row)
         row.set_visible(True)
         self.update_visibility()
@@ -506,32 +506,25 @@ class FolderRow(Gtk.ListBoxRow):
         if folder_color:
             self.add_css_class('folder-{}'.format(folder_color))
 
-        self.gesture_click = Gtk.GestureClick(button=3)
-        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
-        self.add_controller(self.gesture_click)
         drop_target_folder = Gtk.DropTarget.new(FolderRow, Gdk.DragAction.MOVE)
         drop_target_folder.connect("drop", self.on_drop_folder)
         self.add_controller(drop_target_folder)
         drop_target_chat = Gtk.DropTarget.new(ChatRow, Gdk.DragAction.MOVE)
         drop_target_chat.connect("drop", self.on_drop_chat)
         self.add_controller(drop_target_chat)
-        self.connect('map', lambda *_: self.on_map())
-
-    def on_map(self):
-        page = self.get_ancestor(Adw.NavigationPage)
 
         drag_source = Gtk.DragSource()
         drag_source.set_actions(Gdk.DragAction.MOVE)
         drag_source.connect("drag-cancel", lambda *_: self.set_visible(True))
         drag_source.connect('prepare', lambda *_: Gdk.ContentProvider.new_for_value(self))
-        drag_source.connect("drag-begin", lambda s,d,page=page: self.on_drag_begin(s,d,page))
-        drag_source.connect("drag-end", lambda s,d,r,page=page: self.on_drag_end(s,d,r,page))
+        drag_source.connect("drag-begin", lambda s,d: self.on_drag_begin(s,d,self.get_ancestor(Adw.NavigationPage)))
+        drag_source.connect("drag-end", lambda s,d,r: self.on_drag_end(s,d,r,self.get_ancestor(Adw.NavigationPage)))
         self.add_controller(drag_source)
 
     def on_drop_folder(self, target, row, x, y):
         if row.folder_id != self.folder_id:
             SQL.move_folder_to_folder(row.folder_id, self.folder_id)
-            row.unparent()
+            row.get_parent().remove(row)
             folder_page = self.get_root().chat_list_navigationview.find_page(self.folder_id)
             if folder_page:
                 folder_page.folder_list_box.prepend(row)
@@ -542,7 +535,7 @@ class FolderRow(Gtk.ListBoxRow):
     def on_drop_chat(self, target, row, x, y):
         row.chat.folder_id = self.folder_id
         SQL.insert_or_update_chat(row.chat)
-        row.unparent()
+        row.get_parent().remove(row)
         folder_page = self.get_root().chat_list_navigationview.find_page(self.folder_id)
         if folder_page:
             folder_page.chat_list_box.prepend(row)
@@ -567,9 +560,14 @@ class FolderRow(Gtk.ListBoxRow):
             GLib.source_remove(page._scroll_timeout_id)
             page._scroll_timeout_id = None
 
-    def show_popup(self, gesture, x, y):
+    @Gtk.Template.Callback()
+    def show_popup(self, *args):
         rect = Gdk.Rectangle()
-        rect.x, rect.y, = x, y
+        if len(args) == 4:
+            rect.x, rect.y = args[2], args[3]
+        else:
+            rect.x, rect.y = args[1], args[2]
+
         actions = [
             [
                 {
@@ -685,23 +683,12 @@ class ChatRow(Gtk.ListBoxRow):
         self.set_tooltip_text(self.chat.get_name())
         self.label.set_label(self.chat.get_name())
 
-        self.gesture_click = Gtk.GestureClick(button=3)
-        self.gesture_click.connect("released", lambda gesture, n_press, x, y: self.show_popup(gesture, x, y) if n_press == 1 else None)
-        self.add_controller(self.gesture_click)
-        self.gesture_long_press = Gtk.GestureLongPress()
-        self.gesture_long_press.connect("pressed", self.show_popup)
-        self.add_controller(self.gesture_long_press)
-        self.connect('map', lambda *_: self.on_map())
-
-    def on_map(self):
-        page = self.get_ancestor(Adw.NavigationPage)
-
         drag_source = Gtk.DragSource()
         drag_source.set_actions(Gdk.DragAction.MOVE)
         drag_source.connect("drag-cancel", lambda *_: self.set_visible(True))
         drag_source.connect('prepare', lambda *_: Gdk.ContentProvider.new_for_value(self))
-        drag_source.connect("drag-begin", lambda s,d,page=page: self.on_drag_begin(s,d,page))
-        drag_source.connect("drag-end", lambda s,d,r,page=page: self.on_drag_end(s,d,r,page))
+        drag_source.connect("drag-begin", lambda s,d: self.on_drag_begin(s,d,self.get_ancestor(Adw.NavigationPage)))
+        drag_source.connect("drag-end", lambda s,d,r: self.on_drag_end(s,d,r,self.get_ancestor(Adw.NavigationPage)))
         self.add_controller(drag_source)
 
     def on_drag_begin(self, source, drag, page):
@@ -721,9 +708,14 @@ class ChatRow(Gtk.ListBoxRow):
             GLib.source_remove(page._scroll_timeout_id)
             page._scroll_timeout_id = None
 
-    def show_popup(self, gesture, x, y):
+    @Gtk.Template.Callback()
+    def show_popup(self, *args):
         rect = Gdk.Rectangle()
-        rect.x, rect.y, = x, y
+        if len(args) == 4:
+            rect.x, rect.y = args[2], args[3]
+        else:
+            rect.x, rect.y = args[1], args[2]
+
         actions = [
             [
                 {
