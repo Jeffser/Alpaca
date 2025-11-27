@@ -103,21 +103,32 @@ def generate_numbered_name(name: str, compare_list: "list[str]") -> str:
                     break
     return name
 
-def prettify_model_name(name:str, separated:bool=False) -> str or tuple:
-    if name:
-        if ':' in name:
-            name = name.split(':')
-            if separated:
-                return name[0].replace('-', ' ').title(), name[1].replace('-', ' ').title()
-            elif name[1].lower() in ('latest', 'custom'):
-                return name[0].replace('-', ' ').title()
-            else:
-                return '{} ({})'.format(name[0].replace('-', ' ').title(), name[1].replace('-', ' ').title())
-        else:
-            if separated:
-                return name.replace('-', ' ').title(), None
-            else:
-                return name.replace('-', ' ').title()
+def prettify_model_name(name, separated: bool = False):
+    if isinstance(name, dict):
+        name = name.get("name", "Unknown")
+    elif not isinstance(name, str):
+        name = str(name)
+
+    if not name:
+        return ("Unknown", None) if separated else "Unknown"
+
+    if ':' in name:
+        parts = name.split(':')
+        model = parts[0].replace('-', ' ').title()
+        tag = parts[1].replace('-', ' ').title()
+
+        if separated:
+            return model, tag
+
+        if tag.lower() in ('latest', 'custom'):
+            return model
+
+        return f"{model} ({tag})"
+
+    else:
+        model = name.replace('-', ' ').title()
+        return (model, None) if separated else model
+
 
 class SQLiteConnection:
     """
