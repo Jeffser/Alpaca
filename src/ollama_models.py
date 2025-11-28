@@ -5962,11 +5962,23 @@ OLLAMA_MODELS = {
                         "6.1 GB"
                 ],
                 [
+                        "30b",
+                        "20 GB"
+                ],
+                [
                         "32b",
                         "21 GB"
                 ],
                 [
+                        "235b",
+                        "143 GB"
+                ],
+                [
                         "235b-cloud",
+                        "cloud"
+                ],
+                [
+                        "235b-instruct-cloud",
                         "cloud"
                 ]
         ],
@@ -5974,6 +5986,7 @@ OLLAMA_MODELS = {
         "url": "https://ollama.com/library/qwen3-vl",
         "categories": [
                 "vision",
+                "tools",
                 "medium",
                 "small",
                 "big",
@@ -6058,20 +6071,16 @@ OLLAMA_MODELS = {
                         "2.1 GB"
                 ],
                 [
-                        "micro",
+                        "350m",
+                        "708 MB"
+                ],
+                [
+                        "1b",
+                        "3.3 GB"
+                ],
+                [
+                        "3b",
                         "2.1 GB"
-                ],
-                [
-                        "micro-h",
-                        "1.9 GB"
-                ],
-                [
-                        "small-h",
-                        "19 GB"
-                ],
-                [
-                        "tiny-h",
-                        "4.2 GB"
                 ]
         ],
         "description": _("Granite 4 features improved instruction following (IF) and tool-calling capabilities, making them more effective in enterprise applications."),
@@ -6138,6 +6147,119 @@ OLLAMA_MODELS = {
                 "en",
                 "es",
                 "zh"
+        ],
+    },
+    "deepseek-ocr": {
+        "tags": [
+                [
+                        "latest",
+                        "6.7 GB"
+                ],
+                [
+                        "3b",
+                        "6.7 GB"
+                ]
+        ],
+        "description": _("DeepSeek-OCR is a vision-language model that can perform token-efficient OCR."),
+        "url": "https://ollama.com/library/deepseek-ocr",
+        "categories": [
+                "vision",
+                "medium",
+                "big"
+        ],
+        "author": "DeepSeek Team",
+        "languages": [
+                "en"
+        ],
+    },
+    "gpt-oss-safeguard": {
+        "tags": [
+                [
+                        "latest",
+                        "14 GB"
+                ],
+                [
+                        "20b",
+                        "14 GB"
+                ],
+                [
+                        "120b",
+                        "65 GB"
+                ]
+        ],
+        "description": _("gpt-oss-safeguard-20b and gpt-oss-safeguard-120b are safety reasoning models built-upon gpt-oss"),
+        "url": "https://ollama.com/library/gpt-oss-safeguard",
+        "categories": [
+                "tools",
+                "big",
+                "huge"
+        ],
+        "author": "OpenAI",
+        "languages": [
+                "en"
+        ],
+    },
+    "gemini-3-pro-preview": {
+        "tags": [
+                [
+                        "latest",
+                        "cloud"
+                ]
+        ],
+        "description": _("Google's most intelligent model with SOTA reasoning and multimodal understanding, and powerful agentic and vibe coding capabilities."),
+        "url": "https://ollama.com/library/gemini-3-pro-preview",
+        "categories": [
+                "cloud",
+                "code"
+        ],
+        "author": "Google DeepMind",
+        "languages": [
+                "en"
+        ],
+    },
+    "kimi-k2-thinking": {
+        "tags": [
+                [
+                        "cloud",
+                        "cloud"
+                ]
+        ],
+        "description": _("Kimi K2 Thinking, Moonshot AI's best open-source thinking model."),
+        "url": "https://ollama.com/library/kimi-k2-thinking",
+        "categories": [
+                "cloud",
+                "code",
+                "multilingual"
+        ],
+        "author": "Kimi Team",
+        "languages": [
+                "en"
+        ],
+    },
+    "cogito-2.1": {
+        "tags": [
+                [
+                        "latest",
+                        "1.3TB"
+                ],
+                [
+                        "671b",
+                        "1.3TB"
+                ],
+                [
+                        "671b-cloud",
+                        "cloud"
+                ]
+        ],
+        "description": _("The Cogito v2.1 LLMs are instruction tuned generative models. All models are released under MIT license for commercial use."),
+        "url": "https://ollama.com/library/cogito-2.1",
+        "categories": [
+                "cloud",
+                "code"
+        ],
+        "author": "Deep Cogito",
+        "languages": [
+                "en"
         ],
     },
 }
