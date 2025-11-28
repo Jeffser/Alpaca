@@ -143,15 +143,10 @@ class InstancePreferencesDialog(Adw.Dialog):
                 value = self.instance.properties.get('overrides', {}).get(el.get_name().removeprefix('override:'))
             else:
                 value = self.instance.properties.get(el.get_name())
-            if el.get_name() == 'default_model':
+            if el.get_name() in ('default_model', 'title_model'):
                 in_properties = len(list(el.get_model())) > 0
-                if value:
-                    for i, model in enumerate(list(el.get_model())):
-                        if model.get_string() == prettify_model_name(value):
-                            el.set_selected(i)
-                            break
-            elif el.get_name() == 'title_model':
-                in_properties = len(list(el.get_model())) > 1
+                if isinstance(value, dict):
+                    value = value.get('name')
                 if value:
                     for i, model in enumerate(list(el.get_model())):
                         if model.get_string() == prettify_model_name(value):
@@ -180,7 +175,7 @@ class InstancePreferencesDialog(Adw.Dialog):
             if index == 0 or len(self.model_list) == 0:
                 return None
             else:
-                return self.model_list[index + 1]
+                return self.model_list[index + 1].get('name')
         elif el.get_name() == 'model_directory':
             return el.get_subtitle()
         elif isinstance(el, Adw.PasswordEntryRow):
