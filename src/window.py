@@ -445,6 +445,21 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat')
 
+    def prepare_screenshoter(self):
+        #used to take screenshots of widgets for documentation
+        widget = self.get_focus().get_parent()
+        while True:
+            if 'Alpaca' in repr(widget):
+                break
+            widget = widget.get_parent()
+
+        widget.unparent()
+        Adw.ApplicationWindow(
+            width_request=640,
+            height_request=10,
+            content=widget
+        ).present()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.activities_page.set_child(Widgets.activities.ActivityManager())
@@ -506,6 +521,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'zoom_in': [lambda *_: Widgets.preferences.zoom_in(), ['<primary>plus']],
             'zoom_out': [lambda *_: Widgets.preferences.zoom_out(), ['<primary>minus']]
         }
+        if os.getenv('ALPACA_ENABLE_SCREENSHOT_ACTION', '0') == '1':
+            universal_actions['screenshoter'] = [lambda *_: self.prepare_screenshoter(), ['F3']]
+
         for action_name, data in universal_actions.items():
             self.get_application().create_action(action_name, data[0], data[1] if len(data) > 1 else None)
 
