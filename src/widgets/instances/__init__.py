@@ -150,7 +150,7 @@ class InstancePreferencesDialog(Adw.Dialog):
                 if value:
                     for i, model in enumerate(list(el.get_model())):
                         if model.get_string() == prettify_model_name(value):
-                            el.set_selected(i+1)
+                            el.set_selected(i)
                             break
             elif el.get_name() == 'model_directory':
                 el.set_subtitle(value)
