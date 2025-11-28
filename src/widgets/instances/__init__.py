@@ -170,12 +170,16 @@ class InstancePreferencesDialog(Adw.Dialog):
             group.set_visible(group.get_visible() or in_properties)
 
     def get_value(self, el):
-        if el.get_name() in ('default_model', 'title_model'):
+        if el.get_name() == 'default_model':
+            if len(self.model_list) == 0:
+                return None
+            index = el.get_selected()
+            return self.model_list[index].get('name')
+        elif el.get_name() == 'title_model':
             index = el.get_selected()
             if index == 0 or len(self.model_list) == 0:
                 return None
-            else:
-                return self.model_list[index + 1].get('name')
+            return self.model_list[index - 1].get('name')
         elif el.get_name() == 'model_directory':
             return el.get_subtitle()
         elif isinstance(el, Adw.PasswordEntryRow):
