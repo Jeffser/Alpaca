@@ -495,7 +495,9 @@ class FolderRow(Gtk.ListBoxRow):
     label = Gtk.Template.Child()
 
     def __init__(self, folder_id:str=None, folder_name:str=_('Root'), folder_color:str=None, folder_parent:str=None):
-        super().__init__()
+        super().__init__(
+            name=folder_name
+        )
         self.folder_id = folder_id
         self.folder_name = folder_name
         self.folder_color = folder_color
