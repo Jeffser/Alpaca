@@ -17,6 +17,7 @@ class BaseInstance:
 
     def prepare_chat(self, bot_message):
         chat_element = bot_message.get_ancestor(chat.Chat)
+        bot_message.block_container.show_generating_block()
         if chat_element and chat_element.chat_id:
             chat_element.row.spinner.set_visible(True)
             try:
@@ -47,7 +48,6 @@ class BaseInstance:
 
     def use_tools(self, bot_message, model:str, available_tools:dict, generate_message:bool):
         chat, messages = self.prepare_chat(bot_message)
-        bot_message.block_container.prepare_generating_block()
 
         if chat.chat_id and [m.get('role') for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
             threading.Thread(
@@ -130,8 +130,6 @@ class BaseInstance:
             bot_message.finish_generation('')
 
     def generate_response(self, bot_message, chat, messages:list, model:str):
-        bot_message.block_container.prepare_generating_block()
-
         if self.properties.get('share_name', 0) > 0:
             user_display_name = None
             if self.properties.get('share_name') == 1:

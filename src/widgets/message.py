@@ -65,7 +65,7 @@ class OptionPopup(Gtk.Popover):
                 SQL.delete_attachment(att)
                 att.unparent()
 
-            #message_element.block_container.clear()
+            message_element.block_container.clear()
             message_element.main_stack.set_visible_child_name('loading')
             message_element.author = model
             message_element.update_profile_picture()
@@ -111,24 +111,30 @@ class BlockContainer(Gtk.Box):
         self.generating_block = None
         self.thinking_block = None
 
-    def prepare_generating_block(self):
-        """
-        Prepares the generating text block, creating it if it does not exist
-        """
-        if not self.generating_block:
+    def show_generating_block(self):
+        if not self.generating_block or not self.generating_block.get_parent():
             self.generating_block = blocks.GeneratingText()
             self.append(self.generating_block)
-            GLib.idle_add(self.get_ancestor(Message).popup.change_status, False)
+            self.get_ancestor(Message).main_stack.set_visible_child_name('content')
 
     def remove_generating_block(self):
-        if self.generating_block:
+        if self.generating_block.get_parent():
             self.remove(self.generating_block)
-            self.generating_block = None
+
+    def show_thinking_block(self):
+        if not self.thinking_block or not self.thinking_block.get_parent():
+            self.thinking_block = blocks.Thinking()
+            self.prepend(self.thinking_block)
+            self.get_ancestor(Message).main_stack.set_visible_child_name('content')
+
+    def remove_thinking_block(self):
+        if self.thinking_block.get_parent():
+            self.remove(self.thinking_block)
 
     def clear(self) -> None:
         for child in list(self):
             if child != self.generating_block:
-                child.unparent()
+                self.remove(child)
 
     def set_content(self, content:str) -> None:
         self.clear()
@@ -138,15 +144,22 @@ class BlockContainer(Gtk.Box):
             self.append(block)
         message.main_stack.set_visible_child_name('content')
 
+    def check_if_should_tts(self):
+        chat_element = self.get_ancestor(chat.Chat)
+        if not self.get_root():
+            return
+        message = self.get_ancestor(Message)
+        if not message.popup.tts_button.get_active() and (self.get_root().settings.get_value('tts-auto-dictate').unpack() or (chat_element and chat_element.chat_id=='LiveChat')):
+            message.popup.tts_button.set_active(True)
+
     def add_content(self, content:str) -> None:
         """
         Used for live generation rendering
         """
-        message = self.get_ancestor(Message)
 
         for block in blocks.text_to_block_list(content):
             if len(list(self)) <= 1:
-                GLib.idle_add(self.prepend, block)
+                self.prepend(block)
             else:
                 if isinstance(list(self)[-2], blocks.Text) and isinstance(block, blocks.Text):
                     if not list(self)[-2].get_content().endswith('\n') and not block.get_content().startswith('\n'):
@@ -154,23 +167,18 @@ class BlockContainer(Gtk.Box):
                     else:
                         GLib.idle_add(list(self)[-2].append_content, block.get_content())
                 elif isinstance(list(self)[-2], blocks.Text) and not isinstance(block, blocks.Text):
-                    GLib.idle_add(list(self)[-2].set_content, list(self)[-2].get_content().strip())
-                    GLib.idle_add(self.insert_child_after, block, list(self)[-2])
+                    list(self)[-2].set_content(list(self)[-2].get_content().strip())
+                    self.insert_child_after(block, list(self)[-2])
                 else:
-                    GLib.idle_add(self.insert_child_after, block, list(self)[-2])
-
-        chat_element = self.get_ancestor(chat.Chat)
-        if not message.popup.tts_button.get_active() and (message.get_root().settings.get_value('tts-auto-dictate').unpack() or (chat_element and chat_element.chat_id=='LiveChat')):
-            GLib.idle_add(message.popup.tts_button.set_active, True)
+                    self.insert_child_after(block, list(self)[-2])
+        GLib.idle_add(self.check_if_should_tts)
 
     def get_content(self) -> list:
         return [block.get_content() for block in list(self)]
 
     def add_thinking(self, content:str) -> None:
-        if not self.thinking_block or not self.thinking_block.get_parent():
-            self.thinking_block = blocks.Thinking()
-            self.prepend(self.thinking_block)
-        self.thinking_block.append_content(content)
+        self.show_thinking_block()
+        GLib.idle_add(self.thinking_block.append_content, content)
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/message/message.ui')
 class Message(Gtk.Box):
@@ -294,7 +302,6 @@ class Message(Gtk.Box):
 
     def update_message(self, content):
         if content:
-            GLib.idle_add(self.main_stack.set_visible_child_name, 'content')
             GLib.idle_add(self.block_container.generating_block.append_content, content)
 
             chat_element = self.get_ancestor(chat.Chat)
@@ -311,12 +318,11 @@ class Message(Gtk.Box):
             )
             self.attachment_container.add_attachment(attachment)
             SQL.insert_or_update_attachment(self, attachment)
-            self.block_container.thinking_block.unparent()
+            self.block_container.remove_thinking_block()
 
     def update_thinking(self, content):
         if content:
-            GLib.idle_add(self.main_stack.set_visible_child_name, 'content')
-            GLib.idle_add(self.block_container.add_thinking, content)
+            self.block_container.add_thinking(content)
 
             chat_element = self.get_ancestor(chat.Chat)
             if chat_element:
@@ -326,25 +332,28 @@ class Message(Gtk.Box):
 
     def finish_generation(self, response_metadata:str=None):
         chat_element = self.get_ancestor(chat.Chat)
+        root = chat_element.get_root() or chat_element.row.get_root()
+
         def send_notification():
             result_text = self.get_content()
-            if result_text:
+            if result_text and root:
                 dialog.show_notification(
-                    root_widget=self.get_root(),
+                    root_widget=root,
                     title=chat_element.get_name() if chat_element else _("Chat"),
                     body=result_text[:200] + (result_text[200:] and '…'),
                     icon=Gio.ThemedIcon.new('chat-message-new-symbolic')
                 )
 
-        self.popup.change_status(True)
-        if self.get_root().get_name() == 'AlpacaWindow' and chat_element:
-            GLib.idle_add(chat_element.row.spinner.set_visible, False)
-            if self.get_root().chat_bin.get_child().get_name() != chat_element.get_name():
-                GLib.idle_add(chat_element.row.indicator.set_visible, True)
-        elif self.get_root().get_name() == 'AlpacaQuickAsk':
-            GLib.idle_add(self.get_root().save_button.set_sensitive, True)
+        if root and root.get_name() == 'AlpacaWindow' and chat_element:
+            chat_element.row.spinner.set_visible(False)
+            if root.chat_bin.get_child().get_name() != chat_element.get_name():
+                chat_element.row.indicator.set_visible(True)
+        elif root and root.get_name() == 'AlpacaQuickAsk':
+            root.save_button.set_sensitive(True)
 
-        if chat_element:
+        self.popup.change_status(True)
+
+        if chat_element and root:
             chat_element.stop_message()
         buffer = self.block_container.generating_block.buffer
         final_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
