@@ -114,8 +114,7 @@ class BlockContainer(Gtk.Box):
     def show_generating_block(self):
         if not self.generating_block or not self.generating_block.get_parent():
             self.generating_block = blocks.GeneratingText()
-            self.append(self.generating_block)
-            self.get_ancestor(Message).main_stack.set_visible_child_name('content')
+            GLib.idle_add(self.append, self.generating_block)
 
     def remove_generating_block(self):
         if self.generating_block.get_parent():
@@ -124,8 +123,7 @@ class BlockContainer(Gtk.Box):
     def show_thinking_block(self):
         if not self.thinking_block or not self.thinking_block.get_parent():
             self.thinking_block = blocks.Thinking()
-            self.prepend(self.thinking_block)
-            self.get_ancestor(Message).main_stack.set_visible_child_name('content')
+            GLib.idle_add(self.prepend, self.thinking_block)
 
     def remove_thinking_block(self):
         if self.thinking_block.get_parent():
@@ -303,6 +301,7 @@ class Message(Gtk.Box):
     def update_message(self, content):
         if content:
             GLib.idle_add(self.block_container.generating_block.append_content, content)
+            self.main_stack.set_visible_child_name('content')
 
             chat_element = self.get_ancestor(chat.Chat)
             if chat_element:
@@ -323,6 +322,7 @@ class Message(Gtk.Box):
     def update_thinking(self, content):
         if content:
             self.block_container.add_thinking(content)
+            self.main_stack.set_visible_child_name('content')
 
             chat_element = self.get_ancestor(chat.Chat)
             if chat_element:
