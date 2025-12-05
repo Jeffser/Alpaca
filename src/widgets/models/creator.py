@@ -146,8 +146,8 @@ class ModelCreatorDialog(Adw.Dialog):
         model_name = '{}:{}'.format(main_name, tag_name).strip().replace(' ', '-').lower()
         pretty_name = prettify_model_name(model_name)
 
-        for row in list(self.base_el.get_model()):
-            if model_name == row.model.get_name():
+        for row in list_from_selector():
+            if model_name == row:
                 self.show_toast(_("Model name is already in use"))
                 return
 
@@ -208,14 +208,14 @@ class ModelCreatorDialog(Adw.Dialog):
 
         if self.gguf_path:
             try:
-                with open(gguf_path, 'rb', buffering=0) as f:
+                with open(self.gguf_path, 'rb', buffering=0) as f:
                     model_el.append_progress_line('Generating sha256')
                     sha256 = hashlib.file_digest(f, 'sha256').hexdigest()
 
                 if not self.instance.gguf_exists(sha256):
                     model_el.append_progress_line('Uploading GGUF to Ollama instance')
-                    self.instance.upload_gguf(gguf_path, sha256)
-                    data['files'] = {os.path.split(gguf_path)[1]: 'sha256:{}'.format(sha256)}
+                    self.instance.upload_gguf(self.gguf_path, sha256)
+                    data['files'] = {os.path.split(self.gguf_path)[1]: 'sha256:{}'.format(sha256)}
             except Exception as e:
                 logger.error(e)
                 GLib.idle_add(window.local_model_flowbox.remove, model_el.get_parent())
