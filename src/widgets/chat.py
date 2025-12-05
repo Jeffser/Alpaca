@@ -187,6 +187,7 @@ class Folder(Adw.NavigationPage):
             is_template=False,
             mode=1
         )
+        self.chat_list_box.select_row(chat.row)
         if chat:
             SQL.insert_or_update_chat(chat)
             return chat
