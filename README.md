@@ -40,8 +40,6 @@ Normal conversation | Image recognition | Custom Character | Integrated Script E
 :------------------:|:-----------------:|:----------------:|:---------------------------:|:--------------------:
 ![screenie1](https://jeffser.com/images/alpaca/screenie1.png) | ![screenie2](https://jeffser.com/images/alpaca/screenie2.png) | ![screenie3](https://jeffser.com/images/alpaca/screenie3.png) | ![screenie4](https://jeffser.com/images/alpaca/screenie5.png) | ![screenie5](https://jeffser.com/images/alpaca/screenie6.png)
 
-- [Ollama Installation](https://github.com/Jeffser/Alpaca/wiki/Installing-Ollama)
-
 ## Documentation
 
 The documentation of Alpaca and tutorials are now available at [jeffser.com](https://jeffser.com/alpaca/alpaca.html).
