@@ -40,41 +40,11 @@ Normal conversation | Image recognition | Custom Character | Integrated Script E
 :------------------:|:-----------------:|:----------------:|:---------------------------:|:--------------------:
 ![screenie1](https://jeffser.com/images/alpaca/screenie1.png) | ![screenie2](https://jeffser.com/images/alpaca/screenie2.png) | ![screenie3](https://jeffser.com/images/alpaca/screenie3.png) | ![screenie4](https://jeffser.com/images/alpaca/screenie5.png) | ![screenie5](https://jeffser.com/images/alpaca/screenie6.png)
 
-## Installation
-
-- [Alpaca Installation](https://github.com/Jeffser/Alpaca/wiki/Installation)
 - [Ollama Installation](https://github.com/Jeffser/Alpaca/wiki/Installing-Ollama)
 
-## Launch in Quick Ask Mode
+## Documentation
 
-> [!NOTE]
-> Available since Alpaca 6.0.0
-
-> [!NOTE]
-> It uses the default model from the latest instance you've used to generate the messages
-
-Quick Ask is a mini mode you can use to have a quick temporary chat that isn't saved as a full chat.
-
-Great for asking something, getting a response and moving on with your work.
-
-```BASH
-flatpak run com.jeffser.Alpaca --quick-ask
-```
-
-## Launch in Live Chat Mode
-
-> [!NOTE]
-> Available since Alpaca 7.0.0
-
-Live Chat is a great way of having a live conversation with your models as if you were in a call with them.
-
-Great for natural conversations with models and roleplay.
-
-```BASH
-flatpak run com.jeffser.Alpaca --live-chat
-```
-
-You can add your respective command as as keyboard shortcut in your system settings to quickly access Alpaca at anytime!
+The documentation of Alpaca and tutorials are now available at [jeffser.com](https://jeffser.com/alpaca/alpaca.html).
 
 ## Translators
 
