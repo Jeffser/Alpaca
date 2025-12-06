@@ -198,7 +198,7 @@ class AlpacaApplication(Adw.Application):
             developer_name='Jeffry Samuel Eduarte Rojas',
             version=self.version,
             release_notes_version=self.version,
-            support_url="https://github.com/Jeffser/Alpaca/discussions/155",
+            support_url="https://jeffser.com/alpaca/support.html",
             developers=['Jeffser https://jeffser.com'],
             designers=[
                 'Jeffser https://jeffser.com', 
