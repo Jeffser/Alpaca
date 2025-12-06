@@ -89,6 +89,23 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/blob/main/CONTRIBUTING.md</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="8.5.0" date="2025-12-05">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/8.5.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>New documentation website</li>
+          <li>Auto select new chat on creation</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Mostly fixed regeneration of messages</li>
+          <li>Fixed GGUF importer</li>
+          <li>Fixed folder name not displaying properly in dialogs</li>
+          <li>Fix selected model in instance preferences not displaying correctly</li>
+        </ul>
+      </description>
+    </release>
     <release version="8.4.4" date="2025-11-28">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/8.4.4</url>
       <description>
