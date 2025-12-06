@@ -511,7 +511,7 @@ class OllamaManaged(BaseInstance):
                 self.properties[key] = properties.get(key, self.default_properties.get(key))
 
     def log_output(self, pipe):
-        AMD_support_label = "\n<a href='https://github.com/Jeffser/Alpaca/wiki/Installing-Ollama'>{}</a>".format(_('Alpaca Support'))
+        AMD_support_label = "\n<a href='https://jeffser.com/alpaca/installation-guide.html'>{}</a>".format(_('Alpaca Support'))
         with pipe:
             try:
                 for line in iter(pipe.readline, ''):

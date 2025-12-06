@@ -127,7 +127,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     parent = button.get_root(),
                     heading = _("Ollama Was Not Found"),
                     body = _("To add a managed Ollama instance, you must have Ollama installed locally in your device, this is a simple process and should not take more than 5 minutes."),
-                    callback = lambda: Gio.AppInfo.launch_default_for_uri('https://github.com/Jeffser/Alpaca/wiki/Installing-Ollama'),
+                    callback = lambda: Gio.AppInfo.launch_default_for_uri('https://jeffser.com/alpaca/installation-guide.html'),
                     button_name = _("Open Tutorial in Web Browser")
                 )
             else:
