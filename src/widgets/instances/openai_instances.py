@@ -5,7 +5,7 @@ from gi.repository import Adw, GLib
 import openai, requests, json, logging, threading, re
 from pydantic import BaseModel
 
-from .. import dialog, tools
+from .. import dialog, tools, chat
 from ...sql_manager import generate_uuid, Instance as SQL
 from ...constants import MAX_TOKENS_TITLE_GENERATION, TITLE_GENERATION_PROMPT_OPENAI
 
