@@ -487,7 +487,7 @@ class OllamaManaged(BaseInstance):
             'CUDA_VISIBLE_DEVICES': '0',
             'ROCR_VISIBLE_DEVICES': '1',
             'HIP_VISIBLE_DEVICES': '1',
-            'OLLAMA_VULKAN': '1'
+            'OLLAMA_VULKAN': '0'
         },
         'think': False,
         'expose': False,
