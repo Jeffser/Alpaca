@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-11 13:04-0600\n"
+"POT-Creation-Date: 2025-12-11 13:13-0600\n"
 "PO-Revision-Date: 2024-05-19 19:44-0600\n"
 "Last-Translator: Jeffry Samuel Eduarte Rojas <jeffrysamuer@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -267,12 +267,14 @@ msgstr "Se arregló el importador GGUF"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:114
 msgid "Fixed folder name not displaying properly in dialogs"
-msgstr "Se arregló que el nombre de carpetas que no se mostraba en los diálogos"
+msgstr ""
+"Se arregló que el nombre de carpetas que no se mostraba en los diálogos"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:115
 msgid "Fix selected model in instance preferences not displaying correctly"
-msgstr "Se arregló que el modelo seleccionado en las preferencias de "
-"instancia no se mostrara correctamente"
+msgstr ""
+"Se arregló que el modelo seleccionado en las preferencias de instancia no se "
+"mostrara correctamente"
 
 #: data/com.jeffser.Alpaca.metainfo.xml.in:124
 msgid "Updated list of available models for Ollama"
@@ -5951,11 +5953,11 @@ msgstr "Error de Herramienta"
 msgid "An error occurred while running tool"
 msgstr "Se produjo un error al ejecutar la herramienta"
 
-#: src/widgets/instances/ollama_instances.py:211
-#: src/widgets/instances/ollama_instances.py:323
-#: src/widgets/instances/ollama_instances.py:338
-#: src/widgets/instances/ollama_instances.py:586
-#: src/widgets/instances/ollama_instances.py:706
+#: src/widgets/instances/ollama_instances.py:218
+#: src/widgets/instances/ollama_instances.py:330
+#: src/widgets/instances/ollama_instances.py:345
+#: src/widgets/instances/ollama_instances.py:593
+#: src/widgets/instances/ollama_instances.py:713
 #: src/widgets/instances/openai_instances.py:205
 #: src/widgets/instances/openai_instances.py:280
 #: src/widgets/instances/openai_instances.py:336
@@ -5967,83 +5969,83 @@ msgstr "Se produjo un error al ejecutar la herramienta"
 msgid "Instance Error"
 msgstr "Error de Instancia"
 
-#: src/widgets/instances/ollama_instances.py:212
+#: src/widgets/instances/ollama_instances.py:219
 #: src/widgets/instances/openai_instances.py:206
 msgid "Message generation failed"
 msgstr "Error en la generación del mensaje"
 
-#: src/widgets/instances/ollama_instances.py:324
-#: src/widgets/instances/ollama_instances.py:707
+#: src/widgets/instances/ollama_instances.py:331
+#: src/widgets/instances/ollama_instances.py:714
 #: src/widgets/instances/openai_instances.py:281
 #: src/widgets/instances/openai_instances.py:337
 #: src/widgets/instances/openai_instances.py:382
 msgid "Could not retrieve added models"
 msgstr "No se pudieron recuperar los modelos agregados"
 
-#: src/widgets/instances/ollama_instances.py:339
+#: src/widgets/instances/ollama_instances.py:346
 msgid "Could not retrieve available models"
 msgstr "No se pudieron recuperar los modelos disponibles"
 
-#: src/widgets/instances/ollama_instances.py:471
+#: src/widgets/instances/ollama_instances.py:478
 msgid "Ollama (Managed)"
 msgstr "Ollama (Administrado)"
 
-#: src/widgets/instances/ollama_instances.py:472
+#: src/widgets/instances/ollama_instances.py:479
 msgid "Local AI instance managed directly by Alpaca"
 msgstr "Instancia de IA local administrada directamente por Alpaca"
 
-#: src/widgets/instances/ollama_instances.py:475
-#: src/widgets/instances/ollama_instances.py:601
-#: src/widgets/instances/ollama_instances.py:629
+#: src/widgets/instances/ollama_instances.py:482
+#: src/widgets/instances/ollama_instances.py:608
+#: src/widgets/instances/ollama_instances.py:636
 msgid "Instance"
 msgstr "Instancia"
 
-#: src/widgets/instances/ollama_instances.py:514
+#: src/widgets/instances/ollama_instances.py:521
 msgid "Alpaca Support"
 msgstr "Soporte de Alpaca"
 
-#: src/widgets/instances/ollama_instances.py:521
+#: src/widgets/instances/ollama_instances.py:528
 msgid "Model request too large for system"
 msgstr "Solicitud de modelo muy grande para el sistema"
 
-#: src/widgets/instances/ollama_instances.py:524
+#: src/widgets/instances/ollama_instances.py:531
 msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
 msgstr ""
 "GPU AMD detectada pero la extensión no está instalada, Ollama usará CPU."
 
-#: src/widgets/instances/ollama_instances.py:526
+#: src/widgets/instances/ollama_instances.py:533
 msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
 msgstr "GPU AMD detectada pero ROCm no está instalado, Ollama usará CPU."
 
-#: src/widgets/instances/ollama_instances.py:528
+#: src/widgets/instances/ollama_instances.py:535
 msgid "Using AMD GPU type '{}'"
 msgstr "Usando GPU AMD tipo '{}'"
 
-#: src/widgets/instances/ollama_instances.py:552
+#: src/widgets/instances/ollama_instances.py:559
 msgid "Integrated Ollama instance is not running"
 msgstr "Instancia integrada de Ollama no está corriendo"
 
-#: src/widgets/instances/ollama_instances.py:587
+#: src/widgets/instances/ollama_instances.py:594
 msgid "Managed Ollama instance failed to start"
 msgstr "La instancia de Ollama administrada no pudo iniciar"
 
-#: src/widgets/instances/ollama_instances.py:593
+#: src/widgets/instances/ollama_instances.py:600
 msgid "Integrated Ollama instance is running"
 msgstr "Instancia integrada de Ollama está corriendo"
 
-#: src/widgets/instances/ollama_instances.py:597
+#: src/widgets/instances/ollama_instances.py:604
 msgid "Ollama (External)"
 msgstr "Ollama (Externo)"
 
-#: src/widgets/instances/ollama_instances.py:598
+#: src/widgets/instances/ollama_instances.py:605
 msgid "Local or remote AI instance not managed by Alpaca"
 msgstr "Instancia de IA local o remota no administrada por Alpaca"
 
-#: src/widgets/instances/ollama_instances.py:625
+#: src/widgets/instances/ollama_instances.py:632
 msgid "Ollama (Cloud)"
 msgstr "Ollama (Nube)"
 
-#: src/widgets/instances/ollama_instances.py:626
+#: src/widgets/instances/ollama_instances.py:633
 msgid "Online instance directly managed by Ollama (Experimental)"
 msgstr "Instancia en línea gestionada directamente por Ollama (Experimental)"
 
