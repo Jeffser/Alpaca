@@ -2,7 +2,7 @@
 
 from gi.repository import Adw, Gtk, GLib
 
-import requests, json, logging, os, shutil, subprocess, threading, re, signal, pwd, getpass
+import requests, json, logging, os, shutil, subprocess, threading, re, signal, pwd, getpass, datetime
 from .. import dialog, tools, chat
 from ...ollama_models import OLLAMA_MODELS
 from ...constants import data_dir, cache_dir, TITLE_GENERATION_PROMPT_OLLAMA, MAX_TOKENS_TITLE_GENERATION
@@ -152,6 +152,13 @@ class BaseInstance:
                     'role': 'system',
                     'content': model_info.get('system')
                 })
+
+        time_now = datetime.datetime.now().replace(microsecond=0).astimezone().isoformat()
+
+        messages.insert(0, {
+            'role': 'system',
+            'content': 'Current time is {}'.format(time_now),
+        })
 
         params = {
             "model": model,
