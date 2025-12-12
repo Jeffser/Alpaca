@@ -30,7 +30,7 @@ commands = {
     ],
     'bash': [
         'flatpak-spawn --host \'bash -c "{script}"\''
-    ] if IN_FLATPAK else ["script"]
+    ] if IN_FLATPAK else ["{script}"]
 }
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/activities/code_runner.ui')
