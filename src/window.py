@@ -30,7 +30,7 @@ from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, Spelling
 
 from .sql_manager import generate_uuid, generate_numbered_name, prettify_model_name, Instance as SQL
 from . import widgets as Widgets
-from .constants import data_dir, source_dir, cache_dir
+from .constants import data_dir, source_dir, cache_dir, HIGHLIGHT_ALPHA
 
 logger = logging.getLogger(__name__)
 
@@ -287,7 +287,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                                     if search_term:
                                         content = block.get_content().replace('&', '&amp;')
                                         search_text = search_term.replace('&', '&amp;')
-                                        highlighted_text = re.sub(f"({search_text})", r"<span background='yellow' bgalpha='30%'>\1</span>", content, flags=re.IGNORECASE)
+                                        highlighted_text = re.sub(f"({search_text})", rf"<span background='yellow' bgalpha='{HIGHLIGHT_ALPHA}'>\1</span>", content, flags=re.IGNORECASE)
                                         block.set_markup(highlighted_text)
                                     else:
                                         block.set_content(block.get_content())
@@ -445,6 +445,11 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat')
 
+    def show_global_search(self):
+        """Show the global search dialog"""
+        search_dialog = Widgets.global_search.GlobalSearch()
+        search_dialog.present(self)
+
     def prepare_screenshoter(self):
         #used to take screenshots of widgets for documentation
         widget = self.get_focus().get_parent()
@@ -504,6 +509,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'export_current_chat': [lambda *_: self.chat_bin.get_child().row.prompt_export()],
             'toggle_sidebar': [lambda *_: self.split_view_overlay.set_show_sidebar(not self.split_view_overlay.get_show_sidebar()), ['F9']],
             'toggle_search': [lambda *_: self.toggle_searchbar(), ['<primary>f']],
+            'global_search': [lambda *_: self.show_global_search(), ['<primary><shift>f']],
             'model_manager' : [lambda *_: self.push_or_pop('model_manager'), ['<primary>m']],
             'instance_manager' : [lambda *_: self.push_or_pop('instance_manager'), ['<primary>i']],
             'add_model_by_name' : [lambda *i: Widgets.dialog.simple_entry(

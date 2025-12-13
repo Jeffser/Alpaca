@@ -1,0 +1,98 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaGlobalSearch: Adw.Dialog {
+  title: _("Search All Chats");
+  content-width: 600;
+  content-height: 500;
+  
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-title: false;
+      
+      [start]
+      Gtk.Button {
+        icon-name: "go-previous-symbolic";
+        tooltip-text: _("Close");
+        clicked => $on_close();
+      }
+    }
+
+    [top]
+    Gtk.SearchBar search_bar {
+      search-mode-enabled: true;
+      child: Gtk.SearchEntry search_entry {
+        placeholder-text: _("Search messages...");
+        search-changed => $on_search_changed();
+        activate => $on_search_activate();
+      };
+      key-capture-widget: results_stack;
+    }
+
+    content: Gtk.Stack results_stack {
+      Gtk.StackPage {
+        name: "loading";
+        child: Gtk.Box {
+          orientation: vertical;
+          valign: center;
+          halign: center;
+          spacing: 12;
+          
+          Gtk.Spinner {
+            spinning: true;
+            width-request: 32;
+            height-request: 32;
+          }
+          
+          Gtk.Label {
+            label: _("Searching...");
+            styles ["title-3"]
+          }
+        };
+      }
+
+      Gtk.StackPage {
+        name: "results";
+        child: Gtk.ScrolledWindow {
+          vexpand: true;
+          hscrollbar-policy: never;
+          
+          Gtk.ListBox results_listbox {
+            selection-mode: none;
+            activate-on-single-click: true;
+            row-activated => $on_result_activated();
+            styles ["boxed-list"]
+          }
+        };
+      }
+
+      Gtk.StackPage {
+        name: "no-results";
+        child: Adw.StatusPage {
+          icon-name: "edit-find-symbolic";
+          title: _("No Results Found");
+          description: _("Try a different search term");
+        };
+      }
+
+      Gtk.StackPage {
+        name: "empty";
+        child: Adw.StatusPage {
+          icon-name: "edit-find-symbolic";
+          title: _("Search All Chats");
+          description: _("Enter a search term to find messages across all your conversations");
+        };
+      }
+
+      Gtk.StackPage {
+        name: "error";
+        child: Adw.StatusPage {
+          icon-name: "dialog-error-symbolic";
+          title: _("Search Error");
+          description: _("An error occurred while searching");
+        };
+      }
+    };
+  };
+}

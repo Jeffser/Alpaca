@@ -286,6 +286,9 @@ CODE_LANGUAGE_PROPERTIES = (
     }
 )
 
+# UI Constants for search highlighting
+HIGHLIGHT_ALPHA = '30%'  # Background alpha for search highlights
+
 # The identifier when inside the Flatpak runtime
 IN_FLATPAK = bool(os.getenv("FLATPAK_ID"))
 

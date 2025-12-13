@@ -62,6 +62,7 @@ blueprints = files(
   'ui/widgets/voice/microphone_button.blp',
   'ui/widgets/voice/dictate_button.blp',
   'ui/widgets/voice/podcast_dialog.blp',
+  'ui/widgets/search/global_search.blp',
 )
 
 blueprints = custom_target('blueprints',
@@ -122,5 +123,12 @@ alpaca_sources = [
 ]
 
 install_data(alpaca_sources, install_dir: moduledir)
+
+# Install services module
+services_sources = [
+  'services/__init__.py',
+  'services/search.py'
+]
+install_data(services_sources, install_dir: moduledir / 'services')
 
 subdir('widgets')
