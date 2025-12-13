@@ -6,6 +6,7 @@ Handles the message widget
 import gi
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GtkSource, Spelling
 import os, datetime, threading, sys, base64, logging, re, tempfile
+from .. import constants
 from ..sql_manager import prettify_model_name, generate_uuid, format_datetime, Instance as SQL
 from . import attachments, blocks, dialog, voice, tools, models, chat, activities
 
@@ -259,8 +260,8 @@ class Message(Gtk.Box):
             image_data = base64.b64decode(pfp_b64)
             texture = Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data))
             image_element = Gtk.Image.new_from_paintable(texture)
-            image_element.set_size_request(40, 40)
-            image_element.set_pixel_size(40)
+            image_element.set_size_request(constants.ICON_SIZE_SMALL, constants.ICON_SIZE_SMALL)
+            image_element.set_pixel_size(constants.ICON_SIZE_SMALL)
             self.pfp_options_button.set_child(image_element)
             list(self.pfp_options_button)[0].set_overflow(1)
 
@@ -306,7 +307,7 @@ class Message(Gtk.Box):
             chat_element = self.get_ancestor(chat.Chat)
             if chat_element:
                 vadjustment = chat_element.scrolledwindow.get_vadjustment()
-                if vadjustment.get_value() + 150 >= vadjustment.get_upper() - vadjustment.get_page_size():
+                if vadjustment.get_value() + constants.SCROLL_THRESHOLD >= vadjustment.get_upper() - vadjustment.get_page_size():
                     GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
         if self.block_container.thinking_block and self.block_container.thinking_block.get_parent():
             attachment = attachments.Attachment(
@@ -327,7 +328,7 @@ class Message(Gtk.Box):
             chat_element = self.get_ancestor(chat.Chat)
             if chat_element:
                 vadjustment = chat_element.scrolledwindow.get_vadjustment()
-                if vadjustment.get_value() + 150 >= vadjustment.get_upper() - vadjustment.get_page_size():
+                if vadjustment.get_value() + constants.SCROLL_THRESHOLD >= vadjustment.get_upper() - vadjustment.get_page_size():
                     GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
 
     def finish_generation(self, response_metadata:str=None):

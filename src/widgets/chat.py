@@ -6,7 +6,7 @@ Handles the chat widget
 import gi
 from gi.repository import Gtk, Gio, Adw, Gdk, GLib
 import logging, os, datetime, random, json, threading, re, importlib.util
-from ..constants import SAMPLE_PROMPTS, cache_dir
+from ..constants import SAMPLE_PROMPTS, cache_dir, SCROLL_INTERVAL_MS
 from ..sql_manager import generate_uuid, prettify_model_name, generate_numbered_name, Instance as SQL
 from . import dialog, voice, models
 from .message import Message
@@ -56,7 +56,7 @@ class Folder(Adw.NavigationPage):
     def start_scrolling(self, direction):
         if self._scroll_timeout_id:
             GLib.source_remove(self._scroll_timeout_id)
-        self._scroll_timeout_id = GLib.timeout_add(30, self.do_scroll, direction)
+        self._scroll_timeout_id = GLib.timeout_add(SCROLL_INTERVAL_MS, self.do_scroll, direction)
 
     def stop_scrolling(self):
         if self._scroll_timeout_id:

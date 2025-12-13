@@ -286,6 +286,12 @@ CODE_LANGUAGE_PROPERTIES = (
     }
 )
 
+# UI Constants
+SCROLL_THRESHOLD = 150  # Pixels from bottom to trigger auto-scroll
+ICON_SIZE_SMALL = 40  # Small icon size in pixels
+ICON_SIZE_MEDIUM = 64  # Medium icon size in pixels
+SCROLL_INTERVAL_MS = 30  # Scroll animation interval in milliseconds
+
 # The identifier when inside the Flatpak runtime
 IN_FLATPAK = bool(os.getenv("FLATPAK_ID"))
 
