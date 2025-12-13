@@ -359,13 +359,27 @@ class Chat(Gtk.Stack):
     def __init__(self, chat_id:str=None, name:str=_("New Chat"), folder_id:str=None, is_template=False):
         super().__init__()
         self.set_name(name)
-        self.busy = False
+        self._busy = False
+        self._busy_lock = threading.Lock()
         self.chat_id = chat_id
         self.folder_id = folder_id
         self.is_template = is_template
         self.row = ChatRow(self)
         self.use_template_button.set_visible(bool(self.chat_id))
         GLib.idle_add(self.update_prompts)
+
+
+    @property
+    def busy(self):
+        """Thread-safe getter for busy flag."""
+        with self._busy_lock:
+            return self._busy
+
+    @busy.setter
+    def busy(self, value):
+        """Thread-safe setter for busy flag."""
+        with self._busy_lock:
+            self._busy = value
 
     def stop_message(self):
         self.busy = False
