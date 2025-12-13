@@ -184,7 +184,7 @@ class AlpacaApplication(Adw.Application):
                 settings.set_property('gtk-decoration-layout', 'close,minimize,maximize:menu')
                 settings.set_property('gtk-font-name', 'Microsoft Sans Serif')
                 settings.set_property('gtk-xft-dpi', 110592)
-            win.add_css_class('macos')
+            self.main_alpaca_window.add_css_class('macos')
         elif sys.platform == 'win32': # Windows
             settings = Gtk.Settings.get_default()
             if settings:
