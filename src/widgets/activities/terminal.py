@@ -56,8 +56,7 @@ class CodeRunner(Gtk.Stack):
 
         # Activities
         self.buttons = {
-            'start': [self.view_button, self.button_stack],
-            'css': ['black_background']
+            'start': [self.view_button, self.button_stack]
         }
         self.extend_to_edge = False
         self.title = _("Code Runner")
@@ -99,8 +98,7 @@ class Terminal(Vte.Terminal):
 
         # Activities
         self.buttons = {
-            'start': [self.dir_button, self.reload_button],
-            'css': ['black_background']
+            'start': [self.dir_button, self.reload_button]
         }
         self.extend_to_edge = False
         self.title = _("Terminal")

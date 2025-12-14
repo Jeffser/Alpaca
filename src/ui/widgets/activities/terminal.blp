@@ -2,10 +2,14 @@ using Gtk 4.0;
 using Vte 3.91;
 
 template $AlpacaTerminal: Vte.Terminal {
+  margin-start: 5;
+  margin-end: 5;
+  overflow: hidden;
   styles [
-    "p10",
     "black_background",
-    "monospace"
+    "monospace",
+    "r10",
+    "p10"
   ]
   Gtk.EventControllerKey {
     key-pressed => $on_key_press();
