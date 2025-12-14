@@ -247,7 +247,6 @@ class AttachmentCreator(Gtk.ScrolledWindow):
 
     def __init__(self):
         super().__init__()
-        self.buffer.set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita-dark'))
 
         # Activities
         self.buttons = {
@@ -256,6 +255,18 @@ class AttachmentCreator(Gtk.ScrolledWindow):
         self.extend_to_edge = False
         self.title = _("New Attachment")
         self.activity_icon = 'document-edit-symbolic'
+
+        Adw.StyleManager.get_default().connect(
+            'notify::dark',
+            lambda sm, gp: self.update_scheme()
+        )
+        self.update_scheme()
+
+    def update_scheme(self):
+        scheme_name = 'Adwaita'
+        if Adw.StyleManager.get_default().get_dark():
+            scheme_name += '-dark'
+        self.buffer.set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme(scheme_name))
 
     def save(self, name:str):
         is_code = '.' in name and len(name.split('.')) > 1 and name.split('.')[1] != 'txt'

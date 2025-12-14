@@ -5,10 +5,19 @@ template $AlpacaAttachmentCreator: Gtk.ScrolledWindow {
     propagate-natural-width: true;
     propagate-natural-height: true;
     child: GtkSource.View {
+      top-margin: 10;
+      bottom-margin: 10;
+      left-margin: 10;
+      right-margin: 10;
+      margin-start: 5;
+      margin-end: 5;
       auto-indent: true;
       indent-width: 4;
-      show-line-numbers: true;
+      show-line-numbers: false;
       buffer: GtkSource.Buffer buffer {};
+      styles [
+        "r10"
+      ]
     };
     styles [
       "monospace"

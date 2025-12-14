@@ -3,7 +3,7 @@
 Code block handling
 """
 
-from gi.repository import Gtk, Gdk, GtkSource
+from gi.repository import Adw, Gtk, Gdk, GtkSource
 from .. import dialog, activities, message
 from ...sql_manager import generate_uuid
 from ...constants import CODE_LANGUAGE_FALLBACK, CODE_LANGUAGE_PROPERTIES
@@ -27,7 +27,6 @@ class Code(Gtk.Box):
 
     def __init__(self, content:str=None, language:str=None):
         super().__init__()
-        self.buffer.set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita-dark'))
 
         self.raw_language = language
         self.code_language = None
@@ -38,6 +37,18 @@ class Code(Gtk.Box):
 
         self.activity_runner = None
         self.activity_edit = None
+
+        Adw.StyleManager.get_default().connect(
+            'notify::dark',
+            lambda sm, gp: self.update_scheme()
+        )
+        self.update_scheme()
+
+    def update_scheme(self):
+        scheme_name = 'Adwaita'
+        if Adw.StyleManager.get_default().get_dark():
+            scheme_name += '-dark'
+        self.buffer.set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme(scheme_name))
 
     @Gtk.Template.Callback()
     def begin_edit(self, button=None) -> None:
