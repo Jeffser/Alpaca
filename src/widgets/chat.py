@@ -115,6 +115,8 @@ class Folder(Adw.NavigationPage):
             self.list_stack.set_visible_child_name('content' if folder_visible or chat_visible else 'empty')
 
     def on_search(self, query:str):
+        folder_search_mode = self.get_root().settings.get_value('folder-search-mode').unpack()
+
         if len(list(self.folder_list_box)) + len(list(self.chat_list_box)) == 0:
             self.list_stack.set_visible_child_name('empty')
             return
@@ -123,7 +125,20 @@ class Folder(Adw.NavigationPage):
             row.set_visible(re.search(query, row.get_name(), re.IGNORECASE))
 
         for row in list(self.chat_list_box):
-            row.set_visible(re.search(query, row.get_name(), re.IGNORECASE))
+            title_match = re.search(query, row.get_name(), re.IGNORECASE)
+
+            messages_str = ""
+            message_match = False
+
+            if folder_search_mode in (1,2):
+                messages_str = '\n'.join([m.get('content') for m in row.chat.convert_to_ollama()])
+                if not messages_str and folder_search_mode == 2:
+                    messages_str = '\n'.join([m[4] for m in SQL.get_messages(row.chat)])
+
+            if messages_str:
+                message_match = re.search(query, messages_str, re.IGNORECASE)
+
+            row.set_visible(title_match or message_match)
 
         self.update_visibility(True)
 

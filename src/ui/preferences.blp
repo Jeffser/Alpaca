@@ -24,6 +24,18 @@ template $AlpacaPreferencesDialog: Adw.PreferencesDialog {
         subtitle: _("You can also find the model manager in the main dropdown menu");
       }
 
+      Adw.ComboRow folder_search_mode_combo {
+        title: _("Folder Search Mode");
+        subtitle: _("When searching for chats inside a folder");
+        model: StringList {
+          strings [
+            _("Only Titles"),
+            _("Include Loaded Messages"),
+            _("Include All Messages"),
+          ]
+        };
+      }
+
       Adw.SpinRow zoom_spin {
         output => $zoom_changed();
         title: _("Zoom");
