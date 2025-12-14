@@ -325,7 +325,6 @@ class CodeEditor(Gtk.ScrolledWindow):
 
         if language:
             self.buffer.set_language(GtkSource.LanguageManager.get_default().get_language(language))
-        self.buffer.set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme('Adwaita-dark'))
 
         self.view.set_editable(bool(save_func))
 
@@ -341,6 +340,18 @@ class CodeEditor(Gtk.ScrolledWindow):
         self.extend_to_edge = False
         self.title = _("Code Editor")
         self.activity_icon = 'document-edit-symbolic'
+
+        Adw.StyleManager.get_default().connect(
+            'notify::dark',
+            lambda sm, gp: self.update_scheme()
+        )
+        self.update_scheme()
+
+    def update_scheme(self):
+        scheme_name = 'Adwaita'
+        if Adw.StyleManager.get_default().get_dark():
+            scheme_name += '-dark'
+        self.buffer.set_style_scheme(GtkSource.StyleSchemeManager.get_default().get_scheme(scheme_name))
 
     @Gtk.Template.Callback()
     def save(self, button=None):
