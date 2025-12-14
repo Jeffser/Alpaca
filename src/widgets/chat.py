@@ -114,7 +114,8 @@ class Folder(Adw.NavigationPage):
         else:
             self.list_stack.set_visible_child_name('content' if folder_visible or chat_visible else 'empty')
 
-    def on_search(self, query:str):
+    def on_search(self, raw_query:str):
+        query = re.escape(raw_query)
         root = self.get_root()
         folder_search_mode = root.settings.get_value('folder-search-mode').unpack()
 
@@ -135,12 +136,20 @@ class Folder(Adw.NavigationPage):
                 messages_str = '\n'.join([m.get('content') for m in row.chat.convert_to_ollama()])
                 if not messages_str and folder_search_mode == 2:
                     messages_str = '\n'.join([m[4] for m in SQL.get_messages(row.chat)])
-                root.searchentry_messages.set_text(query)
+                root.searchentry_messages.set_text(raw_query)
 
             if messages_str:
                 message_match = re.search(query, messages_str, re.IGNORECASE)
 
             row.set_visible(title_match or message_match)
+            if row.get_visible():
+                if query:
+                    query_escaped = GLib.markup_escape_text(query)
+                    row_label_text = GLib.markup_escape_text(row.get_name())
+                    highlighted_text = re.sub(f"({query_escaped})", r"<span background='yellow' bgalpha='30%'>\1</span>", row_label_text, flags=re.IGNORECASE)
+                    row.label.set_markup(highlighted_text)
+                else:
+                    row.label.set_markup(row.get_name())
 
         self.update_visibility(True)
 
@@ -387,6 +396,7 @@ class Chat(Gtk.Stack):
         GLib.idle_add(self.update_prompts)
 
     def on_search(self, query:str):
+        query = re.escape(query)
         for m in list(self.container):
             content = m.get_content()
             if content:
@@ -395,9 +405,9 @@ class Chat(Gtk.Stack):
                 for block in list(m.block_container):
                     if isinstance(block, blocks.text.Text):
                         if query:
+                            query_escaped = GLib.markup_escape_text(query)
                             block_content = GLib.markup_escape_text(block.get_content())
-                            search_text = GLib.markup_escape_text(query)
-                            highlighted_text = re.sub(f"({search_text})", r"<span background='yellow' bgalpha='30%'>\1</span>", block_content, flags=re.IGNORECASE)
+                            highlighted_text = re.sub(f"({query_escaped})", r"<span background='yellow' bgalpha='30%'>\1</span>", block_content, flags=re.IGNORECASE)
                             block.set_markup(highlighted_text)
                         else:
                             block.set_content(block.get_content())

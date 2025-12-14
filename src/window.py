@@ -236,6 +236,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def model_search_changed(self, entry):
+        query = GLib.markup_escape_text(entry.get_text())
+
         filtered_categories = set()
         if self.model_filter_button.get_popover():
             filtered_categories = set([c.get_name() for c in list(self.model_filter_button.get_popover().get_child()) if c.get_active()])
@@ -243,13 +245,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         if len(list(self.local_model_flowbox)) > 0:
             for model in list(self.local_model_flowbox):
-                string_search = re.search(entry.get_text(), model.get_child().get_search_string(), re.IGNORECASE)
+                string_search = re.search(query, model.get_child().get_search_string(), re.IGNORECASE)
                 category_filter = len(filtered_categories) == 0 or model.get_child().get_search_categories() & filtered_categories or not self.model_searchbar.get_search_mode()
                 model.set_visible(string_search and category_filter)
                 results_local = results_local or model.get_visible()
                 if not model.get_visible() and model in self.local_model_flowbox.get_selected_children():
                     self.local_model_flowbox.unselect_all()
-            self.local_model_stack.set_visible_child_name('content' if results_local or not entry.get_text() else 'no-results')
+            self.local_model_stack.set_visible_child_name('content' if results_local or not query else 'no-results')
         else:
             self.local_model_stack.set_visible_child_name('no-models')
 
@@ -257,7 +259,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if len(Widgets.models.common.available_models_data) > 0:
             self.available_models_stack_page.set_visible(True)
             for model in list(self.available_model_flowbox):
-                string_search = re.search(entry.get_text(), model.get_child().get_search_string(), re.IGNORECASE)
+                string_search = re.search(query, model.get_child().get_search_string(), re.IGNORECASE)
                 category_filter = len(filtered_categories) == 0 or model.get_child().get_search_categories() & filtered_categories or not self.model_searchbar.get_search_mode()
                 model.set_visible(string_search and category_filter)
                 results_available = results_available or model.get_visible()
