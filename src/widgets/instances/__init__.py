@@ -2,11 +2,10 @@
 
 from gi.repository import Adw, Gtk, GLib, Gio
 
-import os, shutil, json, re, logging
+import os, shutil, json, re, logging, importlib.util
 from ...sql_manager import generate_uuid, generate_numbered_name, prettify_model_name, Instance as SQL
 from .. import dialog
 from .ollama_instances import BaseInstance as BaseOllama
-from .openai_instances import BaseInstance as BaseOpenAI
 
 logger = logging.getLogger(__name__)
 
@@ -359,7 +358,8 @@ def create_instance_row(ins:dict) -> InstanceRow or None:
                             properties=ins.get('properties')
                         )
                     )
-    elif os.getenv('ALPACA_OLLAMA_ONLY', '0') != '1':
+    elif os.getenv('ALPACA_OLLAMA_ONLY', '0') != '1' and importlib.util.find_spec('openai'):
+        from .openai_instances import BaseInstance as BaseOpenAI
         for instance_cls in BaseOpenAI.__subclasses__():
             if getattr(instance_cls, 'instance_type', None) == ins.get('type'):
                 return InstanceRow(

@@ -139,7 +139,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         options = {}
         instance_list = Widgets.instances.ollama_instances.BaseInstance.__subclasses__()
-        if os.getenv('ALPACA_OLLAMA_ONLY', '0') != '1':
+        if os.getenv('ALPACA_OLLAMA_ONLY', '0') != '1' and importlib.util.find_spec('openai'):
             instance_list += Widgets.instances.openai_instances.BaseInstance.__subclasses__()
         for ins_type in instance_list:
             options[ins_type.instance_type_display] = ins_type
