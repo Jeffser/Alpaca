@@ -299,6 +299,12 @@ TITLE_GENERATION_PROMPT_OPENAI = (
 )
 MAX_TOKENS_TITLE_GENERATION = 31
 
+LEGAL_NOTICE = """Alpaca is an independent client interface designed to connect to various third-party AI services.
+All underlying AI models and instances are the intellectual property of their respective providers.
+Alpaca only accesses and utilizes the publicly available APIs or connection endpoints provided by these AI services.
+Alpaca is not affiliated with, endorsed by, or officially connected to Google, OpenAI or any other AI model provider.
+Your use of any AI instance is subject to that provider's own Terms of Service and Privacy Policy."""
+
 def get_xdg_home(env, default):
     if IN_FLATPAK:
         return os.getenv(env)

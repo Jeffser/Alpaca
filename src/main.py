@@ -34,7 +34,7 @@ from gi.repository import Gtk, Gio, Adw, GLib, GtkSource
 GtkSource.init()
 
 from .widgets import activities
-from .constants import TRANSLATORS, cache_dir, data_dir, config_dir, source_dir
+from .constants import TRANSLATORS, LEGAL_NOTICE, cache_dir, data_dir, config_dir, source_dir
 from .sql_manager import Instance as SQL
 
 SQL.initialize()
@@ -205,19 +205,7 @@ class AlpacaApplication(Adw.Application):
                 'Tobias Bernard (App Icon) https://tobiasbernard.com/'
             ],
             translator_credits='\n'.join(TRANSLATORS),
-            copyright=f'© {current_year} Alpaca Jeffry Samuel Eduarte Rojas\n'
-                      f'© {current_year} Ollama Meta Platforms, Inc.\n'
-                      f'© {current_year} ChatGPT OpenAI, Inc.\n'
-                      f'© {current_year} Gemini Google Alphabet, Inc.\n'
-                      f'© {current_year} Together.ai\n'
-                      f'© {current_year} Venice AI\n'
-                      f'© {current_year} Deepseek\n'
-                      f'© {current_year} Openrouter\n'
-                      f'© {current_year} Gorqcloud\n'
-                      f'© {current_year} Anthropic\n'
-                      f'© {current_year} Lambda.ai\n'
-                      f'© {current_year} Fireworks.ai\n'
-                      f'© {current_year} Microsoft',
+            copyright=f'© {current_year} Alpaca, Jeffry Samuel Eduarte Rojas\n\n{LEGAL_NOTICE}',
             issue_url='https://github.com/Jeffser/Alpaca/issues',
             license_type=Gtk.License.GPL_3_0,
             website="https://jeffser.com/alpaca"
