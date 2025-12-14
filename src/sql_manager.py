@@ -209,6 +209,11 @@ class Instance:
                     "name": "TEXT NOT NULL",
                     "color": "TEXT",
                     "parent": "TEXT"
+                },
+                "bookmark": {
+                    "id": "TEXT NOT NULL PRIMARY KEY",
+                    "message_id": "TEXT NOT NULL",
+                    "created_at": "DATETIME NOT NULL"
                 }
             }
 
@@ -892,3 +897,58 @@ class Instance:
 
         for row in result:
             Instance.remove_folder(row[0])
+
+    # Bookmark methods
+    def add_bookmark(message_id: str) -> str:
+        """Add a bookmark for a message and return the bookmark ID."""
+        bookmark_id = generate_uuid()
+        with SQLiteConnection() as c:
+            # Check if bookmark already exists
+            existing = c.cursor.execute(
+                "SELECT id FROM bookmark WHERE message_id=?", (message_id,)
+            ).fetchone()
+            
+            if existing:
+                return existing[0]
+            
+            c.cursor.execute(
+                "INSERT INTO bookmark (id, message_id, created_at) VALUES (?, ?, ?)",
+                (bookmark_id, message_id, datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S"))
+            )
+        return bookmark_id
+    
+    def remove_bookmark(message_id: str) -> bool:
+        """Remove a bookmark for a message."""
+        with SQLiteConnection() as c:
+            result = c.cursor.execute(
+                "SELECT id FROM bookmark WHERE message_id=?", (message_id,)
+            ).fetchone()
+            
+            if not result:
+                return False
+            
+            c.cursor.execute(
+                "DELETE FROM bookmark WHERE message_id=?", (message_id,)
+            )
+        return True
+    
+    def is_bookmarked(message_id: str) -> bool:
+        """Check if a message is bookmarked."""
+        with SQLiteConnection() as c:
+            result = c.cursor.execute(
+                "SELECT id FROM bookmark WHERE message_id=?", (message_id,)
+            ).fetchone()
+        return result is not None
+    
+    def get_bookmarks() -> list:
+        """Get all bookmarked messages with their chat information."""
+        with SQLiteConnection() as c:
+            bookmarks = c.cursor.execute(
+                """SELECT b.id, b.message_id, b.created_at, m.content, m.date_time, 
+                   m.role, m.model, c.id, c.name 
+                   FROM bookmark b 
+                   JOIN message m ON b.message_id = m.id 
+                   JOIN chat c ON m.chat_id = c.id 
+                   ORDER BY b.created_at DESC"""
+            ).fetchall()
+        return bookmarks

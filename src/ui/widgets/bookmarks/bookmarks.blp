@@ -1,0 +1,85 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaBookmarks : Adw.Dialog {
+  title: _("Bookmarks");
+  content-width: 600;
+  content-height: 500;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-title: false;
+
+      [start]
+      Button {
+        icon-name: "go-previous-symbolic";
+        tooltip-text: _("Close");
+        clicked => $on_close();
+      }
+
+      [end]
+      Button {
+        icon-name: "view-refresh-symbolic";
+        tooltip-text: _("Refresh");
+        clicked => $on_refresh();
+      }
+    }
+
+    content: Stack bookmarks_stack {
+      StackPage {
+        name: "loading";
+        child: Box {
+          orientation: vertical;
+          valign: center;
+          halign: center;
+          spacing: 12;
+
+          Spinner {
+            spinning: true;
+            width-request: 32;
+            height-request: 32;
+          }
+
+          Label {
+            label: _("Loading bookmarks...");
+            styles ["title-3"]
+          }
+        };
+      }
+
+      StackPage {
+        name: "bookmarks";
+        child: ScrolledWindow {
+          vexpand: true;
+          hscrollbar-policy: never;
+
+          ListBox bookmarks_listbox {
+            selection-mode: none;
+            activate-on-single-click: true;
+            row-activated => $on_bookmark_activated();
+            styles ["boxed-list"]
+          }
+        };
+      }
+
+      StackPage {
+        name: "empty";
+        child: Adw.StatusPage {
+          icon-name: "heart-filled-symbolic";
+          title: _("No Bookmarks");
+          description: _("Bookmark important messages to find them easily later");
+        };
+      }
+
+      StackPage {
+        name: "error";
+        child: Adw.StatusPage {
+          icon-name: "dialog-error-symbolic";
+          title: _("Error Loading Bookmarks");
+          description: _("An error occurred while loading your bookmarks");
+        };
+      }
+    };
+  };
+}
