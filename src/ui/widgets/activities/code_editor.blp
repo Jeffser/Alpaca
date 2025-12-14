@@ -4,9 +4,10 @@ using GtkSource 5;
 template $AlpacaCodeEditor: Gtk.ScrolledWindow {
   propagate-natural-width: true;
   propagate-natural-height: true;
+  margin-start: 5;
+  margin-end: 5;
+  overflow: hidden;
   child: GtkSource.View view {
-    margin-start: 5;
-    margin-end: 5;
     auto-indent: true;
     indent-width: 4;
     show-line-numbers: true;
@@ -14,10 +15,12 @@ template $AlpacaCodeEditor: Gtk.ScrolledWindow {
     buffer: GtkSource.Buffer buffer {};
     styles [
       "monospace",
-      "r10",
       "p10-vertical"
     ]
   };
+  styles [
+    "r10"
+  ]
 }
 
 Gtk.Button save_button {

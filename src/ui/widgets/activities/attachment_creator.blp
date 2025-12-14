@@ -4,19 +4,22 @@ using GtkSource 5;
 template $AlpacaAttachmentCreator: Gtk.ScrolledWindow {
     propagate-natural-width: true;
     propagate-natural-height: true;
+    margin-start: 5;
+    margin-end: 5;
+    overflow: hidden;
     child: GtkSource.View {
-      margin-start: 5;
-      margin-end: 5;
       auto-indent: true;
       indent-width: 4;
       show-line-numbers: false;
       buffer: GtkSource.Buffer buffer {};
       styles [
         "monospace",
-        "r10",
         "p10"
       ]
     };
+    styles [
+      "r10"
+    ]
 }
 
 Gtk.Button save_button {

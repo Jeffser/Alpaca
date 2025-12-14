@@ -44,7 +44,13 @@ class CodeRunner(Gtk.Stack):
         super().__init__()
         self.close_callback = close_callback
         self.code_editor = CodeEditor(language, code_getter, save_func)
+        self.code_editor.set_margin_start(0)
+        self.code_editor.set_margin_end(0)
+        self.code_editor.remove_css_class('r10')
         self.terminal = Terminal(language, self.code_editor.get_code, extra_files)
+        self.terminal.set_margin_start(0)
+        self.terminal.set_margin_end(0)
+        self.terminal.remove_css_class('r10')
         self.add_named(self.terminal, 'terminal')
         self.add_named(self.code_editor, 'editor')
 

@@ -2,7 +2,12 @@ using Gtk 4.0;
 
 template $AlpacaCodeRunner: Gtk.Stack {
   transition-type: slide_left_right;
-
+  margin-start: 5;
+  margin-end: 5;
+  overflow: hidden;
+  styles [
+    "r10"
+  ]
 }
 
 Gtk.Stack button_stack {
