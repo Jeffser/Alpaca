@@ -269,38 +269,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def message_search_changed(self, entry, current_chat=None):
-        search_term=entry.get_text()
-        message_results = 0
-        if not current_chat and self.chat_bin.get_child():
-            current_chat = self.chat_bin.get_child()
-        if current_chat:
-            try:
-                for message in list(current_chat.container):
-                    if message:
-                        content = message.get_content()
-                        if content:
-                            string_search = re.search(search_term, content, re.IGNORECASE)
-                            message.set_visible(string_search)
-                            message_results += 1 if string_search else 0
-                            for block in list(message.block_container):
-                                if isinstance(block, Widgets.blocks.text.Text):
-                                    if search_term:
-                                        content = block.get_content().replace('&', '&amp;')
-                                        search_text = search_term.replace('&', '&amp;')
-                                        highlighted_text = re.sub(f"({search_text})", r"<span background='yellow' bgalpha='30%'>\1</span>", content, flags=re.IGNORECASE)
-                                        block.set_markup(highlighted_text)
-                                    else:
-                                        block.set_content(block.get_content())
-            except Exception as e:
-                logger.error(e)
-                pass
-            if message_results > 0 or not search_term:
-                if len(list(current_chat.container)) > 0:
-                    current_chat.set_visible_child_name('content')
-                else:
-                    current_chat.set_visible_child_name('welcome-screen')
-            else:
-                current_chat.set_visible_child_name('no-results')
+        self.chat_bin.get_child().on_search(entry.get_text())
 
     def send_message(self, mode:int=0, available_tools:dict={}): #mode 0=user 1=system
         buffer = self.global_footer.get_buffer()

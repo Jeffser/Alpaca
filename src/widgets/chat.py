@@ -8,7 +8,7 @@ from gi.repository import Gtk, Gio, Adw, Gdk, GLib
 import logging, os, datetime, random, json, threading, re, importlib.util
 from ..constants import SAMPLE_PROMPTS, cache_dir
 from ..sql_manager import generate_uuid, prettify_model_name, generate_numbered_name, Instance as SQL
-from . import dialog, voice, models
+from . import dialog, voice, models, blocks
 from .message import Message
 
 logger = logging.getLogger(__name__)
@@ -115,7 +115,8 @@ class Folder(Adw.NavigationPage):
             self.list_stack.set_visible_child_name('content' if folder_visible or chat_visible else 'empty')
 
     def on_search(self, query:str):
-        folder_search_mode = self.get_root().settings.get_value('folder-search-mode').unpack()
+        root = self.get_root()
+        folder_search_mode = root.settings.get_value('folder-search-mode').unpack()
 
         if len(list(self.folder_list_box)) + len(list(self.chat_list_box)) == 0:
             self.list_stack.set_visible_child_name('empty')
@@ -134,6 +135,7 @@ class Folder(Adw.NavigationPage):
                 messages_str = '\n'.join([m.get('content') for m in row.chat.convert_to_ollama()])
                 if not messages_str and folder_search_mode == 2:
                     messages_str = '\n'.join([m[4] for m in SQL.get_messages(row.chat)])
+                root.searchentry_messages.set_text(query)
 
             if messages_str:
                 message_match = re.search(query, messages_str, re.IGNORECASE)
@@ -289,7 +291,9 @@ class Folder(Adw.NavigationPage):
                 new_chat.load_messages()
 
             # Show New Stack Page
-            self.get_root().chat_bin.set_child(new_chat)
+            root = self.get_root()
+            root.chat_bin.set_child(new_chat)
+            GLib.idle_add(new_chat.on_search, root.searchentry_messages.get_text())
 
             # Select Model
             GLib.idle_add(self.auto_select_model)
@@ -382,6 +386,31 @@ class Chat(Gtk.Stack):
         self.use_template_button.set_visible(bool(self.chat_id))
         GLib.idle_add(self.update_prompts)
 
+    def on_search(self, query:str):
+        for m in list(self.container):
+            content = m.get_content()
+            if content:
+                string_search = re.search(query, content, re.IGNORECASE)
+                m.set_visible(string_search)
+                for block in list(m.block_container):
+                    if isinstance(block, blocks.text.Text):
+                        if query:
+                            block_content = GLib.markup_escape_text(block.get_content())
+                            search_text = GLib.markup_escape_text(query)
+                            highlighted_text = re.sub(f"({search_text})", r"<span background='yellow' bgalpha='30%'>\1</span>", block_content, flags=re.IGNORECASE)
+                            block.set_markup(highlighted_text)
+                        else:
+                            block.set_content(block.get_content())
+
+        GLib.idle_add(self.update_visibility, True)
+
+    def update_visibility(self, searching:bool=False):
+        for m in list(self.container):
+            if m.get_visible():
+                self.set_visible_child_name('content')
+                return
+        self.set_visible_child_name('no-results' if searching else 'welcome-screen')
+
     def stop_message(self):
         self.busy = False
         self.get_root().global_footer.toggle_action_button(True)
@@ -394,7 +423,7 @@ class Chat(Gtk.Stack):
 
     def add_message(self, message):
         self.container.append(message)
-        GLib.idle_add(self.set_visible_child_name, 'content')
+        GLib.idle_add(self.update_visibility)
 
     def load_messages(self):
         messages = SQL.get_messages(self)
@@ -418,7 +447,7 @@ class Chat(Gtk.Stack):
                     ) and False
                 )
             GLib.idle_add(message_element.block_container.set_content, message[4])
-        GLib.idle_add(self.set_visible_child_name, 'content' if len(messages) > 0 else 'welcome-screen')
+        GLib.idle_add(self.update_visibility)
 
     def convert_to_ollama(self) -> list:
         messages = []
