@@ -77,7 +77,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
     last_selected_instance_row = None
 
     chat_splitview = Gtk.Template.Child()
-    activities_page = Gtk.Template.Child()
+    activity_manager = Gtk.Template.Child()
     chat_page = Gtk.Template.Child()
     last_breakpoint_status = False
 
@@ -110,7 +110,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def last_breakpoint_unapplied(self, bp):
-        if len(self.activities_page.get_child().tabview.get_pages()) > 0:
+        if len(self.activity_manager.tabview.get_pages()) > 0:
             GLib.idle_add(self.chat_splitview.set_collapsed, False)
         self.chat_splitview.set_show_content(True)
         self.last_breakpoint_status = False
@@ -433,7 +433,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.activities_page.set_child(Widgets.activities.ActivityManager())
 
         actions = [[{
             'label': _('New Chat'),

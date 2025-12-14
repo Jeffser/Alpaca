@@ -123,8 +123,9 @@ template $AlpacaWindow: Adw.ApplicationWindow {
           show-content: true;
           max-sidebar-width: 520;
 
-          sidebar: Adw.NavigationPage activities_page {
+          sidebar: Adw.NavigationPage {
             title: _("Activities");
+            child: $AlpacaActivityManager activity_manager {};
           };
 
           content: Adw.NavigationPage chat_page {
