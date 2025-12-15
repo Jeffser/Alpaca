@@ -12,10 +12,10 @@ template $AlpacaLatexEditor: Gtk.Box {
     propagate-natural-height: true;
     max-content-height: 400;
     overflow: hidden;
-    margin-top: 10;
-    margin-bottom: 10;
-    margin-start: 10;
-    margin-end: 10;
+    margin-top: 5;
+    margin-bottom: 5;
+    margin-start: 5;
+    margin-end: 5;
     valign: center;
     styles [
       "card",
@@ -23,14 +23,12 @@ template $AlpacaLatexEditor: Gtk.Box {
     ]
     child: Gtk.TextView {
       wrap-mode: word_char;
-      left-margin: 10;
-      right-margin: 10;
-      top-margin: 10;
-      bottom-margin: 10;
       buffer: Gtk.TextBuffer buffer {
         changed => $buffer_changed();
       };
-
+      styles [
+        "p10"
+      ]
     };
   }
 
