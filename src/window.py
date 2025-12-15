@@ -76,10 +76,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
     model_manager_top_view_switcher = Gtk.Template.Child()
     last_selected_instance_row = None
 
-    chat_splitview = Gtk.Template.Child()
+    chat_split_view_overlay = Gtk.Template.Child()
     activity_manager = Gtk.Template.Child()
     chat_page = Gtk.Template.Child()
-    last_breakpoint_status = False
 
     chat_searchbar = Gtk.Template.Child()
 
@@ -105,19 +104,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 previous_page.on_search('')
 
     @Gtk.Template.Callback()
-    def last_breakpoint_applied(self, bp):
-        self.last_breakpoint_status = True
-
-    @Gtk.Template.Callback()
-    def last_breakpoint_unapplied(self, bp):
-        if len(self.activity_manager.tabview.get_pages()) > 0:
-            GLib.idle_add(self.chat_splitview.set_collapsed, False)
-        self.chat_splitview.set_show_content(True)
-        self.last_breakpoint_status = False
-
-    @Gtk.Template.Callback()
-    def show_activities_button_pressed(self, button):
-        self.chat_splitview.set_show_content(False)
+    def first_breakpoint_applied(self, bp):
+        if len(self.activity_manager.tabview.get_pages()) == 0:
+            self.chat_split_view_overlay.set_show_sidebar(False)
 
     @Gtk.Template.Callback()
     def add_instance(self, button):

@@ -176,10 +176,7 @@ class ActivityManager(Adw.Bin):
 
         self.navigationview.replace_with_tags(['tab'])
         if self.get_root().get_name() == 'AlpacaWindow':
-            if self.get_root().last_breakpoint_status:
-                self.get_root().chat_splitview.set_show_content(False)
-            else:
-                self.get_root().chat_splitview.set_collapsed(False)
+            self.get_root().chat_split_view_overlay.set_show_sidebar(True)
             if len(tabview.get_pages()) == 1:
                 self.get_root().split_view_overlay.set_show_sidebar(False)
 
@@ -191,12 +188,7 @@ class ActivityManager(Adw.Bin):
         if len(tabview.get_pages()) == 0:
             self.navigationview.replace_with_tags(['launcher'])
             if self.get_root().get_name() == 'AlpacaWindow':
-                if self.get_root().last_breakpoint_status:
-                    self.get_root().chat_splitview.set_show_content(True)
-                else:
-                    self.get_root().chat_splitview.set_collapsed(True)
-                if not self.get_root().last_breakpoint_status:
-                    self.get_root().split_view_overlay.set_show_sidebar(True)
+                self.get_root().chat_split_view_overlay.set_show_sidebar(False)
 
     @Gtk.Template.Callback()
     def window_create(self, tabview=None):
@@ -228,7 +220,7 @@ class ActivityManager(Adw.Bin):
             self.tab_tbv.set_extend_content_to_top_edge(selected_child.extend_to_edge)
 
     def reattach_current_activity(self, button):
-        tabview = self.get_root().application.main_alpaca_window.activities_page.get_child().tabview
+        tabview = self.get_root().application.main_alpaca_window.activity_manager.tabview
         self.tabview.transfer_page(
             self.tabview.get_selected_page(),
             tabview,
@@ -310,7 +302,7 @@ def show_activity(page:Gtk.Widget, root:Gtk.Widget, force_dialog:bool=False):
         force_dialog = True
 
     if root.get_name() == 'AlpacaWindow' and root.settings.get_value('activity-mode').unpack() == 0 and not force_dialog:
-        tab_page = root.activities_page.get_child().tabview.append(page)
+        tab_page = root.activity_manager.tabview.append(page)
         return tab_page.get_child()
     elif root.settings.get_value('activity-mode').unpack() == 1 or force_dialog:
         dialog = ActivityDialog(page)

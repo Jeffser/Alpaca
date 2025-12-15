@@ -11,17 +11,26 @@ template $AlpacaWindow: Adw.ApplicationWindow {
   title: "Alpaca";
 
   Adw.Breakpoint {
+    condition ("min-width: 770sp")
+    apply => $first_breakpoint_applied();
+  }
+
+  Adw.Breakpoint {
     condition ("max-width: 770sp")
 
     setters {
+      chat_split_view_overlay.collapsed: true;
       split_view_overlay.collapsed: true;
     }
+
+
   }
 
   Adw.Breakpoint {
     condition ("max-width: 690sp")
 
     setters {
+      chat_split_view_overlay.collapsed: true;
       split_view_overlay.collapsed: true;
       model_manager_header_bar.title-widget: null;
       model_manager_bottom_view_switcher.reveal: true;
@@ -34,18 +43,13 @@ template $AlpacaWindow: Adw.ApplicationWindow {
     condition ("max-width: 560sp")
 
     setters {
+      chat_split_view_overlay.collapsed: true;
       split_view_overlay.collapsed: true;
       model_manager_header_bar.title-widget: null;
       model_manager_bottom_view_switcher.reveal: true;
       available_model_flowbox.min-children-per-line: 1;
       local_model_flowbox.max-children-per-line: 2;
-      chat_splitview.collapsed: true;
-      show_activities_stack.visible-child-name: "button";
-      //chat_headerbar.show-title: false;
     }
-
-    apply => $last_breakpoint_applied();
-    unapply => $last_breakpoint_unapplied();
   }
 
   content: Adw.NavigationView main_navigation_view {
@@ -115,18 +119,15 @@ template $AlpacaWindow: Adw.ApplicationWindow {
           };
         };
 
-        Adw.NavigationSplitView chat_splitview {
-          collapsed: bind show_activities_toggle.active inverted;
+        Adw.OverlaySplitView chat_split_view_overlay {
+          show-sidebar: bind show_activities_toggle.active;
           sidebar-width-fraction: 0.4;
-          sidebar-width-unit: pt;
+          enable-hide-gesture: true;
+          enable-show-gesture: true;
           sidebar-position: end;
-          show-content: true;
           max-sidebar-width: 520;
 
-          sidebar: Adw.NavigationPage {
-            title: _("Activities");
-            child: $AlpacaActivityManager activity_manager {};
-          };
+          sidebar: $AlpacaActivityManager activity_manager {};
 
           content: Adw.NavigationPage chat_page {
             title: _("Chat");
@@ -152,26 +153,10 @@ template $AlpacaWindow: Adw.ApplicationWindow {
                 }
 
                 [end]
-                Stack show_activities_stack {
-                  StackPage {
-                    name: "toggle";
-
-                    child: ToggleButton show_activities_toggle {
-                      icon-name: "sidebar-show-right-symbolic";
-                      tooltip-text: _("Toggle Activities Sidebar");
-                      active: bind chat_splitview.collapsed no-sync-create inverted;
-                    };
-                  }
-
-                  StackPage {
-                    name: "button";
-
-                    child: Button show_activities_button {
-                      icon-name: "sidebar-show-right-symbolic";
-                      tooltip-text: _("Show Activities");
-                      clicked => $show_activities_button_pressed();
-                    };
-                  }
+                ToggleButton show_activities_toggle {
+                  icon-name: "sidebar-show-right-symbolic";
+                  tooltip-text: _("Toggle Activities Sidebar");
+                  active: bind chat_split_view_overlay.show-sidebar no-sync-create;
                 }
 
                 [end]
