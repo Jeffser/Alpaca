@@ -599,11 +599,11 @@ class CompactifAI(BaseInstance):
                 self.row.get_parent().unselect_all()
             return {}
 
-class Gork(BaseInstance):
-    instance_type = 'gork'
-    instance_type_display = 'Gork'
+class Grok(BaseInstance):
+    instance_type = 'grok'
+    instance_type_display = 'Grok'
     instance_url = 'https://api.x.ai/v1'
-    description = _('Gork instance from X.ai')
+    description = _('Grok instance from X.ai')
 
 class GenericOpenAI(BaseInstance):
     instance_type = 'openai:generic'
