@@ -83,10 +83,9 @@ class DictateButton(Gtk.Stack):
 
         # Show Voice in Model Manager if Needed
         if not models.common.tts_model_exists(voice):
-            tts_path = models.get_tts_path()
+            tts_path = models.common.get_tts_path()
             if tts_path:
-                model_element = models.create_tts_model(os.path.join(tts_path, voice + '.pt'))
-                models.common.append_added_model(message_element.get_root(), model_element)
+                model_element = message_element.get_root().get_application().get_main_window().model_manager.create_tts_model(os.path.join(tts_path, voice + '.pt'))
 
         # Generate TTS_ENGINE if needed
         if not tts_engine or tts_engine_language != voice[0]:
@@ -257,9 +256,8 @@ class MicrophoneButton(Gtk.Stack):
                 button.set_active(False)
 
         def prepare_download():
-            self.pulling_model = models.create_stt_model(model_name)
+            self.pulling_model = button.get_root().get_application().get_main_window().model_manager.create_stt_model(model_name)
             self.pulling_model.update_progressbar(1)
-            models.common.prepend_added_model(button.get_root(), self.pulling_model)
             threading.Thread(target=run_mic, daemon=True).start()
 
         if button.get_active():

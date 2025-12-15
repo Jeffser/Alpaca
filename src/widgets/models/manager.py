@@ -1,11 +1,10 @@
 # manager.py
 
-from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GObject
-from . import added, common, creator, basic, manager
-from .common import set_available_models_data, get_available_models_data, get_tts_path, create_added_model, create_stt_model, create_tts_model, create_background_remover_model
+from gi.repository import Gtk, Adw, GLib
+from . import added, basic, common
 
 import os, importlib.util, re
-from ...constants import data_dir, cache_dir, STT_MODELS, TTS_VOICES, REMBG_MODELS, MODEL_CATEGORIES_METADATA
+from ...constants import data_dir, STT_MODELS, TTS_VOICES, REMBG_MODELS, MODEL_CATEGORIES_METADATA
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/model_manager.ui')
 class ModelManager(Adw.NavigationPage):
@@ -74,8 +73,8 @@ class ModelManager(Adw.NavigationPage):
     def update_available_model_list(self):
         self.available_model_flowbox.remove_all()
         instance = self.get_root().get_current_instance()
-        set_available_models_data(instance.get_available_models())
-        available_models_data = get_available_models_data()
+        common.set_available_models_data(instance.get_available_models())
+        available_models_data = common.get_available_models_data()
 
         # Filter
         self.filter_button.set_visible(len(available_models_data) > 0)
@@ -131,26 +130,21 @@ class ModelManager(Adw.NavigationPage):
         instance.local_models = None # Reset cache
         local_models = instance.get_local_models()
         for model in local_models:
-            model_element = create_added_model(model.get('name'), instance)
-            self.added_model_flowbox.append(model_element)
-            model_element.get_parent().set_focusable(False)
+            self.create_added_model(model.get('name'), instance)
 
         if importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice'):
             # Speech to Text
             if os.path.isdir(os.path.join(data_dir, 'whisper')):
                 for model in os.listdir(os.path.join(data_dir, 'whisper')):
                     if model.endswith('.pt') and STT_MODELS.get(model.removesuffix('.pt')):
-                        model_element = create_stt_model(model)
-                        self.added_model_flowbox.append(model_element)
-                        model_element.get_parent().set_focusable(False)
+                        self.create_stt_model(model)
 
             # Text to Speech
-            tts_model_path = get_tts_path()
+            tts_model_path = common.get_tts_path()
             if tts_model_path:
                 for model in os.listdir(tts_model_path):
-                    model_element = create_tts_model(os.path.join(tts_model_path, model))
-                    self.added_model_flowbox.append(model_element)
-                    model_element.get_parent().set_focusable(False)
+                    self.create_tts_model(os.path.join(tts_model_path, model))
+
 
         # Background Removers
         if importlib.util.find_spec('rembg'):
@@ -158,10 +152,7 @@ class ModelManager(Adw.NavigationPage):
             if os.path.isdir(model_dir):
                 for model in os.listdir(model_dir):
                     if model.endswith('.onnx') and REMBG_MODELS.get(model.removesuffix('.onnx')):
-                        model_path = os.path.join(model_dir, model)
-                        model_element = create_background_remover_model(model_path)
-                        self.added_model_flowbox.append(model_element)
-                        model_element.get_parent().set_focusable(False)
+                        self.create_background_remover_model(os.path.join(model_dir, model))
 
         self.update_added_visibility()
 
@@ -194,3 +185,83 @@ class ModelManager(Adw.NavigationPage):
     @Gtk.Template.Callback()
     def open_instance_manager(self, button):
         self.get_root().main_navigation_view.push_by_tag('instance_manager')
+
+    def create_added_model(self, model_name:str, instance, append_row=True):
+        model_element = basic.BasicModelButton(
+            model_name=model_name,
+            instance=instance,
+            dialog_callback=added.AddedModelDialog,
+            remove_callback=common.remove_added_model
+        )
+        if append_row:
+            added.append_to_model_selector(model_element.row)
+        self.added_model_flowbox.append(model_element)
+        model_element.get_parent().set_focusable(False)
+        self.update_added_visibility()
+        return model_element
+
+    def create_stt_model(self, model_name:str):
+        model_element = basic.BasicModelButton(
+            model_name=model_name.removesuffix('.pt'),
+            subtitle=_("Speech to Text"),
+            icon_name="audio-input-microphone-symbolic",
+            dialog_callback=lambda model: basic.BasicModelDialog(
+                model=model,
+                description=_("Local speech to text model provided by OpenAI Whisper"),
+                size=STT_MODELS.get(model.get_name(), '~151mb'),
+                url="https://github.com/openai/whisper"
+            ),
+            remove_callback=common.remove_stt_model
+        )
+        self.added_model_flowbox.append(model_element)
+        model_element.get_parent().set_focusable(False)
+        self.update_added_visibility()
+        return model_element
+
+    def create_tts_model(self, model_path:str):
+        model_name = os.path.basename(model_path).removesuffix('.pt')
+        pretty_name = [k for k, v in TTS_VOICES.items() if v == model_name]
+        if len(pretty_name) > 0:
+            pretty_name = pretty_name[0]
+        else:
+            pretty_name = model_name.title()
+
+        model_element = basic.BasicModelButton(
+            model_name=pretty_name,
+            subtitle=_("Text to Speech"),
+            icon_name="bullhorn-symbolic",
+            dialog_callback=lambda model: basic.BasicModelDialog(
+                model=model,
+                description=_("Local text to speech model provided by Kokoro"),
+                url="https://github.com/hexgrad/kokoro"
+            ),
+            remove_callback=lambda model, path=model_path: common.remove_tts_model(model, path)
+        )
+        self.added_model_flowbox.append(model_element)
+        model_element.get_parent().set_focusable(False)
+        self.update_added_visibility()
+        return model_element
+
+    def create_background_remover_model(self, model_path:str):
+        model_name = os.path.basename(model_path).removesuffix('.onnx')
+        author = REMBG_MODELS.get(model_name, {}).get('author')
+        size = REMBG_MODELS.get(model_name, {}).get('size', '~151mb')
+        url = REMBG_MODELS.get(model_name, {}).get('link')
+
+        model_element = basic.BasicModelButton(
+            model_name=REMBG_MODELS.get(model_name, {}).get('display_name', model_name.title()),
+            subtitle=_("Background Remover"),
+            icon_name="image-missing-symbolic",
+            dialog_callback=lambda model, author=author, size=size, url=url: basic.BasicModelDialog(
+                model=model,
+                description=_("Local background removal model provided by {}.").format(author) if author else "",
+                size=size,
+                url=url
+            ),
+            remove_callback=lambda model, path=model_path: common.remove_background_remover_model(model, path)
+        )
+        self.added_model_flowbox.append(model_element)
+        model_element.get_parent().set_focusable(False)
+        self.update_added_visibility()
+        return model_element
+

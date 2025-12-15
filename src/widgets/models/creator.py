@@ -7,7 +7,7 @@ from ...sql_manager import prettify_model_name, Instance as SQL
 from .. import dialog, attachments
 from .basic import BasicModelButton
 from .added import list_from_selector, AddedModelRow, AddedModelDialog, get_model
-from .common import CategoryPill, prepend_added_model, remove_added_model
+from .common import CategoryPill, remove_added_model
 
 logger = logging.getLogger(__name__)
 
@@ -191,18 +191,16 @@ class ModelCreatorDialog(Adw.Dialog):
         self.close()
 
     def create_model(self, data:dict):
-        window = self.get_root().get_application().get_main_window(present=False)
+        window = self.get_root().get_application().get_main_window()
         if not data.get('model'):
             return
 
-        model_el = BasicModelButton(
+        model_el = window.model_manager.create_added_model(
             model_name=data.get('model'),
             instance=self.instance,
-            dialog_callback=AddedModelDialog,
-            remove_callback=remove_added_model
+            append_row=False
         )
         model_el.update_progressbar(1)
-        prepend_added_model(window, model_el)
 
         if self.gguf_path:
             try:

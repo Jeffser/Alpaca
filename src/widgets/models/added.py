@@ -182,7 +182,7 @@ class AddedModelDialog(Adw.Dialog):
 
     @Gtk.Template.Callback()
     def pfp_clicked(self, button):
-        window = self.get_root().get_application().get_main_window(present=False)
+        window = self.get_root().get_application().get_main_window()
         def set_profile_picture(file):
             if file:
                 picture_b64 = attachments.extract_image(file.get_path(), 480)

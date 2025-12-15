@@ -381,7 +381,7 @@ class BaseInstance:
                     'Authorization': 'Bearer {}'.format(self.properties.get('api'))
                 },
                 data=json.dumps({
-                    'name': model.get_name(),
+                    'model': model.get_name(),
                     'stream': True
                 }),
                 stream=True
@@ -390,6 +390,8 @@ class BaseInstance:
                 for line in response.iter_lines():
                     if line:
                         data = json.loads(line.decode("utf-8"))
+                        if data.get('error'):
+                            raise Exception(data.get('error'))
                         if data.get('status'):
                             model.append_progress_line(data.get('status'))
                         if data.get('total') and data.get('completed'):
@@ -398,6 +400,12 @@ class BaseInstance:
                             model.update_progressbar(-1)
                             return
         except Exception as e:
+            dialog.simple_error(
+                parent = self.row.get_root() if self.row else None,
+                title = _('Error Pulling Model'),
+                body = model.get_name(),
+                error_log = e
+            )
             model.get_parent().get_parent().remove(model.get_parent())
             logger.error(e)
 

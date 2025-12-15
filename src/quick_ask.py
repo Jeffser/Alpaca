@@ -28,13 +28,15 @@ class QuickAskWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def closing_app(self, element):
-        if self.get_application().get_main_window(present=False).get_visible() == False:
+        if not self.get_application().get_main_window().get_visible():
             # Use GLib.idle_add to ensure proper cleanup sequence
             GLib.idle_add(self.get_application().quit)
 
     @Gtk.Template.Callback()
     def save_chat(self, button):
-        new_chat = self.get_application().get_main_window().get_chat_list_page().new_chat(self.chat.get_name())
+        main_window = self.get_application().get_main_window()
+        main_window.present()
+        new_chat = main_window.get_chat_list_page().new_chat(self.chat.get_name())
         for message in list(self.chat.container):
             SQL.insert_or_update_message(message, new_chat.chat_id)
             for attachment in list(message.attachment_container.container) + list(message.image_attachment_container.container):

@@ -1,10 +1,10 @@
 # common.py
 
-from gi.repository import Gtk, Gio, Adw
-import importlib.util, os, threading
+from gi.repository import Gtk
+import os, threading
 from .. import dialog
 from ...constants import data_dir, cache_dir, STT_MODELS, TTS_VOICES, REMBG_MODELS, MODEL_CATEGORIES_METADATA
-from ...sql_manager import prettify_model_name, Instance as SQL
+from ...sql_manager import Instance as SQL
 
 available_models_data = {}
 
@@ -56,22 +56,10 @@ def set_available_models_data(data:list):
     global available_models_data
     available_models_data = data
 
-def prepend_added_model(root, model):
-    window = root.get_application().get_main_window(present=False)
-    window.model_manager.added_model_flowbox.prepend(model)
-    model.get_parent().set_focusable(False)
-    window.model_manager.update_added_visibility()
-
-def append_added_model(root, model):
-    window = root.get_application().get_main_window(present=False)
-    window.model_manager.added_model_flowbox.append(model)
-    model.get_parent().set_focusable(False)
-    window.model_manager.update_added_visibility()
-
 def prompt_gguf(root, instance=None):
     creator = importlib.import_module('alpaca.widgets.models.creator')
     if not instance:
-        instance = root.get_application().get_main_window(present=False).get_current_instance()
+        instance = root.get_application().get_main_window().get_current_instance()
 
     def result(file):
         try:
@@ -91,7 +79,7 @@ def prompt_gguf(root, instance=None):
 def prompt_existing(root, instance=None, row=None):
     creator = importlib.import_module('alpaca.widgets.models.creator')
     if not instance:
-        instance = root.get_application().get_main_window(present=False).get_current_instance()
+        instance = root.get_application().get_main_window().get_current_instance()
     creator.ModelCreatorDialog(instance, row, None).present(root)
 
 def tts_model_exists(model_name:str) -> bool:
@@ -111,77 +99,9 @@ def get_tts_path() -> str or None:
             if os.path.isdir(tts_model_path):
                 return tts_model_path
 
-# Creating models
-def create_added_model(model_name:str, instance, append_row=True):
-    model_element = basic.BasicModelButton(
-        model_name=model_name,
-        instance=instance,
-        dialog_callback=added.AddedModelDialog,
-        remove_callback=remove_added_model
-    )
-    if append_row:
-        added.append_to_model_selector(model_element.row)
-    return model_element
-
-def create_stt_model(model_name:str):
-    model_element = basic.BasicModelButton(
-        model_name=model_name.removesuffix('.pt'),
-        subtitle=_("Speech to Text"),
-        icon_name="audio-input-microphone-symbolic",
-        dialog_callback=lambda model: basic.BasicModelDialog(
-            model=model,
-            description=_("Local speech to text model provided by OpenAI Whisper"),
-            size=STT_MODELS.get(model.get_name(), '~151mb'),
-            url="https://github.com/openai/whisper"
-        ),
-        remove_callback=remove_stt_model
-    )
-    return model_element
-
-def create_tts_model(model_path:str):
-    model_name = os.path.basename(model_path).removesuffix('.pt')
-    pretty_name = [k for k, v in TTS_VOICES.items() if v == model_name]
-    if len(pretty_name) > 0:
-        pretty_name = pretty_name[0]
-    else:
-        pretty_name = model_name.title()
-
-    model_element = basic.BasicModelButton(
-        model_name=pretty_name,
-        subtitle=_("Text to Speech"),
-        icon_name="bullhorn-symbolic",
-        dialog_callback=lambda model: basic.BasicModelDialog(
-            model=model,
-            description=_("Local text to speech model provided by Kokoro"),
-            url="https://github.com/hexgrad/kokoro"
-        ),
-        remove_callback=lambda model, path=model_path: remove_tts_model(model, path)
-    )
-    return model_element
-
-def create_background_remover_model(model_path:str):
-    model_name = os.path.basename(model_path).removesuffix('.onnx')
-    author = REMBG_MODELS.get(model_name, {}).get('author')
-    size = REMBG_MODELS.get(model_name, {}).get('size', '~151mb')
-    url = REMBG_MODELS.get(model_name, {}).get('link')
-
-    model_element = basic.BasicModelButton(
-        model_name=REMBG_MODELS.get(model_name, {}).get('display_name', model_name.title()),
-        subtitle=_("Background Remover"),
-        icon_name="image-missing-symbolic",
-        dialog_callback=lambda model, author=author, size=size, url=url: basic.BasicModelDialog(
-            model=model,
-            description=_("Local background removal model provided by {}.").format(author) if author else "",
-            size=size,
-            url=url
-        ),
-        remove_callback=lambda model, path=model_path: remove_background_remover_model(model, path)
-    )
-    return model_element
-
 # Callbacks for removing models
 def remove_added_model(model):
-    window = model.get_root().get_application().get_main_window(present=False)
+    window = model.get_root().get_application().get_main_window()
 
     if model.instance.delete_model(model.get_name()):
 

@@ -157,9 +157,7 @@ class AlpacaApplication(Adw.Application):
         else:
             app_service.Present()
 
-    def get_main_window(self, present:bool=True):
-        if present:
-            self.main_alpaca_window.present()
+    def get_main_window(self):
         return self.main_alpaca_window
 
     def show_shortcuts_dialog(self):

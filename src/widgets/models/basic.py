@@ -6,7 +6,7 @@ from ...constants import STT_MODELS, TTS_VOICES, REMBG_MODELS, data_dir, cache_d
 from ...sql_manager import prettify_model_name, Instance as SQL
 from .. import dialog, attachments
 from .added import AddedModelRow, AddedModelDialog, append_to_model_selector, list_from_selector
-from .common import CategoryPill, get_available_models_data, prompt_existing, remove_added_model, prepend_added_model
+from .common import CategoryPill, get_available_models_data, prompt_existing, remove_added_model
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/basic_dialog.ui')
 class BasicModelDialog(Adw.Dialog):
@@ -170,7 +170,7 @@ class AvailableModelDialog(Adw.Dialog):
             self.language_flowbox.append(CategoryPill(language, True))
 
     def pull_model(self, tag:str=None):
-        window = self.get_root().get_application().get_main_window(present=False)
+        window = self.get_root().get_application().get_main_window()
         self.close()
         if tag is None:
             tag = ''
@@ -367,13 +367,11 @@ def confirm_pull_model(window, model_name:str):
     if model_name and model_name not in list(list_from_selector()):
         instance = window.get_current_instance()
         if instance:
-            model = BasicModelButton(
+            model_el = window.model_manager.create_added_model(
                 model_name=model_name,
                 instance=instance,
-                dialog_callback=AddedModelDialog,
-                remove_callback=remove_added_model
+                append_row=False
             )
-            model.update_progressbar(1)
-            prepend_added_model(window, model)
-            threading.Thread(target=instance.pull_model, args=(model,)).start()
+            model_el.update_progressbar(1)
+            threading.Thread(target=instance.pull_model, args=(model_el,)).start()
 

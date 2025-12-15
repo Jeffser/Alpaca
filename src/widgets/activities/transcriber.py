@@ -55,8 +55,7 @@ class Transcriber(Gtk.Stack):
             root.get_application().get_main_window().global_footer.attachment_container.add_attachment(attachment)
 
     def prepare_download(self, model_name:str, audio_file:Gio.File):
-        self.pulling_model = models.create_stt_model(model_name)
-        models.common.append_added_model(self.get_root(), self.pulling_model)
+        self.pulling_model = self.get_root().get_application().get_main_window().model_manager.create_stt_model(model_name)
         self.set_visible_child_name('loading_file')
         threading.Thread(target=self.run_file_transcription, args=(audio_file.get_path(),), daemon=True).start()
 
