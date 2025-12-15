@@ -1,0 +1,243 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaModelManager: Adw.NavigationPage {
+  title: _("Model Manager");
+  tag: "model_manager";
+
+  child: Adw.ToolbarView {
+    height-request: 140;
+
+    [top]
+    Adw.HeaderBar header_bar {
+      [start]
+      Gtk.ToggleButton search_toggle {
+        icon-name: "edit-find-symbolic";
+        tooltip-text: _("Search Model");
+        active: bind searchbar.search-mode-enabled;
+      }
+
+      title-widget: Adw.ViewSwitcher top_view_switcher {
+        stack: view_stack;
+        policy: wide;
+      };
+
+      [end]
+      Gtk.MenuButton {
+        primary: false;
+        icon-name: "view-more-symbolic";
+        tooltip-text: _("Model Manager Menu");
+        menu-model: menu_model;
+      }
+    }
+
+    [top]
+    Adw.Clamp {
+      maximum-size: 1000;
+      tightening-threshold: 800;
+      Gtk.SearchBar searchbar {
+        accessibility {
+          label: _("Model search bar");
+        }
+        search-mode-enabled: bind search_toggle.active;
+        key-capture-widget: view_stack;
+
+        Gtk.Box {
+          spacing: 10;
+          Gtk.SearchEntry searchentry {
+            hexpand: true;
+            search-changed => $search_changed();
+            search-delay: 100;
+            placeholder-text: _("Search models");
+          }
+
+          Gtk.MenuButton filter_button {
+            icon-name: "funnel-symbolic";
+            tooltip-text: _("Filter Models");
+            visible: false;
+          }
+        }
+      }
+    }
+
+    [bottom]
+    Adw.ViewSwitcherBar bottom_view_switcher {
+      stack: view_stack;
+    }
+
+    content: Adw.ViewStack view_stack {
+      enable-transitions: true;
+
+      Adw.ViewStackPage {
+        name: "added_models";
+        title: _("Added");
+        icon-name: "folder-download-symbolic";
+
+        child: Gtk.Stack added_model_stack {
+          Gtk.StackPage {
+            name: "no-models";
+
+            child: Adw.StatusPage {
+              icon-name: "sad-computer-symbolic";
+              title: _("No Models Found");
+              description: _("It looks a bit empty in here. Try downloading some models or change your AI instance to get started!");
+
+              child: Gtk.Button {
+                tooltip-text: _("Explore Available Models");
+                halign: center;
+                clicked => $explore_available_models();
+                child: Adw.ButtonContent {
+                  icon-name: "globe-symbolic";
+                  label: _("Explore Available Models");
+                };
+              };
+            };
+          }
+
+          Gtk.StackPage {
+            name: "no-results";
+
+            child: Adw.StatusPage {
+              icon-name: "sad-computer-symbolic";
+              title: _("No Models Found");
+              description: _("Looks like we’re fresh out of models for that search. Try tweaking your keywords, or maybe explore something new!");
+            };
+          }
+
+          Gtk.StackPage {
+            name: "content";
+
+            child: Gtk.ScrolledWindow {
+              child: Adw.Clamp {
+                maximum-size: 1000;
+                tightening-threshold: 800;
+
+                Gtk.FlowBox added_model_flowbox {
+                  row-spacing: 6;
+                  column-spacing: 6;
+                  hexpand: true;
+                  valign: start;
+                  min-children-per-line: 1;
+                  max-children-per-line: 3;
+                  selection-mode: none;
+                  homogeneous: true;
+                  styles [
+                    "p10"
+                  ]
+                }
+              };
+            };
+          }
+        };
+      }
+
+      Adw.ViewStackPage {
+        name: "available_models";
+        title: _("Available");
+        icon-name: "globe-symbolic";
+
+        child: Gtk.Stack available_model_stack {
+          Gtk.StackPage {
+            name: "no-models";
+
+            child: Adw.StatusPage {
+              icon-name: "sad-computer-symbolic";
+              title: _("No Models Found");
+              description: _("It looks like your instance did not provide any models, try a different instance to continue!");
+
+              child: Gtk.Button {
+                tooltip-text: _("Open Instance Manager");
+                halign: center;
+                clicked => $open_instance_manager();
+                child: Adw.ButtonContent {
+                  icon-name: "computer-symbolic";
+                  label: _("Open Instance Manager");
+                };
+              };
+            };
+          }
+
+          Gtk.StackPage {
+            name: "no-instances";
+
+            child: Adw.StatusPage {
+              icon-name: "sad-computer-symbolic";
+              title: _("No Instance Selected");
+              description: _("It appears that no instance is selected, please select one to continue!");
+
+              child: Gtk.Button {
+                tooltip-text: _("Open Instance Manager");
+                halign: center;
+                clicked => $open_instance_manager();
+                child: Adw.ButtonContent {
+                  icon-name: "computer-symbolic";
+                  label: _("Open Instance Manager");
+                };
+              };
+            };
+          }
+
+          Gtk.StackPage {
+            name: "no-results";
+
+            child: Adw.StatusPage {
+              icon-name: "sad-computer-symbolic";
+              title: _("No Models Found");
+              description: _("Looks like we’re fresh out of models for that search. Try tweaking your keywords, or maybe explore something new!");
+            };
+          }
+
+          Gtk.StackPage {
+            name: "content";
+
+            child: Gtk.ScrolledWindow {
+              child: Adw.Clamp {
+                maximum-size: 1000;
+                tightening-threshold: 800;
+
+                Gtk.FlowBox available_model_flowbox {
+                  row-spacing: 6;
+                  column-spacing: 6;
+                  hexpand: true;
+                  valign: start;
+                  min-children-per-line: 2;
+                  max-children-per-line: 3;
+                  selection-mode: none;
+                  styles [
+                    "p10"
+                  ]
+                }
+              };
+            };
+          }
+        };
+      }
+    };
+  };
+}
+
+menu menu_model {
+  section {
+    item {
+      label: _("Reload Added Models");
+      action: "app.reload_added_models";
+    }
+
+    item {
+      label: _("Add Model by Name");
+      action: "app.add_model_by_name";
+    }
+  }
+
+  section {
+    item {
+      label: _("Create Model from Existing");
+      action: "app.model_creator_existing";
+    }
+
+    item {
+      label: _("Create Model from GGUF File");
+      action: "app.model_creator_gguf";
+    }
+  }
+}

@@ -542,7 +542,7 @@ class Chat(Gtk.Stack):
 
     def selected_prompt(self, prompt:str):
         if self.get_root().get_name() == 'AlpacaWindow':
-            if len(list(self.get_root().local_model_flowbox)) == 0:
+            if len(list(self.get_root().model_manager.added_model_flowbox)) == 0:
                 if self.get_root().get_current_instance().instance_type == 'empty':
                     self.get_root().get_application().lookup_action('instance_manager').activate()
                 else:

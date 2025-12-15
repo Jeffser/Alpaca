@@ -289,11 +289,13 @@ class BasicModelButton(Gtk.Button):
         )
 
     def remove_model(self):
-        dialog = self.get_root().get_visible_dialog()
+        root = self.get_root()
+        dialog = root.get_visible_dialog()
         if dialog:
             dialog.close()
         self.remove_callback(self)
         self.get_parent().get_parent().remove(self.get_parent())
+        root.model_manager.update_added_visibility()
 
     def update_progressbar(self, prc:float):
         #prc:float = -1 or 0 to 1
@@ -373,7 +375,5 @@ def confirm_pull_model(window, model_name:str):
             )
             model.update_progressbar(1)
             prepend_added_model(window, model)
-            window.model_manager_stack.set_visible_child_name('added_models')
-            window.local_model_stack.set_visible_child_name('content')
             threading.Thread(target=instance.pull_model, args=(model,)).start()
 

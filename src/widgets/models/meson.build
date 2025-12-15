@@ -6,6 +6,7 @@ models = [
   'creator.py',
   'common.py',
   'basic.py',
+  'manager.py',
 ]
 
 install_data(models, install_dir: moduledir)

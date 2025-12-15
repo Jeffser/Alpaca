@@ -46,24 +46,16 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     #Elements
     new_chat_splitbutton = Gtk.Template.Child()
-    local_model_stack = Gtk.Template.Child()
-    available_model_stack = Gtk.Template.Child()
-    model_manager_stack = Gtk.Template.Child()
+    model_manager = Gtk.Template.Child()
     instance_manager_stack = Gtk.Template.Child()
     main_navigation_view = Gtk.Template.Child()
-    local_model_flowbox = Gtk.Template.Child()
-    available_model_flowbox = Gtk.Template.Child()
     split_view_overlay = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
     chat_bin = Gtk.Template.Child()
     chat_list_navigationview = Gtk.Template.Child()
     global_footer = Gtk.Template.Child()
-    model_searchbar = Gtk.Template.Child()
-    searchentry_models = Gtk.Template.Child()
-    model_search_button = Gtk.Template.Child()
     message_searchbar = Gtk.Template.Child()
     searchentry_messages = Gtk.Template.Child()
-    model_filter_button = Gtk.Template.Child()
 
     file_filter_db = Gtk.Template.Child()
 
@@ -71,29 +63,14 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     instance_preferences_page = Gtk.Template.Child()
     instance_listbox = Gtk.Template.Child()
-    available_models_stack_page = Gtk.Template.Child()
-    model_manager_bottom_view_switcher = Gtk.Template.Child()
-    model_manager_top_view_switcher = Gtk.Template.Child()
     last_selected_instance_row = None
 
     chat_split_view_overlay = Gtk.Template.Child()
     activity_manager = Gtk.Template.Child()
     chat_page = Gtk.Template.Child()
+    small_breakpoint = Gtk.Template.Child()
 
     chat_searchbar = Gtk.Template.Child()
-
-    @Gtk.Template.Callback()
-    def explore_available_models(self, button):
-        if len(Widgets.models.common.available_models_data) == 0:
-            Widgets.dialog.simple(
-                parent = self,
-                heading = _("No Models"),
-                body = _("This instance does not provide any models"),
-                callback = self.get_application().lookup_action('instance_manager').activate,
-                button_name = _("Manage Instances")
-            )
-        else:
-            self.model_manager_stack.set_visible_child_name('available_models')
 
     @Gtk.Template.Callback()
     def chat_list_page_changed(self, navigationview, page=None):
@@ -149,8 +126,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
             self.last_selected_instance_row = row
 
-            Widgets.models.update_added_model_list(self)
-            Widgets.models.update_available_model_list(self)
+            self.model_manager.update_added_model_list()
+            self.model_manager.update_available_model_list()
 
             if row:
                 self.settings.set_string('selected-instance', row.instance.instance_id)
@@ -161,13 +138,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if listbox.get_sensitive():
             listbox.set_sensitive(False)
             threading.Thread(target=change_instance, daemon=True).start()
-
-    @Gtk.Template.Callback()
-    def model_manager_stack_changed(self, viewstack, params):
-        self.local_model_flowbox.unselect_all()
-        self.available_model_flowbox.unselect_all()
-        self.model_search_button.set_sensitive(viewstack.get_visible_child_name() not in ('model_creator', 'instances'))
-        self.model_search_button.set_active(self.model_search_button.get_active() and viewstack.get_visible_child_name() not in ('model_creator', 'instances'))
 
     @Gtk.Template.Callback()
     def closing_app(self, user_data):
@@ -202,7 +172,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             logger.info("Closing app...")
             is_chat_busy = any([chat_row.chat.busy for chat_row in list(self.get_chat_list_page().chat_list_box)])
-            is_model_downloading = any([el for el in list(self.local_model_flowbox) if el.get_child().progressbar.get_visible()])
+            is_model_downloading = any([el for el in list(self.model_manager.added_model_flowbox) if el.get_child().progressbar.get_visible()])
             if is_chat_busy or is_model_downloading:
                 options = {
                     _('Cancel'): {'default': True},
@@ -222,41 +192,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def chat_search_changed(self, entry):
         self.get_chat_list_page().on_search(entry.get_text())
-
-    @Gtk.Template.Callback()
-    def model_search_changed(self, entry):
-        query = GLib.markup_escape_text(entry.get_text())
-
-        filtered_categories = set()
-        if self.model_filter_button.get_popover():
-            filtered_categories = set([c.get_name() for c in list(self.model_filter_button.get_popover().get_child()) if c.get_active()])
-        results_local = False
-
-        if len(list(self.local_model_flowbox)) > 0:
-            for model in list(self.local_model_flowbox):
-                string_search = re.search(query, model.get_child().get_search_string(), re.IGNORECASE)
-                category_filter = len(filtered_categories) == 0 or model.get_child().get_search_categories() & filtered_categories or not self.model_searchbar.get_search_mode()
-                model.set_visible(string_search and category_filter)
-                results_local = results_local or model.get_visible()
-                if not model.get_visible() and model in self.local_model_flowbox.get_selected_children():
-                    self.local_model_flowbox.unselect_all()
-            self.local_model_stack.set_visible_child_name('content' if results_local or not query else 'no-results')
-        else:
-            self.local_model_stack.set_visible_child_name('no-models')
-
-        results_available = False
-        if len(Widgets.models.common.available_models_data) > 0:
-            self.available_models_stack_page.set_visible(True)
-            for model in list(self.available_model_flowbox):
-                string_search = re.search(query, model.get_child().get_search_string(), re.IGNORECASE)
-                category_filter = len(filtered_categories) == 0 or model.get_child().get_search_categories() & filtered_categories or not self.model_searchbar.get_search_mode()
-                model.set_visible(string_search and category_filter)
-                results_available = results_available or model.get_visible()
-                if not model.get_visible() and model in self.available_model_flowbox.get_selected_children():
-                    self.available_model_flowbox.unselect_all()
-            self.available_model_stack.set_visible_child_name('content' if results_available else 'no-results')
-        else:
-            self.available_models_stack_page.set_visible(False)
 
     @Gtk.Template.Callback()
     def message_search_changed(self, entry, current_chat=None):
@@ -390,7 +325,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         searchbars = {
             'chat': self.message_searchbar,
-            'model_manager': self.model_searchbar
+            'model_manager': self.model_manager.searchbar
         }
 
         if searchbars.get(current_tag):
@@ -437,9 +372,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         popover.set_halign(0)
         self.new_chat_splitbutton.set_popover(popover)
 
-        self.model_searchbar.connect_entry(self.searchentry_models)
-        self.model_searchbar.connect('notify::search-mode-enabled', lambda *_: self.model_search_changed(self.searchentry_models))
-
         self.set_focus(self.global_footer.message_text_view)
 
         self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
@@ -472,7 +404,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 callback=lambda name: Widgets.models.basic.confirm_pull_model(window=self, model_name=name),
                 entries={'placeholder': 'deepseek-r1:7b'}
             )],
-            'reload_added_models': [lambda *_: GLib.idle_add(Widgets.models.update_added_model_list, self)],
+            'reload_added_models': [lambda *_: GLib.idle_add(self.model_manager.update_added_model_list)],
             'start_quick_ask': [lambda *_: self.get_application().create_quick_ask().present(), ['<primary><alt>a']],
             'model_creator_existing': [lambda *_: Widgets.models.common.prompt_existing(self)],
             'model_creator_gguf': [lambda *_: Widgets.models.common.prompt_gguf(self)],

@@ -11,30 +11,16 @@ template $AlpacaWindow: Adw.ApplicationWindow {
   title: "Alpaca";
 
   Adw.Breakpoint {
-    condition ("min-width: 770sp")
+    condition ("min-width: 690sp")
     apply => $first_breakpoint_applied();
   }
 
-  Adw.Breakpoint {
-    condition ("max-width: 770sp")
-
-    setters {
-      chat_split_view_overlay.collapsed: true;
-      split_view_overlay.collapsed: true;
-      chat_split_view_overlay.max-sidebar-width: 320;
-    }
-  }
-
-  Adw.Breakpoint {
+  Adw.Breakpoint small_breakpoint {
     condition ("max-width: 690sp")
 
     setters {
       chat_split_view_overlay.collapsed: true;
       split_view_overlay.collapsed: true;
-      model_manager_header_bar.title-widget: null;
-      model_manager_bottom_view_switcher.reveal: true;
-      available_model_flowbox.min-children-per-line: 1;
-      local_model_flowbox.max-children-per-line: 2;
       chat_split_view_overlay.max-sidebar-width: 320;
     }
   }
@@ -287,196 +273,7 @@ template $AlpacaWindow: Adw.ApplicationWindow {
       };
     }
 
-    Adw.NavigationPage {
-      title: _("Model Manager");
-      tag: "model_manager";
-
-      child: Adw.ToolbarView {
-        height-request: 140;
-
-        [top]
-        Adw.HeaderBar model_manager_header_bar {
-          [start]
-          ToggleButton model_search_button {
-            icon-name: "edit-find-symbolic";
-            tooltip-text: _("Search Model");
-            active: bind model_searchbar.search-mode-enabled;
-          }
-
-          title-widget: Adw.ViewSwitcher model_manager_top_view_switcher {
-            stack: model_manager_stack;
-            policy: wide;
-          };
-
-          [end]
-          MenuButton {
-            primary: false;
-            icon-name: "view-more-symbolic";
-            tooltip-text: _("Model Manager Menu");
-            menu-model: model_manager_menu;
-          }
-        }
-
-        [top]
-        Adw.Clamp {
-          maximum-size: 1000;
-          tightening-threshold: 800;
-
-          SearchBar model_searchbar {
-            accessibility {
-              label: _("Model search bar");
-            }
-
-            search-mode-enabled: bind model_search_button.active;
-            key-capture-widget: template;
-
-            Box {
-              spacing: 10;
-
-              SearchEntry searchentry_models {
-                hexpand: true;
-                search-changed => $model_search_changed();
-                search-delay: 100;
-                placeholder-text: _("Search models");
-
-                accessibility {
-                  label: _("Search models");
-                }
-              }
-
-              MenuButton model_filter_button {
-                icon-name: "funnel-symbolic";
-                tooltip-text: _("Filter Models");
-                visible: false;
-              }
-            }
-          }
-        }
-
-        content: Adw.ViewStack model_manager_stack {
-          enable-transitions: true;
-          notify::visible-child => $model_manager_stack_changed();
-
-          Adw.ViewStackPage {
-            name: "added_models";
-            title: _("Added");
-            icon-name: "folder-download-symbolic";
-
-            child: Stack local_model_stack {
-              StackPage {
-                name: "no-models";
-
-                child: Adw.StatusPage {
-                  icon-name: "sad-computer-symbolic";
-                  title: _("No Models Found");
-                  description: _("It looks a bit empty in here. Try downloading some models or change your AI instance to get started!");
-
-                  child: Button {
-                    tooltip-text: _("Explore Available Models");
-                    clicked => $explore_available_models();
-                    halign: center;
-
-                    styles [
-                      "pill",
-                      "suggested-action",
-                    ]
-
-                    child: Adw.ButtonContent {
-                      icon-name: "globe-symbolic";
-                      label: _("Explore Available Models");
-                    };
-                  };
-                };
-              }
-
-              StackPage {
-                name: "content";
-
-                child: ScrolledWindow {
-                  child: Adw.Clamp {
-                    maximum-size: 1000;
-                    tightening-threshold: 800;
-
-                    FlowBox local_model_flowbox {
-                      row-spacing: 6;
-                      column-spacing: 6;
-                      hexpand: true;
-                      valign: start;
-                      min-children-per-line: 1;
-                      max-children-per-line: 3;
-                      selection-mode: none;
-                      homogeneous: true;
-
-                      styles [
-                        "p10",
-                      ]
-                    }
-                  };
-                };
-              }
-
-              StackPage {
-                name: "no-results";
-
-                child: Adw.StatusPage {
-                  icon-name: "sad-computer-symbolic";
-                  title: _("No Models Found");
-                  description: _("Looks like we’re fresh out of models for that search. Try tweaking your keywords, or maybe explore something new!");
-                };
-              }
-            };
-          }
-
-          Adw.ViewStackPage available_models_stack_page {
-            name: "";
-            title: _("Available");
-            icon-name: "globe-symbolic";
-
-            child: Stack available_model_stack {
-              StackPage {
-                name: "content";
-
-                child: ScrolledWindow {
-                  child: Adw.Clamp {
-                    maximum-size: 1000;
-                    tightening-threshold: 800;
-
-                    FlowBox available_model_flowbox {
-                      row-spacing: 6;
-                      column-spacing: 6;
-                      hexpand: true;
-                      valign: start;
-                      min-children-per-line: 2;
-                      max-children-per-line: 3;
-                      selection-mode: none;
-
-                      styles [
-                        "p10",
-                      ]
-                    }
-                  };
-                };
-              }
-
-              StackPage {
-                name: "no-results";
-
-                child: Adw.StatusPage {
-                  icon-name: "sad-computer-symbolic";
-                  title: _("No Models Found");
-                  description: _("Looks like we’re fresh out of models for that search. Try tweaking your keywords, or maybe explore something new!");
-                };
-              }
-            };
-          }
-        };
-
-        [bottom]
-        Adw.ViewSwitcherBar model_manager_bottom_view_switcher {
-          stack: model_manager_stack;
-        }
-      };
-    }
+    $AlpacaModelManager model_manager {}
   };
 }
 
@@ -543,32 +340,6 @@ menu secondary_menu {
     item {
       label: _("Delete Chat");
       action: "app.delete_current_chat";
-    }
-  }
-}
-
-menu model_manager_menu {
-  section {
-    item {
-      label: _("Reload Added Models");
-      action: "app.reload_added_models";
-    }
-
-    item {
-      label: _("Add Model by Name");
-      action: "app.add_model_by_name";
-    }
-  }
-
-  section {
-    item {
-      label: _("Create Model from Existing");
-      action: "app.model_creator_existing";
-    }
-
-    item {
-      label: _("Create Model from GGUF File");
-      action: "app.model_creator_gguf";
     }
   }
 }

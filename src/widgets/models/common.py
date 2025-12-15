@@ -58,13 +58,15 @@ def set_available_models_data(data:list):
 
 def prepend_added_model(root, model):
     window = root.get_application().get_main_window(present=False)
-    window.local_model_flowbox.prepend(model)
+    window.model_manager.added_model_flowbox.prepend(model)
     model.get_parent().set_focusable(False)
+    window.model_manager.update_added_visibility()
 
 def append_added_model(root, model):
     window = root.get_application().get_main_window(present=False)
-    window.local_model_flowbox.append(model)
+    window.model_manager.added_model_flowbox.append(model)
     model.get_parent().set_focusable(False)
+    window.model_manager.update_added_visibility()
 
 def prompt_gguf(root, instance=None):
     creator = importlib.import_module('alpaca.widgets.models.creator')
@@ -97,8 +99,6 @@ def remove_added_model(model):
     window = model.get_root().get_application().get_main_window(present=False)
 
     if model.instance.delete_model(model.get_name()):
-        if len(list(model.get_ancestor(Gtk.FlowBox))) == 1:
-            window.local_model_stack.set_visible_child_name('no-models')
 
         SQL.remove_model_preferences(model.get_name())
         threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures, daemon=True).start()

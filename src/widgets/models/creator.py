@@ -203,8 +203,6 @@ class ModelCreatorDialog(Adw.Dialog):
         )
         model_el.update_progressbar(1)
         prepend_added_model(window, model_el)
-        window.model_manager_stack.set_visible_child_name('added_models')
-        window.local_model_stack.set_visible_child_name('content')
 
         if self.gguf_path:
             try:
@@ -218,7 +216,8 @@ class ModelCreatorDialog(Adw.Dialog):
                     data['files'] = {os.path.split(self.gguf_path)[1]: 'sha256:{}'.format(sha256)}
             except Exception as e:
                 logger.error(e)
-                GLib.idle_add(window.local_model_flowbox.remove, model_el.get_parent())
+                window.model_manager.added_model_flowbox.remove(model_el.get_parent())
+                window.model_manager.update_added_visibility()
                 return
         self.instance.create_model(data, model_el)
 
