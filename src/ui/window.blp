@@ -21,9 +21,8 @@ template $AlpacaWindow: Adw.ApplicationWindow {
     setters {
       chat_split_view_overlay.collapsed: true;
       split_view_overlay.collapsed: true;
+      chat_split_view_overlay.max-sidebar-width: 320;
     }
-
-
   }
 
   Adw.Breakpoint {
@@ -36,19 +35,7 @@ template $AlpacaWindow: Adw.ApplicationWindow {
       model_manager_bottom_view_switcher.reveal: true;
       available_model_flowbox.min-children-per-line: 1;
       local_model_flowbox.max-children-per-line: 2;
-    }
-  }
-
-  Adw.Breakpoint {
-    condition ("max-width: 560sp")
-
-    setters {
-      chat_split_view_overlay.collapsed: true;
-      split_view_overlay.collapsed: true;
-      model_manager_header_bar.title-widget: null;
-      model_manager_bottom_view_switcher.reveal: true;
-      available_model_flowbox.min-children-per-line: 1;
-      local_model_flowbox.max-children-per-line: 2;
+      chat_split_view_overlay.max-sidebar-width: 320;
     }
   }
 
