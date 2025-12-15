@@ -117,9 +117,9 @@ class Folder(Adw.NavigationPage):
     def on_search(self, raw_query:str):
         query = re.escape(raw_query)
         root = self.get_root()
-        folder_search_mode = root.settings.get_value('folder-search-mode').unpack()
+        include_messages = root.settings.get_value('folder-search-mode').unpack()
 
-        if folder_search_mode in (1,2):
+        if include_messages:
             root.searchentry_messages.set_text(raw_query)
 
         if len(list(self.folder_list_box)) + len(list(self.chat_list_box)) == 0:
@@ -144,12 +144,8 @@ class Folder(Adw.NavigationPage):
             messages_str = ""
             message_match = False
 
-            if folder_search_mode in (1,2):
-                messages_str = '\n'.join([m.get('content') for m in row.chat.convert_to_ollama()])
-                if not messages_str and folder_search_mode == 2:
-                    messages_str = '\n'.join([m[4] for m in SQL.get_messages(row.chat)])
-
-            if messages_str:
+            if include_messages:
+                messages_str = '\n'.join([m.get('content') for m in row.chat.convert_to_ollama()]) or '\n'.join([m[4] for m in SQL.get_messages(row.chat)])
                 message_match = re.search(query, messages_str, re.IGNORECASE)
 
             row.set_visible(title_match or message_match)
