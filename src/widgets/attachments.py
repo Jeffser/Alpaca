@@ -170,7 +170,7 @@ class Attachment(Gtk.Button):
                 )
                 page.title = self.file_name
                 page.activity_icon = 'code-symbolic'
-                page.buttons = []
+                page.buttons = {'start': []}
 
                 delete_button = Gtk.Button(
                     css_classes=['error'],
@@ -180,7 +180,7 @@ class Attachment(Gtk.Button):
                     valign=3
                 )
                 delete_button.connect('clicked', lambda *_: self.prompt_delete(page.get_root()))
-                page.buttons.append(delete_button)
+                page.buttons['start'].append(delete_button)
 
                 download_button = Gtk.Button(
                     icon_name='folder-download-symbolic',
@@ -189,7 +189,7 @@ class Attachment(Gtk.Button):
                     valign=3
                 )
                 download_button.connect('clicked', lambda *_: self.prompt_download(page.get_root()))
-                page.buttons.append(download_button)
+                page.buttons['start'].append(download_button)
 
                 self.activity = activities.show_activity(
                     page,
