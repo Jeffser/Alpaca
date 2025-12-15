@@ -82,7 +82,7 @@ class DictateButton(Gtk.Stack):
         speed = message_element.get_root().settings.get_value('tts-speed').unpack()
 
         # Show Voice in Model Manager if Needed
-        if not models.tts_model_exists(voice):
+        if not models.common.tts_model_exists(voice):
             tts_path = models.get_tts_path()
             if tts_path:
                 model_element = models.create_tts_model(os.path.join(tts_path, voice + '.pt'))
