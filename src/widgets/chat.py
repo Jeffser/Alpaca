@@ -313,7 +313,9 @@ class Folder(Adw.NavigationPage):
             # Show New Stack Page
             root = self.get_root()
             root.chat_bin.set_child(new_chat)
-            GLib.idle_add(new_chat.on_search, root.searchentry_messages.get_text())
+            chat_search_query = root.searchentry_messages.get_text()
+            if chat_search_query:
+                GLib.idle_add(new_chat.on_search, chat_search_query)
 
             # Select Model
             GLib.idle_add(self.auto_select_model)
@@ -430,7 +432,7 @@ class Chat(Gtk.Stack):
             if m.get_visible():
                 self.set_visible_child_name('content')
                 return
-        self.set_visible_child_name('no-results' if searching else 'welcome-screen')
+        self.set_visible_child_name('no-results' if searching and len(list(self.container)) > 0 else 'welcome-screen')
 
     def stop_message(self):
         self.busy = False
