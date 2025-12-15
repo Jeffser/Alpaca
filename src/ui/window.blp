@@ -53,7 +53,7 @@ template $AlpacaWindow: Adw.ApplicationWindow {
   }
 
   content: Adw.NavigationView main_navigation_view {
-    Adw.NavigationPage {
+    Adw.NavigationPage chat_page {
       title: "Alpaca";
       tag: "chat";
 
@@ -76,6 +76,13 @@ template $AlpacaWindow: Adw.ApplicationWindow {
                 "flat",
               ]
             }
+
+            title-widget: Gtk.Label {
+              label: "Alpaca";
+              styles [
+                "title"
+              ]
+            };
 
             [end]
             MenuButton {
@@ -129,98 +136,94 @@ template $AlpacaWindow: Adw.ApplicationWindow {
 
           sidebar: $AlpacaActivityManager activity_manager {};
 
-          content: Adw.NavigationPage chat_page {
-            title: _("Chat");
+          content: Adw.ToolbarView {
+            height-request: 140;
 
-            child: Adw.ToolbarView {
-              height-request: 140;
-
-              [top]
-              Adw.HeaderBar chat_headerbar {
-                show-title: true;
-                [start]
-                ToggleButton show_sidebar_button {
-                  icon-name: "sidebar-show-symbolic";
-                  tooltip-text: _("Toggle Sidebar");
-                  active: bind split_view_overlay.show-sidebar;
-                }
-
-                [start]
-                ToggleButton message_search_button {
-                  icon-name: "edit-find-symbolic";
-                  tooltip-text: _("Search Messages");
-                  active: bind message_searchbar.search-mode-enabled;
-                }
-
-                [end]
-                ToggleButton show_activities_toggle {
-                  icon-name: "sidebar-show-right-symbolic";
-                  tooltip-text: _("Toggle Activities Sidebar");
-                  active: bind chat_split_view_overlay.show-sidebar no-sync-create;
-                }
-
-                [end]
-                MenuButton {
-                  primary: false;
-                  icon-name: "view-more-symbolic";
-                  tooltip-text: _("Chat Menu");
-                  menu-model: secondary_menu;
-                }
+            [top]
+            Adw.HeaderBar chat_headerbar {
+              show-title: true;
+              [start]
+              ToggleButton show_sidebar_button {
+                icon-name: "sidebar-show-symbolic";
+                tooltip-text: _("Toggle Sidebar");
+                active: bind split_view_overlay.show-sidebar;
               }
 
-              [top]
-              Adw.Clamp {
-                maximum-size: 1000;
-                tightening-threshold: 800;
+              [start]
+              ToggleButton message_search_button {
+                icon-name: "edit-find-symbolic";
+                tooltip-text: _("Search Messages");
+                active: bind message_searchbar.search-mode-enabled;
+              }
 
-                SearchBar message_searchbar {
+              [end]
+              ToggleButton show_activities_toggle {
+                icon-name: "sidebar-show-right-symbolic";
+                tooltip-text: _("Toggle Activities Sidebar");
+                active: bind chat_split_view_overlay.show-sidebar no-sync-create;
+              }
+
+              [end]
+              MenuButton {
+                primary: false;
+                icon-name: "view-more-symbolic";
+                tooltip-text: _("Chat Menu");
+                menu-model: secondary_menu;
+              }
+            }
+
+            [top]
+            Adw.Clamp {
+              maximum-size: 1000;
+              tightening-threshold: 800;
+
+              SearchBar message_searchbar {
+                accessibility {
+                  label: _("Message search bar");
+                }
+
+                search-mode-enabled: bind message_search_button.active;
+                key-capture-widget: template;
+
+                SearchEntry searchentry_messages {
+                  search-changed => $message_search_changed();
+                  hexpand: true;
+                  search-delay: 200;
+                  placeholder-text: _("Search messages");
+
                   accessibility {
-                    label: _("Message search bar");
-                  }
-
-                  search-mode-enabled: bind message_search_button.active;
-                  key-capture-widget: template;
-
-                  SearchEntry searchentry_messages {
-                    search-changed => $message_search_changed();
-                    hexpand: true;
-                    search-delay: 200;
-                    placeholder-text: _("Search messages");
-
-                    accessibility {
-                      label: _("Search messages");
-                    }
+                    label: _("Search messages");
                   }
                 }
               }
+            }
 
-              content: Box {
+            content: Box {
+              orientation: vertical;
+              vexpand: true;
+              hexpand: true;
+
+              Adw.Banner banner {
+                button-label: _("Close");
+                title: _("Warning: Power saver mode is enabled, this will slow down message generation");
+              }
+
+              Box {
                 orientation: vertical;
-                vexpand: true;
-                hexpand: true;
 
-                Adw.Banner banner {
-                  button-label: _("Close");
-                  title: _("Warning: Power saver mode is enabled, this will slow down message generation");
-                }
-
-                Box {
-                  orientation: vertical;
-
-                  Adw.ToastOverlay toast_overlay {
-                    Adw.Bin chat_bin {
-                      hexpand: true;
-                      vexpand: true;
-                    }
-                  }
-
-                  Adw.Clamp {
-                    maximum-size: 1000;
-                    tightening-threshold: 800;
-                    child: $AlpacaGlobalFooter global_footer {};
+                Adw.ToastOverlay toast_overlay {
+                  Adw.Bin chat_bin {
+                    hexpand: true;
+                    vexpand: true;
                   }
                 }
-              };
+
+                Adw.Clamp {
+                  maximum-size: 1000;
+                  tightening-threshold: 800;
+                  child: $AlpacaGlobalFooter global_footer {};
+                }
+              }
             };
           };
         }
