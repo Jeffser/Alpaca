@@ -5,10 +5,13 @@ template $AlpacaAddedModelSelector: Gtk.Stack {
 
   Gtk.StackPage {
     name: "no-models";
-    child: Gtk.Label {
+    child: Gtk.Button {
       label: _("No Models");
-      wrap: true;
-      wrap-mode: word_char;
+      tooltip-text: _("Open Model Manager");
+      action-name: "app.model_manager_available";
+      styles [
+        "error"
+      ]
     };
   }
   Gtk.StackPage {

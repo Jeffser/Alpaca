@@ -137,7 +137,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             listbox.set_sensitive(True)
         if listbox.get_sensitive():
             listbox.set_sensitive(False)
-            threading.Thread(target=change_instance, daemon=True).start()
+            GLib.idle_add(threading.Thread(target=change_instance, daemon=True).start)
 
     @Gtk.Template.Callback()
     def closing_app(self, user_data):
@@ -340,6 +340,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             GLib.idle_add(self.main_navigation_view.pop_to_tag, 'chat')
 
+    def open_available_model_page(self):
+        self.main_navigation_view.push_by_tag('model_manager')
+        self.model_manager.view_stack.set_visible_child_name('available_models')
+
     def prepare_screenshoter(self):
         #used to take screenshots of widgets for documentation
         widget = self.get_focus().get_parent()
@@ -396,6 +400,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'toggle_sidebar': [lambda *_: self.split_view_overlay.set_show_sidebar(not self.split_view_overlay.get_show_sidebar()), ['F9']],
             'toggle_search': [lambda *_: self.toggle_searchbar(), ['<primary>f']],
             'model_manager' : [lambda *_: self.push_or_pop('model_manager'), ['<primary>m']],
+            'model_manager_available' : [lambda *_: self.open_available_model_page()],
             'instance_manager' : [lambda *_: self.push_or_pop('instance_manager'), ['<primary>i']],
             'add_model_by_name' : [lambda *i: Widgets.dialog.simple_entry(
                 parent=self,
