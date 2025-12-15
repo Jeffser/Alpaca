@@ -3,9 +3,15 @@ using Adw 1;
 using WebKit 6.0;
 
 template $AlpacaWebBrowser: WebKit.WebView {
+  margin-start: 5;
+  margin-end: 5;
+  overflow: hidden;
   load-changed => $on_load_changed();
   create => $on_create();
   notify::title => $title_changed();
+  styles [
+    "r10"
+  ]
 }
 
 Gtk.Button back_button {
