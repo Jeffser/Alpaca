@@ -344,18 +344,20 @@ class BasicModelButton(Gtk.Button):
             rect.x, rect.y = args[1], args[2]
 
         actions = [[]]
-        if self.instance and self.instance.instance_type in ('ollama', 'ollama:managed'):
-            actions[0].append({
-                'label': _('Create Child'),
-                'callback': self.prompt_create_child,
-                'icon': 'list-add-symbolic'
-            })
-        if self.remove_callback:
-            actions[0].append({
-                'label': _('Remove Model'),
-                'callback': self.prompt_remove_model,
-                'icon': 'user-trash-symbolic'
-            })
+
+        if not self.progressbar.get_visible():
+            if self.instance and self.instance.instance_type in ('ollama', 'ollama:managed'):
+                actions[0].append({
+                    'label': _('Create Child'),
+                    'callback': self.prompt_create_child,
+                    'icon': 'list-add-symbolic'
+                })
+            if self.remove_callback:
+                actions[0].append({
+                    'label': _('Remove Model'),
+                    'callback': self.prompt_remove_model,
+                    'icon': 'user-trash-symbolic'
+                })
 
         if len(actions[0]) > 0:
             popup = dialog.Popover(actions)
@@ -374,4 +376,4 @@ def confirm_pull_model(window, model_name:str):
             )
             model_el.update_progressbar(1)
             threading.Thread(target=instance.pull_model, args=(model_el,)).start()
-
+            window.model_manager.view_stack.set_visible_child_name('added_models')

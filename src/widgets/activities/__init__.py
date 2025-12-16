@@ -189,6 +189,8 @@ class ActivityManager(Adw.Bin):
             self.navigationview.replace_with_tags(['launcher'])
             if self.get_root().get_name() == 'AlpacaWindow':
                 self.get_root().chat_split_view_overlay.set_show_sidebar(False)
+                if not self.get_root().split_view_overlay.get_collapsed():
+                    self.get_root().split_view_overlay.set_show_sidebar(True)
 
     @Gtk.Template.Callback()
     def window_create(self, tabview=None):

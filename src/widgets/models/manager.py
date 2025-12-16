@@ -195,7 +195,7 @@ class ModelManager(Adw.NavigationPage):
         )
         if append_row:
             added.append_to_model_selector(model_element.row)
-        self.added_model_flowbox.append(model_element)
+        self.added_model_flowbox.prepend(model_element)
         model_element.get_parent().set_focusable(False)
         self.update_added_visibility()
         return model_element
