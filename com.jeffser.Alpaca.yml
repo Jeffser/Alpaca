@@ -40,7 +40,7 @@ modules:
         --prefix=${FLATPAK_DEST} "six" --no-build-isolation
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/ee/ff/48bde5c0f013094d729fe4b0316ba2a24774b3ff1c52d924a8a4cb04078a/six-1.17.0-py2.py3-none-any.whl
+        url: https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl
         sha256: 4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274
   - name: python3-requests
     buildsystem: simple
