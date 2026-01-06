@@ -182,7 +182,7 @@ class InstancePreferencesDialog(Adw.Dialog):
         elif el.get_name() == 'model_directory':
             return el.get_subtitle()
         elif isinstance(el, Adw.PasswordEntryRow):
-            return el.get_text().strip() or self.instance.properties.get(el.get_name())
+            return el.get_text().strip() or self.instance.properties.get(el.get_name()) or 'NOKEY'
         elif isinstance(el, Adw.ExpanderRow):
             return el.get_enable_expansion()
         elif isinstance(el, Adw.EntryRow):
