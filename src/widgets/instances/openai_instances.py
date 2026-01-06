@@ -74,7 +74,7 @@ class BaseInstance:
                 target=self.generate_chat_title,
                 args=(
                     chat,
-                    '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']),
+                    messages[-1].get('content'),
                     model
                 ),
                 daemon=True
@@ -90,7 +90,7 @@ class BaseInstance:
                 target=self.generate_chat_title,
                 args=(
                     chat,
-                    '\n'.join([c.get('text') for c in messages[-1].get('content') if c.get('type') == 'text']),
+                    messages[-1].get('content'),
                     model
                 ),
                 daemon=True
