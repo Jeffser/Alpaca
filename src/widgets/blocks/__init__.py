@@ -8,12 +8,14 @@ from .table import Table
 from .code import Code
 from .separator import Separator
 from .thinking import Thinking
+from .inline_picture import InlinePicture
 from collections import namedtuple
 
 from .. import attachments
 from ...sql_manager import generate_uuid, Instance as SQL
 
 patterns = [
+    ('online_picture', re.compile(r'!\[[^\]]*\]\((.*?)\)')),
     ('code', re.compile(r'```([a-zA-Z0-9_+\-]*)\n(.*?)\n\s*```', re.DOTALL)),
     ('latex', re.compile(r'\\\[\n*?(.*?)\n*?\\\]|\$+\n*?(.*?)\$+\n*?', re.DOTALL)),
     ('table', re.compile(r'((?:\| *[^|\r\n]+ *)+\|)(?:\r?\n)((?:\|[ :]?-+[ :]?)+\|)((?:(?:\r?\n)(?:\| *[^|\r\n]+ *)+\|)+)', re.MULTILINE)),
@@ -47,7 +49,15 @@ def text_to_block_list(content: str):
                 blocks.append(Text(content=snippet))
 
         match = mb.match
-        if mb.name == "code":
+        if mb.name == "online_picture":
+            url = match.group(1).strip()
+            if url:
+                blocks.append(
+                    InlinePicture(
+                        url=url
+                    )
+                )
+        elif mb.name == "code":
             if match.group(1).lower() == 'latex':
                 blocks.append(LatexRenderer(content=match.group(2)))
             else:

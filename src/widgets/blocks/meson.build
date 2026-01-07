@@ -7,7 +7,8 @@ blocks = [
   'text.py',
   'code.py',
   'separator.py',
-  'thinking.py'
+  'thinking.py',
+  'inline_picture.py'
 ]
 
 install_data(blocks, install_dir: moduledir)

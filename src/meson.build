@@ -35,6 +35,7 @@ blueprints = files(
   'ui/widgets/blocks/generating_text.blp',
   'ui/widgets/blocks/text.blp',
   'ui/widgets/blocks/thinking.blp',
+  'ui/widgets/blocks/inline_picture.blp',
   'ui/widgets/activities/web_browser.blp',
   'ui/widgets/activities/background_remover.blp',
   'ui/widgets/activities/background_remover_image.blp',
