@@ -9,6 +9,7 @@ from markitdown import MarkItDown
 from html2text import html2text
 from io import BytesIO
 from PIL import Image
+from PIL.PngImagePlugin import PngInfo
 from ..constants import cache_dir
 import numpy as np
 import requests, json, base64, tempfile, shutil, logging, threading, os, re, cairo
@@ -91,6 +92,13 @@ def extract_online_image(image_url:str, max_size:int) -> str | None:
 def extract_image(image_path:str, max_size:int) -> str:
     #Normal Image: 640, Profile Pictures: 128
     with Image.open(image_path) as img:
+        img.load()
+        metadata = PngInfo()
+        source_data = img.info or {}
+        for key, value in source_data.items():
+            if key not in ('exif', 'dpi', 'icc_profile'):
+                metadata.add_text(key, str(value))
+
         width, height = img.size
         if width > height:
             new_width = max_size
@@ -99,8 +107,15 @@ def extract_image(image_path:str, max_size:int) -> str:
             new_height = max_size
             new_width = int((max_size / height) * width)
         resized_img = img.resize((new_width, new_height), Image.LANCZOS)
+
         with BytesIO() as output:
-            resized_img.save(output, format="PNG")
+            resized_img.save(
+                output,
+                format="PNG",
+                pnginfo=metadata,
+                exif=img.info.get('exif'),
+                dpi=img.info.get('dpi')
+            )
             image_data = output.getvalue()
         return base64.b64encode(image_data).decode("utf-8")
 
