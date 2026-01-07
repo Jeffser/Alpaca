@@ -174,6 +174,7 @@ class AddedModelDialog(Adw.Dialog):
     context_system_container = Gtk.Template.Child()
     categories_container = Gtk.Template.Child()
     character_page_container = Gtk.Template.Child()
+    view_stack = Gtk.Template.Child()
     view_switcher = Gtk.Template.Child()
 
     def __init__(self, model):
@@ -256,8 +257,11 @@ class AddedModelDialog(Adw.Dialog):
 
     def check_for_character(self):
         self.view_switcher.set_reveal(len(self.model.character_data.keys()) > 0)
+        self.view_stack.set_visible_child_name('model')
         if len(self.model.character_data.keys()) > 0:
             self.character_page_container.set_child(CharacterPage(self.model.character_data))
+        else:
+            self.character_page_container.set_child()
 
     def update_profile_picture(self):
         if self.model.image.get_visible():
