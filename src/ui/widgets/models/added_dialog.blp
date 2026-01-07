@@ -49,114 +49,136 @@ template $AlpacaAddedModelDialog: Adw.Dialog {
       }
     }
 
-    content: Gtk.ScrolledWindow {
-      propagate-natural-height: true;
-      max-content-width: 500;
-      child: Gtk.Box {
-        spacing: 10;
-        hexpand: true;
-        vexpand: true;
-        orientation: vertical;
-        styles [
-          "p10"
-        ]
+    content: Adw.ViewStack view_stack {
+      enable-transitions: true;
 
-        Gtk.Box {
-          spacing: 20;
-          hexpand: true;
-          orientation: vertical;
-
-          Gtk.Button {
-            halign: center;
-            overflow: hidden;
-            tooltip-text: _("Change Profile Picture");
-            clicked => $pfp_clicked();
-            styles [
-              "circular"
-            ]
-            child: Gtk.Image image {
-              icon-size: large;
-              width-request: 192;
-              height-request: 192;
-              icon-name: "image-missing-symbolic";
-              //CODE set pfp texture
-            };
-          }
-
-          Gtk.Label title_label {
-            wrap: true;
-            wrap-mode: word_char;
-            justify: center;
-            styles [
-              "title-1"
-            ]
-            //CODE set label
-          }
-
-          Adw.PreferencesGroup preferences_group {
-            visible: false;
-            //CODE visible if needed
-            Adw.ComboRow voice_combo {
-              notify::selected => $update_voice();
-              title: _("Voice");
-              //CODE fill and select combo
-              model: Gtk.StringList {
-                strings [
-                  _("Default")
-                ]
-              };
-            }
-          }
-        }
-
-        Gtk.Box metadata_container {
-          spacing: 6;
-          hexpand: false;
-          orientation: vertical;
-
-          Gtk.FlowBox information_container {
-            selection-mode: none;
-            homogeneous: true;
-            max-children-per-line: 2;
-            row-spacing: 6;
-            column-spacing: 6;
-            //CODE fill
-          }
-
-          Adw.Bin description_container {}
-
-          Gtk.Box {
-            orientation: vertical;
-            spacing: 5;
-            visible: false;
-            //CODE set visible
-
-            Gtk.Label {
-              label: _("Files");
-              hexpand: true;
-              ellipsize: end;
-              halign: start;
-              styles [
-                "subtitle",
-                "caption",
-                "dim-label"
-              ]
-            }
-
-            Adw.Bin context_attachment_container {}
-          }
-
-          Adw.Bin context_system_container {}
-
-          Adw.WrapBox categories_container {
+      Adw.ViewStackPage {
+        name: "model";
+        title: _("Model");
+        icon-name: "brain-augemnted-symbolic";
+        child: Gtk.ScrolledWindow {
+          propagate-natural-height: true;
+          max-content-width: 500;
+          child: Gtk.Box {
+            spacing: 10;
             hexpand: true;
-            line-spacing: 6;
-            child-spacing: 6;
-            justify: none;
-            halign: start;
-          }
-        }
-      };
+            vexpand: true;
+            valign: center;
+            orientation: vertical;
+            styles [
+              "p10"
+            ]
+
+            Gtk.Box {
+              spacing: 20;
+              hexpand: true;
+              orientation: vertical;
+
+              Gtk.Button {
+                halign: center;
+                overflow: hidden;
+                tooltip-text: _("Change Profile Picture");
+                clicked => $pfp_clicked();
+                styles [
+                  "circular"
+                ]
+                child: Gtk.Image image {
+                  icon-size: large;
+                  width-request: 192;
+                  height-request: 192;
+                  icon-name: "image-missing-symbolic";
+                  //CODE set pfp texture
+                };
+              }
+
+              Gtk.Label title_label {
+                wrap: true;
+                wrap-mode: word_char;
+                justify: center;
+                styles [
+                  "title-1"
+                ]
+                //CODE set label
+              }
+
+              Adw.PreferencesGroup preferences_group {
+                visible: false;
+                //CODE visible if needed
+                Adw.ComboRow voice_combo {
+                  notify::selected => $update_voice();
+                  title: _("Voice");
+                  //CODE fill and select combo
+                  model: Gtk.StringList {
+                    strings [
+                      _("Default")
+                    ]
+                  };
+                }
+              }
+            }
+
+            Gtk.Box metadata_container {
+              spacing: 6;
+              hexpand: false;
+              orientation: vertical;
+
+              Gtk.FlowBox information_container {
+                selection-mode: none;
+                homogeneous: true;
+                max-children-per-line: 2;
+                row-spacing: 6;
+                column-spacing: 6;
+                //CODE fill
+              }
+
+              Adw.Bin description_container {}
+
+              Gtk.Box {
+                orientation: vertical;
+                spacing: 5;
+                visible: false;
+                //CODE set visible
+
+                Gtk.Label {
+                  label: _("Files");
+                  hexpand: true;
+                  ellipsize: end;
+                  halign: start;
+                  styles [
+                    "subtitle",
+                    "caption",
+                    "dim-label"
+                  ]
+                }
+
+                Adw.Bin context_attachment_container {}
+              }
+
+              Adw.Bin context_system_container {}
+
+              Adw.WrapBox categories_container {
+                hexpand: true;
+                line-spacing: 6;
+                child-spacing: 6;
+                justify: none;
+                halign: start;
+              }
+            }
+          };
+        };
+      }
+
+      Adw.ViewStackPage {
+        name: "character";
+        title: _("Character");
+        icon-name: "person-symbolic";
+        child: Adw.Bin character_page_container {};
+      }
     };
+
+    [bottom]
+    Adw.ViewSwitcherBar view_switcher {
+      stack: view_stack;
+    }
   };
 }

@@ -1,0 +1,107 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaCharacterPage: Adw.PreferencesPage {
+  Adw.PreferencesGroup {
+    title: _("Information");
+    visible: false;
+    Adw.ActionRow name_row {
+      name: "name";
+      title: _("Name");
+      styles [
+        "property"
+      ]
+    }
+    Adw.ActionRow creator_row {
+      name: "creator";
+      title: _("Creator");
+      styles [
+        "property"
+      ]
+    }
+    Adw.ActionRow character_version_row {
+      name: "character_version";
+      title: _("Character Version");
+      styles [
+        "property"
+      ]
+    }
+    Adw.ActionRow creation_date_row {
+      name: "creation_date";
+      title: _("Creation Date");
+      styles [
+        "property"
+      ]
+    }
+    Adw.ActionRow modification_date_row {
+      name: "modification_date";
+      title: _("Modification Date");
+      styles [
+        "property"
+      ]
+    }
+    Adw.ExpanderRow {
+      title: _("Creator Notes");
+      visible: false;
+      Adw.ActionRow creator_notes_row {
+        name: "creator_notes";
+      }
+    }
+  }
+
+  Adw.PreferencesGroup {
+    title: _("Tags");
+    visible: false;
+    Adw.WrapBox tag_container {
+      hexpand: true;
+      line-spacing: 6;
+      child-spacing: 6;
+      justify: none;
+      halign: start;
+    }
+  }
+
+  Adw.PreferencesGroup {
+    title: _("Prompt Engeriering");
+    description: _("Information used to create the conversation scenario");
+    Adw.ExpanderRow {
+      title: _("Description");
+      visible: false;
+      Adw.ActionRow description_row {
+        name: "description";
+      }
+    }
+    Adw.ExpanderRow {
+      title: _("System Prompt");
+      visible: false;
+      Adw.ActionRow system_prompt_row {
+        name: "system_prompt";
+      }
+    }
+    Adw.ExpanderRow {
+      title: _("Personality");
+      visible: false;
+      Adw.ActionRow personality_row {
+        name: "personality";
+      }
+    }
+    Adw.ExpanderRow {
+      title: _("Scenario");
+      visible: false;
+      Adw.ActionRow scenario_row {
+        name: "scenario";
+      }
+    }
+    Adw.ExpanderRow {
+      title: _("First Message");
+      visible: false;
+      Adw.ActionRow first_message_row {
+        name: "first_mes";
+      }
+    }
+  }
+
+  Adw.PreferencesGroup character_book_group {
+    visible: false;
+  }
+}

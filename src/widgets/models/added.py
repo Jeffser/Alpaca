@@ -3,7 +3,7 @@
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GObject
 import logging, os, re, datetime, threading, sys, glob, icu, base64, hashlib, importlib.util
 from ...constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
-from ...sql_manager import prettify_model_name, Instance as SQL
+from ...sql_manager import prettify_model_name, format_datetime, Instance as SQL
 from .. import dialog, attachments
 from .common import CategoryPill, get_available_models_data, InfoBox
 
@@ -22,6 +22,102 @@ class AddedModelRow(GObject.Object):
 
     def __str__(self):
         return prettify_model_name(self.model.get_name())
+
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/character_page.ui')
+class CharacterPage(Adw.PreferencesPage):
+    __gtype_name__ = 'AlpacaCharacterPage'
+
+    name_row = Gtk.Template.Child()
+    creator_row = Gtk.Template.Child()
+    character_version_row = Gtk.Template.Child()
+    creation_date_row = Gtk.Template.Child()
+    modification_date_row = Gtk.Template.Child()
+    creator_notes_row = Gtk.Template.Child()
+
+    tag_container = Gtk.Template.Child()
+
+    description_row = Gtk.Template.Child()
+    system_prompt_row = Gtk.Template.Child()
+    personality_row = Gtk.Template.Child()
+    scenario_row = Gtk.Template.Child()
+    first_message_row = Gtk.Template.Child()
+
+    character_book_group = Gtk.Template.Child()
+
+    def set_simple_value(self, row:Gtk.Widget, value:str):
+        value = GLib.markup_escape_text(value).strip()
+        row.set_subtitle(str(value))
+        row.set_visible(bool(value))
+        pg = row.get_ancestor(Adw.PreferencesGroup)
+        if pg and not pg.get_visible():
+            pg.set_visible(row.get_visible())
+
+        er = row.get_ancestor(Adw.ExpanderRow)
+        if er and not er.get_visible():
+            er.set_visible(row.get_visible())
+
+    def add_tags(self, container:Gtk.Widget, tag_names:list):
+        for tag_name in tag_names:
+            category_pill = CategoryPill(tag_name, True)
+            category_pill.image.set_visible(False)
+            container.append(category_pill)
+        pg = container.get_ancestor(Adw.PreferencesGroup)
+        if pg and not pg.get_visible():
+            pg.set_visible(len(tag_names) > 0)
+
+        er = container.get_ancestor(Adw.ExpanderRow)
+        if er and not er.get_visible():
+            er.set_visible(len(tag_names) > 0)
+
+    def __init__(self, chara_dict:dict):
+        super().__init__()
+        self.chara_data = chara_dict.get('data', {})
+
+        # rows that just set their subtitles
+        SIMPLE_ROWS = (
+            self.name_row, self.creator_row, self.character_version_row,
+            self.creation_date_row, self.modification_date_row, self.creator_notes_row,
+            self.description_row, self.system_prompt_row, self.personality_row,
+            self.scenario_row, self.first_message_row
+        )
+        for row in SIMPLE_ROWS:
+            value = self.chara_data.get(row.get_name())
+            if isinstance(value, int) and 'date' in row.get_name():
+                value = format_datetime(datetime.datetime.fromtimestamp(value / 1000.0))
+            self.set_simple_value(row, value)
+
+        # Tags
+        self.add_tags(self.tag_container, self.chara_data.get('tags', []))
+
+        # Character Book
+        character_book = self.chara_data.get('character_book', {})
+        if len(character_book.get('entries', [])) > 0:
+            self.character_book_group.set_title(character_book.get('name', ''))
+            self.character_book_group.set_description(character_book.get('description', ''))
+
+            for entry in character_book.get('entries', []):
+                if entry.get('name') and entry.get('enabled'):
+                    er = Adw.ExpanderRow(
+                        title = entry.get('name').title(),
+                        visible = False
+                    )
+                    self.character_book_group.add(er)
+
+                    key_container = Adw.WrapBox(
+                        hexpand = True,
+                        line_spacing = 6,
+                        child_spacing = 6,
+                        justify = 0,
+                        halign = 1,
+                        css_classes = ['p10']
+                    )
+                    er.add_row(key_container)
+                    self.add_tags(key_container, entry.get('keys', []))
+
+                    content_row = Adw.ActionRow()
+                    er.add_row(content_row)
+                    self.set_simple_value(content_row, entry.get('content'))
+
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/added_selector.ui')
 class AddedModelSelector(Gtk.Stack):
@@ -77,6 +173,8 @@ class AddedModelDialog(Adw.Dialog):
     context_attachment_container = Gtk.Template.Child()
     context_system_container = Gtk.Template.Child()
     categories_container = Gtk.Template.Child()
+    character_page_container = Gtk.Template.Child()
+    view_switcher = Gtk.Template.Child()
 
     def __init__(self, model):
         super().__init__()
@@ -156,6 +254,14 @@ class AddedModelDialog(Adw.Dialog):
             self.language_flowbox.append(CategoryPill(language, True))
         self.language_button.set_visible(len(languages) > 1)
 
+    def check_for_character(self):
+        # call on separate thread, may take a while
+        self.view_switcher.set_reveal(len(self.model.character_data.keys()) > 0)
+        if len(self.model.character_data.keys()) > 0:
+            self.character_page_container.set_child(Adw.Spinner())
+            page = CharacterPage(self.model.character_data)
+            self.character_page_container.set_child(page)
+
     def update_profile_picture(self):
         if self.model.image.get_visible():
             self.image.set_from_paintable(self.model.image.get_paintable())
@@ -163,6 +269,8 @@ class AddedModelDialog(Adw.Dialog):
         else:
             self.image.set_from_icon_name('image-missing-symbolic')
             self.image.set_pixel_size(-1)
+        thread = threading.Thread(target=self.check_for_character, daemon=True)
+        GLib.idle_add(thread.start)
 
     @Gtk.Template.Callback()
     def prompt_remove_model(self, button):

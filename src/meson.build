@@ -27,6 +27,7 @@ blueprints = files(
   'ui/widgets/models/category_pill.blp',
   'ui/widgets/models/added_selector.blp',
   'ui/widgets/models/model_manager.blp',
+  'ui/widgets/models/character_page.blp',
   'ui/widgets/blocks/code.blp',
   'ui/widgets/blocks/latex_renderer.blp',
   'ui/widgets/blocks/table.blp',

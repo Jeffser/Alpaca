@@ -33,7 +33,7 @@ class CategoryPill(Gtk.Box):
     label = Gtk.Template.Child()
 
     def __init__(self, category_id:str, show_label:bool):
-        category_name = MODEL_CATEGORIES_METADATA.get(category_id, {}).get('name')
+        category_name = MODEL_CATEGORIES_METADATA.get(category_id, {}).get('name', category_id.title())
         category_icon = MODEL_CATEGORIES_METADATA.get(category_id, {}).get('icon', 'language-symbolic')
         super().__init__(
             tooltip_text=category_name
