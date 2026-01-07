@@ -2,8 +2,21 @@ using Gtk 4.0;
 
 template $AlpacaMessagePopup: Gtk.Popover {
   has-arrow: true;
+  show => $on_show();
   child: Gtk.Box {
     spacing: 5;
+
+    Gtk.Button model_button {
+      visible: false;
+      halign: start;
+      hexpand: true;
+      icon-name: "person-symbolic";
+      tooltip-text: _("Show Model Dialog");
+      clicked => $show_model_dialog();
+      styles [
+        "flat"
+      ]
+    }
 
     Gtk.Button delete_button {
       halign: start;

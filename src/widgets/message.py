@@ -16,6 +16,7 @@ logger = logging.getLogger(__name__)
 class OptionPopup(Gtk.Popover):
     __gtype_name__ = 'AlpacaMessagePopup'
 
+    model_button = Gtk.Template.Child()
     delete_button = Gtk.Template.Child()
     copy_button = Gtk.Template.Child()
     edit_button = Gtk.Template.Child()
@@ -26,6 +27,20 @@ class OptionPopup(Gtk.Popover):
         self.delete_button.set_sensitive(status)
         self.edit_button.set_sensitive(status)
         self.regenerate_button.set_sensitive(status)
+
+    @Gtk.Template.Callback()
+    def on_show(self, udata):
+        message_element = self.get_ancestor(Message)
+        found_model = models.added.list_from_selector().get(message_element.author)
+        self.model_button.set_visible(bool(found_model))
+
+    @Gtk.Template.Callback()
+    def show_model_dialog(self, button):
+        self.popdown()
+        message_element = self.get_ancestor(Message)
+        found_model = models.added.list_from_selector().get(message_element.author)
+        if found_model:
+            models.added.AddedModelDialog(found_model).present(self.get_root())
 
     @Gtk.Template.Callback()
     def delete_message(self, button=None):
