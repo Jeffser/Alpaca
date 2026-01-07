@@ -392,6 +392,7 @@ class Chat(Gtk.Stack):
     prompt_container = Gtk.Template.Child()
     welcome_screen = Gtk.Template.Child()
     use_template_button = Gtk.Template.Child()
+    use_character_button = Gtk.Template.Child()
 
     def __init__(self, chat_id:str=None, name:str=_("New Chat"), folder_id:str=None, is_template=False):
         super().__init__()
@@ -403,6 +404,19 @@ class Chat(Gtk.Stack):
         self.row = ChatRow(self)
         self.use_template_button.set_visible(bool(self.chat_id))
         GLib.idle_add(self.update_prompts)
+        self.connect('notify::root', lambda *_: self.connect_model_selector())
+
+    def connect_model_selector(self):
+        if self.get_root():
+            global_footer = self.get_root().global_footer
+            if global_footer:
+                global_footer.model_selector.selector.connect('notify::selected', lambda selector, ud: self.on_model_change(selector))
+                GLib.idle_add(self.on_model_change, global_footer.model_selector)
+
+    def on_model_change(self, model_selector):
+        selected_item = model_selector.get_selected_item()
+        if selected_item:
+            self.use_character_button.set_visible(len(selected_item.model.character_data.keys()) > 0)
 
     def on_search(self, query:str):
         query = re.escape(query)
@@ -539,6 +553,59 @@ class Chat(Gtk.Stack):
     @Gtk.Template.Callback()
     def show_template_selector(self, button):
         TemplateSelector(self).present(self.get_root())
+
+    @Gtk.Template.Callback()
+    def use_character(self, button):
+        selected_item = self.get_root().global_footer.model_selector.get_selected_item()
+        if selected_item and len(selected_item.model.character_data.keys()) > 0:
+            character_data = selected_item.model.character_data.get('data', {})
+
+            system_message_parts = {
+                'Description': character_data.get('description'),
+                'System Prompt': character_data.get('system_prompt'),
+                'Personality': character_data.get('personality'),
+                'Scenario': character_data.get('scenario'),
+            }
+            message_element = Message(
+                dt=datetime.datetime.now(),
+                message_id=generate_uuid(),
+                mode=2
+            )
+            add_message = False
+            for k, v in system_message_parts.items():
+                content = v.strip()
+                if content:
+                    add_message = True
+                    attachment = message_element.add_attachment(
+                        file_id = generate_uuid(),
+                        name = k,
+                        attachment_type = 'plain_text',
+                        content = content
+                    )
+                    SQL.insert_or_update_attachment(message_element, attachment)
+            if add_message:
+                self.add_message(message_element)
+                message_element.block_container.set_content('')
+                SQL.insert_or_update_message(message_element)
+
+            first_message_content = character_data.get('first_mes')
+            if first_message_content:
+                message_element = Message(
+                    dt=datetime.datetime.now(),
+                    message_id=generate_uuid(),
+                    mode=1,
+                    author=selected_item.model.get_name()
+                )
+                self.add_message(message_element)
+                message_element.block_container.set_content(first_message_content)
+                SQL.insert_or_update_message(message_element)
+
+            GLib.idle_add(self.update_visibility)
+        else:
+            dialog.show_toast(
+                message = _("The selected model does not have a character card"),
+                root_widget = self.get_root()
+            )
 
     def selected_prompt(self, prompt:str):
         if self.get_root().get_name() == 'AlpacaWindow':

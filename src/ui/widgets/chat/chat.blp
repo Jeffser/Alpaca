@@ -42,7 +42,7 @@ template $AlpacaChat: Gtk.Stack {
     child: Adw.StatusPage welcome_screen {
       icon-name: "com.jeffser.Alpaca";
       title: "Alpaca";
-      description: _("Try one of these prompts or templates");
+      //description: _("Try one of these prompts or templates");
       child: Gtk.Box {
         orientation: vertical;
         spacing: 10;
@@ -71,6 +71,11 @@ template $AlpacaChat: Gtk.Stack {
             label: _("Use Template");
             tooltip-text: _("Use Template");
             clicked => $show_template_selector();
+          }
+          Gtk.Button use_character_button {
+            label: _("Use Character");
+            tooltip-text: _("Use Character");
+            clicked => $use_character();
           }
         }
       };
