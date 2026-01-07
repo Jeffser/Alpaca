@@ -255,12 +255,9 @@ class AddedModelDialog(Adw.Dialog):
         self.language_button.set_visible(len(languages) > 1)
 
     def check_for_character(self):
-        # call on separate thread, may take a while
         self.view_switcher.set_reveal(len(self.model.character_data.keys()) > 0)
         if len(self.model.character_data.keys()) > 0:
-            self.character_page_container.set_child(Adw.Spinner())
-            page = CharacterPage(self.model.character_data)
-            self.character_page_container.set_child(page)
+            self.character_page_container.set_child(CharacterPage(self.model.character_data))
 
     def update_profile_picture(self):
         if self.model.image.get_visible():
@@ -269,8 +266,7 @@ class AddedModelDialog(Adw.Dialog):
         else:
             self.image.set_from_icon_name('image-missing-symbolic')
             self.image.set_pixel_size(-1)
-        thread = threading.Thread(target=self.check_for_character, daemon=True)
-        GLib.idle_add(thread.start)
+        self.check_for_character()
 
     @Gtk.Template.Callback()
     def prompt_remove_model(self, button):
