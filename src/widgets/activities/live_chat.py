@@ -153,11 +153,11 @@ class LiveChat(Adw.Bin):
         if not current_instance:
             dialog.show_toast(_("Please select an instance in Alpaca before chatting"), self.get_root())
             return
-        current_model = self.get_selected_model().get_name()
-        if not current_model:
+        current_model = self.get_selected_model()
+        if not current_model.get_name():
             dialog.show_toast(_("Please select add a model for this instance in Alpaca before chatting"), self.get_root())
             return
-        if current_model not in [m.get('name') for m in current_instance.get_local_models()]:
+        if current_model.get_name() not in [m.get('name') for m in current_instance.get_local_models()]:
             dialog.show_toast(_("Selected model is not available"), self.get_root())
             return
 
@@ -188,7 +188,7 @@ class LiveChat(Adw.Bin):
                 dt=datetime.datetime.now(),
                 message_id=generate_uuid(),
                 mode=1,
-                author=current_model
+                author=current_model.get_name()
             )
             chat.add_message(m_element_bot)
 

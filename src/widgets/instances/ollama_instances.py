@@ -15,7 +15,27 @@ class BaseInstance:
     description = None
     process = None
 
-    def prepare_chat(self, bot_message):
+    def get_active_lore(self, messages:list, lorebook:dict) -> str:
+        if len(lorebook.get('entries', [])) == 0:
+            return
+        messages_to_scan = messages[-lorebook.get('scan_depth', 100):]
+        messages_str = '\n'.join([m.get('content') for m in messages_to_scan if m.get('role') != 'system'])
+        active_lore_content = []
+
+        for entry in lorebook.get('entries'):
+            for key in entry.get('keys', []):
+                clean_key = key.strip()
+                if clean_key:
+                    pattern = rf"\b{re.escape(clean_key)}\b"
+                    if re.search(pattern, messages_str, flags=re.IGNORECASE):
+                        content = '# {}\n\n{}'.format(clean_key.title(), entry.get('content', ''))
+                        if content not in active_lore_content:
+                            active_lore_content.append(content)
+                        break
+
+        return '\n\n---\n\n'.join(active_lore_content)
+
+    def prepare_chat(self, bot_message, model):
         chat_element = bot_message.get_ancestor(chat.Chat)
         bot_message.block_container.show_generating_block()
         if chat_element and chat_element.chat_id:
@@ -29,33 +49,49 @@ class BaseInstance:
             chat_element.set_visible_child_name('content')
 
         messages = chat_element.convert_to_ollama()[:list(chat_element.container).index(bot_message)]
+
+        character_book = model.character_data.get('data', {}).get('character_book', {})
+        if len(character_book.get('entries', [])) > 0:
+            lore_message = {
+                'role': 'system',
+                'content': self.get_active_lore(messages, character_book)
+            }
+            if lore_message.get('content'):
+                index = 0
+                for msg in messages:
+                    if msg.get('role') == 'system':
+                        index += 1
+                    else:
+                        break
+                messages.insert(index, lore_message)
+
         return chat_element, messages
 
-    def generate_message(self, bot_message, model:str):
-        chat, messages = self.prepare_chat(bot_message)
+    def generate_message(self, bot_message, model):
+        chat, messages = self.prepare_chat(bot_message, model)
 
-        if chat.chat_id and [m.get('role') for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
+        if chat.chat_id and chat.get_name().startswith(_("New Chat")):
             threading.Thread(
                 target=self.generate_chat_title,
                 args=(
                     chat,
                     messages[-1].get('content'),
-                    model
+                    model.get_name()
                 ),
                 daemon=True
             ).start()
-        self.generate_response(bot_message, chat, messages, model)
+        self.generate_response(bot_message, chat, messages, model.get_name())
 
-    def use_tools(self, bot_message, model:str, available_tools:dict, generate_message:bool):
-        chat, messages = self.prepare_chat(bot_message)
+    def use_tools(self, bot_message, model, available_tools:dict, generate_message:bool):
+        chat, messages = self.prepare_chat(bot_message, model)
 
-        if chat.chat_id and [m.get('role') for m in messages].count('assistant') == 0 and chat.get_name().startswith(_("New Chat")):
+        if chat.chat_id and chat.get_name().startswith(_("New Chat")):
             threading.Thread(
                 target=self.generate_chat_title,
                 args=(
                     chat,
                     messages[-1].get('content'),
-                    model
+                    model.get_name()
                 ),
                 daemon=True
             ).start()
@@ -63,7 +99,7 @@ class BaseInstance:
         message_response = ''
         try:
             params = {
-                "model": model,
+                "model": model.get_name(),
                 "messages": messages,
                 "stream": False,
                 "tools": [v.get_metadata() for v in available_tools.values()],
@@ -124,7 +160,7 @@ class BaseInstance:
             logger.error(e)
 
         if generate_message:
-            self.generate_response(bot_message, chat, messages, model)
+            self.generate_response(bot_message, chat, messages, model.get_name())
         else:
             bot_message.block_container.set_content(str(message_response))
             bot_message.finish_generation('')

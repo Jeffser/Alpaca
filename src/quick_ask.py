@@ -71,8 +71,8 @@ class QuickAskWindow(Adw.ApplicationWindow):
         if not current_instance:
             Widgets.dialog.show_toast(_("Please select an instance in Alpaca before chatting"), self)
             return
-        current_model = self.get_selected_model().get_name()
-        if current_model is None:
+        current_model = self.get_selected_model()
+        if current_model.get_name() is None:
             Widgets.dialog.show_toast(_("Please select add a model for this instance in Alpaca before chatting"), self)
             return
 
@@ -101,7 +101,7 @@ class QuickAskWindow(Adw.ApplicationWindow):
                 dt=datetime.now(),
                 message_id=generate_uuid(),
                 mode=1,
-                author=current_model
+                author=current_model.get_name()
             )
             self.chat.add_message(m_element_bot)
             self.chat.busy=True
