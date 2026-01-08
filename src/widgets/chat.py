@@ -383,6 +383,78 @@ class TemplateSelector(Adw.Dialog):
         self.chat.load_messages()
         self.close()
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/chat/character_greeting_selector.ui')
+class CharacterGreetingSelector(Adw.Dialog):
+    __gtype_name__ = 'AlpacaCharacterGreetingSelector'
+
+    carousel = Gtk.Template.Child()
+
+    def __init__(self, greetings:list, callback:callable):
+        super().__init__()
+        self.callback = callback
+        for i, greeting in enumerate(greetings):
+            msg = Message(
+                dt=datetime.datetime.now(),
+                message_id=generate_uuid(),
+                mode=1,
+                author=None
+            )
+            msg.header_options_button.unparent()
+            msg.header_label.set_label(_('Greeting #{}').format(i+1))
+            msg.block_container.set_content(greeting)
+
+            scrolled_window = Gtk.ScrolledWindow(
+                propagate_natural_height=True,
+                propagate_natural_width=True,
+                vexpand=True,
+                css_classes=["card", "p0"],
+                overflow=1,
+                child=Gtk.Label(
+                    wrap=True,
+                    wrap_mode=2,
+                    label=greeting,
+                    css_classes=["body", "p10"]
+                )
+            )
+
+            button = Gtk.Button(
+                css_classes=["suggested-action", "pill"],
+                halign=3,
+                label=_("Use Greeting")
+            )
+            button.connect('clicked', lambda button, text=greeting: self.greeting_selected(text))
+
+            container = Gtk.Box(
+                orientation=1,
+                spacing=10,
+                css_classes=["p10"]
+            )
+            container.append(scrolled_window)
+            container.append(button)
+
+            self.carousel.append(container)
+
+    def scroll_n_pages(self, number:int):
+        index = self.carousel.get_position() + number
+        if index < 0:
+            index = self.carousel.get_n_pages() -1
+        elif index > self.carousel.get_n_pages() -1:
+            index = 0
+        self.carousel.scroll_to(self.carousel.get_nth_page(index), True)
+
+    def greeting_selected(self, text:str):
+        self.callback(text)
+        self.close()
+
+    @Gtk.Template.Callback()
+    def previous_page(self, button=None):
+        self.scroll_n_pages(-1)
+
+    @Gtk.Template.Callback()
+    def next_page(self, button=None):
+        self.scroll_n_pages(1)
+
+
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/chat/chat.ui')
 class Chat(Gtk.Stack):
     __gtype_name__ = 'AlpacaChat'
@@ -599,6 +671,10 @@ class Chat(Gtk.Stack):
                 self.add_message(message_element)
                 message_element.block_container.set_content(first_message_content)
                 SQL.insert_or_update_message(message_element)
+
+            alternate_greetings = character_data.get('alternate_greetings', [])
+            if len(alternate_greetings) > 0:
+                CharacterGreetingSelector(alternate_greetings, self.selected_prompt).present(self.get_root())
 
             GLib.idle_add(self.update_visibility)
         else:

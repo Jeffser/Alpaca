@@ -17,6 +17,7 @@ blueprints = files(
   'ui/widgets/chat/chat.blp',
   'ui/widgets/chat/folder_row.blp',
   'ui/widgets/chat/chat_row.blp',
+  'ui/widgets/chat/character_greeting_selector.blp',
   'ui/widgets/models/added_dialog.blp',
   'ui/widgets/models/basic_dialog.blp',
   'ui/widgets/models/basic_button.blp',

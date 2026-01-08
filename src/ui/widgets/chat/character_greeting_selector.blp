@@ -1,0 +1,41 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaCharacterGreetingSelector: Adw.Dialog {
+  title: _("Greeting Selector");
+  content-width: 400;
+  content-height: 500;
+  default-widget: next_button;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    [bottom]
+    Gtk.ActionBar {
+      [start]
+      Gtk.Button {
+        icon-name: "left-symbolic";
+        clicked => $previous_page();
+      }
+
+      [center]
+      Adw.CarouselIndicatorDots {
+        carousel: carousel;
+      }
+
+      [end]
+      Gtk.Button next_button {
+        icon-name: "right-symbolic";
+        clicked => $next_page();
+      }
+    }
+
+    content: Adw.Carousel carousel {
+      vexpand: true;
+      hexpand: true;
+      allow-scroll-wheel: false;
+      spacing: 0;
+    };
+  };
+}
