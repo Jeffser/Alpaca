@@ -260,6 +260,9 @@ class AddedModelDialog(Adw.Dialog):
             self.navigation_view.add(character_page)
         else:
             self.character_row.set_visible(False)
+            existing_page = self.navigation_view.find_page("character")
+            if existing_page:
+                self.navigation_view.remove(existing_page)
 
     def update_profile_picture(self):
         if self.model.image.get_visible():
