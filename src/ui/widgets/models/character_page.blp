@@ -56,18 +56,6 @@ template $AlpacaCharacterPage: Adw.NavigationPage {
       }
 
       Adw.PreferencesGroup {
-        title: _("Tags");
-        visible: false;
-        Adw.WrapBox tag_container {
-          hexpand: true;
-          line-spacing: 6;
-          child-spacing: 6;
-          justify: none;
-          halign: start;
-        }
-      }
-
-      Adw.PreferencesGroup {
         title: _("Prompt Engeriering");
         description: _("Information used to create the conversation scenario");
         Adw.ExpanderRow {
@@ -109,6 +97,24 @@ template $AlpacaCharacterPage: Adw.NavigationPage {
 
       Adw.PreferencesGroup character_book_group {
         visible: false;
+      }
+
+      Adw.PreferencesGroup greetings_group {
+        visible: false;
+        title: _("Alternative Greetings");
+        description: _("Optional greetings to be presented when starting a new chat with the option 'Use Character'");
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Tags");
+        visible: false;
+        Adw.WrapBox tag_container {
+          hexpand: true;
+          line-spacing: 6;
+          child-spacing: 6;
+          justify: none;
+          halign: start;
+        }
       }
     };
   };

@@ -71,8 +71,6 @@ class CharacterPage(Adw.NavigationPage):
     modification_date_row = Gtk.Template.Child()
     creator_notes_row = Gtk.Template.Child()
 
-    tag_container = Gtk.Template.Child()
-
     description_row = Gtk.Template.Child()
     system_prompt_row = Gtk.Template.Child()
     personality_row = Gtk.Template.Child()
@@ -80,6 +78,10 @@ class CharacterPage(Adw.NavigationPage):
     first_message_row = Gtk.Template.Child()
 
     character_book_group = Gtk.Template.Child()
+
+    greetings_group = Gtk.Template.Child()
+
+    tag_container = Gtk.Template.Child()
 
     def set_simple_value(self, row:Gtk.Widget, value:str):
         value = GLib.markup_escape_text(value).strip()
@@ -123,11 +125,8 @@ class CharacterPage(Adw.NavigationPage):
                 value = format_datetime(datetime.datetime.fromtimestamp(value / 1000.0))
             self.set_simple_value(row, value)
 
-        # Tags
-        self.add_tags(self.tag_container, self.chara_data.get('tags', []))
-
         # Character Book
-        character_book = self.chara_data.get('character_book', {})
+        character_book = self.chara_data.get('character_book') or {}
         if len(character_book.get('entries', [])) > 0:
             self.character_book_group.set_title(character_book.get('name', ''))
             self.character_book_group.set_description(character_book.get('description', ''))
@@ -154,6 +153,24 @@ class CharacterPage(Adw.NavigationPage):
                     content_row = Adw.ActionRow()
                     er.add_row(content_row)
                     self.set_simple_value(content_row, entry.get('content'))
+
+        # Greetings
+        greetings = self.chara_data.get('alternate_greetings') or []
+        if len(greetings) > 0:
+            self.greetings_group.set_visible(True)
+
+            for i, greeting in enumerate(greetings):
+                er = Adw.ExpanderRow(
+                    title = _("Greeting #{}").format(i+1)
+                )
+                self.greetings_group.add(er)
+
+                content_row = Adw.ActionRow()
+                er.add_row(content_row)
+                self.set_simple_value(content_row, greeting)
+
+        # Tags
+        self.add_tags(self.tag_container, self.chara_data.get('tags', []))
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/added_dialog.ui')
 class AddedModelDialog(Adw.Dialog):
