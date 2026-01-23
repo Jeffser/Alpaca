@@ -17,7 +17,6 @@ class ModelCreatorDialog(Adw.Dialog):
 
     toast_overlay = Gtk.Template.Child()
     base_el = Gtk.Template.Child()
-    profile_picture_el = Gtk.Template.Child()
     name_el = Gtk.Template.Child()
     tag_el = Gtk.Template.Child()
     context_attachment_button = Gtk.Template.Child()
@@ -122,16 +121,6 @@ class ModelCreatorDialog(Adw.Dialog):
 
 
     @Gtk.Template.Callback()
-    def change_profile_picture(self, button):
-        file_filter = Gtk.FileFilter()
-        file_filter.add_pixbuf_formats()
-        dialog.simple_file(
-            file_filters = [file_filter],
-            parent = self.get_root(),
-            callback = lambda res, row=self.profile_picture_el: row.set_subtitle(res.get_path() if res else row.get_subtitle())
-        )
-
-    @Gtk.Template.Callback()
     def cancel(self, button):
         self.close()
 
@@ -151,8 +140,6 @@ class ModelCreatorDialog(Adw.Dialog):
                 self.show_toast(_("Model name is already in use"))
                 return
 
-        profile_picture_path = self.profile_picture_el.get_subtitle()
-
         system_message = []
         for attachment in self.context_attachment_container.get_content():
             system_message.append('```{}\n{}\n```'.format(attachment.get('name'), attachment.get('content').strip()))
@@ -168,9 +155,6 @@ class ModelCreatorDialog(Adw.Dialog):
         num_ctx = self.num_ctx_el.get_value()
 
         # SAVE BEGGINS
-
-        if profile_picture_path:
-            SQL.insert_or_update_model_picture(model_name, attachments.extract_image(profile_picture_path, 480))
 
         data_json = {
             'model': model_name,

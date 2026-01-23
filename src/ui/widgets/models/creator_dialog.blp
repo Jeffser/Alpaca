@@ -42,20 +42,6 @@ template $AlpacaModelCreatorDialog: Adw.Dialog {
             title: _("Base");
             notify::selected-item => $base_changed();
           }
-          Adw.ActionRow profile_picture_el {
-            title: _("Profile Picture");
-            activatable-widget: profile_picture_button;
-            [suffix]
-            Gtk.Button profile_picture_button {
-              tooltip-text: _("Select Profile Picture");
-              icon-name: "inode-directory-symbolic";
-              valign: center;
-              clicked => $change_profile_picture();
-              styles [
-                "flat"
-              ]
-            }
-          }
           Adw.EntryRow name_el {
             title: _("Name");
           }
