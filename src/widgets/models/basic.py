@@ -1,7 +1,7 @@
 # basic.py
 
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GObject
-import logging, os, re, datetime, threading, sys, glob, icu, base64, hashlib, importlib.util, io, json
+import logging, os, re, datetime, threading, sys, glob, icu, base64, hashlib, importlib.util, json
 from PIL import Image
 from ...constants import STT_MODELS, TTS_VOICES, REMBG_MODELS, data_dir, cache_dir
 from ...sql_manager import prettify_model_name, Instance as SQL
@@ -198,7 +198,6 @@ class BasicModelButton(Gtk.Button):
     def __init__(self, model_name:str, subtitle:str=None, icon_name:str=None, instance=None, dialog_callback:callable=None, remove_callback:callable=None, data:dict={}):
         super().__init__()
         self.instance = instance
-        self.character_data = {} # set in set_image_data based on character card (pfp)
         self.dialog_callback = dialog_callback
         self.remove_callback = remove_callback
 
@@ -255,24 +254,10 @@ class BasicModelButton(Gtk.Button):
         self.subtitle_label.set_visible(subtitle)
 
     def set_image_data(self, b64_data:str):
-        self.character_data = {}
-
         if b64_data:
             image_data = base64.b64decode(b64_data)
             texture = Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data))
             self.image.set_from_paintable(texture)
-
-            # Retrieve character data
-            image_file = io.BytesIO(image_data)
-            with Image.open(image_file) as img:
-                img.load()
-                raw_chara = img.info.get('chara')
-                if raw_chara:
-                    try:
-                        decoded_json = base64.b64decode(raw_chara).decode('utf-8')
-                        self.character_data = json.loads(decoded_json)
-                    except:
-                        self.character_data = json.loads(raw_chara)
 
         self.image.set_size_request(64, 64)
         self.image.set_pixel_size(64)

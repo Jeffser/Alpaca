@@ -486,9 +486,11 @@ class Chat(Gtk.Stack):
                 GLib.idle_add(self.on_model_change, global_footer.model_selector)
 
     def on_model_change(self, model_selector):
+        character_dict = {}
         selected_item = model_selector.get_selected_item()
         if selected_item:
-            self.use_character_button.set_visible(len(selected_item.model.character_data.keys()) > 0)
+            character_dict = SQL.get_model_preferences(selected_item.model.get_name()).get('character', {})
+        self.use_character_button.set_visible(len(character_dict.keys()) > 0)
 
     def on_search(self, query:str):
         query = re.escape(query)
@@ -628,9 +630,14 @@ class Chat(Gtk.Stack):
 
     @Gtk.Template.Callback()
     def use_character(self, button):
+        character_dict = {}
+
         selected_item = self.get_root().global_footer.model_selector.get_selected_item()
-        if selected_item and len(selected_item.model.character_data.keys()) > 0:
-            character_data = selected_item.model.character_data.get('data', {})
+        if selected_item:
+            character_dict = SQL.get_model_preferences(selected_item.model.get_name()).get('character', {})
+
+        if len(character_dict.keys()) > 0:
+            character_data = character_dict.get('data', {})
 
             system_message_parts = {
                 'Description': character_data.get('description'),

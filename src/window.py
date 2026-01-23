@@ -212,8 +212,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.get_application().lookup_action('instance_manager').activate()
             return
 
-        current_model = self.get_selected_model()
-        if current_model.get_name() is None:
+        current_model = self.get_selected_model().get_name()
+        if current_model is None:
             Widgets.dialog.show_toast(_("Please select a model before chatting"), current_chat.get_root())
             return
 
@@ -253,7 +253,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 dt=datetime.now(),
                 message_id=generate_uuid(),
                 mode=1,
-                author=current_model.get_name()
+                author=current_model
             )
             current_chat.add_message(m_element_bot)
             SQL.insert_or_update_message(m_element_bot)

@@ -70,7 +70,7 @@ class BaseInstance:
 
         return '\n\n---\n\n'.join(active_lore_content)
 
-    def prepare_chat(self, bot_message, model):
+    def prepare_chat(self, bot_message, model:str):
         chat_element = bot_message.get_ancestor(chat.Chat)
         bot_message.block_container.show_generating_block()
         if chat_element and chat_element.chat_id:
@@ -85,7 +85,8 @@ class BaseInstance:
 
         messages = chat_element.convert_to_ollama()[:list(chat_element.container).index(bot_message)]
 
-        character_book = model.character_data.get('data', {}).get('character_book', {})
+        character_dict = SQL.get_model_preferences(model).get('character', {})
+        character_book = character_dict.get('data', {}).get('character_book', {})
         if len(character_book.get('entries', [])) > 0:
             lore_message = {
                 'role': 'system',
@@ -102,7 +103,7 @@ class BaseInstance:
 
         return chat_element, messages
 
-    def generate_message(self, bot_message, model):
+    def generate_message(self, bot_message, model:str):
         chat, messages = self.prepare_chat(bot_message, model)
 
         if chat.chat_id and chat.get_name().startswith(_("New Chat")):
@@ -111,14 +112,14 @@ class BaseInstance:
                 args=(
                     chat,
                     messages[-1].get('content'),
-                    model.get_name()
+                    model
                 ),
                 daemon=True
             ).start()
 
-        self.generate_response(bot_message, chat, messages, model.get_name())
+        self.generate_response(bot_message, chat, messages, model)
 
-    def use_tools(self, bot_message, model, available_tools:dict, generate_message:bool):
+    def use_tools(self, bot_message, model:str, available_tools:dict, generate_message:bool):
         chat, messages = self.prepare_chat(bot_message, model)
 
         if chat.chat_id and chat.get_name().startswith(_("New Chat")):
@@ -127,7 +128,7 @@ class BaseInstance:
                 args=(
                     chat,
                     messages[-1].get('content'),
-                    model.get_name()
+                    model
                 ),
                 daemon=True
             ).start()
@@ -135,7 +136,7 @@ class BaseInstance:
         message_response = ''
         try:
             completion = self.client.chat.completions.create(
-                model=model.get_name(),
+                model=model,
                 messages=messages,
                 tools=[v.get_metadata() for v in available_tools.values()]
             )
@@ -188,7 +189,7 @@ class BaseInstance:
             logger.error(e)
 
         if generate_message:
-            self.generate_response(bot_message, chat, messages, model.get_name())
+            self.generate_response(bot_message, chat, messages, model)
         else:
             bot_message.block_container.set_content(str(message_response))
             bot_message.finish_generation('')

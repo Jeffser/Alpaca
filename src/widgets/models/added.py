@@ -1,7 +1,8 @@
 # added.py
 
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GObject
-import logging, os, re, datetime, threading, sys, glob, icu, base64, hashlib, importlib.util
+import logging, os, re, datetime, threading, sys, glob, icu, base64, hashlib, importlib.util, io, json
+from PIL import Image
 from ...constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
 from ...sql_manager import prettify_model_name, format_datetime, Instance as SQL
 from .. import dialog, attachments
@@ -270,10 +271,12 @@ class AddedModelDialog(Adw.Dialog):
         self.language_button.set_visible(len(languages) > 1)
 
     def check_for_character(self):
-        if len(self.model.character_data.keys()) > 0:
+        character_data = SQL.get_model_preferences(self.model.get_name()).get('character', {})
+
+        if len(character_data.keys()) > 0:
             self.character_row.set_visible(True)
-            character_page = CharacterPage(self.model.character_data)
-            character_page.set_title(self.model.character_data.get('data', {}).get('name', _("Character")))
+            character_page = CharacterPage(character_data)
+            character_page.set_title(character_data.get('data', {}).get('name', _("Character")))
             self.navigation_view.add(character_page)
         else:
             self.character_row.set_visible(False)
@@ -317,6 +320,22 @@ class AddedModelDialog(Adw.Dialog):
             if file:
                 picture_b64 = attachments.extract_image(file.get_path(), 480)
                 SQL.insert_or_update_model_picture(self.model.get_name(), picture_b64)
+
+                # Retrieve character data
+                image_data = base64.b64decode(picture_b64)
+                image_file = io.BytesIO(image_data)
+                character_data = {}
+                with Image.open(image_file) as img:
+                    img.load()
+                    raw_chara = img.info.get('chara')
+                    if raw_chara:
+                        try:
+                            decoded_json = base64.b64decode(raw_chara).decode('utf-8')
+                            character_data = json.loads(decoded_json)
+                        except:
+                            character_data = json.loads(raw_chara)
+                SQL.insert_or_update_character_model(self.model.get_name(), character_data)
+
                 self.model.update_profile_picture()
                 self.update_profile_picture()
                 threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures, daemon=True).start()

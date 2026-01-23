@@ -187,7 +187,8 @@ class Instance:
                 "model_preferences": {
                     "id": "TEXT NOT NULL PRIMARY KEY",
                     "picture": "TEXT",
-                    "voice": "TEXT"
+                    "voice": "TEXT",
+                    "character": "TEXT" #JSON
                 },
                 "instance": {
                     "id": "TEXT NOT NULL PRIMARY KEY",
@@ -228,6 +229,12 @@ class Instance:
                 c.cursor.execute(f"CREATE TABLE IF NOT EXISTS chat ({columns_def})")
                 c.cursor.execute(f"INSERT INTO chat (id, name) SELECT id, name FROM chat_old")
                 c.cursor.execute(f"DROP TABLE chat_old")
+
+            c.cursor.execute("PRAGMA table_info(model_preferences)")
+            columns = [col[1] for col in c.cursor.fetchall()]
+            if 'character' not in columns:
+                c.cursor.execute("ALTER TABLE model_preferences ADD COLUMN character TEXT")
+
             # Remove stuff from previous versions (cleaning)
             try:
                 model_pictures = c.cursor.execute("SELECT id, picture FROM model")
@@ -671,18 +678,27 @@ class Instance:
             else:
                 c.cursor.execute("INSERT INTO model_preferences (id, voice) VALUES (?, ?)", (model_id, voice_name))
 
+    def insert_or_update_character_model(model_id: str, character_data: dict) -> None:
+        with SQLiteConnection() as c:
+            if c.cursor.execute("SELECT id FROM model_preferences WHERE id=?", (model_id,)).fetchone():
+                c.cursor.execute("UPDATE model_preferences SET character=? WHERE id=?", (json.dumps(character_data), model_id))
+            else:
+                c.cursor.execute("INSERT INTO model_preferences (id, character) VALUES (?, ?)", (model_id, json.dumps(character_data)))
+
     def get_model_preferences(model_id: str) -> dict:
         with SQLiteConnection() as c:
-            row = c.cursor.execute("SELECT picture, voice FROM model_preferences WHERE id=?", (model_id,)).fetchone()
+            row = c.cursor.execute("SELECT picture, voice, character FROM model_preferences WHERE id=?", (model_id,)).fetchone()
             if row:
                 return {
                     'picture': row[0],
-                    'voice': row[1]
+                    'voice': row[1],
+                    'character': json.loads(row[2] or '{}')
                 }
             else:
                 return {
                     'picture': None,
-                    'voice': None
+                    'voice': None,
+                    'character': {}
                 }
 
 
