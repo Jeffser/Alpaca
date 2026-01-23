@@ -23,8 +23,45 @@ class AddedModelRow(GObject.Object):
     def __str__(self):
         return prettify_model_name(self.model.get_name())
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/added_selector.ui')
+class AddedModelSelector(Gtk.Stack):
+    __gtype_name__ = 'AlpacaAddedModelSelector'
+
+    selector = Gtk.Template.Child()
+
+    def __init__(self):
+        global model_selector_model
+        if not model_selector_model:
+            model_selector_model = Gio.ListStore.new(AddedModelRow)
+        model_selector_model.connect('notify::n-items', self.n_items_changed)
+
+        super().__init__()
+
+        self.selector.set_model(model_selector_model)
+        list(self.selector)[0].add_css_class('flat')
+        self.selector.set_expression(Gtk.PropertyExpression.new(AddedModelRow, None, "name"))
+        factory = Gtk.SignalListItemFactory()
+        factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
+        factory.connect("bind", lambda factory, list_item: list_item.get_child().set_text(list_item.get_item().name))
+        self.selector.set_factory(factory)
+        list(list(self.selector)[1].get_child())[1].set_propagate_natural_width(True)
+        GLib.idle_add(self.n_items_changed, self.selector.get_model())
+
+    def get_model(self):
+        return self.selector.get_model()
+
+    def n_items_changed(self, model, gparam=None):
+        self.selector.set_enable_search(len(model) > 10)
+        self.set_visible_child_name('selector' if len(model) > 0 else 'no-models')
+
+    def set_selected(self, index:int):
+        self.selector.set_selected(index)
+
+    def get_selected_item(self):
+        return self.selector.get_selected_item()
+
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/character_page.ui')
-class CharacterPage(Adw.PreferencesPage):
+class CharacterPage(Adw.NavigationPage):
     __gtype_name__ = 'AlpacaCharacterPage'
 
     name_row = Gtk.Template.Child()
@@ -118,44 +155,6 @@ class CharacterPage(Adw.PreferencesPage):
                     er.add_row(content_row)
                     self.set_simple_value(content_row, entry.get('content'))
 
-
-@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/added_selector.ui')
-class AddedModelSelector(Gtk.Stack):
-    __gtype_name__ = 'AlpacaAddedModelSelector'
-
-    selector = Gtk.Template.Child()
-
-    def __init__(self):
-        global model_selector_model
-        if not model_selector_model:
-            model_selector_model = Gio.ListStore.new(AddedModelRow)
-        model_selector_model.connect('notify::n-items', self.n_items_changed)
-
-        super().__init__()
-
-        self.selector.set_model(model_selector_model)
-        list(self.selector)[0].add_css_class('flat')
-        self.selector.set_expression(Gtk.PropertyExpression.new(AddedModelRow, None, "name"))
-        factory = Gtk.SignalListItemFactory()
-        factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
-        factory.connect("bind", lambda factory, list_item: list_item.get_child().set_text(list_item.get_item().name))
-        self.selector.set_factory(factory)
-        list(list(self.selector)[1].get_child())[1].set_propagate_natural_width(True)
-        GLib.idle_add(self.n_items_changed, self.selector.get_model())
-
-    def get_model(self):
-        return self.selector.get_model()
-
-    def n_items_changed(self, model, gparam=None):
-        self.selector.set_enable_search(len(model) > 10)
-        self.set_visible_child_name('selector' if len(model) > 0 else 'no-models')
-
-    def set_selected(self, index:int):
-        self.selector.set_selected(index)
-
-    def get_selected_item(self):
-        return self.selector.get_selected_item()
-
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/added_dialog.ui')
 class AddedModelDialog(Adw.Dialog):
     __gtype_name__ = 'AlpacaAddedModelDialog'
@@ -165,7 +164,6 @@ class AddedModelDialog(Adw.Dialog):
     language_flowbox = Gtk.Template.Child()
     image = Gtk.Template.Child()
     title_label = Gtk.Template.Child()
-    preferences_group = Gtk.Template.Child()
     voice_combo = Gtk.Template.Child()
     metadata_container = Gtk.Template.Child()
     information_container = Gtk.Template.Child()
@@ -173,9 +171,8 @@ class AddedModelDialog(Adw.Dialog):
     context_attachment_container = Gtk.Template.Child()
     context_system_container = Gtk.Template.Child()
     categories_container = Gtk.Template.Child()
-    character_page_container = Gtk.Template.Child()
-    view_stack = Gtk.Template.Child()
-    view_switcher = Gtk.Template.Child()
+    navigation_view = Gtk.Template.Child()
+    character_row = Gtk.Template.Child()
 
     def __init__(self, model):
         super().__init__()
@@ -187,7 +184,7 @@ class AddedModelDialog(Adw.Dialog):
 
         self.title_label.set_label(prettify_model_name(self.model.get_name(), True)[0])
 
-        self.preferences_group.set_visible(importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice'))
+        self.voice_combo.set_visible(importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice'))
 
         selected_voice = SQL.get_model_preferences(self.model.get_name()).get('voice', None)
         selected_index = 0
@@ -256,12 +253,13 @@ class AddedModelDialog(Adw.Dialog):
         self.language_button.set_visible(len(languages) > 1)
 
     def check_for_character(self):
-        self.view_switcher.set_reveal(len(self.model.character_data.keys()) > 0)
-        self.view_stack.set_visible_child_name('model')
         if len(self.model.character_data.keys()) > 0:
-            self.character_page_container.set_child(CharacterPage(self.model.character_data))
+            self.character_row.set_visible(True)
+            character_page = CharacterPage(self.model.character_data)
+            character_page.set_title(self.model.character_data.get('data', {}).get('name', _("Character")))
+            self.navigation_view.add(character_page)
         else:
-            self.character_page_container.set_child()
+            self.character_row.set_visible(False)
 
     def update_profile_picture(self):
         if self.model.image.get_visible():
@@ -270,7 +268,11 @@ class AddedModelDialog(Adw.Dialog):
         else:
             self.image.set_from_icon_name('image-missing-symbolic')
             self.image.set_pixel_size(-1)
-        self.check_for_character()
+        threading.Thread(target=self.check_for_character, daemon=True).start()
+
+    @Gtk.Template.Callback()
+    def character_row_activated(self, row):
+        self.navigation_view.push_by_tag('character')
 
     @Gtk.Template.Callback()
     def prompt_remove_model(self, button):
