@@ -52,7 +52,7 @@ class CharacterBookEntryRow(Adw.ExpanderRow):
                 label=keyword,
                 icon_name="cross-large-symbolic"
             ),
-            css_classes=["small_button", "circular"],
+            css_classes=["small_button", "circular", "button_no_bold"],
             tooltip_text=_("Remove Keyword")
         )
         button.connect('clicked', lambda btn: btn.unparent())
@@ -69,7 +69,7 @@ class CharacterBookEntryRow(Adw.ExpanderRow):
         )
 
     def get_entry(self, id_num:int) -> dict:
-        keys = [k.get_name() for k in list(self.add_keyword_button.get_parent())[1:]]
+        keys = [k.get_name() for k in list(self.wrap_box)[1:]]
 
         return {
             'keys': keys,

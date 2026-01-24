@@ -1,0 +1,73 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaCharacterExportPage: Adw.NavigationPage {
+  tag: "export_character";
+  title: _("Export Character Card");
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-start-title-buttons: false;
+      show-end-title-buttons: false;
+
+      [end]
+      Gtk.Button {
+        label: _("Export");
+        tooltip-text: _("Export");
+        clicked => $export_requested();
+        styles [
+          "suggested-action"
+        ]
+      }
+    }
+
+    content: Adw.PreferencesPage {
+      description: _("Character Cards are distributed by adding the data to images, this way you can use your characters outside of Alpaca");
+
+      Adw.PreferencesGroup {
+        title: _("Additional Metadata");
+        Adw.EntryRow creator_el {
+          title: _("Creator");
+        }
+        Adw.EntryRow character_version_el {
+          title: _("Character Version");
+          text: _("1.0");
+        }
+        Adw.EntryRow character_book_name_el {
+          title: _("Character Book Name");
+          text: _("Character Book");
+        }
+        Adw.EntryRow character_book_description_el {
+          title: _("Character Book Description");
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Creator Notes");
+        $AlpacaScrollableTextView creator_notes_el {}
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Tags");
+        Adw.WrapBox tag_wrapbox {
+          hexpand: true;
+          line-spacing: 6;
+          child-spacing: 6;
+          justify: none;
+          halign: start;
+          Gtk.Button add_tag_button {
+            icon-name: "list-add-symbolic";
+            tooltip-text: _("Add Tag");
+            clicked => $add_tag_requested();
+            styles [
+              "small_button",
+              "circular",
+              "suggested-action"
+            ]
+          }
+        }
+      }
+
+    };
+  };
+}

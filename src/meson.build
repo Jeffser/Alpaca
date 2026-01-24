@@ -69,6 +69,7 @@ blueprints = files(
   'ui/widgets/characters/character_page.blp',
   'ui/widgets/characters/greeting_row.blp',
   'ui/widgets/characters/character_book_entry_row.blp',
+  'ui/widgets/characters/export_page.blp',
 )
 
 blueprints = custom_target('blueprints',

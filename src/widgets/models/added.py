@@ -3,6 +3,7 @@
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GObject
 import logging, os, re, datetime, threading, sys, glob, icu, base64, hashlib, importlib.util, io, json
 from PIL import Image
+from PIL.PngImagePlugin import PngInfo
 from ...constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
 from ...sql_manager import prettify_model_name, format_datetime, Instance as SQL
 from .. import dialog, attachments, characters
@@ -237,6 +238,57 @@ class AddedModelDialog(Adw.Dialog):
         self.update_profile_picture()
         window = self.get_root().get_application().get_main_window()
         threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures, daemon=True).start()
+
+    @Gtk.Template.Callback()
+    def export_profile_picture(self, button):
+        popover = button.get_ancestor(Gtk.Popover)
+        if popover:
+            popover.popdown()
+
+        def include_character():
+            existing_page = self.navigation_view.find_page("export_character")
+            if existing_page:
+                self.navigation_view.remove(existing_page)
+            self.navigation_view.push(characters.CharacterExportPage())
+
+        def simple(file_dialog, result):
+            file = file_dialog.save_finish(result)
+            if file:
+                picture_b64 = SQL.get_model_preferences(self.model.get_name()).get('picture')
+                image_data = base64.b64decode(picture_b64)
+                image_file = io.BytesIO(image_data)
+                with Image.open(image_file) as img:
+                    img.load()
+                    img.save(
+                        file.get_path(),
+                        format="PNG",
+                        pnginfo=PngInfo(),
+                        exif=img.info.get('exif'),
+                        dpi=img.info.get('dpi')
+                    )
+
+        options = {
+            _('Cancel'): {},
+            _('Include Character Card'): {
+                'callback': include_character
+            },
+            _('Only Export Picture'): {
+                'callback': lambda: Gtk.FileDialog(initial_name='{}.png'.format(_("Image"))).save(
+                    self.get_root(),
+                    None,
+                    simple
+                ),
+                'appearance': 'suggested',
+                'default': True
+            }
+        }
+
+        dialog.Options(
+            _("Export Profile Picture"),
+            _("Do you want to include the character card data for use outside of Alpaca?"),
+            list(options.keys())[0],
+            options
+        ).show(self.get_root())
 
     @Gtk.Template.Callback()
     def change_profile_picture(self, button):

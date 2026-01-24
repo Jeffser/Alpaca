@@ -114,6 +114,20 @@ template $AlpacaAddedModelDialog: Adw.Dialog {
                           orientation: vertical;
 
                           Gtk.Button {
+                            clicked => $export_profile_picture();
+                            child: Adw.ButtonContent {
+                              label: _("Export Card");
+                              icon-name: "folder-download-symbolic";
+                              halign: start;
+                            };
+                            styles [
+                              "small",
+                              "flat",
+                              "button_no_bold"
+                            ]
+                          }
+
+                          Gtk.Button {
                             clicked => $change_profile_picture();
                             child: Adw.ButtonContent {
                               label: _("Change");
