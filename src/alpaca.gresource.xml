@@ -86,6 +86,7 @@
     <file alias="widgets/instances/preferences.ui">ui/widgets/instances/preferences.ui</file>
     <file alias="widgets/message/popup.ui">ui/widgets/message/popup.ui</file>
     <file alias="widgets/message/message.ui">ui/widgets/message/message.ui</file>
+    <file alias="widgets/message/scrollable_textview.ui">ui/widgets/message/scrollable_textview.ui</file>
     <file alias="widgets/chat/character_greeting_selector.ui">ui/widgets/chat/character_greeting_selector.ui</file>
     <file alias="widgets/chat/folder.ui">ui/widgets/chat/folder.ui</file>
     <file alias="widgets/chat/template_selector.ui">ui/widgets/chat/template_selector.ui</file>
@@ -102,7 +103,6 @@
     <file alias="widgets/models/category_pill.ui">ui/widgets/models/category_pill.ui</file>
     <file alias="widgets/models/added_selector.ui">ui/widgets/models/added_selector.ui</file>
     <file alias="widgets/models/model_manager.ui">ui/widgets/models/model_manager.ui</file>
-    <file alias="widgets/models/character_page.ui">ui/widgets/models/character_page.ui</file>
     <file alias="widgets/blocks/code.ui">ui/widgets/blocks/code.ui</file>
     <file alias="widgets/blocks/latex_renderer.ui">ui/widgets/blocks/latex_renderer.ui</file>
     <file alias="widgets/blocks/table.ui">ui/widgets/blocks/table.ui</file>
@@ -140,5 +140,8 @@
     <file alias="widgets/voice/microphone_button.ui">ui/widgets/voice/microphone_button.ui</file>
     <file alias="widgets/voice/dictate_button.ui">ui/widgets/voice/dictate_button.ui</file>
     <file alias="widgets/voice/podcast_dialog.ui">ui/widgets/voice/podcast_dialog.ui</file>
+    <file alias="widgets/characters/character_page.ui">ui/widgets/characters/character_page.ui</file>
+    <file alias="widgets/characters/greeting_row.ui">ui/widgets/characters/greeting_row.ui</file>
+    <file alias="widgets/characters/character_book_entry_row.ui">ui/widgets/characters/character_book_entry_row.ui</file>
   </gresource>
 </gresources>

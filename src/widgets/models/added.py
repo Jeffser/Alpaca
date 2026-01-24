@@ -5,7 +5,7 @@ import logging, os, re, datetime, threading, sys, glob, icu, base64, hashlib, im
 from PIL import Image
 from ...constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
 from ...sql_manager import prettify_model_name, format_datetime, Instance as SQL
-from .. import dialog, attachments
+from .. import dialog, attachments, characters
 from .common import CategoryPill, get_available_models_data, InfoBox
 
 logger = logging.getLogger(__name__)
@@ -61,134 +61,6 @@ class AddedModelSelector(Gtk.Stack):
     def get_selected_item(self):
         return self.selector.get_selected_item()
 
-@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/character_page.ui')
-class CharacterPage(Adw.NavigationPage):
-    __gtype_name__ = 'AlpacaCharacterPage'
-
-    name_row = Gtk.Template.Child()
-    creator_row = Gtk.Template.Child()
-    character_version_row = Gtk.Template.Child()
-    creation_date_row = Gtk.Template.Child()
-    modification_date_row = Gtk.Template.Child()
-    creator_notes_row = Gtk.Template.Child()
-
-    description_row = Gtk.Template.Child()
-    system_prompt_row = Gtk.Template.Child()
-    personality_row = Gtk.Template.Child()
-    scenario_row = Gtk.Template.Child()
-    first_message_row = Gtk.Template.Child()
-
-    character_book_group = Gtk.Template.Child()
-
-    greetings_group = Gtk.Template.Child()
-
-    tag_container = Gtk.Template.Child()
-
-    def set_simple_value(self, row:Gtk.Widget, value:str):
-        value = GLib.markup_escape_text(value).strip()
-        row.set_subtitle(str(value))
-        row.set_visible(bool(value))
-        pg = row.get_ancestor(Adw.PreferencesGroup)
-        if pg and not pg.get_visible():
-            pg.set_visible(row.get_visible())
-
-        er = row.get_ancestor(Adw.ExpanderRow)
-        if er and not er.get_visible():
-            er.set_visible(row.get_visible())
-
-    def add_tags(self, container:Gtk.Widget, tag_names:list):
-        for tag_name in tag_names:
-            category_pill = CategoryPill(tag_name, True)
-            category_pill.image.set_visible(False)
-            container.append(category_pill)
-        pg = container.get_ancestor(Adw.PreferencesGroup)
-        if pg and not pg.get_visible():
-            pg.set_visible(len(tag_names) > 0)
-
-        er = container.get_ancestor(Adw.ExpanderRow)
-        if er and not er.get_visible():
-            er.set_visible(len(tag_names) > 0)
-
-    def __init__(self, chara_dict:dict):
-        super().__init__()
-        self.chara_data = chara_dict.get('data', {})
-
-        # rows that just set their subtitles
-        SIMPLE_ROWS = (
-            self.name_row, self.creator_row, self.character_version_row,
-            self.creation_date_row, self.modification_date_row, self.creator_notes_row,
-            self.description_row, self.system_prompt_row, self.personality_row,
-            self.scenario_row, self.first_message_row
-        )
-        for row in SIMPLE_ROWS:
-            value = self.chara_data.get(row.get_name())
-            if isinstance(value, int) and 'date' in row.get_name():
-                value = format_datetime(datetime.datetime.fromtimestamp(value / 1000.0))
-            self.set_simple_value(row, value)
-
-        # Character Book
-        character_book = self.chara_data.get('character_book') or {}
-        if len(character_book.get('entries', [])) > 0:
-            self.character_book_group.set_title(character_book.get('name', ''))
-            self.character_book_group.set_description(character_book.get('description', ''))
-
-            for entry in character_book.get('entries', []):
-                if entry.get('name') and entry.get('enabled'):
-                    er = Adw.ExpanderRow(
-                        title = entry.get('name').title(),
-                        visible = False
-                    )
-                    self.character_book_group.add(er)
-
-                    key_container = Adw.WrapBox(
-                        hexpand = True,
-                        line_spacing = 6,
-                        child_spacing = 6,
-                        justify = 0,
-                        halign = 1,
-                        css_classes = ['p10']
-                    )
-                    er.add_row(key_container)
-                    self.add_tags(key_container, entry.get('keys', []))
-
-                    content_row = Adw.ActionRow()
-                    er.add_row(content_row)
-                    self.set_simple_value(content_row, entry.get('content'))
-
-        # Greetings
-        greetings = self.chara_data.get('alternate_greetings') or []
-        if len(greetings) > 0:
-            self.greetings_group.set_visible(True)
-
-            for i, greeting in enumerate(greetings):
-                er = Adw.ExpanderRow(
-                    title = _("Greeting #{}").format(i+1)
-                )
-                self.greetings_group.add(er)
-
-                content_row = Adw.ActionRow()
-                er.add_row(content_row)
-                self.set_simple_value(content_row, greeting)
-
-        # Tags
-        self.add_tags(self.tag_container, self.chara_data.get('tags', []))
-
-    @Gtk.Template.Callback()
-    def prompt_remove_character_card(self, button):
-        def confirm():
-            model_dialog = self.get_ancestor(AddedModelDialog)
-            model_dialog.set_character_data({})
-            model_dialog.navigation_view.pop_to_tag('model')
-
-        dialog.simple(
-            parent=self.get_root(),
-            heading=_("Remove Character Card"),
-            body=_("Are you sure you want to remove the character card?"),
-            callback=confirm,
-            button_name=_("Remove"),
-            button_appearance="destructive"
-        )
-
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/added_dialog.ui')
 class AddedModelDialog(Adw.Dialog):
     __gtype_name__ = 'AlpacaAddedModelDialog'
@@ -207,13 +79,11 @@ class AddedModelDialog(Adw.Dialog):
     context_system_container = Gtk.Template.Child()
     categories_container = Gtk.Template.Child()
     navigation_view = Gtk.Template.Child()
-    character_row = Gtk.Template.Child()
 
     def __init__(self, model):
         super().__init__()
         self.model = model
         self.image.get_ancestor(Gtk.ToggleButton).set_overflow(1)
-        threading.Thread(target=self.check_for_character, daemon=True).start()
 
         self.create_child_button.set_visible(self.model.instance.instance_type in ('ollama', 'ollama:managed'))
 
@@ -289,20 +159,12 @@ class AddedModelDialog(Adw.Dialog):
             self.language_flowbox.append(CategoryPill(language, True))
         self.language_button.set_visible(len(languages) > 1)
 
-    def check_for_character(self):
-        character_data = SQL.get_model_preferences(self.model.get_name()).get('character', {})
-
+    def update_character_page(self, character_data):
         existing_page = self.navigation_view.find_page("character")
         if existing_page:
             self.navigation_view.remove(existing_page)
 
-        if len(character_data.keys()) > 0:
-            self.character_row.set_visible(True)
-            character_page = CharacterPage(character_data)
-            character_page.set_title(character_data.get('data', {}).get('name', _("Character")))
-            self.navigation_view.add(character_page)
-        else:
-            self.character_row.set_visible(False)
+        self.navigation_view.add(characters.CharacterPage(character_data))
 
     def update_profile_picture(self):
         if self.model.image.get_paintable():
@@ -313,6 +175,8 @@ class AddedModelDialog(Adw.Dialog):
 
     @Gtk.Template.Callback()
     def character_row_activated(self, row):
+        character_data = SQL.get_model_preferences(self.model.get_name()).get('character', {})
+        self.update_character_page(character_data)
         self.navigation_view.push_by_tag('character')
 
     @Gtk.Template.Callback()
@@ -331,9 +195,9 @@ class AddedModelDialog(Adw.Dialog):
             voice = TTS_VOICES.get(comborow.get_selected_item().get_string())
             SQL.insert_or_update_model_voice(self.model.get_name(), voice)
 
-    def set_character_data(self, character_data:dict):
-        SQL.insert_or_update_character_model(self.model.get_name(), character_data)
-        threading.Thread(target=self.check_for_character, daemon=True).start()
+    def preview_character_data(self, character_data:dict):
+        self.update_character_page(character_data)
+        self.navigation_view.push_by_tag('character')
 
     def set_profile_picture_from_file(self, file):
         if file:
@@ -358,7 +222,7 @@ class AddedModelDialog(Adw.Dialog):
                     parent=self.get_root(),
                     heading=_("Character Card Detected"),
                     body=_("Import character card data from picture?"),
-                    callback=lambda char_data=character_data: self.set_character_data(char_data)
+                    callback=lambda char_data=character_data: self.preview_character_data(char_data)
                 )
 
             self.model.update_profile_picture()

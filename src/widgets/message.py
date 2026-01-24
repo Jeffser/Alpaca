@@ -583,4 +583,15 @@ class GlobalFooter(Gtk.Box):
         buffer.set_text(current_text, len(current_text.encode('utf-8')))
 
 
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/message/scrollable_textview.ui')
+class ScrollableTextView(Gtk.ScrolledWindow):
+    __gtype_name__ = 'AlpacaScrollableTextView'
 
+    text_view = Gtk.Template.Child()
+    buffer = Gtk.Template.Child()
+
+    def set_text(self, text:str) -> None:
+        self.buffer.set_text(text, len(text.encode('utf-8')))
+
+    def get_text(self) -> str:
+        return self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)

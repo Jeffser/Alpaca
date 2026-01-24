@@ -51,20 +51,21 @@ class BaseInstance:
         messages = chat_element.convert_to_ollama()[:list(chat_element.container).index(bot_message)]
 
         character_dict = SQL.get_model_preferences(model).get('character', {})
-        character_book = character_dict.get('data', {}).get('character_book', {})
-        if len(character_book.get('entries', [])) > 0:
-            lore_message = {
-                'role': 'system',
-                'content': self.get_active_lore(messages, character_book)
-            }
-            if lore_message.get('content'):
-                index = 0
-                for msg in messages:
-                    if msg.get('role') == 'system':
-                        index += 1
-                    else:
-                        break
-                messages.insert(index, lore_message)
+        if character_dict.get('data', {}).get('extensions', {}).get('com.jeffser.Alpaca', {}).get('enabled', False):
+            character_book = character_dict.get('data', {}).get('character_book', {})
+            if len(character_book.get('entries', [])) > 0:
+                lore_message = {
+                    'role': 'system',
+                    'content': self.get_active_lore(messages, character_book)
+                }
+                if lore_message.get('content'):
+                    index = 0
+                    for msg in messages:
+                        if msg.get('role') == 'system':
+                            index += 1
+                        else:
+                            break
+                    messages.insert(index, lore_message)
 
         return chat_element, messages
 

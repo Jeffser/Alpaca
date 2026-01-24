@@ -486,11 +486,12 @@ class Chat(Gtk.Stack):
                 GLib.idle_add(self.on_model_change, global_footer.model_selector)
 
     def on_model_change(self, model_selector):
-        character_dict = {}
+        char_dict = {}
         selected_item = model_selector.get_selected_item()
         if selected_item:
-            character_dict = SQL.get_model_preferences(selected_item.model.get_name()).get('character', {})
-        self.use_character_button.set_visible(len(character_dict.keys()) > 0)
+            char_dict = SQL.get_model_preferences(selected_item.model.get_name()).get('character', {})
+        use_character = char_dict.get('data', {}).get('extensions', {}).get('com.jeffser.Alpaca', {}).get('enabled', False)
+        self.use_character_button.set_visible(use_character)
 
     def on_search(self, query:str):
         query = re.escape(query)
@@ -636,33 +637,28 @@ class Chat(Gtk.Stack):
         if selected_item:
             character_dict = SQL.get_model_preferences(selected_item.model.get_name()).get('character', {})
 
+        use_character = character_dict.get('data', {}).get('extensions', {}).get('com.jeffser.Alpaca', {}).get('enabled', False)
+        if character_dict == {} or not use_character:
+            button.set_visible(False)
+            return
+
         if len(character_dict.keys()) > 0:
             character_data = character_dict.get('data', {})
 
-            system_message_parts = {
-                'Description': character_data.get('description'),
-                'System Prompt': character_data.get('system_prompt'),
-                'Personality': character_data.get('personality'),
-                'Scenario': character_data.get('scenario'),
-            }
-            message_element = Message(
-                dt=datetime.datetime.now(),
-                message_id=generate_uuid(),
-                mode=2
-            )
-            add_message = False
-            for k, v in system_message_parts.items():
-                content = v.strip()
-                if content:
-                    add_message = True
-                    attachment = message_element.add_attachment(
-                        file_id = generate_uuid(),
-                        name = k,
-                        attachment_type = 'plain_text',
-                        content = content
-                    )
-                    SQL.insert_or_update_attachment(message_element, attachment)
-            if add_message:
+            description_content = character_data.get('description')
+            if description_content:
+                message_element = Message(
+                    dt=datetime.datetime.now(),
+                    message_id=generate_uuid(),
+                    mode=2
+                )
+                attachment = message_element.add_attachment(
+                    file_id = generate_uuid(),
+                    name = _("Description"),
+                    attachment_type = 'plain_text',
+                    content = description_content
+                )
+                SQL.insert_or_update_attachment(message_element, attachment)
                 self.add_message(message_element)
                 message_element.block_container.set_content('')
                 SQL.insert_or_update_message(message_element)

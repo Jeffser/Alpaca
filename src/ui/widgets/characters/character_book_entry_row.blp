@@ -1,0 +1,76 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaCharacterBookEntryRow: Adw.ExpanderRow {
+  [prefix]
+  Gtk.MenuButton {
+    icon-name: "view-more-symbolic";
+    valign: center;
+    tooltip-text: _("See Options");
+    styles [
+      "flat"
+    ]
+    popover: Gtk.Popover {
+      child: Gtk.Box {
+        orientation: vertical;
+        Gtk.Button {
+          child: Adw.ButtonContent {
+            halign: start;
+            icon-name: "edit-symbolic";
+            label: _("Edit Name");
+          };
+          clicked => $edit_name();
+          styles [
+            "flat",
+            "button_no_bold"
+          ]
+        }
+        Gtk.Button {
+          child: Adw.ButtonContent {
+            halign: start;
+            icon-name: "user-trash-symbolic";
+            label: _("Remove Entry");
+          };
+          clicked => $remove();
+          styles [
+            "flat",
+            "error",
+            "button_no_bold"
+          ]
+        }
+      };
+    };
+  }
+
+  Gtk.ListBoxRow {
+    activatable: false;
+    child: Adw.WrapBox wrap_box {
+      hexpand: true;
+      line-spacing: 6;
+      child-spacing: 6;
+      justify: none;
+      halign: start;
+      Gtk.Button add_keyword_button {
+        icon-name: "list-add-symbolic";
+        tooltip-text: _("Add Keyword");
+        clicked => $add_keyword_requested();
+        styles [
+          "small_button",
+          "circular",
+          "suggested-action"
+        ]
+      }
+    };
+    styles [
+      "p10"
+    ]
+  }
+
+  Gtk.ListBoxRow {
+    activatable: false;
+    child: $AlpacaScrollableTextView text_view {};
+    styles [
+      "p10"
+    ]
+  }
+}

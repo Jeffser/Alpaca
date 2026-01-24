@@ -28,7 +28,6 @@ blueprints = files(
   'ui/widgets/models/category_pill.blp',
   'ui/widgets/models/added_selector.blp',
   'ui/widgets/models/model_manager.blp',
-  'ui/widgets/models/character_page.blp',
   'ui/widgets/blocks/code.blp',
   'ui/widgets/blocks/latex_renderer.blp',
   'ui/widgets/blocks/table.blp',
@@ -57,6 +56,7 @@ blueprints = files(
   'ui/widgets/message/global_action_stack.blp',
   'ui/widgets/message/global_footer.blp',
   'ui/widgets/message/block_container.blp',
+  'ui/widgets/message/scrollable_textview.blp',
   'ui/widgets/attachments/attachment_container.blp',
   'ui/widgets/attachments/global_attachment_button.blp',
   'ui/widgets/attachments/image_attachment_container.blp',
@@ -66,6 +66,9 @@ blueprints = files(
   'ui/widgets/voice/microphone_button.blp',
   'ui/widgets/voice/dictate_button.blp',
   'ui/widgets/voice/podcast_dialog.blp',
+  'ui/widgets/characters/character_page.blp',
+  'ui/widgets/characters/greeting_row.blp',
+  'ui/widgets/characters/character_book_entry_row.blp',
 )
 
 blueprints = custom_target('blueprints',

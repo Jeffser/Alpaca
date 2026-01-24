@@ -61,6 +61,11 @@ stacksidebar {
 .category_pill.brown {
   background-color: mix(var(--brown-2), var(--window-bg-color), 0.8);
 }
+.small_button {
+  min-height: 0;
+	min-width: 0;
+	padding: 5px 10px;
+}
 .brown {
   color: mix(var(--brown-1), var(--window-fg-color), 0.4);
 }

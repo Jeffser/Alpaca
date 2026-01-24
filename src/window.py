@@ -359,6 +359,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
             content=widget
         ).present()
 
+    def get_current_chat(self) -> Gtk.Widget:
+        return self.chat_bin.get_child()
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 

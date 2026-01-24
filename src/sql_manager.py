@@ -678,7 +678,7 @@ class Instance:
             else:
                 c.cursor.execute("INSERT INTO model_preferences (id, voice) VALUES (?, ?)", (model_id, voice_name))
 
-    def insert_or_update_character_model(model_id: str, character_data: dict) -> None:
+    def insert_or_update_model_character(model_id: str, character_data: dict) -> None:
         with SQLiteConnection() as c:
             if c.cursor.execute("SELECT id FROM model_preferences WHERE id=?", (model_id,)).fetchone():
                 c.cursor.execute("UPDATE model_preferences SET character=? WHERE id=?", (json.dumps(character_data), model_id))

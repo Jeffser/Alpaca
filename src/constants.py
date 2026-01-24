@@ -286,6 +286,40 @@ CODE_LANGUAGE_PROPERTIES = (
     }
 )
 
+EMPTY_CHARA_CARD = {
+    'spec': "chara_card_v3",
+    'spec_version': "3.0",
+    'data': {
+        'name': "",
+        'description': "",
+        'tags': [],
+        'creator': "",
+        'character_version': "",
+        'mes_example': "",
+        'extensions': {
+            'com.jeffser.Alpaca': {
+                'enabled': False
+            }
+        },
+        'system_prompt': "",
+        'post_history_instructions': "",
+        'first_mes': "",
+        'alternate_greetings': [],
+        'personality': "",
+        'scenario': "",
+        'creator_notes': "",
+        'character_book': {
+            'name': "",
+            'description': "",
+            'scan_depth': 100,
+            'entries': []
+        },
+        'group_only_greetings': [],
+        'creation_date': 0,
+        'modification_date': 0
+    }
+}
+
 # The identifier when inside the Flatpak runtime
 IN_FLATPAK = bool(os.getenv("FLATPAK_ID"))
 

@@ -116,6 +116,9 @@ class QuickAskWindow(Adw.ApplicationWindow):
         buffer.insert(buffer.get_start_iter(), message, len(message.encode('utf-8')))
         self.send_message()
 
+    def get_current_chat(self) -> Gtk.Widget:
+        return self.chat
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.global_footer.model_manager_shortcut.set_visible(False)

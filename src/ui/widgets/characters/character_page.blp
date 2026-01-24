@@ -1,0 +1,89 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaCharacterPage: Adw.NavigationPage {
+  tag: "character";
+  title: _("Character Card");
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      show-start-title-buttons: false;
+      show-end-title-buttons: false;
+      [start]
+      Gtk.Button {
+        icon-name: "update-symbolic";
+        tooltip-text: _("Clear Character Card");
+        clicked => $clear_requested();
+        styles [
+          "error"
+        ]
+      }
+
+      [end]
+      Gtk.Button {
+        label: _("Save");
+        tooltip-text: _("Save Changes");
+        clicked => $save_requested();
+        styles [
+          "suggested-action"
+        ]
+      }
+    }
+
+    content: Adw.PreferencesPage {
+      description: _("To use an active Character Card, start a new chat, select the model, and then choose 'Use Character' on the Welcome Screen");
+      Adw.PreferencesGroup {
+        title: _("Options");
+
+        Adw.SwitchRow enable_character_row {
+          title: _("Enable Character");
+          subtitle: _("Show the option to use the character in new chats");
+        }
+
+        Adw.EntryRow name_el {
+          title: _("Name");
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Description");
+        description: _("Describes the character, their background and the world that they live in");
+        $AlpacaScrollableTextView description_el {}
+      }
+
+      Adw.PreferencesGroup {
+        title: _("First Message");
+        description: _("The opening message, it establishes the initial context, setting and tone of the conversation");
+        $AlpacaScrollableTextView first_message_el {}
+      }
+
+      Adw.PreferencesGroup greetings_group {
+        title: _("Alternative Greetings");
+        description: _("Optional greetings to be presented when starting a new chat with the character");
+        header-suffix: Gtk.Button {
+          clicked => $new_alternative_greeting_requested();
+          icon-name: "list-add-symbolic";
+          tooltip-text: _("Add Greeting");
+          valign: center;
+          styles [
+            "flat"
+          ]
+        };
+      }
+
+      Adw.PreferencesGroup character_book_group {
+        title: _("Character Book");
+        description: _("Information consulted by the model when a keyword is found in a message");
+        header-suffix: Gtk.Button {
+          clicked => $new_character_book_entry_requested();
+          icon-name: "list-add-symbolic";
+          tooltip-text: _("Add Entry");
+          valign: center;
+          styles [
+            "flat"
+          ]
+        };
+      }
+    };
+  };
+}

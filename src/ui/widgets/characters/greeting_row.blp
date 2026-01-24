@@ -1,0 +1,43 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaCharacterGreetingRow: Adw.ExpanderRow {
+  title: _("Greeting");
+
+  [prefix]
+  Gtk.MenuButton {
+    icon-name: "view-more-symbolic";
+    valign: center;
+    tooltip-text: _("See Options");
+    styles [
+      "flat"
+    ]
+    popover: Gtk.Popover {
+      child: Gtk.Box {
+        orientation: vertical;
+        Gtk.Button {
+          child: Adw.ButtonContent {
+            halign: start;
+            icon-name: "user-trash-symbolic";
+            label: _("Remove Greeting");
+          };
+          clicked => $remove();
+          styles [
+            "flat",
+            "error",
+            "button_no_bold"
+          ]
+        }
+      };
+    };
+  }
+
+
+  Gtk.ListBoxRow {
+    activatable: false;
+    child: $AlpacaScrollableTextView text_view {};
+    styles [
+      "p10"
+    ]
+  }
+}

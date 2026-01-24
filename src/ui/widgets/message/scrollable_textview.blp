@@ -1,0 +1,26 @@
+using Gtk 4.0;
+
+template $AlpacaScrollableTextView: Gtk.ScrolledWindow {
+  min-content-height: 120;
+  vexpand: true;
+  propagate-natural-height: true;
+  overflow: hidden;
+  styles [
+    "card",
+    "undershoot-bottom"
+  ]
+  child: Gtk.TextView text_view {
+    wrap-mode: word_char;
+    accepts-tab: false;
+    overflow: hidden;
+    vexpand: true;
+    left-margin: 10;
+    right-margin: 10;
+    top-margin: 10;
+    bottom-margin: 10;
+    buffer: Gtk.TextBuffer buffer {};
+    styles [
+      "modelfile_textview"
+    ]
+  };
+}
