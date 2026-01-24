@@ -258,6 +258,8 @@ class BasicModelButton(Gtk.Button):
             image_data = base64.b64decode(b64_data)
             texture = Gdk.Texture.new_from_bytes(GLib.Bytes.new(image_data))
             self.image.set_from_paintable(texture)
+        else:
+            self.image.set_from_paintable(None)
 
         self.image.set_size_request(64, 64)
         self.image.set_pixel_size(64)
