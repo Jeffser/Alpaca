@@ -8,7 +8,7 @@ template $AlpacaAddedModelDialog: Adw.Dialog {
 
   child: Adw.ToastOverlay {
     child: Adw.NavigationView navigation_view {
-      animate-transitions: true;
+      animate-transitions: false;
 
       Adw.NavigationPage {
         tag: "model";
@@ -116,7 +116,7 @@ template $AlpacaAddedModelDialog: Adw.Dialog {
                           Gtk.Button {
                             clicked => $export_profile_picture();
                             child: Adw.ButtonContent {
-                              label: _("Export Card");
+                              label: _("Export");
                               icon-name: "folder-download-symbolic";
                               halign: start;
                             };
