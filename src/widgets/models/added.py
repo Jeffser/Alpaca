@@ -173,6 +173,22 @@ class CharacterPage(Adw.NavigationPage):
         # Tags
         self.add_tags(self.tag_container, self.chara_data.get('tags', []))
 
+    @Gtk.Template.Callback()
+    def prompt_remove_character_card(self, button):
+        def confirm():
+            model_dialog = self.get_ancestor(AddedModelDialog)
+            model_dialog.set_character_data({})
+            model_dialog.navigation_view.pop_to_tag('model')
+
+        dialog.simple(
+            parent=self.get_root(),
+            heading=_("Remove Character Card"),
+            body=_("Are you sure you want to remove the character card?"),
+            callback=confirm,
+            button_name=_("Remove"),
+            button_appearance="destructive"
+        )
+
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/added_dialog.ui')
 class AddedModelDialog(Adw.Dialog):
     __gtype_name__ = 'AlpacaAddedModelDialog'
@@ -180,6 +196,7 @@ class AddedModelDialog(Adw.Dialog):
     create_child_button = Gtk.Template.Child()
     language_button = Gtk.Template.Child()
     language_flowbox = Gtk.Template.Child()
+    pfp_stack = Gtk.Template.Child()
     image = Gtk.Template.Child()
     title_label = Gtk.Template.Child()
     voice_combo = Gtk.Template.Child()
@@ -195,6 +212,8 @@ class AddedModelDialog(Adw.Dialog):
     def __init__(self, model):
         super().__init__()
         self.model = model
+        self.image.get_ancestor(Gtk.ToggleButton).set_overflow(1)
+        threading.Thread(target=self.check_for_character, daemon=True).start()
 
         self.create_child_button.set_visible(self.model.instance.instance_type in ('ollama', 'ollama:managed'))
 
@@ -273,6 +292,10 @@ class AddedModelDialog(Adw.Dialog):
     def check_for_character(self):
         character_data = SQL.get_model_preferences(self.model.get_name()).get('character', {})
 
+        existing_page = self.navigation_view.find_page("character")
+        if existing_page:
+            self.navigation_view.remove(existing_page)
+
         if len(character_data.keys()) > 0:
             self.character_row.set_visible(True)
             character_page = CharacterPage(character_data)
@@ -280,18 +303,13 @@ class AddedModelDialog(Adw.Dialog):
             self.navigation_view.add(character_page)
         else:
             self.character_row.set_visible(False)
-            existing_page = self.navigation_view.find_page("character")
-            if existing_page:
-                self.navigation_view.remove(existing_page)
 
     def update_profile_picture(self):
-        if self.model.image.get_visible():
+        if self.model.image.get_paintable():
             self.image.set_from_paintable(self.model.image.get_paintable())
-            self.image.set_pixel_size(192)
+            self.pfp_stack.set_visible_child_name('pfp')
         else:
-            self.image.set_from_icon_name('image-missing-symbolic')
-            self.image.set_pixel_size(-1)
-        threading.Thread(target=self.check_for_character, daemon=True).start()
+            self.pfp_stack.set_visible_child_name('no-pfp')
 
     @Gtk.Template.Callback()
     def character_row_activated(self, row):
@@ -313,64 +331,59 @@ class AddedModelDialog(Adw.Dialog):
             voice = TTS_VOICES.get(comborow.get_selected_item().get_string())
             SQL.insert_or_update_model_voice(self.model.get_name(), voice)
 
-    @Gtk.Template.Callback()
-    def pfp_clicked(self, button):
-        window = self.get_root().get_application().get_main_window()
-        def set_profile_picture(file):
-            if file:
-                picture_b64 = attachments.extract_image(file.get_path(), 480)
-                SQL.insert_or_update_model_picture(self.model.get_name(), picture_b64)
+    def set_character_data(self, character_data:dict):
+        SQL.insert_or_update_character_model(self.model.get_name(), character_data)
+        threading.Thread(target=self.check_for_character, daemon=True).start()
 
-                # Retrieve character data
-                image_data = base64.b64decode(picture_b64)
-                image_file = io.BytesIO(image_data)
-                character_data = {}
-                with Image.open(image_file) as img:
-                    img.load()
-                    raw_chara = img.info.get('chara')
-                    if raw_chara:
-                        try:
-                            decoded_json = base64.b64decode(raw_chara).decode('utf-8')
-                            character_data = json.loads(decoded_json)
-                        except:
-                            character_data = json.loads(raw_chara)
-                SQL.insert_or_update_character_model(self.model.get_name(), character_data)
+    def set_profile_picture_from_file(self, file):
+        if file:
+            picture_b64 = attachments.extract_image(file.get_path(), 480)
+            SQL.insert_or_update_model_picture(self.model.get_name(), picture_b64)
 
-                self.model.update_profile_picture()
-                self.update_profile_picture()
-                threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures, daemon=True).start()
+            # Retrieve character data
+            image_data = base64.b64decode(picture_b64)
+            image_file = io.BytesIO(image_data)
+            character_data = {}
+            with Image.open(image_file) as img:
+                img.load()
+                raw_chara = img.info.get('chara')
+                if raw_chara:
+                    try:
+                        decoded_json = base64.b64decode(raw_chara).decode('utf-8')
+                        character_data = json.loads(decoded_json)
+                    except:
+                        character_data = json.loads(raw_chara)
+            if len(character_data.keys()) > 0:
+                dialog.simple(
+                    parent=self.get_root(),
+                    heading=_("Character Card Detected"),
+                    body=_("Import character card data from picture?"),
+                    callback=lambda char_data=character_data: self.set_character_data(char_data)
+                )
 
-        def remove_profile_picture():
-            SQL.insert_or_update_model_picture(self.model.get_name(), None)
             self.model.update_profile_picture()
             self.update_profile_picture()
+            window = self.get_root().get_application().get_main_window()
             threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures, daemon=True).start()
 
+    @Gtk.Template.Callback()
+    def remove_profile_picture(self, button=None):
+        SQL.insert_or_update_model_picture(self.model.get_name(), None)
+        self.model.update_profile_picture()
+        self.update_profile_picture()
+        window = self.get_root().get_application().get_main_window()
+        threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures, daemon=True).start()
+
+    @Gtk.Template.Callback()
+    def change_profile_picture(self, button):
         file_filter = Gtk.FileFilter()
         file_filter.add_pixbuf_formats()
-        if self.model.image.get_visible():
-            options = {
-                _('Cancel'): {},
-                _('Remove'): {'callback': remove_profile_picture, 'appearance': 'destructive'},
-                _('Change'): {'callback': lambda: dialog.simple_file(
-                    parent = self.get_root(),
-                    file_filters = [file_filter],
-                    callback = set_profile_picture
-                ), 'appearance': 'suggested', 'default': True},
-            }
 
-            dialog.Options(
-                heading = _("Model Profile Picture"),
-                body = _("What do you want to do with the model's profile picture?"),
-                close_response = list(options.keys())[0],
-                options = options
-            ).show(self.get_root())
-        else:
-            dialog.simple_file(
-                parent = self.get_root(),
-                file_filters = [file_filter],
-                callback = set_profile_picture
-            )
+        dialog.simple_file(
+            parent = self.get_root(),
+            file_filters = [file_filter],
+            callback = self.set_profile_picture_from_file
+        )
 
 class FallbackModel:
     def get_name(): return None

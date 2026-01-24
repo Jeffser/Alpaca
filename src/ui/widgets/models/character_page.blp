@@ -5,7 +5,18 @@ template $AlpacaCharacterPage: Adw.NavigationPage {
   tag: "character";
   child: Adw.ToolbarView {
     [top]
-    Adw.HeaderBar {}
+    Adw.HeaderBar {
+      [start]
+      Gtk.Button {
+        icon-name: "user-trash-symbolic";
+        tooltip-text: _("Remove Character Card");
+        clicked => $prompt_remove_character_card();
+        styles [
+          "error"
+        ]
+      }
+
+    }
 
     content: Adw.PreferencesPage {
       Adw.PreferencesGroup {

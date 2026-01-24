@@ -7,6 +7,8 @@ template $AlpacaAddedModelDialog: Adw.Dialog {
   follows-content-size: true;
 
   child: Adw.NavigationView navigation_view {
+    animate-transitions: true;
+
     Adw.NavigationPage {
       tag: "model";
       title: _("Model");
@@ -71,21 +73,78 @@ template $AlpacaAddedModelDialog: Adw.Dialog {
               hexpand: true;
               orientation: vertical;
 
-              Gtk.Button {
-                halign: center;
-                overflow: hidden;
-                tooltip-text: _("Change Profile Picture");
-                clicked => $pfp_clicked();
-                styles [
-                  "circular"
-                ]
-                child: Gtk.Image image {
-                  icon-size: large;
-                  width-request: 192;
-                  height-request: 192;
-                  icon-name: "image-missing-symbolic";
-                  //CODE set pfp texture
-                };
+              Gtk.Stack pfp_stack {
+                Gtk.StackPage {
+                  name: "no-pfp";
+                  child: Gtk.Button {
+                    halign: center;
+                    overflow: hidden;
+                    tooltip-text: _("Set Profile Picture");
+                    clicked => $change_profile_picture();
+                    styles [
+                      "circular"
+                    ]
+                    child: Gtk.Image {
+                      icon-size: large;
+                      width-request: 192;
+                      height-request: 192;
+                      icon-name: "image-missing-symbolic";
+                    };
+                  };
+                }
+
+                Gtk.StackPage {
+                  name: "pfp";
+                  child: Gtk.MenuButton {
+                    halign: center;
+                    overflow: hidden;
+                    tooltip-text: _("Profile Picture");
+                    styles [
+                      "circular"
+                    ]
+                    child: Gtk.Image image {
+                      width-request: 192;
+                      height-request: 192;
+                      pixel-size: 192;
+                      //CODE set pfp texture
+                    };
+                    popover: Gtk.Popover {
+                      child: Gtk.Box {
+                        orientation: vertical;
+
+                        Gtk.Button {
+                          clicked => $change_profile_picture();
+                          child: Adw.ButtonContent {
+                            label: _("Change");
+                            icon-name: "image-x-generic-symbolic";
+                            halign: start;
+                          };
+                          styles [
+                            "small",
+                            "flat",
+                            "button_no_bold"
+                          ]
+                        }
+
+                        Gtk.Button {
+                          clicked => $remove_profile_picture();
+                          child: Adw.ButtonContent {
+                            label: _("Remove");
+                            icon-name: "user-trash-symbolic";
+                            halign: start;
+                          };
+                          styles [
+                            "small",
+                            "flat",
+                            "button_no_bold",
+                            "error"
+                          ]
+                        }
+
+                      };
+                    };
+                  };
+                }
               }
 
               Gtk.Label title_label {
