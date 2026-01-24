@@ -251,7 +251,7 @@ class AddedModelDialog(Adw.Dialog):
                 self.navigation_view.remove(existing_page)
             self.navigation_view.push(characters.CharacterExportPage())
 
-        def simple(file_dialog, result):
+        def simple_result(file_dialog, result):
             file = file_dialog.save_finish(result)
             if file:
                 picture_b64 = SQL.get_model_preferences(self.model.get_name()).get('picture')
@@ -267,28 +267,37 @@ class AddedModelDialog(Adw.Dialog):
                         dpi=img.info.get('dpi')
                     )
 
-        options = {
-            _('Cancel'): {},
-            _('Include Character Card'): {
-                'callback': include_character
-            },
-            _('Only Export Picture'): {
-                'callback': lambda: Gtk.FileDialog(initial_name='{}.png'.format(_("Image"))).save(
-                    self.get_root(),
-                    None,
-                    simple
-                ),
-                'appearance': 'suggested',
-                'default': True
-            }
-        }
+        def simple():
+            Gtk.FileDialog(initial_name='{}.png'.format(_("Image"))).save(
+                self.get_root(),
+                None,
+                simple_result
+            )
 
-        dialog.Options(
-            _("Export Profile Picture"),
-            _("Do you want to include the character card data for use outside of Alpaca?"),
-            list(options.keys())[0],
-            options
-        ).show(self.get_root())
+        character_dict = SQL.get_model_preferences(self.model.get_name()).get('character', {})
+        use_character = character_dict.get('data', {}).get('extensions', {}).get('com.jeffser.Alpaca', {}).get('enabled', False)
+
+        if use_character:
+            options = {
+                _('Cancel'): {},
+                _('Include Character Card'): {
+                    'callback': include_character
+                },
+                _('Only Export Picture'): {
+                    'callback': simple,
+                    'appearance': 'suggested',
+                    'default': True
+                }
+            }
+
+            dialog.Options(
+                _("Export Profile Picture"),
+                _("Do you want to include the character card data for use outside of Alpaca?"),
+                list(options.keys())[0],
+                options
+            ).show(self.get_root())
+        else:
+            simple()
 
     @Gtk.Template.Callback()
     def change_profile_picture(self, button):
