@@ -41,6 +41,14 @@ class CharacterExportPage(Adw.NavigationPage):
                     dpi=img.info.get('dpi')
                 )
 
+            toast_overlay = self.get_ancestor(Adw.ToastOverlay)
+            toast = Adw.Toast(
+                title=_("Character Card Exported Successfully")
+            )
+            toast_overlay.add_toast(toast)
+            navigation_view = self.get_ancestor(Adw.NavigationView)
+            navigation_view.pop_to_tag('model')
+
     @Gtk.Template.Callback()
     def export_requested(self, button):
         model_id = self.get_ancestor(Adw.Dialog).model.get_name()

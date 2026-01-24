@@ -266,6 +266,11 @@ class AddedModelDialog(Adw.Dialog):
                         exif=img.info.get('exif'),
                         dpi=img.info.get('dpi')
                     )
+                toast_overlay = self.get_ancestor(Adw.ToastOverlay)
+                toast = Adw.Toast(
+                    title=_("Profile Picture Exported Successfully")
+                )
+                toast_overlay.add_toast(toast)
 
         def simple():
             Gtk.FileDialog(initial_name='{}.png'.format(_("Image"))).save(
