@@ -1,0 +1,248 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaOllamaManager: Adw.Dialog {
+  content-width: 500;
+  Adw.ToastOverlay toast_overlay {
+    child: Adw.NavigationView navigation_view {
+
+      Adw.NavigationPage {
+        title: _("Ollama Manager");
+        tag: "installed";
+
+        Adw.ToolbarView {
+          [top]
+          Adw.HeaderBar {}
+
+          content: Adw.StatusPage main_status_page {
+            icon-name: "computer-symbolic";
+            title: "Ollama";
+            child: Gtk.ListBox {
+              halign: center;
+              styles [
+                "boxed-list"
+              ]
+
+              Adw.ActionRow gpu_row {
+                activatable: true;
+                title: _("GPU Status");
+                icon-name: "pci-card-symbolic";
+                [suffix]
+                Gtk.Image gpu_suffix {
+                  icon-name: "right-symbolic";
+                  valign: center;
+                }
+                activated => $initial_rocm_installation_requested();
+              }
+
+              Adw.ActionRow logs_row {
+                activatable: true;
+                title: _("See Logs");
+                icon-name: "terminal-symbolic";
+                [suffix]
+                Gtk.Image {
+                  icon-name: "right-symbolic";
+                  valign: center;
+                }
+                activated => $logs_requested();
+              }
+
+              Adw.ActionRow update_row {
+                activatable: true;
+                title: _("Check For Update");
+                icon-name: "update-symbolic";
+                [suffix]
+                Gtk.Image {
+                  icon-name: "right-symbolic";
+                  valign: center;
+                }
+                activated => $update_check_requested();
+              }
+
+              Adw.ActionRow delete_row {
+                activatable: true;
+                title: _("Delete Installation");
+                icon-name: "user-trash-symbolic";
+                [suffix]
+                Gtk.Image {
+                  icon-name: "right-symbolic";
+                  valign: center;
+                }
+                activated => $delete_installation_requested();
+              }
+
+            };
+          };
+        }
+      }
+
+      Adw.NavigationPage {
+        title: _("Logs");
+        tag: "logs";
+        child: Adw.ToolbarView {
+          [top]
+          Adw.HeaderBar {}
+          content: $AlpacaScrollableTextView logs_el {
+            margin-top: 10;
+            margin-bottom: 10;
+            margin-start: 10;
+            margin-end: 10;
+            styles [
+              "monospace"
+            ]
+          };
+        };
+      }
+
+      Adw.NavigationPage {
+        title: _("Installer");
+        tag: "not_installed";
+        child: Adw.ToolbarView {
+          [top]
+          Adw.HeaderBar {}
+          content: Adw.StatusPage {
+            icon-name: "folder-download-symbolic";
+            title: _("Ollama is not Installed");
+            description: _("The selected instance requires Ollama to be installed and available for Alpaca");
+            child: Gtk.Button {
+              tooltip-text: _("Install Ollama");
+              halign: center;
+              clicked => $initial_ollama_installation_requested();
+              styles [
+                "suggested-action",
+                "pill"
+              ]
+              child: Adw.ButtonContent {
+                label: _("Install Ollama");
+                icon-name: "folder-download-symbolic";
+              };
+            };
+          };
+        };
+      }
+
+      Adw.NavigationPage {
+        title: _("Installer");
+        tag: "installing";
+        child: Adw.ToolbarView {
+          [top]
+          Adw.HeaderBar {}
+          content: Adw.StatusPage installer_statuspage {
+            icon-name: "folder-download-symbolic";
+            child: Gtk.ProgressBar {};
+          };
+        };
+      }
+
+      Adw.NavigationPage {
+        title: _("Deleter");
+        tag: "removing";
+        child: Adw.ToolbarView {
+          [top]
+          Adw.HeaderBar {}
+          content: Adw.StatusPage {
+            icon-name: "user-trash-symbolic";
+            title: _("Delete Ollama");
+            description: _("This action might make some instances not work, downloaded models will not be affected");
+            child: Gtk.Box {
+              orientation: vertical;
+              spacing: 10;
+
+              Gtk.Button delete_rocm_button {
+                tooltip-text: _("Delete ROCm");
+                label: _("Delete ROCm");
+                halign: center;
+                clicked => $delete_rocm();
+                styles [
+                  "destructive-action",
+                  "pill"
+                ]
+              }
+
+              Gtk.Button delete_ollama_button {
+                tooltip-text: _("Delete Ollama");
+                label: _("Delete Ollama");
+                halign: center;
+                clicked => $delete_ollama();
+                styles [
+                  "destructive-action",
+                  "pill"
+                ]
+              }
+            };
+          };
+        };
+      }
+
+      Adw.NavigationPage {
+        title: _("Updater");
+        tag: "update_available";
+        child: Adw.ToolbarView {
+          [top]
+          Adw.HeaderBar {}
+          content: Adw.StatusPage update_status_page {
+            icon-name: "update-symbolic";
+            title: _("Ollama Update Available");
+            child: Gtk.Button {
+              halign: center;
+              tooltip-text: _("Update");
+              label: _("Update");
+              clicked => $update_requested();
+              styles [
+                "suggested-action",
+                "pill"
+              ]
+            };
+          };
+        };
+      }
+
+      Adw.NavigationPage {
+        title: _("Installer");
+        tag: "installation_ok";
+        child: Adw.ToolbarView {
+          [top]
+          Adw.HeaderBar {}
+          content: Adw.StatusPage {
+            icon-name: "check-plain-symbolic";
+            title: _("Installation Done");
+            description: _("The instance was restarted, you can close this dialog");
+          };
+        };
+      }
+
+      Adw.NavigationPage {
+        title: _("Installer");
+        tag: "incompatible_installer";
+        child: Adw.ToolbarView {
+          [top]
+          Adw.HeaderBar {}
+          content: Adw.StatusPage {
+            icon-name: "sad-computer-symbolic";
+            title: _("Installing Ollama");
+            description: _("This package of Alpaca is not compatible with auto-installing Ollama, consult the wiki for more information");
+            child: Gtk.LinkButton {
+              uri: "https://jeffser.com/alpaca/installation-guide.html";
+              label: _("Alpaca Wiki");
+            };
+          };
+        };
+      }
+
+      Adw.NavigationPage {
+        title: _("Ollama Manager");
+        tag: "error";
+        child: Adw.ToolbarView {
+          [top]
+          Adw.HeaderBar {}
+          content: Adw.StatusPage {
+            icon-name: "cross-large-symbolic";
+            title: _("Error");
+            description: _("An error occurred, please try again later");
+          };
+        };
+      }
+
+    };
+  }
+}

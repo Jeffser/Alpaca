@@ -9,6 +9,7 @@ blueprints = files(
   'ui/welcome.blp',
   'ui/window.blp',
   'ui/widgets/instances/preferences.blp',
+  'ui/widgets/instances/ollama_manager.blp',
   'ui/widgets/message/popup.blp',
   'ui/widgets/message/message.blp',
   'ui/widgets/chat/folder.blp',

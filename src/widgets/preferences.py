@@ -2,7 +2,7 @@
 
 from gi.repository import Adw, Gtk, Gio, GLib
 import importlib.util, icu, sys, os
-from ..constants import TTS_VOICES, STT_MODELS, SPEACH_RECOGNITION_LANGUAGES, REMBG_MODELS, IN_FLATPAK
+from ..constants import TTS_VOICES, STT_MODELS, SPEACH_RECOGNITION_LANGUAGES, REMBG_MODELS, IN_FLATPAK, CAN_SELF_MANAGE_OLLAMA
 from . import dialog
 from ..sql_manager import Instance as SQL
 
@@ -15,6 +15,7 @@ class PreferencesDialog(Adw.PreferencesDialog):
     powersaver_warning_switch = Gtk.Template.Child()
     show_model_manager_shortcut_switch = Gtk.Template.Child()
     folder_search_mode_switch = Gtk.Template.Child()
+    check_ollama_update_switch = Gtk.Template.Child()
     zoom_spin = Gtk.Template.Child()
     regenerate_after_edit = Gtk.Template.Child()
     image_size_spin = Gtk.Template.Child()
@@ -105,6 +106,8 @@ class PreferencesDialog(Adw.PreferencesDialog):
         self.settings.bind('powersaver-warning', self.powersaver_warning_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
         self.settings.bind('show-model-manager-shortcut', self.show_model_manager_shortcut_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
         self.settings.bind('folder-search-mode', self.folder_search_mode_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
+        self.settings.bind('ollama-managed-auto-check-update', self.check_ollama_update_switch, 'active', Gio.SettingsBindFlags.DEFAULT)
+        self.check_ollama_update_switch.set_visible(CAN_SELF_MANAGE_OLLAMA)
         self.settings.bind('zoom', self.zoom_spin, 'value', Gio.SettingsBindFlags.DEFAULT)
         self.settings.bind('regenerate-after-edit', self.regenerate_after_edit, 'active', Gio.SettingsBindFlags.DEFAULT)
         self.mic_group.set_visible(importlib.util.find_spec('whisper'))

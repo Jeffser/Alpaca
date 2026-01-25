@@ -6,6 +6,7 @@ import os, shutil, json, re, logging, importlib.util
 from ...sql_manager import generate_uuid, generate_numbered_name, prettify_model_name, Instance as SQL
 from .. import dialog
 from .ollama_instances import BaseInstance as BaseOllama
+from .ollama_manager import OllamaManager
 
 logger = logging.getLogger(__name__)
 
@@ -310,8 +311,19 @@ class InstanceRow(Adw.ActionRow):
             visible = self.instance.instance_type != 'empty'
         )
 
+        if self.instance.instance_type == 'ollama:managed':
+            ollama_manager_button = Gtk.Button(
+                tooltip_text=_('Open Ollama Manager'),
+                icon_name='computer-symbolic',
+                valign=3,
+                css_classes=['flat']
+            )
+            ollama_manager_button.connect('clicked', lambda button: OllamaManager(self.instance).present(self.get_root()))
+            self.add_suffix(ollama_manager_button)
+
         if not self.pinned:
             remove_button = Gtk.Button(
+                tooltip_text=_('Remove Instance'),
                 icon_name='user-trash-symbolic',
                 valign=3,
                 css_classes=['destructive-action', 'flat']
@@ -329,6 +341,7 @@ class InstanceRow(Adw.ActionRow):
 
         if not isinstance(self.instance, Empty):
             edit_button = Gtk.Button(
+                tooltip_text=_('Edit Instance'),
                 icon_name='edit-symbolic',
                 valign=3,
                 css_classes=['accent', 'flat']
@@ -349,15 +362,14 @@ class InstanceRow(Adw.ActionRow):
 
 def create_instance_row(ins:dict) -> InstanceRow or None:
     if 'ollama' in ins.get('type'):
-        if ins.get('type') != 'ollama:managed' or shutil.which('ollama'):
-            for instance_cls in BaseOllama.__subclasses__():
-                if getattr(instance_cls, 'instance_type', None) == ins.get('type'):
-                    return InstanceRow(
-                        instance=instance_cls(
-                            instance_id=ins.get('id'),
-                            properties=ins.get('properties')
-                        )
+        for instance_cls in BaseOllama.__subclasses__():
+            if getattr(instance_cls, 'instance_type', None) == ins.get('type'):
+                return InstanceRow(
+                    instance=instance_cls(
+                        instance_id=ins.get('id'),
+                        properties=ins.get('properties')
                     )
+                )
     elif os.getenv('ALPACA_OLLAMA_ONLY', '0') != '1' and importlib.util.find_spec('openai'):
         from .openai_instances import BaseInstance as BaseOpenAI
         for instance_cls in BaseOpenAI.__subclasses__():

@@ -16,7 +16,7 @@ template $AlpacaPreferencesDialog: Adw.PreferencesDialog {
 
       Adw.SwitchRow powersaver_warning_switch {
         title: _("Show Power Saver Warning");
-        subtitle: _("When running a managed Ollama instance");
+        subtitle: _("When running an Ollama (Managed) instance");
       }
 
       Adw.SwitchRow show_model_manager_shortcut_switch {
@@ -27,6 +27,11 @@ template $AlpacaPreferencesDialog: Adw.PreferencesDialog {
       Adw.SwitchRow folder_search_mode_switch {
         title: _("Include Messages on Search");
         subtitle: _("When searching for chats inside a folder");
+      }
+
+      Adw.SwitchRow check_ollama_update_switch {
+        title: _("Check for Ollama Updates");
+        subtitle: _("When selecting an Ollama (Managed) instance");
       }
 
       Adw.SpinRow zoom_spin {

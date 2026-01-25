@@ -3,7 +3,7 @@
 Holds a few constant values that can be re-used all over the application.
 """
 
-import os
+import os, shutil, platform
 
 # Big thanks to everyone contributing translations.
 # These translators will be shown inside of the app under
@@ -322,6 +322,7 @@ EMPTY_CHARA_CARD = {
 
 # The identifier when inside the Flatpak runtime
 IN_FLATPAK = bool(os.getenv("FLATPAK_ID"))
+IN_SNAP = bool(os.getenv("FLATPAK_ID"))
 
 TITLE_GENERATION_PROMPT_OLLAMA = (
     "You are an assistant that generates short chat titles based on the "
@@ -354,4 +355,23 @@ config_dir = get_xdg_home("XDG_CONFIG_HOME", "~/.config")
 cache_dir = get_xdg_home("XDG_CACHE_HOME", "~/.cache")
 
 source_dir = os.path.abspath(os.path.dirname(__file__))
+
+DEVICE_ARCH = { #amd64 or arm64
+    'x86_64': 'amd64',
+    'amd64': 'amd64',
+    'aarch64': 'arm64',
+    'arm64': 'arm64'
+}.get(platform.machine().lower(), 'unknown')
+
+CAN_SELF_MANAGE_OLLAMA = IN_FLATPAK or IN_SNAP or os.getenv("ALPACA_FORCE_OLLAMA_MANAGER", "0") == "1"
+OLLAMA_BINARY_PATH = os.path.join(data_dir, 'ollama_installation', 'bin', 'ollama') if CAN_SELF_MANAGE_OLLAMA else shutil.which('ollama')
+
+def is_ollama_installed() -> bool:
+    # Checks if Ollama is installed in a way that can be managed by Alpaca
+    return os.path.isfile(OLLAMA_BINARY_PATH)
+
+def is_rocm_installed() -> bool:
+    # Checks if ROCm is installed in a way that can be managed by Alpaca
+    # Should only be called if using a managed instance
+    return os.path.isdir(os.path.join(data_dir, 'ollama_installation', 'lib', 'ollama', 'rocm'))
 

@@ -30,7 +30,7 @@ from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, Spelling
 
 from .sql_manager import generate_uuid, generate_numbered_name, prettify_model_name, Instance as SQL
 from . import widgets as Widgets
-from .constants import data_dir, source_dir, cache_dir
+from .constants import data_dir, source_dir, cache_dir, is_ollama_installed
 
 logger = logging.getLogger(__name__)
 
@@ -87,21 +87,21 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def add_instance(self, button):
+        def show_dialog(instance):
+            Widgets.instances.InstancePreferencesDialog(instance).present(self)
+
         def selected(ins):
-            if ins.instance_type == 'ollama:managed' and not shutil.which('ollama'):
-                Widgets.dialog.simple(
-                    parent = button.get_root(),
-                    heading = _("Ollama Was Not Found"),
-                    body = _("To add a managed Ollama instance, you must have Ollama installed locally in your device, this is a simple process and should not take more than 5 minutes."),
-                    callback = lambda: Gio.AppInfo.launch_default_for_uri('https://jeffser.com/alpaca/installation-guide.html'),
-                    button_name = _("Open Tutorial in Web Browser")
-                )
+            instance = ins(
+                instance_id=None,
+                properties={}
+            )
+
+            if ins.instance_type == 'ollama:managed' and not is_ollama_installed():
+                dialog = Widgets.instances.OllamaManager(instance)
+                dialog.connect('closed', lambda *_: show_dialog(instance) if is_ollama_installed() else None)
+                dialog.present(self)
             else:
-                instance = ins(
-                    instance_id=None,
-                    properties={}
-                )
-                Widgets.instances.InstancePreferencesDialog(instance).present(self)
+                show_dialog(instance)
 
         options = {}
         instance_list = Widgets.instances.ollama_instances.BaseInstance.__subclasses__()
@@ -137,7 +137,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             listbox.set_sensitive(True)
         if listbox.get_sensitive():
             listbox.set_sensitive(False)
-            GLib.idle_add(threading.Thread(target=change_instance, daemon=True).start)
+            threading.Thread(target=change_instance, daemon=True).start()
 
     @Gtk.Template.Callback()
     def closing_app(self, user_data):
@@ -287,18 +287,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         if self.get_application().args.new_chat:
             self.get_chat_list_page().new_chat(self.get_application().args.new_chat)
-
-        # Ollama is available but there are no instances added
-        if not any(i.get("type") == "ollama:managed" for i in SQL.get_instances()) and shutil.which("ollama"):
-            SQL.insert_or_update_instance(
-                instance_id=generate_uuid(),
-                pinned=True,
-                instance_type='ollama:managed',
-                properties={
-                    'name': 'Alpaca',
-                    'url': 'http://127.0.0.1:11435',
-                }
-            )
 
         Widgets.instances.update_instance_list(
             instance_listbox=self.instance_listbox,

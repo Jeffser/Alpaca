@@ -2,10 +2,11 @@
 
 from gi.repository import Adw, Gtk, GLib
 
-import requests, json, logging, os, shutil, subprocess, threading, re, signal, pwd, getpass, datetime
+import requests, json, logging, os, shutil, subprocess, threading, re, signal, pwd, getpass, datetime, time
+from .ollama_manager import OllamaManager, get_latest_ollama_tag
 from .. import dialog, tools, chat
 from ...ollama_models import OLLAMA_MODELS
-from ...constants import data_dir, cache_dir, TITLE_GENERATION_PROMPT_OLLAMA, MAX_TOKENS_TITLE_GENERATION
+from ...constants import data_dir, cache_dir, TITLE_GENERATION_PROMPT_OLLAMA, MAX_TOKENS_TITLE_GENERATION, OLLAMA_BINARY_PATH, CAN_SELF_MANAGE_OLLAMA, is_ollama_installed
 from ...sql_manager import generate_uuid, dict_to_metadata_string, Instance as SQL
 
 logger = logging.getLogger(__name__)
@@ -153,13 +154,14 @@ class BaseInstance:
                         'content': str(tool_response)
                     })
         except Exception as e:
-            dialog.simple_error(
-                parent = bot_message.get_root(),
-                title = _('Tool Error'),
-                body = _('An error occurred while running tool'),
-                error_log = e
-            )
-            logger.error(e)
+            if self.instance_type != 'ollama:managed' or is_ollama_installed():
+                dialog.simple_error(
+                    parent = bot_message.get_root(),
+                    title = _('Tool Error'),
+                    body = _('An error occurred while running tool'),
+                    error_log = e
+                )
+                logger.error(e)
 
         if generate_message:
             self.generate_response(bot_message, chat, messages, model)
@@ -251,13 +253,14 @@ class BaseInstance:
                         bot_message.update_message("🦙 Just a quick heads-up! To access the Ollama cloud models, you'll need to log into your Ollama account first.")
                     logger.error(response.content)
             except Exception as e:
-                dialog.simple_error(
-                    parent = bot_message.get_root(),
-                    title = _('Instance Error'),
-                    body = _('Message generation failed'),
-                    error_log = e
-                )
-                logger.error(e)
+                if self.instance_type != 'ollama:managed' or is_ollama_installed():
+                    dialog.simple_error(
+                        parent = bot_message.get_root(),
+                        title = _('Instance Error'),
+                        body = _('Message generation failed'),
+                        error_log = e
+                    )
+                    logger.error(e)
                 if self.row:
                     self.row.get_parent().unselect_all()
         metadata_string = None
@@ -363,13 +366,14 @@ class BaseInstance:
             if response.status_code == 200:
                 return json.loads(response.text).get('models')
         except Exception as e:
-            dialog.simple_error(
-                parent = self.row.get_root() if self.row else None,
-                title = _('Instance Error'),
-                body = _('Could not retrieve added models'),
-                error_log = e
-            )
-            logger.error(e)
+            if self.instance_type != 'ollama:managed' or is_ollama_installed():
+                dialog.simple_error(
+                    parent = self.row.get_root() if self.row else None,
+                    title = _('Instance Error'),
+                    body = _('Could not retrieve added models'),
+                    error_log = e
+                )
+                logger.error(e)
             if self.row:
                 self.row.get_parent().unselect_all()
         return []
@@ -378,13 +382,14 @@ class BaseInstance:
         try:
             return OLLAMA_MODELS
         except Exception as e:
-            dialog.simple_error(
-                parent = self.row.get_root() if self.row else None,
-                title = _('Instance Error'),
-                body = _('Could not retrieve available models'),
-                error_log = e
-            )
-            logger.error(e)
+            if self.instance_type != 'ollama:managed' or is_ollama_installed():
+                dialog.simple_error(
+                    parent = self.row.get_root() if self.row else None,
+                    title = _('Instance Error'),
+                    body = _('Could not retrieve available models'),
+                    error_log = e
+                )
+                logger.error(e)
         return {}
 
     def get_model_info(self, model_name:str) -> dict:
@@ -438,14 +443,15 @@ class BaseInstance:
                             model.update_progressbar(-1)
                             return
         except Exception as e:
-            dialog.simple_error(
-                parent = self.row.get_root() if self.row else None,
-                title = _('Error Pulling Model'),
-                body = model.get_name(),
-                error_log = e
-            )
+            if self.instance_type != 'ollama:managed' or is_ollama_installed():
+                dialog.simple_error(
+                    parent = self.row.get_root() if self.row else None,
+                    title = _('Error Pulling Model'),
+                    body = model.get_name(),
+                    error_log = e
+                )
+                logger.error(e)
             model.get_parent().get_parent().remove(model.get_parent())
-            logger.error(e)
 
     def gguf_exists(self, sha256:str) -> bool:
         if not self.process:
@@ -552,7 +558,10 @@ class OllamaManaged(BaseInstance):
         self.instance_id = instance_id
         self.process = None
         self.log_raw = ''
-        self.log_summary = ('', ['dim-label'])
+        self.rocm_status = 0 # 0: no need, 1: using Vulkan 2: wants rocm, 3: rocm ok
+        self.version_number = ''
+        self.last_auto_version_check_time = 0
+
         self.properties = {}
         self.row = None
         for key in self.default_properties:
@@ -572,15 +581,28 @@ class OllamaManaged(BaseInstance):
                     print(line, end='')
                     if 'msg="model request too large for system"' in line and self.row:
                         dialog.show_toast(_("Model request too large for system"), self.row.get_root())
-                    elif 'msg="amdgpu detected, but no compatible rocm library found.' in line:
-                        if bool(os.getenv("FLATPAK_ID")):
-                            self.log_summary = (_("AMD GPU detected but the extension is missing, Ollama will use CPU.") + AMD_support_label, ['dim-label', 'error'])
-                        else:
-                            self.log_summary = (_("AMD GPU detected but ROCm is missing, Ollama will use CPU.") + AMD_support_label, ['dim-label', 'error'])
+                    elif 'library=cpu' in line:
+                        self.rocm_status = 0
+                    elif 'library=Vulkan' in line:
+                        self.rocm_status = 1
                     elif 'msg="amdgpu is supported"' in line:
-                        self.log_summary = (_("Using AMD GPU type '{}'").format(line.split('=')[-1].replace('\n', '')), ['dim-label', 'success'])
+                        self.rocm_status = 2
+                    elif 'library=ROCm' in line:
+                        self.rocm_status = 3
             except Exception as e:
                 pass
+
+    def auto_check_version(self):
+        installed_tag = self.version_number.strip('v').strip()
+        available_tag = get_latest_ollama_tag()
+
+        if available_tag and installed_tag:
+            available_tag = available_tag.strip('v').strip()
+            if installed_tag != available_tag:
+                manager_dialog = OllamaManager(self)
+                manager_dialog.update_check_requested(None)
+                manager_dialog.navigation_view.replace_with_tags(["update_available"])
+                manager_dialog.present(self.row.get_root())
 
     def stop(self):
         if self.process:
@@ -602,12 +624,12 @@ class OllamaManaged(BaseInstance):
                 logger.error(f"Error stopping Ollama process: {e}")
             finally:
                 self.process = None
-                self.log_summary = (_("Integrated Ollama instance is not running"), ['dim-label'])
                 logger.info("Stopped Alpaca's Ollama instance")
 
     def start(self):
-        if shutil.which('ollama') and not self.process:
+        if not self.process:
             try:
+                logger.info("Starting Alpaca's Ollama instance...")
                 params = self.properties.get('overrides', {}).copy()
                 params["OLLAMA_HOST"] = self.properties.get('url')
                 params["OLLAMA_MODELS"] = self.properties.get('model_directory')
@@ -619,7 +641,7 @@ class OllamaManaged(BaseInstance):
                     if not params.get(key):
                         del params[key]
                 self.process = subprocess.Popen(
-                    ["ollama", "serve"],
+                    [OLLAMA_BINARY_PATH, "serve"],
                     env={**os.environ, **params},
                     stderr=subprocess.PIPE,
                     stdout=subprocess.PIPE,
@@ -629,21 +651,29 @@ class OllamaManaged(BaseInstance):
 
                 threading.Thread(target=self.log_output, args=(self.process.stdout,), daemon=True).start()
                 threading.Thread(target=self.log_output, args=(self.process.stderr,), daemon=True).start()
-                logger.info("Starting Alpaca's Ollama instance...")
                 logger.info("Started Alpaca's Ollama instance")
-                v_str = subprocess.check_output("ollama -v", shell=True).decode('utf-8')
-                logger.info(v_str.split('\n')[1].strip('Warning: ').strip())
+                self.version_number = subprocess.check_output("{} -v".format(OLLAMA_BINARY_PATH), shell=True).decode('utf-8')
+                self.version_number = self.version_number.strip('ollama version is ').strip()
+                if self.version_number:
+                    logger.info('Ollama version is {}'.format(self.version_number))
+                if CAN_SELF_MANAGE_OLLAMA and self.row.get_root().settings.get_value('ollama-managed-auto-check-update').unpack() and time.time() - self.last_auto_version_check_time > 300:
+                    self.last_auto_version_check_time = time.time()
+                    GLib.idle_add(self.auto_check_version)
             except Exception as e:
-                dialog.simple_error(
-                    parent = self.row.get_root() if self.row else None,
-                    title = _('Instance Error'),
-                    body = _('Managed Ollama instance failed to start'),
-                    error_log = e
-                )
                 logger.error(e)
+                if not is_ollama_installed():
+                    if self.row:
+                        OllamaManager(self).present(self.row.get_root())
+                else:
+                    dialog.simple_error(
+                        parent = self.row.get_root() if self.row else None,
+                        title = _('Instance Error'),
+                        body = _('Managed Ollama instance failed to start'),
+                        error_log = e
+                    )
                 if self.row:
                     self.row.get_parent().unselect_all()
-            self.log_summary = (_("Integrated Ollama instance is running"), ['dim-label', 'success'])
+                self.stop()
 
 class Ollama(BaseInstance):
     instance_type = 'ollama'
@@ -754,13 +784,14 @@ class OllamaCloud(BaseInstance):
 
                 return available_models
         except Exception as e:
-            dialog.simple_error(
-                parent = self.row.get_root() if self.row else None,
-                title = _('Instance Error'),
-                body = _('Could not retrieve added models'),
-                error_log = e
-            )
-            logger.error(e)
+            if self.instance_type != 'ollama:managed' or is_ollama_installed():
+                dialog.simple_error(
+                    parent = self.row.get_root() if self.row else None,
+                    title = _('Instance Error'),
+                    body = _('Could not retrieve added models'),
+                    error_log = e
+                )
+                logger.error(e)
             if self.row:
                 self.row.get_parent().unselect_all()
         return {}
