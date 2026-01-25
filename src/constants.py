@@ -368,7 +368,10 @@ OLLAMA_BINARY_PATH = os.path.join(data_dir, 'ollama_installation', 'bin', 'ollam
 
 def is_ollama_installed() -> bool:
     # Checks if Ollama is installed in a way that can be managed by Alpaca
-    return os.path.isfile(OLLAMA_BINARY_PATH)
+    if OLLAMA_BINARY_PATH:
+        return os.path.isfile(OLLAMA_BINARY_PATH)
+    else:
+        return False
 
 def is_rocm_installed() -> bool:
     # Checks if ROCm is installed in a way that can be managed by Alpaca

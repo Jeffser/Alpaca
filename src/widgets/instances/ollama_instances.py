@@ -624,6 +624,7 @@ class OllamaManaged(BaseInstance):
                 logger.error(f"Error stopping Ollama process: {e}")
             finally:
                 self.process = None
+                self.log_raw += '\nOllama stopped by Alpaca\n'
                 logger.info("Stopped Alpaca's Ollama instance")
 
     def start(self):

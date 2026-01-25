@@ -30,8 +30,11 @@ class OllamaManager(Adw.Dialog):
         #top 10 worst lines of code
         list(list(list(list(list(self.installer_statuspage)[0].get_child())[0])[0])[0])[2].add_css_class('monospace')
 
-        if self.instance.version_number:
+        if self.instance.version_number and self.instance.process:
             self.main_status_page.set_description(_('Version') + ' ' + self.instance.version_number)
+        else:
+            self.update_row.set_sensitive(False)
+            self.main_status_page.set_description(_('Not Running'))
 
         self.logs_el.text_view.set_editable(False)
         self.gpu_row.set_visible(DEVICE_ARCH == "amd64")
