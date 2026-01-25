@@ -33,6 +33,9 @@ gi.require_version('Vte', '3.91')
 from gi.repository import Gtk, Gio, Adw, GLib, GtkSource
 GtkSource.init()
 
+GLib.set_prgname("Alpaca")
+GLib.set_application_name("Alpaca")
+
 from .widgets import activities
 from .constants import TRANSLATORS, LEGAL_NOTICE, cache_dir, data_dir, config_dir, source_dir
 from .sql_manager import Instance as SQL
