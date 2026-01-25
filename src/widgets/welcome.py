@@ -53,10 +53,3 @@ class Welcome(Adw.NavigationPage):
             self.install_ollama_button.set_tooltip_text(text)
             self.install_ollama_button.set_sensitive(False)
 
-@Gtk.Template(resource_path='/com/jeffser/Alpaca/notice.ui')
-class Notice(Adw.Dialog):
-    __gtype_name__ = 'AlpacaNotice'
-
-    @Gtk.Template.Callback()
-    def closing_notice(self, dialog):
-        Gio.Settings(schema_id="com.jeffser.Alpaca").set_string('last-notice-seen', dialog.get_name())

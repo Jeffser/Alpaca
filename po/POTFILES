@@ -4,7 +4,6 @@ data/com.jeffser.Alpaca.metainfo.xml.in
 data/com.jeffser.Alpaca.SearchProvider.desktop.in
 data/com.jeffser.Alpaca.SearchProvider.service.in
 
-src/ui/notice.blp
 src/ui/preferences.blp
 src/ui/quick_ask.blp
 src/ui/shortcuts.blp
@@ -72,6 +71,11 @@ src/ui/widgets/tools/selector.blp
 src/ui/widgets/voice/dictate_button.blp
 src/ui/widgets/voice/microphone_button.blp
 
+src/ui/widgets/characters/character_book_entry_row.blp
+src/ui/widgets/characters/character_page.blp
+src/ui/widgets/characters/export_page.blp
+src/ui/widgets/characters/greeting_row.blp
+
 src/constants.py
 src/main.py
 src/ollama_models.py
@@ -118,3 +122,7 @@ src/widgets/models/creator.py
 
 src/widgets/tools/__init__.py
 src/widgets/tools/tools.py
+
+src/widgets/characters/__init__.py
+src/widgets/characters/character_page.py
+src/widgets/characters/export_page.py

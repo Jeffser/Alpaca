@@ -436,10 +436,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         self.banner.connect('button-clicked', lambda *_: self.banner.set_revealed(False))
 
         self.prepare_alpaca()
-        if self.settings.get_value('skip-welcome').unpack():
-            notice_dialog = Widgets.welcome.Notice()
-            if not self.settings.get_value('last-notice-seen').unpack() == notice_dialog.get_name():
-                notice_dialog.present(self)
-        else:
+        if not self.settings.get_value('skip-welcome').unpack():
             self.main_navigation_view.replace([Widgets.welcome.Welcome()])
 

@@ -3,7 +3,6 @@ moduledir = pkgdatadir / 'alpaca'
 gnome = import('gnome')
 
 blueprints = files(
-  'ui/notice.blp',
   'ui/preferences.blp',
   'ui/quick_ask.blp',
   'ui/shortcuts.blp',

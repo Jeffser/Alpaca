@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-10 10:56+0300\n"
+"POT-Creation-Date: 2026-01-24 19:27-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/com.jeffser.Alpaca.desktop.in:3
+#: data/com.jeffser.Alpaca.desktop.in:2
 #: data/com.jeffser.Alpaca.metainfo.xml.in:7
 msgid "Alpaca"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.desktop.in:9
+#: data/com.jeffser.Alpaca.desktop.in:8
 msgid "ai;ollama;llm"
 msgstr ""
 
@@ -2622,44 +2622,8 @@ msgstr ""
 msgid "This is the first public version of Alpaca"
 msgstr ""
 
-#: data/com.jeffser.Alpaca.SearchProvider.desktop.in:4
+#: data/com.jeffser.Alpaca.SearchProvider.desktop.in:3
 msgid "Alpaca Search Provider"
-msgstr ""
-
-#: src/ui/notice.blp:6
-msgid "Notice"
-msgstr ""
-
-#: src/ui/notice.blp:25
-msgid ""
-"Hey Alpaca users! Get ready for a huge update packed with enhancements and "
-"exciting new features designed to make your experience even better."
-msgstr ""
-
-#: src/ui/notice.blp:31
-msgid "Folders"
-msgstr ""
-
-#: src/ui/notice.blp:32
-msgid ""
-"Keeping all your chats and subfolders in one place is now easier than ever. "
-"Folders let you neatly organize everything, so you can find exactly what "
-"you're looking for without the clutter."
-msgstr ""
-
-#: src/ui/notice.blp:38 src/ui/preferences.blp:124
-#: src/ui/widgets/activities/activity_manager.blp:8
-#: src/ui/widgets/activities/activity_manager.blp:44
-#: src/ui/widgets/activities/activity_manager.blp:53
-#: src/ui/widgets/activities/activity_tab_window.blp:5
-msgid "Activities"
-msgstr ""
-
-#: src/ui/notice.blp:39
-msgid ""
-"There's a new way to get things done with Activities. These are like mini-"
-"apps that your AI can use to help you with tasks, from running code and "
-"using a web browser to transcribing audio and creating attachments."
 msgstr ""
 
 #: src/ui/preferences.blp:6 src/ui/window.blp:305
@@ -2768,6 +2732,13 @@ msgstr ""
 
 #: src/ui/preferences.blp:110
 msgid "Modify the speed of the dictation voice"
+msgstr ""
+
+#: src/ui/preferences.blp:124 src/ui/widgets/activities/activity_manager.blp:8
+#: src/ui/widgets/activities/activity_manager.blp:44
+#: src/ui/widgets/activities/activity_manager.blp:53
+#: src/ui/widgets/activities/activity_tab_window.blp:5
+msgid "Activities"
 msgstr ""
 
 #: src/ui/preferences.blp:128
@@ -3052,13 +3023,13 @@ msgstr ""
 msgid "Install Ollama"
 msgstr ""
 
-#: src/ui/window.blp:45 src/window.py:366
-#: src/widgets/instances/ollama_instances.py:73
-#: src/widgets/instances/ollama_instances.py:88
-#: src/widgets/instances/openai_instances.py:108
-#: src/widgets/instances/openai_instances.py:124 src/widgets/chat.py:214
-#: src/widgets/chat.py:216 src/widgets/chat.py:469 src/widgets/chat.py:971
-#: src/widgets/chat.py:999
+#: src/ui/window.blp:45 src/window.py:369
+#: src/widgets/instances/ollama_instances.py:75
+#: src/widgets/instances/ollama_instances.py:90
+#: src/widgets/instances/openai_instances.py:110
+#: src/widgets/instances/openai_instances.py:126 src/widgets/chat.py:214
+#: src/widgets/chat.py:216 src/widgets/chat.py:469 src/widgets/chat.py:974
+#: src/widgets/chat.py:1002
 msgid "New Chat"
 msgstr ""
 
@@ -3163,19 +3134,19 @@ msgstr ""
 msgid "About Alpaca"
 msgstr ""
 
-#: src/ui/window.blp:324 src/widgets/chat.py:931 src/widgets/chat.py:995
+#: src/ui/window.blp:324 src/widgets/chat.py:934 src/widgets/chat.py:998
 msgid "Edit Chat"
 msgstr ""
 
-#: src/ui/window.blp:329 src/widgets/chat.py:936
+#: src/ui/window.blp:329 src/widgets/chat.py:939
 msgid "Duplicate Chat"
 msgstr ""
 
-#: src/ui/window.blp:334 src/widgets/chat.py:941 src/widgets/chat.py:1131
+#: src/ui/window.blp:334 src/widgets/chat.py:944 src/widgets/chat.py:1134
 msgid "Export Chat"
 msgstr ""
 
-#: src/ui/window.blp:341 src/widgets/chat.py:948 src/widgets/chat.py:1033
+#: src/ui/window.blp:341 src/widgets/chat.py:951 src/widgets/chat.py:1036
 msgid "Delete Chat"
 msgstr ""
 
@@ -3199,8 +3170,8 @@ msgid "Original"
 msgstr ""
 
 #: src/ui/widgets/activities/background_remover.blp:41
-#: src/widgets/instances/ollama_instances.py:134
-#: src/widgets/instances/openai_instances.py:160
+#: src/widgets/instances/ollama_instances.py:136
+#: src/widgets/instances/openai_instances.py:162
 msgid "Result"
 msgstr ""
 
@@ -3277,6 +3248,7 @@ msgid "Reset View"
 msgstr ""
 
 #: src/ui/widgets/activities/latex_editor.blp:40
+#: src/ui/widgets/characters/character_page.blp:25
 msgid "Save Changes"
 msgstr ""
 
@@ -3384,9 +3356,9 @@ msgstr ""
 #: src/ui/widgets/instances/preferences.blp:17
 #: src/ui/widgets/models/creator_dialog.blp:18
 #: src/ui/widgets/models/creator_dialog.blp:19 src/window.py:178
-#: src/widgets/chat.py:247 src/widgets/chat.py:832 src/widgets/chat.py:986
+#: src/widgets/chat.py:247 src/widgets/chat.py:835 src/widgets/chat.py:989
 #: src/widgets/dialog.py:201 src/widgets/dialog.py:214
-#: src/widgets/dialog.py:227 src/widgets/models/added.py:312
+#: src/widgets/dialog.py:227 src/widgets/models/added.py:287
 msgid "Cancel"
 msgstr ""
 
@@ -3395,6 +3367,7 @@ msgstr ""
 #: src/ui/widgets/instances/preferences.blp:27
 #: src/ui/widgets/models/creator_dialog.blp:28
 #: src/ui/widgets/models/creator_dialog.blp:29
+#: src/ui/widgets/characters/character_page.blp:24
 msgid "Save"
 msgstr ""
 
@@ -3464,7 +3437,8 @@ msgid "Add templates by editing a chat"
 msgstr ""
 
 #: src/ui/widgets/instances/preferences.blp:41
-#: src/ui/widgets/models/creator_dialog.blp:60
+#: src/ui/widgets/models/creator_dialog.blp:46
+#: src/ui/widgets/characters/character_page.blp:44
 msgid "Name"
 msgstr ""
 
@@ -3560,12 +3534,12 @@ msgid ""
 msgstr ""
 
 #: src/ui/widgets/instances/preferences.blp:157
-#: src/ui/widgets/models/creator_dialog.blp:154
+#: src/ui/widgets/models/creator_dialog.blp:146
 msgid "Context Window Size"
 msgstr ""
 
 #: src/ui/widgets/instances/preferences.blp:158
-#: src/ui/widgets/models/creator_dialog.blp:155
+#: src/ui/widgets/models/creator_dialog.blp:147
 msgid ""
 "Controls how many tokens (pieces of text) the model can process and remember "
 "at once"
@@ -3658,42 +3632,63 @@ msgstr ""
 msgid "Regenerate Message"
 msgstr ""
 
-#: src/ui/widgets/models/added_dialog.blp:16
-#: src/ui/widgets/models/basic_dialog.blp:16 src/widgets/models/basic.py:374
+#: src/ui/widgets/models/added_dialog.blp:15
+msgid "Model"
+msgstr ""
+
+#: src/ui/widgets/models/added_dialog.blp:23
+#: src/ui/widgets/models/basic_dialog.blp:16 src/widgets/models/basic.py:361
 msgid "Remove Model"
 msgstr ""
 
-#: src/ui/widgets/models/added_dialog.blp:25 src/widgets/models/basic.py:368
+#: src/ui/widgets/models/added_dialog.blp:32 src/widgets/models/basic.py:355
 msgid "Create Child"
 msgstr ""
 
-#: src/ui/widgets/models/added_dialog.blp:33
+#: src/ui/widgets/models/added_dialog.blp:40
 #: src/ui/widgets/models/available_dialog.blp:23
 msgid "Languages"
 msgstr ""
 
-#: src/ui/widgets/models/added_dialog.blp:57
-msgid "Model"
+#: src/ui/widgets/models/added_dialog.blp:83
+msgid "Set Profile Picture"
 msgstr ""
 
-#: src/ui/widgets/models/added_dialog.blp:80
-msgid "Change Profile Picture"
+#: src/ui/widgets/models/added_dialog.blp:102
+msgid "Profile Picture"
 msgstr ""
 
-#: src/ui/widgets/models/added_dialog.blp:109
+#: src/ui/widgets/models/added_dialog.blp:119
+#: src/ui/widgets/characters/export_page.blp:15
+#: src/ui/widgets/characters/export_page.blp:16
+msgid "Export"
+msgstr ""
+
+#: src/ui/widgets/models/added_dialog.blp:133
+msgid "Change"
+msgstr ""
+
+#: src/ui/widgets/models/added_dialog.blp:147
+#: src/widgets/instances/__init__.py:324 src/widgets/models/basic.py:291
+msgid "Remove"
+msgstr ""
+
+#: src/ui/widgets/models/added_dialog.blp:178
 msgid "Voice"
 msgstr ""
 
-#: src/ui/widgets/models/added_dialog.blp:113
+#: src/ui/widgets/models/added_dialog.blp:184
 msgid "Default"
 msgstr ""
 
-#: src/ui/widgets/models/added_dialog.blp:143
-msgid "Files"
+#: src/ui/widgets/models/added_dialog.blp:190
+#: src/ui/widgets/characters/character_page.blp:6
+#: src/widgets/characters/export_page.py:81
+msgid "Character Card"
 msgstr ""
 
-#: src/ui/widgets/models/added_dialog.blp:173
-msgid "Character"
+#: src/ui/widgets/models/added_dialog.blp:225
+msgid "Files"
 msgstr ""
 
 #: src/ui/widgets/models/added_selector.blp:9
@@ -3722,59 +3717,52 @@ msgstr ""
 msgid "Base"
 msgstr ""
 
-#: src/ui/widgets/models/creator_dialog.blp:46
-msgid "Profile Picture"
-msgstr ""
-
-#: src/ui/widgets/models/creator_dialog.blp:50
-msgid "Select Profile Picture"
-msgstr ""
-
-#: src/ui/widgets/models/creator_dialog.blp:63 src/widgets/models/added.py:202
+#: src/ui/widgets/models/creator_dialog.blp:49 src/widgets/models/added.py:107
+#: src/widgets/characters/export_page.py:111
 msgid "Tag"
 msgstr ""
 
-#: src/ui/widgets/models/creator_dialog.blp:67 src/widgets/models/added.py:242
+#: src/ui/widgets/models/creator_dialog.blp:53 src/widgets/models/added.py:147
 msgid "Context"
 msgstr ""
 
-#: src/ui/widgets/models/creator_dialog.blp:68
+#: src/ui/widgets/models/creator_dialog.blp:54
 msgid ""
 "Describe the desired behavior of the model in its primary language "
 "(typically English)."
 msgstr ""
 
-#: src/ui/widgets/models/creator_dialog.blp:70
+#: src/ui/widgets/models/creator_dialog.blp:56
 msgid "Add File"
 msgstr ""
 
-#: src/ui/widgets/models/creator_dialog.blp:102
+#: src/ui/widgets/models/creator_dialog.blp:91
 msgid "Template"
 msgstr ""
 
-#: src/ui/widgets/models/creator_dialog.blp:103
+#: src/ui/widgets/models/creator_dialog.blp:92
 msgid ""
 "Some GGUF models require a template, please check the model's documentation "
 "for more information."
 msgstr ""
 
-#: src/ui/widgets/models/creator_dialog.blp:126
+#: src/ui/widgets/models/creator_dialog.blp:118
 msgid "Behavior"
 msgstr ""
 
-#: src/ui/widgets/models/creator_dialog.blp:128
+#: src/ui/widgets/models/creator_dialog.blp:120
 msgid "Imagination"
 msgstr ""
 
-#: src/ui/widgets/models/creator_dialog.blp:129
+#: src/ui/widgets/models/creator_dialog.blp:121
 msgid "A higher number results in more diverse answers from the model. (top_k)"
 msgstr ""
 
-#: src/ui/widgets/models/creator_dialog.blp:141
+#: src/ui/widgets/models/creator_dialog.blp:133
 msgid "Focus"
 msgstr ""
 
-#: src/ui/widgets/models/creator_dialog.blp:142
+#: src/ui/widgets/models/creator_dialog.blp:134
 msgid "A higher number widens the amount of possible answers. (top_p)"
 msgstr ""
 
@@ -3788,6 +3776,150 @@ msgstr ""
 
 #: src/ui/widgets/voice/microphone_button.blp:9
 msgid "Use Speech Recognition"
+msgstr ""
+
+#: src/ui/widgets/characters/character_book_entry_row.blp:9
+#: src/ui/widgets/characters/greeting_row.blp:11
+msgid "See Options"
+msgstr ""
+
+#: src/ui/widgets/characters/character_book_entry_row.blp:20
+#: src/widgets/characters/character_page.py:38
+msgid "Edit Name"
+msgstr ""
+
+#: src/ui/widgets/characters/character_book_entry_row.blp:32
+msgid "Remove Entry"
+msgstr ""
+
+#: src/ui/widgets/characters/character_book_entry_row.blp:55
+#: src/widgets/characters/character_page.py:65
+msgid "Add Keyword"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:15
+#: src/widgets/characters/character_page.py:259
+msgid "Clear Character Card"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:34
+msgid ""
+"To use an active Character Card, start a new chat, select the model, and "
+"then choose 'Use Character' on the Welcome Screen"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:36
+msgid "Options"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:39
+msgid "Enable Character"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:40
+msgid "Show the option to use the character in new chats"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:49 src/widgets/chat.py:657
+#: src/widgets/models/added.py:125
+msgid "Description"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:50
+msgid ""
+"Describes the character, their background and the world that they live in"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:55
+msgid "First Message"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:56
+msgid ""
+"The opening message, it establishes the initial context, setting and tone of "
+"the conversation"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:61
+msgid "Alternative Greetings"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:62
+msgid ""
+"Optional greetings to be presented when starting a new chat with the "
+"character"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:66
+msgid "Add Greeting"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:75
+#: src/ui/widgets/characters/export_page.blp:38
+msgid "Character Book"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:76
+msgid "Information consulted by the model when a keyword is found in a message"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:80
+msgid "Add Entry"
+msgstr ""
+
+#: src/ui/widgets/characters/export_page.blp:6
+msgid "Export Character Card"
+msgstr ""
+
+#: src/ui/widgets/characters/export_page.blp:25
+msgid ""
+"Character Cards are distributed by adding the data to images, this way you "
+"can use your characters outside of Alpaca"
+msgstr ""
+
+#: src/ui/widgets/characters/export_page.blp:28
+msgid "Additional Metadata"
+msgstr ""
+
+#: src/ui/widgets/characters/export_page.blp:30
+msgid "Creator"
+msgstr ""
+
+#: src/ui/widgets/characters/export_page.blp:33
+msgid "Character Version"
+msgstr ""
+
+#: src/ui/widgets/characters/export_page.blp:34
+msgid "1.0"
+msgstr ""
+
+#: src/ui/widgets/characters/export_page.blp:37
+msgid "Character Book Name"
+msgstr ""
+
+#: src/ui/widgets/characters/export_page.blp:41
+msgid "Character Book Description"
+msgstr ""
+
+#: src/ui/widgets/characters/export_page.blp:46
+msgid "Creator Notes"
+msgstr ""
+
+#: src/ui/widgets/characters/export_page.blp:51
+msgid "Tags"
+msgstr ""
+
+#: src/ui/widgets/characters/export_page.blp:60
+#: src/widgets/characters/export_page.py:108
+msgid "Add Tag"
+msgstr ""
+
+#: src/ui/widgets/characters/greeting_row.blp:5
+msgid "Greeting"
+msgstr ""
+
+#: src/ui/widgets/characters/greeting_row.blp:22
+msgid "Remove Greeting"
 msgstr ""
 
 #: src/constants.py:241
@@ -4942,6 +5074,7 @@ msgid "Please select add a model for this instance in Alpaca before chatting"
 msgstr ""
 
 #: src/sql_manager.py:60
+#, python-brace-format
 msgid "{} seconds"
 msgstr ""
 
@@ -4958,6 +5091,7 @@ msgid "Prompt Eval Count"
 msgstr ""
 
 #: src/sql_manager.py:68 src/sql_manager.py:73
+#, python-brace-format
 msgid "{} tokens"
 msgstr ""
 
@@ -4970,6 +5104,7 @@ msgid "Prompt Eval Rate"
 msgstr ""
 
 #: src/sql_manager.py:71 src/sql_manager.py:76
+#, python-brace-format
 msgid "{} tokens/s"
 msgstr ""
 
@@ -4989,8 +5124,8 @@ msgstr ""
 msgid "Metric"
 msgstr ""
 
-#: src/sql_manager.py:77 src/widgets/instances/ollama_instances.py:128
-#: src/widgets/instances/openai_instances.py:154
+#: src/sql_manager.py:77 src/widgets/instances/ollama_instances.py:130
+#: src/widgets/instances/openai_instances.py:156
 msgid "Value"
 msgstr ""
 
@@ -5033,16 +5168,16 @@ msgstr ""
 msgid "Chat imported successfully"
 msgstr ""
 
-#: src/window.py:370 src/widgets/chat.py:256 src/widgets/chat.py:260
-#: src/widgets/chat.py:812 src/widgets/chat.py:845
+#: src/window.py:373 src/widgets/chat.py:256 src/widgets/chat.py:260
+#: src/widgets/chat.py:815 src/widgets/chat.py:848
 msgid "New Folder"
 msgstr ""
 
-#: src/window.py:407
+#: src/window.py:410
 msgid "Pull Model"
 msgstr ""
 
-#: src/window.py:408
+#: src/window.py:411
 msgid "Please enter the model name following this template: name:tag"
 msgstr ""
 
@@ -5078,6 +5213,7 @@ msgid "Download Background Removal Model"
 msgstr ""
 
 #: src/widgets/activities/background_remover.py:177
+#, python-brace-format
 msgid "To use this tool you'll need to download a special model ({})"
 msgstr ""
 
@@ -5143,6 +5279,7 @@ msgid "Download Speech Recognition Model"
 msgstr ""
 
 #: src/widgets/activities/transcriber.py:78 src/widgets/voice.py:272
+#, python-brace-format
 msgid "To use speech recognition you'll need to download a special model ({})"
 msgstr ""
 
@@ -5168,6 +5305,7 @@ msgid "An error occurred while transcribing audio"
 msgstr ""
 
 #: src/widgets/activities/viewers.py:17 src/widgets/attachments.py:320
+#: src/widgets/models/added.py:276
 msgid "Image"
 msgstr ""
 
@@ -5251,127 +5389,123 @@ msgstr ""
 msgid "Are you sure you want to remove this instance?"
 msgstr ""
 
-#: src/widgets/instances/__init__.py:324 src/widgets/models/added.py:313
-#: src/widgets/models/basic.py:304
-msgid "Remove"
-msgstr ""
-
-#: src/widgets/instances/ollama_instances.py:127
-#: src/widgets/instances/openai_instances.py:153
+#: src/widgets/instances/ollama_instances.py:129
+#: src/widgets/instances/openai_instances.py:155
 msgid "Arguments"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:128
-#: src/widgets/instances/openai_instances.py:154
+#: src/widgets/instances/ollama_instances.py:130
+#: src/widgets/instances/openai_instances.py:156
 msgid "Argument"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:156
-#: src/widgets/instances/openai_instances.py:184
+#: src/widgets/instances/ollama_instances.py:158
+#: src/widgets/instances/openai_instances.py:186
 msgid "Tool Error"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:157
-#: src/widgets/instances/openai_instances.py:185
+#: src/widgets/instances/ollama_instances.py:159
+#: src/widgets/instances/openai_instances.py:187
 msgid "An error occurred while running tool"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:254
-#: src/widgets/instances/ollama_instances.py:366
-#: src/widgets/instances/ollama_instances.py:381
-#: src/widgets/instances/ollama_instances.py:637
-#: src/widgets/instances/ollama_instances.py:757
-#: src/widgets/instances/openai_instances.py:241
-#: src/widgets/instances/openai_instances.py:316
-#: src/widgets/instances/openai_instances.py:372
-#: src/widgets/instances/openai_instances.py:417
-#: src/widgets/instances/openai_instances.py:478
-#: src/widgets/instances/openai_instances.py:517
-#: src/widgets/instances/openai_instances.py:550
-#: src/widgets/instances/openai_instances.py:629
+#: src/widgets/instances/ollama_instances.py:256
+#: src/widgets/instances/ollama_instances.py:368
+#: src/widgets/instances/ollama_instances.py:383
+#: src/widgets/instances/ollama_instances.py:639
+#: src/widgets/instances/ollama_instances.py:759
+#: src/widgets/instances/openai_instances.py:243
+#: src/widgets/instances/openai_instances.py:318
+#: src/widgets/instances/openai_instances.py:374
+#: src/widgets/instances/openai_instances.py:419
+#: src/widgets/instances/openai_instances.py:480
+#: src/widgets/instances/openai_instances.py:519
+#: src/widgets/instances/openai_instances.py:552
+#: src/widgets/instances/openai_instances.py:631
 msgid "Instance Error"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:255
-#: src/widgets/instances/openai_instances.py:242
+#: src/widgets/instances/ollama_instances.py:257
+#: src/widgets/instances/openai_instances.py:244
 msgid "Message generation failed"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:367
-#: src/widgets/instances/ollama_instances.py:758
-#: src/widgets/instances/openai_instances.py:317
-#: src/widgets/instances/openai_instances.py:373
-#: src/widgets/instances/openai_instances.py:418
+#: src/widgets/instances/ollama_instances.py:369
+#: src/widgets/instances/ollama_instances.py:760
+#: src/widgets/instances/openai_instances.py:319
+#: src/widgets/instances/openai_instances.py:375
+#: src/widgets/instances/openai_instances.py:420
 msgid "Could not retrieve added models"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:382
+#: src/widgets/instances/ollama_instances.py:384
 msgid "Could not retrieve available models"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:441
+#: src/widgets/instances/ollama_instances.py:443
 msgid "Error Pulling Model"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:522
+#: src/widgets/instances/ollama_instances.py:524
 msgid "Ollama (Managed)"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:523
+#: src/widgets/instances/ollama_instances.py:525
 msgid "Local AI instance managed directly by Alpaca"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:526
-#: src/widgets/instances/ollama_instances.py:652
-#: src/widgets/instances/ollama_instances.py:680
+#: src/widgets/instances/ollama_instances.py:528
+#: src/widgets/instances/ollama_instances.py:654
+#: src/widgets/instances/ollama_instances.py:682
 msgid "Instance"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:565
+#: src/widgets/instances/ollama_instances.py:567
 msgid "Alpaca Support"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:572
+#: src/widgets/instances/ollama_instances.py:574
 msgid "Model request too large for system"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:575
+#: src/widgets/instances/ollama_instances.py:577
 msgid "AMD GPU detected but the extension is missing, Ollama will use CPU."
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:577
+#: src/widgets/instances/ollama_instances.py:579
 msgid "AMD GPU detected but ROCm is missing, Ollama will use CPU."
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:579
+#: src/widgets/instances/ollama_instances.py:581
+#, python-brace-format
 msgid "Using AMD GPU type '{}'"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:603
+#: src/widgets/instances/ollama_instances.py:605
 msgid "Integrated Ollama instance is not running"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:638
+#: src/widgets/instances/ollama_instances.py:640
 msgid "Managed Ollama instance failed to start"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:644
+#: src/widgets/instances/ollama_instances.py:646
 msgid "Integrated Ollama instance is running"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:648
+#: src/widgets/instances/ollama_instances.py:650
 msgid "Ollama (External)"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:649
+#: src/widgets/instances/ollama_instances.py:651
 msgid "Local or remote AI instance not managed by Alpaca"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:676
+#: src/widgets/instances/ollama_instances.py:678
 msgid "Ollama (Cloud)"
 msgstr ""
 
-#: src/widgets/instances/ollama_instances.py:677
+#: src/widgets/instances/ollama_instances.py:679
 msgid "Online instance directly managed by Ollama (Experimental)"
 msgstr ""
 
@@ -5379,69 +5513,69 @@ msgstr ""
 msgid "Instances"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:479
-#: src/widgets/instances/openai_instances.py:518
-#: src/widgets/instances/openai_instances.py:551
+#: src/widgets/instances/openai_instances.py:481
+#: src/widgets/instances/openai_instances.py:520
+#: src/widgets/instances/openai_instances.py:553
 msgid "Could not retrieve models"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:491
+#: src/widgets/instances/openai_instances.py:493
 msgid "Alibaba Cloud Qwen large language models via DashScope"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:497
+#: src/widgets/instances/openai_instances.py:499
 msgid "Fireworks AI inference platform"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:530
+#: src/widgets/instances/openai_instances.py:532
 msgid "Lambda Labs cloud inference API"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:563
+#: src/widgets/instances/openai_instances.py:565
 msgid "Cerebras AI cloud inference API"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:569
+#: src/widgets/instances/openai_instances.py:571
 msgid "Kluster AI cloud inference API"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:575
+#: src/widgets/instances/openai_instances.py:577
 msgid "Kimi large language models by Moonshot AI"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:582
+#: src/widgets/instances/openai_instances.py:584
 msgid "Mistral AI large language models"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:589
+#: src/widgets/instances/openai_instances.py:591
 msgid "Meta AI Llama API"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:595
+#: src/widgets/instances/openai_instances.py:597
 msgid "Novita AI cloud inference API"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:602
+#: src/widgets/instances/openai_instances.py:604
 msgid "DeepInfra cloud inference API"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:608
+#: src/widgets/instances/openai_instances.py:610
 msgid "CompactifAI inference platform"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:630
+#: src/widgets/instances/openai_instances.py:632
 msgid "Could not retrieve CompactifAI models"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:642
+#: src/widgets/instances/openai_instances.py:644
 msgid "Grok instance from X.ai"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:646
+#: src/widgets/instances/openai_instances.py:648
 msgid "OpenAI Compatible Instance"
 msgstr ""
 
-#: src/widgets/instances/openai_instances.py:648
+#: src/widgets/instances/openai_instances.py:650
 msgid "AI instance compatible with OpenAI library"
 msgstr ""
 
@@ -5478,6 +5612,7 @@ msgid "Attach Website? (Experimental)"
 msgstr ""
 
 #: src/widgets/message.py:441
+#, python-brace-format
 msgid ""
 "Are you sure you want to attach\n"
 "'{}'?"
@@ -5542,12 +5677,13 @@ msgid "Delete Attachment?"
 msgstr ""
 
 #: src/widgets/attachments.py:238 src/widgets/attachments.py:359
-#: src/widgets/chat.py:1034
+#: src/widgets/chat.py:1037
+#, python-brace-format
 msgid "Are you sure you want to delete '{}'?"
 msgstr ""
 
 #: src/widgets/attachments.py:240 src/widgets/attachments.py:361
-#: src/widgets/chat.py:876 src/widgets/chat.py:1036
+#: src/widgets/chat.py:879 src/widgets/chat.py:1039
 msgid "Delete"
 msgstr ""
 
@@ -5587,21 +5723,23 @@ msgstr ""
 msgid "Attach Photo From Camera"
 msgstr ""
 
-#: src/widgets/chat.py:30 src/widgets/chat.py:704
+#: src/widgets/chat.py:30 src/widgets/chat.py:707
 msgid "Root"
 msgstr ""
 
-#: src/widgets/chat.py:248 src/widgets/chat.py:833 src/widgets/chat.py:987
+#: src/widgets/chat.py:248 src/widgets/chat.py:836 src/widgets/chat.py:990
 #: src/widgets/dialog.py:199 src/widgets/dialog.py:212
 #: src/widgets/dialog.py:225
 msgid "Accept"
 msgstr ""
 
 #: src/widgets/chat.py:356
+#, python-brace-format
 msgid "Use '{}'"
 msgstr ""
 
 #: src/widgets/chat.py:403
+#, python-brace-format
 msgid "Greeting #{}"
 msgstr ""
 
@@ -5609,113 +5747,130 @@ msgstr ""
 msgid "Use Greeting"
 msgstr ""
 
-#: src/widgets/chat.py:619
+#: src/widgets/chat.py:622
+#, python-brace-format
 msgid "Send prompt: '{}'"
 msgstr ""
 
-#: src/widgets/chat.py:682
+#: src/widgets/chat.py:685
 msgid "The selected model does not have a character card"
 msgstr ""
 
-#: src/widgets/chat.py:783 src/widgets/chat.py:841
+#: src/widgets/chat.py:786 src/widgets/chat.py:844
 msgid "Edit Folder"
 msgstr ""
 
-#: src/widgets/chat.py:790 src/widgets/chat.py:873
+#: src/widgets/chat.py:793 src/widgets/chat.py:876
 msgid "Delete Folder"
 msgstr ""
 
-#: src/widgets/chat.py:842 src/widgets/chat.py:996
+#: src/widgets/chat.py:845 src/widgets/chat.py:999
+#, python-brace-format
 msgid "Editing '{}'"
 msgstr ""
 
-#: src/widgets/chat.py:874
+#: src/widgets/chat.py:877
+#, python-brace-format
 msgid ""
 "Are you sure you want to delete '{}' and all it's sub-folders and chats?"
 msgstr ""
 
-#: src/widgets/chat.py:956
+#: src/widgets/chat.py:959
 msgid "Generate Podcast"
 msgstr ""
 
-#: src/widgets/chat.py:1002
+#: src/widgets/chat.py:1005
 msgid "Use as Template"
 msgstr ""
 
-#: src/widgets/chat.py:1041
+#: src/widgets/chat.py:1044
+#, python-brace-format
 msgid "Copy of {}"
 msgstr ""
 
-#: src/widgets/chat.py:1053
+#: src/widgets/chat.py:1056
 msgid "Chat exported successfully"
 msgstr ""
 
-#: src/widgets/chat.py:1073
+#: src/widgets/chat.py:1076
 msgid "User"
 msgstr ""
 
-#: src/widgets/chat.py:1077
+#: src/widgets/chat.py:1080
 msgid "System"
 msgstr ""
 
-#: src/widgets/chat.py:1123
+#: src/widgets/chat.py:1126
 msgid "Importable (.db)"
 msgstr ""
 
-#: src/widgets/chat.py:1124
+#: src/widgets/chat.py:1127
 msgid "Markdown"
 msgstr ""
 
-#: src/widgets/chat.py:1125
+#: src/widgets/chat.py:1128
 msgid "Markdown (Obsidian Style)"
 msgstr ""
 
-#: src/widgets/chat.py:1126
+#: src/widgets/chat.py:1129
 msgid "JSON"
 msgstr ""
 
-#: src/widgets/chat.py:1127
+#: src/widgets/chat.py:1130
 msgid "JSON (Include Metadata)"
 msgstr ""
 
-#: src/widgets/chat.py:1132
+#: src/widgets/chat.py:1135
 msgid "Select a method to export the chat"
 msgstr ""
 
-#: src/widgets/models/added.py:203
+#: src/widgets/models/added.py:108
 msgid "Family"
 msgstr ""
 
-#: src/widgets/models/added.py:204
+#: src/widgets/models/added.py:109
 msgid "Parameter Size"
 msgstr ""
 
-#: src/widgets/models/added.py:205
+#: src/widgets/models/added.py:110
 msgid "Quantization Level"
 msgstr ""
 
-#: src/widgets/models/added.py:208
+#: src/widgets/models/added.py:113
 msgid "Parent Model"
 msgstr ""
 
-#: src/widgets/models/added.py:211 src/widgets/models/added.py:213
+#: src/widgets/models/added.py:116 src/widgets/models/added.py:118
 msgid "Modified At"
 msgstr ""
 
-#: src/widgets/models/added.py:220
-msgid "Description"
+#: src/widgets/models/added.py:224
+msgid "Character Card Detected"
 msgstr ""
 
-#: src/widgets/models/added.py:314
-msgid "Change"
+#: src/widgets/models/added.py:225
+msgid "Import character card data from picture?"
 msgstr ""
 
-#: src/widgets/models/added.py:322
-msgid "Model Profile Picture"
+#: src/widgets/models/added.py:271
+msgid "Profile Picture Exported Successfully"
 msgstr ""
 
-#: src/widgets/models/added.py:323
-msgid "What do you want to do with the model's profile picture?"
+#: src/widgets/models/added.py:288
+msgid "Include Character Card"
+msgstr ""
+
+#: src/widgets/models/added.py:291
+msgid "Only Export Picture"
+msgstr ""
+
+#: src/widgets/models/added.py:299
+msgid "Export Profile Picture"
+msgstr ""
+
+#: src/widgets/models/added.py:300
+msgid ""
+"Do you want to include the character card data for use outside of Alpaca?"
 msgstr ""
 
 #: src/widgets/models/basic.py:85
@@ -5723,6 +5878,7 @@ msgid "Already Added"
 msgstr ""
 
 #: src/widgets/models/basic.py:87
+#, python-brace-format
 msgid "Pull '{}'"
 msgstr ""
 
@@ -5738,19 +5894,20 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: src/widgets/models/basic.py:301
+#: src/widgets/models/basic.py:288
 msgid "Remove Model?"
 msgstr ""
 
-#: src/widgets/models/basic.py:302
+#: src/widgets/models/basic.py:289
+#, python-brace-format
 msgid "Are you sure you want to remove '{}'?"
 msgstr ""
 
-#: src/widgets/models/creator.py:142
+#: src/widgets/models/creator.py:131
 msgid "Please add a name"
 msgstr ""
 
-#: src/widgets/models/creator.py:151
+#: src/widgets/models/creator.py:140
 msgid "Model name is already in use"
 msgstr ""
 
@@ -5768,4 +5925,53 @@ msgstr ""
 
 #: src/widgets/tools/tools.py:212
 msgid "Loading Image..."
+msgstr ""
+
+#: src/widgets/characters/character_page.py:41
+#: src/widgets/characters/character_page.py:180
+msgid "Entry Name"
+msgstr ""
+
+#: src/widgets/characters/character_page.py:56
+msgid "Remove Keyword"
+msgstr ""
+
+#: src/widgets/characters/character_page.py:68
+msgid "Keyword"
+msgstr ""
+
+#: src/widgets/characters/character_page.py:170
+msgid "Entry"
+msgstr ""
+
+#: src/widgets/characters/character_page.py:177
+msgid "Create Entry"
+msgstr ""
+
+#: src/widgets/characters/character_page.py:241
+msgid "Character Card Saved Successfully"
+msgstr ""
+
+#: src/widgets/characters/character_page.py:253
+msgid "Character Card Cleared Successfully"
+msgstr ""
+
+#: src/widgets/characters/character_page.py:260
+msgid "Are you sure you want to clear the character card?"
+msgstr ""
+
+#: src/widgets/characters/character_page.py:262
+msgid "Clear"
+msgstr ""
+
+#: src/widgets/characters/export_page.py:46
+msgid "Character Card Exported Successfully"
+msgstr ""
+
+#: src/widgets/characters/export_page.py:61
+msgid "Error Exporting Character Card"
+msgstr ""
+
+#: src/widgets/characters/export_page.py:101
+msgid "Remove Tag"
 msgstr ""
