@@ -48,7 +48,7 @@ The documentation of Alpaca and tutorials are now available at [jeffser.com](htt
 
 Language                | Contributors
 :-----------------------|:-----------
-🇷🇺 Russian              | [Alex K](https://github.com/alexkdeveloper) [DasHi](https://github.com/col83)
+🇷🇺 Russian              | [Alex K](https://github.com/alexkdeveloper) [DasHi](https://github.com/col83) [Snowflake](https://github.com/snow010101)
 🇪🇸 Spanish              | [Jeffry Samuel](https://github.com/jeffser)
 🇫🇷 French               | [Louis Chauvet-Villaret](https://github.com/loulou64490) , [Théo FORTIN](https://github.com/topiga)
 🇧🇷 Brazilian Portuguese | [Daimar Stein](https://github.com/not-a-dev-stein) , [Bruno Antunes](https://github.com/antun3s) , [Lucas Loura](https://github.com/lloura)

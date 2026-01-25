@@ -11,6 +11,7 @@ import os, shutil, platform
 TRANSLATORS = [
     "Alex K (Russian) https://github.com/alexkdeveloper",
     "DasHi (Russian) https://github.com/col83",
+    "Snowflake (Russian) https://github.com/snow010101",
     "Jeffry Samuel (Spanish) https://github.com/jeffser",
     "Louis Chauvet-Villaret (French) https://github.com/loulou64490",
     "Théo FORTIN (French) https://github.com/topiga",
