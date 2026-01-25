@@ -56,7 +56,13 @@ class CharacterExportPage(Adw.NavigationPage):
         picture_b64 = model_preferences.get('picture')
 
         if not picture_b64:
-            ##TODO show error as toast
+            toast_overlay = self.get_ancestor(Adw.ToastOverlay)
+            toast = Adw.Toast(
+                title=_("Error Exporting Character Card")
+            )
+            toast_overlay.add_toast(toast)
+            navigation_view = self.get_ancestor(Adw.NavigationView)
+            navigation_view.pop_to_tag('model')
             return
 
         character_dict = model_preferences.get('character', {})
