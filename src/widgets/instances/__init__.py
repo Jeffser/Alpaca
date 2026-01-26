@@ -6,6 +6,8 @@ import os, shutil, json, re, logging, importlib.util
 from ...sql_manager import generate_uuid, generate_numbered_name, prettify_model_name, Instance as SQL
 from .. import dialog
 from .ollama_instances import BaseInstance as BaseOllama
+if os.getenv('ALPACA_OLLAMA_ONLY', '0') != '1' and importlib.util.find_spec('openai'):
+    from .openai_instances import BaseInstance as BaseOpenAI
 from .ollama_manager import OllamaManager
 
 logger = logging.getLogger(__name__)
@@ -110,26 +112,30 @@ class InstancePreferencesDialog(Adw.Dialog):
             self.set_simple_element_value(el)
 
         #MODEL GROUP
-        self.set_simple_element_value(self.model_directory_el)
+        if self.instance.instance_id:
+            self.set_simple_element_value(self.model_directory_el)
 
-        factory = Gtk.SignalListItemFactory()
-        factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
-        factory.connect("bind", lambda factory, list_item: list_item.get_child().set_label(list_item.get_item().get_string()))
-        self.default_model_el.set_factory(factory)
-        self.title_model_el.set_factory(factory)
+            factory = Gtk.SignalListItemFactory()
+            factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
+            factory.connect("bind", lambda factory, list_item: list_item.get_child().set_label(list_item.get_item().get_string()))
+            self.default_model_el.set_factory(factory)
+            self.title_model_el.set_factory(factory)
 
-        string_list_default = Gtk.StringList()
-        string_list_title = Gtk.StringList()
-        string_list_title.append(_('Use Current Model'))
-        self.model_list = self.instance.get_local_models()
-        for i, model in enumerate(self.model_list):
-            string_list_default.append(prettify_model_name(model.get('name')))
-            string_list_title.append(prettify_model_name(model.get('name')))
+            string_list_default = Gtk.StringList()
+            string_list_title = Gtk.StringList()
+            string_list_title.append(_('Use Current Model'))
+            self.model_list = self.instance.get_local_models()
+            for i, model in enumerate(self.model_list):
+                string_list_default.append(prettify_model_name(model.get('name')))
+                string_list_title.append(prettify_model_name(model.get('name')))
 
-        self.default_model_el.set_model(string_list_default)
-        self.set_simple_element_value(self.default_model_el)
-        self.title_model_el.set_model(string_list_title)
-        self.set_simple_element_value(self.title_model_el)
+            self.default_model_el.set_model(string_list_default)
+            self.set_simple_element_value(self.default_model_el)
+            self.title_model_el.set_model(string_list_title)
+            self.set_simple_element_value(self.title_model_el)
+        else:
+            self.default_model_el.set_visible(False)
+            self.title_model_el.set_visible(False)
 
     def set_simple_element_value(self, el):
         if el.get_name().startswith('override:'):
@@ -223,10 +229,13 @@ class InstancePreferencesDialog(Adw.Dialog):
             properties=self.instance.properties
         )
 
+        self.instance.stop()
+
         if self.instance.row:
             self.instance.row.set_title(self.instance.properties.get('name'))
         else:
             row = InstanceRow(instance=self.instance)
+            self.instance.row = row
             self.get_root().instance_listbox.append(row)
             self.get_root().instance_listbox.select_row(row)
 
@@ -235,7 +244,6 @@ class InstancePreferencesDialog(Adw.Dialog):
 
         else:
             self.get_root().instance_manager_stack.set_visible_child_name('no-instances')
-        self.instance.stop()
 
         self.close()
 
@@ -371,7 +379,6 @@ def create_instance_row(ins:dict) -> InstanceRow or None:
                     )
                 )
     elif os.getenv('ALPACA_OLLAMA_ONLY', '0') != '1' and importlib.util.find_spec('openai'):
-        from .openai_instances import BaseInstance as BaseOpenAI
         for instance_cls in BaseOpenAI.__subclasses__():
             if getattr(instance_cls, 'instance_type', None) == ins.get('type'):
                 return InstanceRow(
