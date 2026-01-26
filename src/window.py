@@ -86,7 +86,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.chat_split_view_overlay.set_show_sidebar(False)
 
     @Gtk.Template.Callback()
-    def add_instance(self, button):
+    def add_instance(self, button, hide_ollama_managed:bool=False):
         def show_dialog(instance):
             Widgets.instances.InstancePreferencesDialog(instance).present(self)
 
@@ -105,6 +105,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         options = {}
         instance_list = Widgets.instances.ollama_instances.BaseInstance.__subclasses__()
+        if hide_ollama_managed:
+            instance_list = instance_list[1:]
         if os.getenv('ALPACA_OLLAMA_ONLY', '0') != '1' and importlib.util.find_spec('openai'):
             instance_list += Widgets.instances.openai_instances.BaseInstance.__subclasses__()
         for ins_type in instance_list:
@@ -277,22 +279,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
         else:
             return Widgets.instances.Empty()
 
-    def prepare_alpaca(self):
-        self.main_navigation_view.replace_with_tags(['chat'])
-
-        #Chat History
-        root_folder = Widgets.chat.Folder(show_bar=False)
-        self.chat_list_navigationview.add(root_folder)
-        root_folder.update()
-
-        if self.get_application().args.new_chat:
-            self.get_chat_list_page().new_chat(self.get_application().args.new_chat)
-
-        Widgets.instances.update_instance_list(
-            instance_listbox=self.instance_listbox,
-            selected_instance_id=self.settings.get_value('selected-instance').unpack()
-        )
-
     def on_chat_imported(self, file):
         if file:
             if os.path.isfile(os.path.join(cache_dir, 'import.db')):
@@ -423,7 +409,19 @@ class AlpacaWindow(Adw.ApplicationWindow):
         Gio.PowerProfileMonitor.dup_default().connect("notify::power-saver-enabled", lambda *_: verify_powersaver_mode())
         self.banner.connect('button-clicked', lambda *_: self.banner.set_revealed(False))
 
-        self.prepare_alpaca()
-        if not self.settings.get_value('skip-welcome').unpack():
-            self.main_navigation_view.replace([Widgets.welcome.Welcome()])
+        #Chat History
+        root_folder = Widgets.chat.Folder(show_bar=False)
+        self.chat_list_navigationview.add(root_folder)
+        root_folder.update()
 
+        if self.get_application().args.new_chat:
+            self.get_chat_list_page().new_chat(self.get_application().args.new_chat)
+
+        Widgets.instances.update_instance_list(
+            instance_listbox=self.instance_listbox,
+            selected_instance_id=self.settings.get_value('selected-instance').unpack()
+        )
+        if len(SQL.get_instances()) == 0:
+            self.main_navigation_view.replace([Widgets.guide.Guide()])
+        else:
+            self.main_navigation_view.replace_with_tags(['chat'])

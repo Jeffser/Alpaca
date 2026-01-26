@@ -1,0 +1,112 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaGuide: Adw.NavigationPage {
+  title: _("Welcome");
+  tag: "welcome";
+
+  child: Adw.ToolbarView {
+    extend-content-to-top-edge: true;
+
+    [top]
+    Adw.HeaderBar {
+      show-title: false;
+    }
+    content: Gtk.Stack main_stack {
+      transition-type: slide_left_right;
+
+      Gtk.StackPage {
+        name: "welcome";
+        child: Adw.StatusPage {
+          icon-name: "com.jeffser.Alpaca";
+          title: _("Welcome to Alpaca");
+          description: _("Powering your potential");
+          child: Gtk.Button {
+            label: _("Begin Guide");
+            halign: center;
+            clicked => $begin_guide();
+            styles [
+              "suggested-action",
+              "pill"
+            ]
+          };
+        };
+      }
+
+      Gtk.StackPage {
+        name: "instance";
+        child: Adw.StatusPage {
+          icon-name: "computer-symbolic";
+          title: _("Instances");
+          description: _("They are the bridge between you and AI models.\n\nOllama can be used to run AI models locally in your device.\n\nYou can modify or create new instances later by accessing the Instance Manager from the main dropdown menu.");
+
+          child: Gtk.Box {
+            orientation: vertical;
+            halign: center;
+            spacing: 10;
+
+            Gtk.Button {
+              label: _("Create Ollama Instance");
+              clicked => $create_ollama_instance();
+              styles [
+                "suggested-action",
+                "pill"
+              ]
+            }
+
+            Gtk.Button {
+              label: _("Connect to External Server");
+              clicked => $create_external_instance();
+              styles [
+                "pill"
+              ]
+            }
+
+          };
+        };
+      }
+
+      Gtk.StackPage {
+        name: "model";
+        child: Adw.StatusPage {
+          icon-name: "brain-augemnted-symbolic";
+          title: _("Models");
+          description: _("Choose the right brain for the job. From lightning-fast replies to advanced coding and creative writing, Alpaca has a model tailored for whatever you might need.\n\nYou can access the Model Manager later from the main drropdown menu");
+
+          child: Gtk.Button {
+            label: _("Open Model Manager");
+            clicked => $open_end();
+            action-name: "app.model_manager_available";
+            halign: center;
+            styles [
+              "suggested-action",
+              "pill"
+            ]
+          };
+        };
+      }
+
+      Gtk.StackPage {
+        name: "end";
+        child: Adw.StatusPage {
+          icon-name: "com.jeffser.Alpaca";
+          title: _("Enjoy Alpaca");
+          description: _("There are even more features waiting for you, explore the whole interface to find more functionality!");
+
+          child: Gtk.Button {
+            label: _("Close Guide");
+            clicked => $close_guide();
+            halign: center;
+            styles [
+              "suggested-action",
+              "pill"
+            ]
+          };
+        };
+      }
+
+
+    };
+
+  };
+}

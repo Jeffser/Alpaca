@@ -202,7 +202,8 @@ class OllamaManager(Adw.Dialog):
             result = self.install_latest_ollama()
             self.navigation_view.replace_with_tags(["installation_ok"] if result else ["error"])
             self.instance.stop()
-            threading.Thread(target=self.instance.start).start()
+            if self.instance.row.get_root():
+                threading.Thread(target=self.instance.start).start()
         if CAN_SELF_MANAGE_OLLAMA:
             threading.Thread(target=run_install, daemon=True).start()
         else:

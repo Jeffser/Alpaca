@@ -7,7 +7,7 @@ widgets = [
   'dialog.py',
   'attachments.py',
   'voice.py',
-  'welcome.py',
+  'guide.py',
   'preferences.py',
 ]
 

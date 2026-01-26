@@ -241,7 +241,6 @@ class InstancePreferencesDialog(Adw.Dialog):
 
         if len(list(self.get_root().instance_listbox)) > 0:
             self.get_root().instance_manager_stack.set_visible_child_name('content')
-
         else:
             self.get_root().instance_manager_stack.set_visible_child_name('no-instances')
 

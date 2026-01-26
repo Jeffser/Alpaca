@@ -6,7 +6,7 @@ blueprints = files(
   'ui/preferences.blp',
   'ui/quick_ask.blp',
   'ui/shortcuts.blp',
-  'ui/welcome.blp',
+  'ui/guide.blp',
   'ui/window.blp',
   'ui/widgets/instances/preferences.blp',
   'ui/widgets/instances/ollama_manager.blp',

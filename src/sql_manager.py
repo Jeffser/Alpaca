@@ -248,7 +248,6 @@ class Instance:
             if c.cursor.execute("SELECT name FROM sqlite_master WHERE type='table' and name='preferences';").fetchall() != []:
                 settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
                 settings_keys = {
-                    'skip_welcome_page': 'skip-welcome',
                     'selected_instance': 'selected-instance',
                     'last_notice_seen': 'last-notice-seen',
                     'selected_chat': 'default-chat',
