@@ -23,6 +23,7 @@ template $AlpacaGuide: Adw.NavigationPage {
           description: _("Powering your potential");
           child: Gtk.Button {
             label: _("Begin Guide");
+            tooltip-text: _("Begin Guide");
             halign: center;
             clicked => $begin_guide();
             styles [
@@ -47,6 +48,7 @@ template $AlpacaGuide: Adw.NavigationPage {
 
             Gtk.Button {
               label: _("Create Ollama Instance");
+              tooltip-text: _("Create Ollama Instance");
               clicked => $create_ollama_instance();
               styles [
                 "suggested-action",
@@ -56,6 +58,7 @@ template $AlpacaGuide: Adw.NavigationPage {
 
             Gtk.Button {
               label: _("Connect to External Server");
+              tooltip-text: _("Connect to External Server");
               clicked => $create_external_instance();
               styles [
                 "pill"
@@ -75,6 +78,7 @@ template $AlpacaGuide: Adw.NavigationPage {
 
           child: Gtk.Button {
             label: _("Open Model Manager");
+            tooltip-text: _("Open Model Manager");
             clicked => $open_end();
             action-name: "app.model_manager_available";
             halign: center;
@@ -95,6 +99,7 @@ template $AlpacaGuide: Adw.NavigationPage {
 
           child: Gtk.Button {
             label: _("Close Guide");
+            tooltip-text: _("Close Guide");
             clicked => $close_guide();
             halign: center;
             styles [

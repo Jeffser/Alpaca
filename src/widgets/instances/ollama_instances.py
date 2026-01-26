@@ -654,7 +654,7 @@ class OllamaManaged(BaseInstance):
                 threading.Thread(target=self.log_output, args=(self.process.stderr,), daemon=True).start()
                 logger.info("Started Alpaca's Ollama instance")
                 self.version_number = subprocess.check_output("{} -v".format(OLLAMA_BINARY_PATH), shell=True).decode('utf-8')
-                self.version_number = self.version_number.strip('ollama version is ').strip()
+                self.version_number = self.version_number.split(' ')[-1].strip()
                 if self.version_number:
                     logger.info('Ollama version is {}'.format(self.version_number))
                 if CAN_SELF_MANAGE_OLLAMA and self.row.get_root().settings.get_value('ollama-managed-auto-check-update').unpack() and time.time() - self.last_auto_version_check_time > 300:
