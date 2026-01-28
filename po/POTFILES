@@ -4,10 +4,10 @@ data/com.jeffser.Alpaca.metainfo.xml.in
 data/com.jeffser.Alpaca.SearchProvider.desktop.in
 data/com.jeffser.Alpaca.SearchProvider.service.in
 
+src/ui/guide.blp
 src/ui/preferences.blp
 src/ui/quick_ask.blp
 src/ui/shortcuts.blp
-src/ui/welcome.blp
 src/ui/window.blp
 
 src/ui/widgets/activities/activity_dialog.blp
@@ -36,17 +36,25 @@ src/ui/widgets/attachments/image_attachment_container.blp
 src/ui/widgets/blocks/code.blp
 src/ui/widgets/blocks/editing_text.blp
 src/ui/widgets/blocks/generating_text.blp
+src/ui/widgets/blocks/inline_picture.blp
 src/ui/widgets/blocks/latex_renderer.blp
 src/ui/widgets/blocks/table.blp
 src/ui/widgets/blocks/text.blp
 src/ui/widgets/blocks/thinking.blp
 
+src/ui/widgets/characters/character_book_entry_row.blp
+src/ui/widgets/characters/character_page.blp
+src/ui/widgets/characters/export_page.blp
+src/ui/widgets/characters/greeting_row.blp
+
+src/ui/widgets/chat/character_greeting_selector.blp
 src/ui/widgets/chat/chat.blp
 src/ui/widgets/chat/chat_row.blp
 src/ui/widgets/chat/folder.blp
 src/ui/widgets/chat/folder_row.blp
 src/ui/widgets/chat/template_selector.blp
 
+src/ui/widgets/instances/ollama_manager.blp
 src/ui/widgets/instances/preferences.blp
 
 src/ui/widgets/message/block_container.blp
@@ -55,6 +63,7 @@ src/ui/widgets/message/global_footer.blp
 src/ui/widgets/message/global_message_textview.blp
 src/ui/widgets/message/message.blp
 src/ui/widgets/message/popup.blp
+src/ui/widgets/message/scrollable_textview.blp
 
 src/ui/widgets/models/added_dialog.blp
 src/ui/widgets/models/added_selector.blp
@@ -64,18 +73,16 @@ src/ui/widgets/models/basic_dialog.blp
 src/ui/widgets/models/category_pill.blp
 src/ui/widgets/models/creator_dialog.blp
 src/ui/widgets/models/info_box.blp
+src/ui/widgets/models/model_manager.blp
 src/ui/widgets/models/pulling_dialog.blp
 
 src/ui/widgets/tools/selector.blp
 
 src/ui/widgets/voice/dictate_button.blp
 src/ui/widgets/voice/microphone_button.blp
+src/ui/widgets/voice/podcast_dialog.blp
 
-src/ui/widgets/characters/character_book_entry_row.blp
-src/ui/widgets/characters/character_page.blp
-src/ui/widgets/characters/export_page.blp
-src/ui/widgets/characters/greeting_row.blp
-
+src/alpaca_search_provider.py.in
 src/constants.py
 src/main.py
 src/ollama_models.py
@@ -95,34 +102,37 @@ src/widgets/activities/web_browser.py
 
 src/widgets/blocks/__init__.py
 src/widgets/blocks/code.py
+src/widgets/blocks/inline_picture.py
 src/widgets/blocks/latex.py
 src/widgets/blocks/separator.py
 src/widgets/blocks/table.py
 src/widgets/blocks/text.py
 src/widgets/blocks/thinking.py
 
+src/widgets/characters/__init__.py
+src/widgets/characters/character_page.py
+src/widgets/characters/export_page.py
+
 src/widgets/instances/__init__.py
 src/widgets/instances/ollama_instances.py
+src/widgets/instances/ollama_manager.py
 src/widgets/instances/openai_instances.py
-
-src/widgets/message.py
-src/widgets/voice.py
-src/widgets/welcome.py
-src/widgets/preferences.py
-src/widgets/__init__.py
-src/widgets/attachments.py
-src/widgets/chat.py
-src/widgets/dialog.py
 
 src/widgets/models/__init__.py
 src/widgets/models/added.py
 src/widgets/models/basic.py
 src/widgets/models/common.py
 src/widgets/models/creator.py
+src/widgets/models/manager.py
 
 src/widgets/tools/__init__.py
 src/widgets/tools/tools.py
 
-src/widgets/characters/__init__.py
-src/widgets/characters/character_page.py
-src/widgets/characters/export_page.py
+src/widgets/__init__.py
+src/widgets/attachments.py
+src/widgets/chat.py
+src/widgets/dialog.py
+src/widgets/guide.py
+src/widgets/message.py
+src/widgets/preferences.py
+src/widgets/voice.py
