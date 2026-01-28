@@ -72,7 +72,7 @@ Language                | Contributors
 🌐 Belarusian           | [Aliaksandr Kliujeŭ](https://github.com/PlagaMedicum)
 🌐 Kabyle               | [Athmane MOKRAOUI](https://github.com/BoFFire) , [MoonShadow](https://github.com/ZiriSut)
 
-Want to add a language? Visit [this discussion](https://github.com/Jeffser/Alpaca/discussions/153) to get started!
+Want to add a language? Visit [this wiki page](https://jeffser.com/alpaca/contributing-translations.html) to get started!
 
 ---
 
