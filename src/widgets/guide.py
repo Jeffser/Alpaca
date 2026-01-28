@@ -4,6 +4,7 @@ from gi.repository import Adw, Gtk, Gio, GLib, Gdk
 from .instances import OllamaManager, create_instance_row
 from ..constants import is_ollama_installed, IN_FLATPAK
 from ..sql_manager import generate_uuid, Instance as SQL
+import shutil
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/guide.ui')
 class Guide(Adw.NavigationPage):
@@ -70,7 +71,7 @@ class Guide(Adw.NavigationPage):
         self.get_root().main_navigation_view.replace_with_tags(['chat'])
 
 def show_EOL_flatpak_extension_dialog(window):
-    if IN_FLATPAK:# and shutil.which('ollama'):
+    if IN_FLATPAK and shutil.which('ollama'):
         def copy_command(btn):
             btn.set_icon_name('check-plain-symbolic')
             Gdk.Display().get_default().get_clipboard().set(btn.get_ancestor(Adw.ActionRow).get_subtitle())
