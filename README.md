@@ -92,4 +92,5 @@ Want to add a language? Visit [this wiki page](https://jeffser.com/alpaca/contri
 
 ## Packaging Alpaca
 
-If you want to package Alpaca in a different packaging method please read [this wiki page](https://github.com/Jeffser/Alpaca/wiki/Packaging-Alpaca).
+If you want to package Alpaca in a different packaging method please read [this wiki page](https://jeffser.com/alpaca/packaging-alpaca.html).
+
