@@ -1,8 +1,8 @@
 # guide.py
 
-from gi.repository import Adw, Gtk, Gio
+from gi.repository import Adw, Gtk, Gio, GLib, Gdk
 from .instances import OllamaManager, create_instance_row
-from ..constants import is_ollama_installed
+from ..constants import is_ollama_installed, IN_FLATPAK
 from ..sql_manager import generate_uuid, Instance as SQL
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/guide.ui')
@@ -68,3 +68,60 @@ class Guide(Adw.NavigationPage):
     @Gtk.Template.Callback()
     def close_guide(self, button):
         self.get_root().main_navigation_view.replace_with_tags(['chat'])
+
+def show_EOL_flatpak_extension_dialog(window):
+    if IN_FLATPAK:# and shutil.which('ollama'):
+        def copy_command(btn):
+            btn.set_icon_name('check-plain-symbolic')
+            Gdk.Display().get_default().get_clipboard().set(btn.get_ancestor(Adw.ActionRow).get_subtitle())
+
+        container = Gtk.Box(
+            orientation=1,
+            spacing=10
+        )
+
+        command_row = Adw.ActionRow(
+            overflow=1,
+            title=_("Uninstall Ollama Command"),
+            subtitle="flatpak uninstall com.jeffser.Alpaca.Plugins.Ollama",
+            css_classes = ["p0", "card", "black_background"]
+        )
+        list(list(list(command_row)[0])[2])[1].set_selectable(True)
+        copy_button = Gtk.Button(
+            tooltip_text=_("Copy Command"),
+            icon_name="edit-copy-symbolic",
+            valign=3,
+            css_classes=['flat']
+        )
+        copy_button.connect('clicked', copy_command)
+        command_row.add_suffix(copy_button)
+        container.append(command_row)
+
+        command_row = Adw.ActionRow(
+            overflow=1,
+            title=_("Uninstall ROCm Command"),
+            subtitle="flatpak uninstall com.jeffser.Alpaca.Plugins.AMD",
+            css_classes = ["p0", "card", "black_background"]
+        )
+        list(list(list(command_row)[0])[2])[1].set_selectable(True)
+        copy_button = Gtk.Button(
+            tooltip_text=_("Copy Command"),
+            icon_name="edit-copy-symbolic",
+            valign=3,
+            css_classes=['flat']
+        )
+        copy_button.connect('clicked', copy_command)
+        command_row.add_suffix(copy_button)
+        container.append(command_row)
+
+        dialog = Adw.AlertDialog(
+            heading=_("Deprecated Extension Found"),
+            body=_("As of Alpaca 9, the Flatpak extensions are no longer used, make sure to uninstall them to save space in your device and to stop this dialog from appearing."),
+            extra_child=container
+        )
+
+        dialog.add_response(
+            id='close',
+            label=_('Close')
+        )
+        GLib.idle_add(dialog.choose, window)

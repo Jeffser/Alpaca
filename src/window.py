@@ -30,7 +30,7 @@ from gi.repository import Adw, Gtk, Gdk, GLib, GtkSource, Gio, Spelling
 
 from .sql_manager import generate_uuid, generate_numbered_name, prettify_model_name, Instance as SQL
 from . import widgets as Widgets
-from .constants import data_dir, source_dir, cache_dir, is_ollama_installed
+from .constants import data_dir, source_dir, cache_dir, is_ollama_installed, IN_FLATPAK
 
 logger = logging.getLogger(__name__)
 
@@ -425,3 +425,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
             self.main_navigation_view.replace([Widgets.guide.Guide()])
         else:
             self.main_navigation_view.replace_with_tags(['chat'])
+
+        # Check if EOL flatpak extension is installed, if so tell the user to remove the thing
+        Widgets.guide.show_EOL_flatpak_extension_dialog(self)
