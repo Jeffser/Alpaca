@@ -5010,6 +5010,18 @@ OLLAMA_MODELS = {
                 [
                         "27b",
                         "17 GB"
+                ],
+                [
+                        "4b-cloud",
+                        "cloud"
+                ],
+                [
+                        "12b-cloud",
+                        "cloud"
+                ],
+                [
+                        "27b-cloud",
+                        "cloud"
                 ]
         ],
         "url": "https://ollama.com/library/gemma3",
@@ -5018,7 +5030,8 @@ OLLAMA_MODELS = {
                 "small",
                 "medium",
                 "big",
-                "huge"
+                "huge",
+                "cloud"
         ],
         "author": "Google DeepMind",
         "languages": [
@@ -6010,6 +6023,7 @@ OLLAMA_MODELS = {
         "description": _("Advanced agentic, reasoning and coding capabilities."),
         "url": "https://ollama.com/library/glm-4.6",
         "categories": [
+                "tools",
                 "cloud",
                 "code"
         ],
@@ -6119,6 +6133,7 @@ OLLAMA_MODELS = {
         "description": _("A state-of-the-art mixture-of-experts (MoE) language model. Kimi K2-Instruct-0905 demonstrates significant improvements in performance on public benchmarks and real-world coding agent tasks."),
         "url": "https://ollama.com/library/kimi-k2",
         "categories": [
+                "tools",
                 "cloud",
                 "code"
         ],
@@ -6137,6 +6152,7 @@ OLLAMA_MODELS = {
         "description": _("MiniMax M2 is a high-efficiency large language model built for coding and agentic workflows."),
         "url": "https://ollama.com/library/minimax-m2",
         "categories": [
+                "tools",
                 "cloud",
                 "code",
                 "math",
@@ -6209,6 +6225,8 @@ OLLAMA_MODELS = {
         "description": _("Google's most intelligent model with SOTA reasoning and multimodal understanding, and powerful agentic and vibe coding capabilities."),
         "url": "https://ollama.com/library/gemini-3-pro-preview",
         "categories": [
+                "vision",
+                "tools",
                 "cloud",
                 "code"
         ],
@@ -6227,6 +6245,7 @@ OLLAMA_MODELS = {
         "description": _("Kimi K2 Thinking, Moonshot AI's best open-source thinking model."),
         "url": "https://ollama.com/library/kimi-k2-thinking",
         "categories": [
+                "tools",
                 "cloud",
                 "code",
                 "multilingual"
@@ -6258,6 +6277,593 @@ OLLAMA_MODELS = {
                 "code"
         ],
         "author": "Deep Cogito",
+        "languages": [
+                "en"
+        ],
+    },
+    "ministral-3": {
+        "tags": [
+                [
+                        "latest",
+                        "6.0 GB"
+                ],
+                [
+                        "3b",
+                        "3.0 GB"
+                ],
+                [
+                        "8b",
+                        "6.0 GB"
+                ],
+                [
+                        "14b",
+                        "9.1 GB"
+                ],
+                [
+                        "3b-cloud",
+                        "cloud"
+                ],
+                [
+                        "8b-cloud",
+                        "cloud"
+                ],
+                [
+                        "14b-cloud",
+                        "cloud"
+                ]
+        ],
+        "description": _("The Ministral 3 family is designed for edge deployment, capable of running on a wide range of hardware."),
+        "url": "https://ollama.com/library/ministral-3",
+        "categories": [
+                "vision",
+                "tools",
+                "medium",
+                "small",
+                "big",
+                "huge",
+                "cloud"
+        ],
+        "author": "Mistral AI",
+        "languages": [
+                "en"
+        ],
+    },
+    "rnj-1": {
+        "tags": [
+                [
+                        "latest",
+                        "5.1 GB"
+                ],
+                [
+                        "8b",
+                        "5.1 GB"
+                ],
+                [
+                        "8b-cloud",
+                        "cloud"
+                ]
+        ],
+        "description": _("Rnj-1 is a family of 8B parameter open-weight, dense models trained from scratch by Essential AI, optimized for code and STEM with capabilities on par with SOTA open-weight models."),
+        "url": "https://ollama.com/library/rnj-1",
+        "categories": [
+                "tools",
+                "medium",
+                "big",
+                "cloud",
+                "code",
+                "math"
+        ],
+        "author": "Essential AI",
+        "languages": [
+                "en"
+        ],
+    },
+    "qwen3-next": {
+        "tags": [
+                [
+                        "latest",
+                        "50 GB"
+                ],
+                [
+                        "80b",
+                        "50 GB"
+                ],
+                [
+                        "80b-cloud",
+                        "cloud"
+                ]
+        ],
+        "description": _("The first installment in the Qwen3-Next series with strong performance in terms of both parameter efficiency and inference speed."),
+        "url": "https://ollama.com/library/qwen3-next",
+        "categories": [
+                "tools",
+                "huge",
+                "cloud"
+        ],
+        "author": "Alibaba",
+        "languages": [
+                "en"
+        ],
+    },
+    "nemotron-3-nano": {
+        "tags": [
+                [
+                        "latest",
+                        "24 GB"
+                ],
+                [
+                        "30b",
+                        "24 GB"
+                ],
+                [
+                        "30b-cloud",
+                        "cloud"
+                ]
+        ],
+        "description": _("Nemotron 3 Nano - A new Standard for Efficient, Open, and Intelligent Agentic Models"),
+        "url": "https://ollama.com/library/nemotron-3-nano",
+        "categories": [
+                "tools",
+                "huge",
+                "cloud"
+        ],
+        "author": "Nvidia",
+        "languages": [
+                "en"
+        ],
+    },
+    "devstral-small-2": {
+        "tags": [
+                [
+                        "latest",
+                        "15 GB"
+                ],
+                [
+                        "24b",
+                        "15 GB"
+                ],
+                [
+                        "24b-cloud",
+                        "cloud"
+                ]
+        ],
+        "description": _("24B model that excels at using tools to explore codebases, editing multiple files and power software engineering agents."),
+        "url": "https://ollama.com/library/devstral-small-2",
+        "categories": [
+                "vision",
+                "tools",
+                "big",
+                "huge",
+                "cloud",
+                "code"
+        ],
+        "author": "Mistral AI",
+        "languages": [
+                "en"
+        ],
+    },
+    "olmo-3": {
+        "tags": [
+                [
+                        "latest",
+                        "4.5 GB"
+                ],
+                [
+                        "7b",
+                        "4.5 GB"
+                ],
+                [
+                        "32b",
+                        "19 GB"
+                ]
+        ],
+        "description": _("Olmo is a series of Open language models designed to enable the science of language models. These models are pre-trained on the Dolma 3 dataset and post-trained on the Dolci datasets."),
+        "url": "https://ollama.com/library/olmo-3",
+        "categories": [
+                "small",
+                "medium",
+                "big",
+                "code",
+                "math"
+        ],
+        "author": "Ai2",
+        "languages": [
+                "en"
+        ],
+    },
+    "translategemma": {
+        "tags": [
+                [
+                        "latest",
+                        "3.3 GB"
+                ],
+                [
+                        "4b",
+                        "3.3 GB"
+                ],
+                [
+                        "12b",
+                        "8.1 GB"
+                ],
+                [
+                        "27b",
+                        "17 GB"
+                ]
+        ],
+        "description": _("A new collection of open translation models built on Gemma 3, helping people communicate across 55 languages."),
+        "url": "https://ollama.com/library/translategemma",
+        "categories": [
+                "vision",
+                "small",
+                "medium",
+                "big",
+                "huge"
+        ],
+        "author": "Google DeepMind",
+        "languages": [
+                "en"
+        ],
+    },
+    "glm-4.7-flash": {
+        "tags": [
+                [
+                        "latest",
+                        "19 GB"
+                ],
+                [
+                        "q4_K_M",
+                        "19 GB"
+                ],
+                [
+                        "q8_0",
+                        "32 GB"
+                ],
+                [
+                        "bf16",
+                        "60 GB"
+                ]
+        ],
+        "description": _("As the strongest model in the 30B class, GLM-4.7-Flash offers a new option for lightweight deployment that balances performance and efficiency."),
+        "url": "https://ollama.com/library/glm-4.7-flash",
+        "categories": [
+                "tools",
+                "big",
+                "huge"
+        ],
+        "author": "THUDM",
+        "languages": [
+                "en"
+        ],
+    },
+    "olmo-3.1": {
+        "tags": [
+                [
+                        "latest",
+                        "19 GB"
+                ],
+                [
+                        "32b",
+                        "19 GB"
+                ]
+        ],
+        "description": _("Olmo is a series of Open language models designed to enable the science of language models. These models are pre-trained on the Dolma 3 dataset and post-trained on the Dolci datasets."),
+        "url": "https://ollama.com/library/olmo-3.1",
+        "categories": [
+                "tools",
+                "big",
+                "huge",
+                "code",
+                "math"
+        ],
+        "author": "Ai2",
+        "languages": [
+                "en"
+        ],
+    },
+    "devstral-2": {
+        "tags": [
+                [
+                        "latest",
+                        "75 GB"
+                ],
+                [
+                        "123b",
+                        "75 GB"
+                ],
+                [
+                        "123b-cloud",
+                        "cloud"
+                ]
+        ],
+        "description": _("123B model that excels at using tools to explore codebases, editing multiple files and power software engineering agents."),
+        "url": "https://ollama.com/library/devstral-2",
+        "categories": [
+                "tools",
+                "huge",
+                "cloud",
+                "code"
+        ],
+        "author": "Mistral AI",
+        "languages": [
+                "en"
+        ],
+    },
+    "functiongemma": {
+        "tags": [
+                [
+                        "latest",
+                        "301 MB"
+                ],
+                [
+                        "270m",
+                        "301 MB"
+                ]
+        ],
+        "description": _("FunctionGemma is a specialized version of Google's Gemma 3 270M model fine-tuned explicitly for function calling."),
+        "url": "https://ollama.com/library/functiongemma",
+        "categories": [
+                "tools",
+                "small",
+                "medium"
+        ],
+        "author": "Google Deepmind",
+        "languages": [
+                "en"
+        ],
+    },
+    "gemini-3-flash-preview": {
+        "tags": [
+                [
+                        "latest",
+                        "cloud"
+                ],
+                [
+                        "cloud",
+                        "cloud"
+                ]
+        ],
+        "description": _("Gemini 3 Flash offers frontier intelligence built for speed at a fraction of the cost."),
+        "url": "https://ollama.com/library/gemini-3-flash-preview",
+        "categories": [
+                "vision",
+                "tools",
+                "cloud"
+        ],
+        "author": "Google Deepmind",
+        "languages": [
+                "en"
+        ],
+    },
+    "nomic-embed-text-v2-moe": {
+        "tags": [
+                [
+                        "latest",
+                        "958 MB"
+                ]
+        ],
+        "description": _("nomic-embed-text-v2-moe is a multilingual MoE text embedding model that excels at multilingual retrieval."),
+        "url": "https://ollama.com/library/nomic-embed-text-v2-moe",
+        "categories": [
+                "small",
+                "embedding",
+                "multilingual"
+        ],
+        "author": "Nomic AI",
+        "languages": [
+                "en",
+                "es",
+                "fr",
+                "de",
+                "it",
+                "pt",
+                "pl",
+                "nl",
+                "tr",
+                "ja",
+                "vi",
+                "ru",
+                "id",
+                "ar",
+                "cs",
+                "ro",
+                "sv",
+                "el",
+                "uk",
+                "zh",
+                "hu",
+                "da",
+                "no",
+                "hi",
+                "fi",
+                "bg",
+                "ko",
+                "sk",
+                "th",
+                "iw",
+                "ca",
+                "lt",
+                "fa",
+                "ms",
+                "sl",
+                "lv",
+                "mr",
+                "bn",
+                "sq",
+                "cy",
+                "be",
+                "ml",
+                "kn",
+                "mk",
+                "ur",
+                "fy",
+                "fil",
+                "te",
+                "eu",
+                "sw",
+                "so",
+                "sd",
+                "uz",
+                "co",
+                "hr",
+                "gu",
+                "ceb",
+                "eo",
+                "jv",
+                "la",
+                "zu",
+                "mn",
+                "si",
+                "ga",
+                "ky",
+                "tg",
+                "my",
+                "km",
+                "mg",
+                "pa",
+                "sn",
+                "ha",
+                "he",
+                "hmn",
+                "ht",
+                "su",
+                "gd",
+                "ny",
+                "ps",
+                "ku",
+                "sh",
+                "am",
+                "ig",
+                "lo",
+                "mi",
+                "nn",
+                "sm",
+                "yi",
+                "st",
+                "tl",
+                "xh",
+                "yo"
+        ],
+    },
+    "glm-4.7": {
+        "tags": [
+                [
+                        "cloud",
+                        "cloud"
+                ]
+        ],
+        "description": _("Advancing the Coding Capability"),
+        "url": "https://ollama.com/library/glm-4.7",
+        "categories": [
+                "tools",
+                "cloud",
+                "code"
+        ],
+        "author": "THUDM",
+        "languages": [
+                "en"
+        ],
+    },
+    "deepseek-v3.2": {
+        "tags": [
+                [
+                        "cloud",
+                        "cloud"
+                ]
+        ],
+        "description": _("DeepSeek-V3.2, a model that harmonizes high computational efficiency with superior reasoning and agent performance."),
+        "url": "https://ollama.com/library/deepseek-v3.2",
+        "categories": [
+                "tools",
+                "cloud"
+        ],
+        "author": "DeepSeek Team",
+        "languages": [
+                "en"
+        ],
+    },
+    "mistral-large-3": {
+        "tags": [
+                [
+                        "675b-cloud",
+                        "cloud"
+                ]
+        ],
+        "description": _("A general-purpose multimodal mixture-of-experts model for production-grade tasks and enterprise workloads."),
+        "url": "https://ollama.com/library/mistral-large-3",
+        "categories": [
+                "vision",
+                "tools",
+                "cloud"
+        ],
+        "author": "Mistral AI",
+        "languages": [
+                "en"
+        ],
+    },
+    "minimax-m2.1": {
+        "tags": [
+                [
+                        "cloud",
+                        "cloud"
+                ]
+        ],
+        "description": _("Exceptional multilingual capabilities to elevate code engineering"),
+        "url": "https://ollama.com/library/minimax-m2.1",
+        "categories": [
+                "tools",
+                "cloud",
+                "code"
+        ],
+        "author": "Mistral AI",
+        "languages": [
+                "en"
+        ],
+    },
+    "lfm2.5-thinking": {
+        "tags": [
+                [
+                        "latest",
+                        "731 MB"
+                ],
+                [
+                        "1.2b",
+                        "731 MB"
+                ]
+        ],
+        "description": _("LFM2.5 is a new family of hybrid models designed for on-device deployment."),
+        "url": "https://ollama.com/library/lfm2.5-thinking",
+        "categories": [
+                "small",
+                "medium",
+                "multilingual"
+        ],
+        "author": "Liquid",
+        "languages": [
+                "en",
+                "ar",
+                "zh",
+                "fr",
+                "de",
+                "ja",
+                "ko",
+                "es"
+        ],
+    },
+    "kimi-k2.5": {
+        "tags": [
+                [
+                        "cloud",
+                        "cloud"
+                ]
+        ],
+        "description": _("Kimi K2.5 is an open-source, native multimodal agentic model that seamlessly integrates vision and language understanding with advanced agentic capabilities, instant and thinking modes, as well as conversational and agentic paradigms."),
+        "url": "https://ollama.com/library/kimi-k2.5",
+        "categories": [
+                "vision",
+                "tools",
+                "cloud"
+        ],
+        "author": "Kimi Team",
         "languages": [
                 "en"
         ],
