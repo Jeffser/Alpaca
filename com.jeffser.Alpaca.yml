@@ -11,17 +11,7 @@ finish-args:
   - --socket=pulseaudio
   - --socket=wayland
   - --filesystem=/sys/module/amdgpu:ro
-  - --env=LD_LIBRARY_PATH=/app/lib:/usr/lib/x86_64-linux-gnu/GL/default/lib:/usr/lib/x86_64-linux-gnu/openh264/extra:/usr/lib/sdk/llvm15/lib:/app/plugins/lib:/app/plugins/lib/ollama:/app/plugins/lib/ollama/rocm:/app/plugins/lib/ollama/rocm/rocblas/library
   - --env=PATH=/app/bin:/usr/bin:/app/plugins/bin
-add-extensions:
-  com.jeffser.Alpaca.Plugins:
-    merge-dirs: lib;bin
-    directory: plugins
-    no-autodownload: true
-    autodelete: true
-    subdirectories: true
-cleanup-commands:
-  - mkdir ${FLATPAK_DEST}/plugins
 cleanup:
   - /include
   - /lib/pkgconfig
