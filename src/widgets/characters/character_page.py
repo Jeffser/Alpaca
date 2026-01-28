@@ -104,7 +104,7 @@ class CharacterPage(Adw.NavigationPage):
 
         # Enable Character
 
-        self.enable_character_row.set_active(char_data.get('extensions', {}).get('com.jeffser.Alpaca', {}).get('enabled', True))
+        self.enable_character_row.set_active(char_data.get('extensions', {}).get('com.jeffser.Alpaca', {}).get('enabled', False))
 
         # Name
 
@@ -118,7 +118,8 @@ class CharacterPage(Adw.NavigationPage):
             if char_data.get(key):
                 title = key.replace('_', ' ').title()
                 description_content.append('# {}\n\n{}'.format(title, char_data.get(key)))
-            self.character_dict['data'][key] = ""
+            if 'data' in self.character_dict:
+                self.character_dict['data'][key] = ""
 
         description_content = '\n---\n'.join(description_content)
         self.description_el.set_text((description_content or '').strip())
