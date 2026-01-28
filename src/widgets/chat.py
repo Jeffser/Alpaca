@@ -630,16 +630,21 @@ class Chat(Gtk.Stack):
         TemplateSelector(self).present(self.get_root())
 
     @Gtk.Template.Callback()
-    def use_character(self, button):
+    def use_character(self, button:Gtk.Widget=None, ignore_greetings:bool=False, model_name:str=""):
         character_dict = {}
 
-        selected_item = self.get_root().global_footer.model_selector.get_selected_item()
-        if selected_item:
-            character_dict = SQL.get_model_preferences(selected_item.model.get_name()).get('character', {})
+        if not model_name:
+            selected_item = self.get_root().global_footer.model_selector.get_selected_item()
+            if selected_item:
+                model_name = selected_item.model.get_name()
+
+        if model_name:
+            character_dict = SQL.get_model_preferences(model_name).get('character', {})
 
         use_character = character_dict.get('data', {}).get('extensions', {}).get('com.jeffser.Alpaca', {}).get('enabled', False)
         if character_dict == {} or not use_character:
-            button.set_visible(False)
+            if button:
+                button.set_visible(False)
             return
 
         if len(character_dict.keys()) > 0:
@@ -669,15 +674,16 @@ class Chat(Gtk.Stack):
                     dt=datetime.datetime.now(),
                     message_id=generate_uuid(),
                     mode=1,
-                    author=selected_item.model.get_name()
+                    author=model_name
                 )
                 self.add_message(message_element)
                 message_element.block_container.set_content(first_message_content)
                 SQL.insert_or_update_message(message_element)
 
-            alternate_greetings = character_data.get('alternate_greetings', [])
-            if len(alternate_greetings) > 0:
-                CharacterGreetingSelector(alternate_greetings, self.selected_prompt).present(self.get_root())
+            if not ignore_greetings:
+                alternate_greetings = character_data.get('alternate_greetings', [])
+                if len(alternate_greetings) > 0:
+                    CharacterGreetingSelector(alternate_greetings, self.selected_prompt).present(self.get_root())
 
             GLib.idle_add(self.update_visibility)
         else:

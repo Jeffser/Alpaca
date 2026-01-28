@@ -164,6 +164,14 @@ class LiveChat(Adw.Bin):
         buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
 
         chat = self.chat
+        if len(list(chat.container)) == 0 or (len(list(chat.container)) == 1 and list(chat.container)[0].mode == 2): # chat is just starting
+            chat.use_character(
+                button=None,
+                ignore_greetings=True,
+                model_name=current_model
+            )
+
+        return
 
         m_element = message.Message(
             dt=datetime.datetime.now(),
