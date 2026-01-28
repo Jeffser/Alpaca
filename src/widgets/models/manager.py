@@ -167,12 +167,12 @@ class ModelManager(Adw.NavigationPage):
 
         for model in list(self.added_model_flowbox):
             string_search = re.search(query, model.get_child().get_search_string(), re.IGNORECASE)
-            category_filter = len(filtered_categories) == 0 or model.get_child().get_search_categories() & filtered_categories or not self.model_searchbar.get_search_mode()
+            category_filter = len(filtered_categories) == 0 or model.get_child().get_search_categories() & filtered_categories or not self.searchbar.get_search_mode()
             model.set_visible(string_search and category_filter)
 
         for model in list(self.available_model_flowbox):
             string_search = re.search(query, model.get_child().get_search_string(), re.IGNORECASE)
-            category_filter = len(filtered_categories) == 0 or model.get_child().get_search_categories() & filtered_categories or not self.model_searchbar.get_search_mode()
+            category_filter = len(filtered_categories) == 0 or model.get_child().get_search_categories() & filtered_categories or not self.searchbar.get_search_mode()
             model.set_visible(string_search and category_filter)
 
         self.update_added_visibility()
