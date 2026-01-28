@@ -171,8 +171,6 @@ class LiveChat(Adw.Bin):
                 model_name=current_model
             )
 
-        return
-
         m_element = message.Message(
             dt=datetime.datetime.now(),
             message_id=generate_uuid(),
