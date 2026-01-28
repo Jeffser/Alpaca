@@ -535,6 +535,18 @@ class Chat(Gtk.Stack):
         GLib.idle_add(self.update_visibility)
 
     def load_messages(self):
+        def load_message(message_element, content):
+            attachments = SQL.get_attachments(message_element)
+            message_element.block_container.set_content(content)
+
+            for attachment in attachments:
+                message_element.add_attachment(
+                    file_id=attachment[0],
+                    name=attachment[2],
+                    attachment_type=attachment[1],
+                    content=attachment[3]
+                )
+
         messages = SQL.get_messages(self)
         for message in messages:
             message_element = Message(
@@ -543,19 +555,8 @@ class Chat(Gtk.Stack):
                 mode=('user', 'assistant', 'system').index(message[1]),
                 author=message[2]
             )
+            threading.Thread(target=load_message, args=(message_element, message[4])).start()
             self.container.append(message_element)
-
-            attachments = SQL.get_attachments(message_element)
-            for attachment in attachments:
-                GLib.idle_add(
-                    lambda msg=message_element, att=attachment: msg.add_attachment(
-                        file_id=att[0],
-                        name=att[2],
-                        attachment_type=att[1],
-                        content=att[3]
-                    ) and False
-                )
-            GLib.idle_add(message_element.block_container.set_content, message[4])
         GLib.idle_add(self.update_visibility)
 
     def convert_to_ollama(self) -> list:
