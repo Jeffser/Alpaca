@@ -223,7 +223,7 @@ class MicrophoneButton(Gtk.Stack):
                 )
 
                 try:
-                    mic_auto_send = self.get_root().settings.get_value('stt-auto-send').unpack() and hasattr(self.text_view, 'parent_footer')
+                    mic_auto_send = self.get_root().settings.get_value('stt-auto-send').unpack() and self.text_view.get_ancestor(message.GlobalFooter)
                     while button.get_active():
                         frames = []
                         for i in range(0, int(samplerate / 1024 * 2)):
@@ -231,9 +231,8 @@ class MicrophoneButton(Gtk.Stack):
                             frames.append(np.frombuffer(data, dtype=np.int16))
                         audio_data = np.concatenate(frames).astype(np.float32) / 32768.0
                         threading.Thread(target=recognize_audio, args=(loaded_whisper_models.get(model_name), audio_data, buffer.get_end_iter()), daemon=True).start()
-
                         if self.mic_timeout >= 2 and mic_auto_send and buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False):
-                            GLib.idle_add(self.text_view.parent_footer.send_callback)
+                            GLib.idle_add(self.text_view.get_ancestor(message.GlobalFooter).send_callback)
                             break
 
                 except Exception as e:
