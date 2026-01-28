@@ -476,7 +476,8 @@ class Chat(Gtk.Stack):
         self.row = ChatRow(self)
         self.use_template_button.set_visible(bool(self.chat_id))
         GLib.idle_add(self.update_prompts)
-        self.connect('notify::root', lambda *_: self.connect_model_selector())
+        GLib.idle_add(self.connect_model_selector)
+        #self.connect('notify::root', lambda *_: self.connect_model_selector())
 
     def connect_model_selector(self):
         if self.get_root():
@@ -666,7 +667,8 @@ class Chat(Gtk.Stack):
                 SQL.insert_or_update_attachment(message_element, attachment)
                 self.add_message(message_element)
                 message_element.block_container.set_content('')
-                SQL.insert_or_update_message(message_element)
+                if self.chat_id:
+                    SQL.insert_or_update_message(message_element)
 
             first_message_content = character_data.get('first_mes')
             if first_message_content:
@@ -678,7 +680,8 @@ class Chat(Gtk.Stack):
                 )
                 self.add_message(message_element)
                 message_element.block_container.set_content(first_message_content)
-                SQL.insert_or_update_message(message_element)
+                if self.chat_id:
+                    SQL.insert_or_update_message(message_element)
 
             if not ignore_greetings:
                 alternate_greetings = character_data.get('alternate_greetings', [])
