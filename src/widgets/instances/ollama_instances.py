@@ -114,7 +114,8 @@ class BaseInstance:
                     "Authorization": "Bearer {}".format(self.properties.get('api')),
                     "Content-Type": "application/json"
                 },
-                data=json.dumps(params)
+                data=json.dumps(params),
+                verify=not self.properties.get('allow_self_signed_ssl', False)
             )
             tool_calls = response.json().get('message', {}).get('tool_calls', [])
             for tc in tool_calls:
@@ -225,7 +226,8 @@ class BaseInstance:
                         "Content-Type": "application/json"
                     },
                     data=json.dumps(params),
-                    stream=True
+                    stream=True,
+                    verify=not self.properties.get('allow_self_signed_ssl', False)
                 )
                 bot_message.block_container.clear()
                 if response.status_code == 200:
@@ -311,7 +313,8 @@ class BaseInstance:
                     "Authorization": "Bearer {}".format(self.properties.get('api')),
                     "Content-Type": "application/json"
                 },
-                data=json.dumps(params)
+                data=json.dumps(params),
+                verify=not self.properties.get('allow_self_signed_ssl', False)
             )
             data = json.loads(response.json().get('message', {}).get('content', '{"title": "New Chat"}'))
             generated_title = data.get('title').replace('\n', '').strip()
@@ -361,7 +364,8 @@ class BaseInstance:
                 '{}/api/tags'.format(self.properties.get('url')),
                 headers={
                     'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-                }
+                },
+                verify=not self.properties.get('allow_self_signed_ssl', False)
             )
             if response.status_code == 200:
                 return json.loads(response.text).get('models')
@@ -405,7 +409,8 @@ class BaseInstance:
                 data=json.dumps({
                     "name": model_name
                 }),
-                stream=False
+                stream=False,
+                verify=not self.properties.get('allow_self_signed_ssl', False)
             )
             if response.status_code == 200:
                 return json.loads(response.text)
@@ -427,7 +432,8 @@ class BaseInstance:
                     'model': model.get_name(),
                     'stream': True
                 }),
-                stream=True
+                stream=True,
+                verify=not self.properties.get('allow_self_signed_ssl', False)
             )
             if response.status_code == 200:
                 for line in response.iter_lines():
@@ -461,7 +467,8 @@ class BaseInstance:
                 '{}/api/blobs/sha256:{}'.format(self.properties.get('url'), sha256),
                 headers={
                     'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-                }
+                },
+                verify=not self.properties.get('allow_self_signed_ssl', False)
             ).status_code == 200
         except Exception as e:
             return False
@@ -475,7 +482,8 @@ class BaseInstance:
                 data=f,
                 headers={
                     'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-                }
+                },
+                verify=not self.properties.get('allow_self_signed_ssl', False)
             )
 
     def create_model(self, data:dict, model):
@@ -489,7 +497,8 @@ class BaseInstance:
                     'Authorization': 'Bearer {}'.format(self.properties.get('api'))
                 },
                 data=json.dumps(data),
-                stream=True
+                stream=True,
+                verify=not self.properties.get('allow_self_signed_ssl', False)
             )
             if response.status_code == 200:
                 for line in response.iter_lines():
@@ -518,7 +527,8 @@ class BaseInstance:
                 },
                 data=json.dumps({
                     "name": model_name
-                })
+                }),
+                verify=not self.properties.get('allow_self_signed_ssl', False)
             )
             return response.status_code == 200
         except Exception as e:
@@ -694,7 +704,8 @@ class Ollama(BaseInstance):
         'title_model': None,
         'think': False,
         'share_name': 0,
-        'show_response_metadata': False
+        'show_response_metadata': False,
+        'allow_self_signed_ssl': False
     }
 
     def __init__(self, instance_id:str, properties:dict):
@@ -753,7 +764,8 @@ class OllamaCloud(BaseInstance):
                 '{}/api/tags'.format(self.properties.get('url')),
                 headers={
                     'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-                }
+                },
+                verify=not self.properties.get('allow_self_signed_ssl', False)
             )
             if response.status_code == 200:
                 available_models = {}

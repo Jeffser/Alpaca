@@ -101,6 +101,12 @@ template $AlpacaInstancePreferencesDialog: Adw.Dialog {
           name: "show_response_metadata";
         }
 
+        Adw.SwitchRow self_signed_ssl_el {
+          title: _("Allow Self-Signed SSL Certificates");
+          subtitle: _("Only use if you trust the server");
+          name: "allow_self_signed_ssl";
+        }
+
         Adw.SpinRow max_tokens_el {
           title: _("Max Tokens");
           subtitle: _("Defines the maximum number of tokens (words + spaces) the AI can generate in a response. More tokens allow longer replies but may take more time and cost more");

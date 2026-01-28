@@ -30,6 +30,7 @@ class InstancePreferencesDialog(Adw.Dialog):
     expose_el = Gtk.Template.Child()
     share_name_el = Gtk.Template.Child()
     metadata_el = Gtk.Template.Child()
+    self_signed_ssl_el = Gtk.Template.Child()
     max_tokens_el = Gtk.Template.Child()
 
     parameters_group = Gtk.Template.Child()
@@ -93,6 +94,7 @@ class InstancePreferencesDialog(Adw.Dialog):
         self.set_simple_element_value(self.expose_el)
         self.set_simple_element_value(self.share_name_el)
         self.set_simple_element_value(self.metadata_el)
+        self.set_simple_element_value(self.self_signed_ssl_el)
         self.set_simple_element_value(self.max_tokens_el)
 
         # PARAMETERS GROUP
