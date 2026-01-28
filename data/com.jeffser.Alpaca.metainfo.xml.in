@@ -89,6 +89,34 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/blob/main/CONTRIBUTING.md</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="9.0.0" date="2026-01-28">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/9.0.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Added Character Cards</li>
+          <li>Added Ollama Manager (replacement for Flatpak extensions)</li>
+          <li>Added option to include messages when searching for chats</li>
+          <li>Added starter guide for new users</li>
+          <li>Added reminder for users to uninstall Flatpak extensions</li>
+          <li>Removed notice dialog</li>
+          <li>Added light mode for code blocks and multiple activities</li>
+          <li>Made slight redesign for activities</li>
+          <li>Improved Model Manager and Model Creator</li>
+          <li>Added message block to display in-line pictures</li>
+          <li>Added option to allow self-signed SSL certificates for Ollama (external) instances</li>
+          <li>Added legal notice to about dialog</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed title generation not working with OpenAI instances</li>
+          <li>Fixed external instances not working when a key is not specified</li>
+          <li>Fixed errors when creating / editing instances</li>
+          <li>Fixed auto send message feature in Live Chat activity</li>
+          <li>Fixed ROCm not working</li>
+        </ul>
+      </description>
+    </release>
     <release version="8.5.1" date="2025-12-11">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/8.5.1</url>
       <description>
