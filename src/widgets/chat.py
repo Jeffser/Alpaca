@@ -331,7 +331,7 @@ class Folder(Adw.NavigationPage):
             if len(list(chat.container)) > 0:
                 model_index = find_model_index(list(chat.container)[-1].get_model())
             if model_index == -1:
-                model_index = find_model_index(self.get_root().get_current_instance().get_default_model())
+                model_index = find_model_index(self.get_root().get_current_instance().properties.get('default_model'))
 
             if model_index and model_index != -1:
                 self.get_root().global_footer.model_selector.set_selected(model_index)
