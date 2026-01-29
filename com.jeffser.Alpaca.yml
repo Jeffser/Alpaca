@@ -126,8 +126,8 @@ modules:
         --prefix=${FLATPAK_DEST} "PyICU" --no-build-isolation
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/88/b0/c8b61bac55424e2ff80e20d7251c3f002baff3c07c34cee3849e3505d8f5/pyicu-2.15.3.tar.gz
-        sha256: f32e78e1cb64d0aeb14f027e037a8944861d3114548818a6adf0081ef51aefc3
+        url: https://files.pythonhosted.org/packages/11/c3/8d558b30deb33eb583c0bcae3e64d6db8316b69461a04bb9db5ff63d3f6e/pyicu-2.16.tar.gz
+        sha256: 42b3a8062e3b23e927ca727e6b5e1730d86c70279834e4887152895d2eb012d9
         x-checker-data:
           type: pypi
           name: PyICU
