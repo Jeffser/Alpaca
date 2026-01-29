@@ -106,9 +106,9 @@ class QuickAskWindow(Adw.ApplicationWindow):
             self.chat.add_message(m_element_bot)
             self.chat.busy=True
             if len(available_tools) > 0:
-                threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, available_tools, True), daemon=True).start()
+                GLib.idle_add(threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, available_tools, True), daemon=True).start)
             else:
-                threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model), daemon=True).start()
+                GLib.idle_add(threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model), daemon=True).start)
 
     def write_and_send_message(self, message:str):
         buffer = self.global_footer.get_buffer()

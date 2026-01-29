@@ -93,7 +93,7 @@ class OptionPopup(Gtk.Popover):
                 tools = {t.name: t for t in list(self.get_root().global_footer.tool_selector.get_model()) if t.runnable}
 
             if len(tools) > 0:
-                threading.Thread(
+                GLib.idle_add(threading.Thread(
                     target=self.get_root().get_current_instance().use_tools,
                     args=(
                         message_element,
@@ -102,16 +102,16 @@ class OptionPopup(Gtk.Popover):
                         True
                     ),
                     daemon=True
-                ).start()
+                ).start)
             else:
-                threading.Thread(
+                GLib.idle_add(threading.Thread(
                     target=message_element.get_root().get_current_instance().generate_message,
                     args=(
                         message_element,
                         current_model
                     ),
                     daemon=True
-                ).start()
+                ).start)
 
             message_element.main_stack.set_visible_child_name('loading')
         else:

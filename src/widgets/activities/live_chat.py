@@ -215,9 +215,9 @@ class LiveChat(Adw.Bin):
             chat.busy = True
             current_instance = self.get_current_instance()
             if len(available_tools) > 0:
-                threading.Thread(target=current_instance.use_tools, args=(m_element_bot, current_model, available_tools, True), daemon=True).start()
+                GLib.idle_add(threading.Thread(target=current_instance.use_tools, args=(m_element_bot, current_model, available_tools, True), daemon=True).start)
             else:
-                threading.Thread(target=current_instance.generate_message, args=(m_element_bot, current_model), daemon=True).start()
+                GLib.idle_add(threading.Thread(target=current_instance.generate_message, args=(m_element_bot, current_model), daemon=True).start)
 
     def get_current_instance(self):
         return self.get_root().get_application().get_main_window().get_current_instance()

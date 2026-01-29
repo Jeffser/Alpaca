@@ -260,9 +260,9 @@ class AlpacaWindow(Adw.ApplicationWindow):
             current_chat.add_message(m_element_bot)
             SQL.insert_or_update_message(m_element_bot)
             if len(available_tools) > 0:
-                threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, available_tools, True), daemon=True).start()
+                GLib.idle_add(threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, available_tools, True), daemon=True).start)
             else:
-                threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model), daemon=True).start()
+                GLib.idle_add(threading.Thread(target=self.get_current_instance().generate_message, args=(m_element_bot, current_model), daemon=True).start)
         elif mode==1:
             current_chat.set_visible_child_name('content')
 
