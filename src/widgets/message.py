@@ -154,8 +154,8 @@ class BlockContainer(Gtk.Box):
         message = self.get_ancestor(Message)
 
         for block in blocks.text_to_block_list(content):
-            self.append(block)
-        message.main_stack.set_visible_child_name('content')
+            GLib.idle_add(self.append, block)
+        GLib.idle_add(message.main_stack.set_visible_child_name, 'content')
 
     def check_if_should_tts(self):
         chat_element = self.get_ancestor(chat.Chat)

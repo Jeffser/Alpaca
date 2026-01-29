@@ -528,7 +528,7 @@ class Chat(Gtk.Stack):
         for widget in list(self.container):
             GLib.idle_add(widget.unparent)
             GLib.idle_add(widget.unrealize)
-        self.set_visible_child_name('loading')
+        #self.set_visible_child_name('loading')
 
     def add_message(self, message):
         self.container.append(message)
