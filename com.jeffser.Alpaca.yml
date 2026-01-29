@@ -982,6 +982,7 @@ modules:
       - type: git
         url: https://gitlab.gnome.org/GNOME/libspelling.git
         tag: 0.4.7
+        commit: c7c74e8d402ba2e4cf48d1c57414c1c489a2361b
   - name: vte
     buildsystem: meson
     config-opts:
@@ -1002,6 +1003,7 @@ modules:
       - type: git
         url: https://github.com/flatpak/libportal.git
         tag: 0.9.1
+        commit: 8f5dc8d192f6e31dafe69e35219e3b707bde71ce
   - name: alpaca
     builddir: true
     buildsystem: meson
