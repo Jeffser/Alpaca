@@ -149,6 +149,16 @@ flowboxchild {
   padding: 0px;
 }
 
+@media (prefers-color-scheme: dark) {
+  .latex_renderer {
+	  filter: invert(1);
+  }
+
+  .live_chat_background {
+	  filter: blur(100px) brightness(50%);
+  }
+}
+
 /*-----------FOLDER COLOURS--------*/
 
 .folder-blue headerbar, row.folder-blue {
