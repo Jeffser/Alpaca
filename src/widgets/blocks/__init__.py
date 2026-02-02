@@ -43,10 +43,11 @@ def text_to_block_list(content: str):
     for mb in matches:
         if pos < mb.start and content[pos:mb.start].strip():
             snippet = content[pos:mb.start]
-            if blocks and isinstance(blocks[-1], Text):
-                blocks[-1].append_content(snippet)
-            else:
-                blocks.append(Text(content=snippet))
+            if snippet:
+                if blocks and isinstance(blocks[-1], Text):
+                    blocks[-1].append_content(snippet)
+                else:
+                    blocks.append(Text(content=snippet))
 
         match = mb.match
         if mb.name == "online_picture":
@@ -58,10 +59,13 @@ def text_to_block_list(content: str):
                     )
                 )
         elif mb.name == "code":
-            if match.group(1).lower() == 'latex':
-                blocks.append(LatexRenderer(content=match.group(2)))
-            else:
-                blocks.append(Code(content=match.group(2), language=match.group(1)))
+            code_content = match.group(2)
+            language = match.group(1)
+            if code_content:
+                if language.lower() == 'latex':
+                    blocks.append(LatexRenderer(content=code_content))
+                else:
+                    blocks.append(Code(content=code_content, language=language))
         elif mb.name == "latex":
             expression = match.group(1) or match.group(2)
             if expression:
@@ -73,7 +77,9 @@ def text_to_block_list(content: str):
                     else:
                         blocks.append(Text(content=expression))
         elif mb.name == "table":
-            blocks.append(Table(content=content[mb.start:mb.end]))
+            content = content[mb.start:mb.end]
+            if content:
+                blocks.append(Table(content=content))
         elif mb.name == "line":
             blocks.append(Separator())
 
@@ -81,8 +87,8 @@ def text_to_block_list(content: str):
 
     # Remaining text after last match
     if pos < len(content):
-        rest = content[pos:]
-        if rest.strip():
+        rest = content[pos:].strip()
+        if rest:
             if blocks and isinstance(blocks[-1], Text):
                 blocks[-1].append_content(rest)
             else:

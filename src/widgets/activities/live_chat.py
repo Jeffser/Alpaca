@@ -143,8 +143,8 @@ class LiveChat(Adw.Bin):
 
     def send_message(self, mode:int=0, available_tools:dict={}): #mode 0=user 1=system
         buffer = self.global_footer.get_buffer()
-        raw_message = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
-        if not raw_message.strip():
+        raw_message = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False).strip()
+        if not raw_message:
             return
 
         self.global_footer.microphone_button.button.set_active(False)

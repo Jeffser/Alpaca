@@ -74,6 +74,7 @@ class OptionPopup(Gtk.Popover):
         message_element = self.get_ancestor(Message)
         chat_element = self.get_ancestor(chat.Chat)
         current_model = self.get_root().get_selected_model().get_name()
+        self.popdown()
 
         if not chat_element.busy and current_model:
             for att in list(message_element.image_attachment_container.container) + list(message_element.attachment_container.container):
@@ -81,7 +82,6 @@ class OptionPopup(Gtk.Popover):
                 att.unparent()
 
             message_element.block_container.clear()
-            message_element.main_stack.set_visible_child_name('loading')
             message_element.author = current_model
             message_element.update_profile_picture()
 
@@ -105,7 +105,7 @@ class OptionPopup(Gtk.Popover):
                 ).start)
             else:
                 GLib.idle_add(threading.Thread(
-                    target=message_element.get_root().get_current_instance().generate_message,
+                    target=self.get_root().get_current_instance().generate_message,
                     args=(
                         message_element,
                         current_model
@@ -316,7 +316,7 @@ class Message(Gtk.Box):
     def update_message(self, content):
         if content:
             GLib.idle_add(self.block_container.generating_block.append_content, content)
-            self.main_stack.set_visible_child_name('content')
+            GLib.idle_add(self.main_stack.set_visible_child_name, 'content')
 
             chat_element = self.get_ancestor(chat.Chat)
             if chat_element:
@@ -330,9 +330,9 @@ class Message(Gtk.Box):
                 'thought',
                 self.block_container.thinking_block.get_content()
             )
-            self.attachment_container.add_attachment(attachment)
+            GLib.idle_add(self.attachment_container.add_attachment, attachment)
             SQL.insert_or_update_attachment(self, attachment)
-            self.block_container.remove_thinking_block()
+            GLib.idle_add(self.block_container.remove_thinking_block)
 
     def update_thinking(self, content):
         if content:

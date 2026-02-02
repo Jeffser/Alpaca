@@ -706,7 +706,7 @@ class Chat(Gtk.Stack):
         buffer = self.get_root().global_footer.get_buffer()
         buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
         buffer.insert(buffer.get_start_iter(), prompt, len(prompt.encode('utf-8')))
-        self.get_root().send_message()
+        GLib.idle_add(self.get_root().send_message)
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/chat/folder_row.ui')
 class FolderRow(Gtk.ListBoxRow):

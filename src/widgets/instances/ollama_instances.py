@@ -667,7 +667,7 @@ class OllamaManaged(BaseInstance):
                 self.version_number = self.version_number.split(' ')[-1].strip('v').strip()
                 if self.version_number:
                     logger.info('Ollama version is {}'.format(self.version_number))
-                if CAN_SELF_MANAGE_OLLAMA and self.row.get_root().settings.get_value('ollama-managed-auto-check-update').unpack() and time.time() - self.last_auto_version_check_time > 300:
+                if CAN_SELF_MANAGE_OLLAMA and self.row and self.row.get_root().settings.get_value('ollama-managed-auto-check-update').unpack() and time.time() - self.last_auto_version_check_time > 300:
                     self.last_auto_version_check_time = time.time()
                     GLib.idle_add(self.auto_check_version)
             except Exception as e:
