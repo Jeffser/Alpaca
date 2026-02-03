@@ -408,8 +408,3 @@ def update_instance_list(instance_listbox:Gtk.ListBox, selected_instance_id:str)
         GLib.idle_add(instance_listbox.get_root().instance_manager_stack.set_visible_child_name, 'no-instances')
         GLib.idle_add(instance_listbox.append, InstanceRow(Empty()))
 
-    def check_row_is_selected():
-        if not instance_listbox.get_selected_row():
-            instance_listbox.select_row(instance_listbox.get_row_at_index(0))
-    GLib.idle_add(check_row_is_selected)
-

@@ -416,14 +416,21 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if self.get_application().args.new_chat:
             self.get_chat_list_page().new_chat(self.get_application().args.new_chat)
 
-        Widgets.instances.update_instance_list(
-            instance_listbox=self.instance_listbox,
-            selected_instance_id=self.settings.get_value('selected-instance').unpack()
-        )
         if len(SQL.get_instances()) == 0:
             self.main_navigation_view.replace([Widgets.guide.Guide()])
         else:
             self.main_navigation_view.replace_with_tags(['chat'])
 
         # Check if EOL flatpak extension is installed, if so tell the user to remove the thing
-        Widgets.guide.show_EOL_flatpak_extension_dialog(self)
+        if IN_FLATPAK and shutil.which('ollama'):
+            Widgets.guide.show_EOL_flatpak_extension_dialog(self)
+            Widgets.instances.update_instance_list(
+                instance_listbox=self.instance_listbox,
+                selected_instance_id=''
+            )
+        else:
+            Widgets.instances.update_instance_list(
+                instance_listbox=self.instance_listbox,
+                selected_instance_id=self.settings.get_value('selected-instance').unpack()
+            )
+
