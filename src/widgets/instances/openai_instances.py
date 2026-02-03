@@ -203,12 +203,8 @@ class BaseInstance:
 
         if 'text-only' in self.limitations:
             for i in range(len(messages)):
-                for c in range(len(messages[i].get('content', []))):
-                    if messages[i].get('content')[c].get('type') != 'text':
-                        del messages[i]['content'][c]
-                    else:
-                        messages[i]['content'] = messages[i].get('content')[c].get('text')
-
+                if 'images' in messages[i]:
+                    del messages[i]['images']
         params = {
             "model": model,
             "messages": messages,
