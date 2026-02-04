@@ -161,6 +161,13 @@ class AlpacaWindow(Adw.ApplicationWindow):
                     Widgets.voice.message_dictated.popup.tts_button.set_active(False)
             except Exception as e:
                 logger.warning(f"Error stopping voice: {e}")
+
+            try:
+                for el in ("default-width", "default-height"):
+                    self.settings.set_int(el, self.get_property(el))
+                self.settings.set_boolean("maximized", self.get_property("maximized"))
+            except Exception as e:
+                logger.warning(f'Error saving window preferences: {e}')
             
             # Quit from the GLib main loop to avoid teardown races with worker threads
             GLib.idle_add(self.get_application().quit)
@@ -356,7 +363,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
 
         self.settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
         for el in ("default-width", "default-height", "maximized", "hide-on-close"):
-            self.settings.bind(el, self, el, Gio.SettingsBindFlags.DEFAULT)
+            self.set_property(el, self.settings.get_value(el).unpack())
 
         # Zoom
         Widgets.preferences.set_zoom(Widgets.preferences.get_zoom())
