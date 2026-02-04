@@ -433,4 +433,4 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 instance_listbox=self.instance_listbox,
                 selected_instance_id=self.settings.get_value('selected-instance').unpack()
             )
-        Widgets.dialog.show_notification(self, 'test', 'body')
+
