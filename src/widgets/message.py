@@ -360,13 +360,13 @@ class Message(Gtk.Box):
                 )
 
         if root and root.get_name() == 'AlpacaWindow' and chat_element:
-            chat_element.row.spinner.set_visible(False)
+            GLib.idle_add(chat_element.row.spinner.set_visible, False)
             if root.chat_bin.get_child().get_name() != chat_element.get_name():
-                chat_element.row.indicator.set_visible(True)
+                GLib.idle_add(chat_element.row.indicator.set_visible, True)
         elif root and root.get_name() == 'AlpacaQuickAsk':
-            root.save_button.set_sensitive(True)
+            GLib.idle_add(root.save_button.set_sensitive, True)
 
-        self.popup.change_status(True)
+        GLib.idle_add(self.popup.change_status, True)
 
         if chat_element and root:
             chat_element.stop_message()
@@ -388,7 +388,7 @@ class Message(Gtk.Box):
             )
             SQL.insert_or_update_attachment(self, attachment)
 
-        sys.exit() #Exit thread
+        #sys.exit() #Exit thread
 
     def save(self):
         chat_element = self.get_ancestor(chat.Chat)

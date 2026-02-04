@@ -522,7 +522,9 @@ class Chat(Gtk.Stack):
 
     def stop_message(self):
         self.busy = False
-        self.get_root().global_footer.toggle_action_button(True)
+        root = self.get_root() or self.row.get_root()
+        if root:
+            root.global_footer.toggle_action_button(True)
 
     def unload_messages(self):
         for widget in list(self.container):

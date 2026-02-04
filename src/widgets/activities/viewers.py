@@ -119,7 +119,6 @@ class ImageViewer(Gtk.ScrolledWindow):
 
     @Gtk.Template.Callback()
     def on_gesture_zoom(self, gesture, value):
-        print(value)
         if value >= 1:
             value = self.scale + value / 10
         else:

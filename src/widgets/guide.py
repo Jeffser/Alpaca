@@ -50,7 +50,6 @@ class Guide(Adw.NavigationPage):
     def create_external_instance(self, button):
         connection_id = None
         def row_selected(list_box, row):
-            print(list_box, row)
             self.get_root().instance_listbox.disconnect(connection_id)
             if row.instance.instance_type != 'empty':
                 self.main_stack.set_visible_child_name('model')
