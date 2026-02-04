@@ -138,8 +138,9 @@ class BackgroundRemover(Gtk.ScrolledWindow):
         else:
             self.output_picture_button.get_child().remove_css_class('loading_image')
 
+    # Use Different Thread
     def run(self, model_name:str, input_image_data):
-        self.set_status(True)
+        GLib.idle_add(self.set_status, True)
 
         from rembg import remove, new_session
         session = new_session(model_name)
@@ -150,14 +151,14 @@ class BackgroundRemover(Gtk.ScrolledWindow):
 
         output_image_data = base64.b64encode(buffered.getvalue()).decode("utf-8")
         texture = self.make_texture(output_image_data)
-        self.output_picture_button.set_texture(texture)
+        GLib.idle_add(self.output_picture_button.set_texture, texture)
 
-        self.set_status(False)
+        GLib.idle_add(self.set_status, False)
 
         if self.pulling_model:
-            self.pulling_model.update_progressbar(-1)
+            GLib.idle_add(self.pulling_model.update_progressbar, -1)
         if self.save_func:
-            self.save_func(output_image_data)
+            GLib.idle_add(self.save_func, output_image_data)
 
     def prepare_model_download(self, model_name:str, input_image_data):
         model_dir = os.path.join(data_dir, '.u2net', model_name)

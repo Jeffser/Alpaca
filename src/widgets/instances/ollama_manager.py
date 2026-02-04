@@ -79,8 +79,8 @@ class OllamaManager(Adw.Dialog):
     # Call in different thread pls
     def start_download(self, title:str, url:str, dest_path:str) -> bool:
         # returns true if download went ok
-        self.navigation_view.replace_with_tags(["installing"])
-        self.installer_statuspage.set_title(title)
+        GLib.idle_add(self.navigation_view.replace_with_tags, ["installing"])
+        GLib.idle_add(self.installer_statuspage.set_title, title)
 
         def update_ui(downloaded, total):
             done = self.format_bytes(downloaded)
@@ -133,7 +133,7 @@ class OllamaManager(Adw.Dialog):
         )
 
         if result:
-            self.installer_statuspage.set_description(_("Installing…"))
+            GLib.idle_add(self.installer_statuspage.set_description, _("Installing…"))
             archive = Path(dest_path)
             out_dir = Path(os.path.join(data_dir, 'ollama_installation'))
             self.remove_ollama() # Delete existing installation
@@ -190,9 +190,10 @@ class OllamaManager(Adw.Dialog):
 
     @Gtk.Template.Callback()
     def initial_rocm_installation_requested(self, button):
+        # Use Different Thread
         def run_install():
             result = self.install_latest_rocm()
-            self.navigation_view.replace_with_tags(["installation_ok"] if result else ["error"])
+            GLib.idle_add(self.navigation_view.replace_with_tags, ["installation_ok"] if result else ["error"])
             self.instance.stop()
             if self.instance.row.get_root():
                 threading.Thread(target=self.instance.start).start()
@@ -200,9 +201,10 @@ class OllamaManager(Adw.Dialog):
 
     @Gtk.Template.Callback()
     def initial_ollama_installation_requested(self, button):
+        # Use Different Thread
         def run_install():
             result = self.install_latest_ollama()
-            self.navigation_view.replace_with_tags(["installation_ok"] if result else ["error"])
+            GLib.idle_add(self.navigation_view.replace_with_tags, ["installation_ok"] if result else ["error"])
             self.instance.stop()
             if self.instance.row.get_root():
                 threading.Thread(target=self.instance.start).start()
@@ -250,12 +252,13 @@ class OllamaManager(Adw.Dialog):
 
     @Gtk.Template.Callback()
     def update_requested(self, button):
+        # Use Different Thread
         def run_update():
             rocm_installed = is_rocm_installed()
 
             result = self.install_latest_ollama()
             if not result:
-                self.navigation_view.replace_with_tags(["error"])
+                GLib.idle_add(self.navigation_view.replace_with_tags, ["error"])
                 self.instance.stop()
                 threading.Thread(target=self.instance.start).start()
                 return
@@ -263,7 +266,7 @@ class OllamaManager(Adw.Dialog):
             if rocm_installed: # if it was installed already, update it
                 result = self.install_latest_rocm()
 
-            self.navigation_view.replace_with_tags(["installation_ok"] if result else ["error"])
+            GLib.idle_add(self.navigation_view.replace_with_tags, ["installation_ok"] if result else ["error"])
             self.instance.stop()
             threading.Thread(target=self.instance.start).start()
 

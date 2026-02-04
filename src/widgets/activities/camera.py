@@ -38,6 +38,7 @@ class Camera(Gtk.Stack):
         self.capture_button.set_visible(camera_available)
         self.set_visible_child_name("picture" if camera_available else "error")
 
+    # Use Different Thread
     def update_frame(self):
         while self.running and self.capture.isOpened():
             ret, frame = self.capture.read()

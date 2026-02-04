@@ -72,16 +72,16 @@ class BaseInstance:
 
     def prepare_chat(self, bot_message, model:str):
         chat_element = bot_message.get_ancestor(chat.Chat)
-        bot_message.block_container.show_generating_block()
+        GLib.idle_add(bot_message.block_container.show_generating_block)
         if chat_element and chat_element.chat_id:
-            chat_element.row.spinner.set_visible(True)
+            GLib.idle_add(chat_element.row.spinner.set_visible, True)
             try:
-                bot_message.get_root().global_footer.toggle_action_button(False)
+                GLib.idle_add(bot_message.get_root().global_footer.toggle_action_button, False)
             except:
                 pass
 
             chat_element.busy = True
-            chat_element.set_visible_child_name('content')
+            GLib.idle_add(chat_element.set_visible_child_name, 'content')
 
         messages = chat_element.convert_to_ollama()[:list(chat_element.container).index(bot_message)]
 
@@ -281,9 +281,10 @@ class BaseInstance:
         if len(new_chat_title) > 30:
             new_chat_title = new_chat_title[:30].strip() + '...'
 
-        chat.row.edit(
-            new_name=new_chat_title,
-            is_template=chat.is_template
+        GLib.idle_add(
+            chat.row.edit,
+            new_chat_title,
+            chat.is_template
         )
 
     def get_default_model(self):

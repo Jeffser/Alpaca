@@ -256,7 +256,7 @@ class MicrophoneButton(Gtk.Stack):
 
         def prepare_download():
             self.pulling_model = button.get_root().get_application().get_main_window().model_manager.create_stt_model(model_name)
-            self.pulling_model.update_progressbar(1)
+            GLib.idle_add(self.pulling_model.update_progressbar, 1)
             threading.Thread(target=run_mic, daemon=True).start()
 
         if button.get_active():

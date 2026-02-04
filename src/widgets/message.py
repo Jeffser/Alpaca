@@ -129,7 +129,7 @@ class BlockContainer(Gtk.Box):
     def show_generating_block(self):
         if not self.generating_block or not self.generating_block.get_parent():
             self.generating_block = blocks.GeneratingText()
-            GLib.idle_add(self.append, self.generating_block)
+            self.append(self.generating_block)
 
     def remove_generating_block(self):
         if self.generating_block.get_parent():
@@ -306,11 +306,11 @@ class Message(Gtk.Box):
     def add_attachment(self, file_id:str, name:str, attachment_type:str, content:str):
         if attachment_type == 'image':
             new_image = attachments.ImageAttachment(file_id, name, content)
-            self.image_attachment_container.add_attachment(new_image)
+            GLib.idle_add(self.image_attachment_container.add_attachment, new_image)
             return new_image
         else:
             new_attachment = attachments.Attachment(file_id, name, attachment_type, content)
-            self.attachment_container.add_attachment(new_attachment)
+            GLib.idle_add(self.attachment_container.add_attachment, new_attachment)
             return new_attachment
 
     def update_message(self, content):
@@ -337,7 +337,7 @@ class Message(Gtk.Box):
     def update_thinking(self, content):
         if content:
             self.block_container.add_thinking(content)
-            self.main_stack.set_visible_child_name('content')
+            GLib.idle_add(self.main_stack.set_visible_child_name, 'content')
 
             chat_element = self.get_ancestor(chat.Chat)
             if chat_element:

@@ -447,6 +447,7 @@ class AttachmentContainer(Gtk.ScrolledWindow):
         )
         self.add_attachment(attachment)
 
+    # Use Different Thread
     def attach_youtube(self, video_url:str):
         GLib.idle_add(self.get_root().global_footer.remove_text, video_url)
         content = extract_content('youtube', video_url)
@@ -457,7 +458,7 @@ class AttachmentContainer(Gtk.ScrolledWindow):
             file_type="youtube",
             file_content=content
         )
-        self.add_attachment(attachment)
+        GLib.idle_add(self.add_attachment, attachment)
 
     def on_attachment(self, file:Gio.File, remove_original:bool=False):
         if not file:

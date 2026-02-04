@@ -113,13 +113,14 @@ class Transcriber(Gtk.Stack):
             callback = self.on_attachment
         )
 
+    # Use Different Thread
     def run_file_transcription(self, file_path:str):
         model_name = list(STT_MODELS)[self.get_root().settings.get_value('stt-model').unpack()]
         try:
             if not voice.loaded_whisper_models.get(model_name):
                 voice.loaded_whisper_models[model_name] = voice.libraries.get('whisper').load_model(model_name, download_root=os.path.join(data_dir, 'whisper'))
             if self.pulling_model:
-                self.pulling_model.update_progressbar(-1)
+                GLib.idle_add(self.pulling_model.update_progressbar, -1)
         except Exception as e:
             dialog.simple_error(
                 parent = self.get_root(),
@@ -128,7 +129,7 @@ class Transcriber(Gtk.Stack):
                 error_log = e
             )
             logger.error(e)
-            self.close()
+            GLib.idle_add(self.close)
             return
         try:
             result = voice.loaded_whisper_models.get(model_name).transcribe(file_path, word_timestamps=False)
@@ -158,7 +159,7 @@ class Transcriber(Gtk.Stack):
                 error_log = e
             )
             logger.error(e)
-            self.close()
+            GLib.idle_add(self.close)
             return
 
     def close(self):

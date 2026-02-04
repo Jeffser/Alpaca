@@ -210,9 +210,11 @@ class WebBrowser(WebKit.WebView):
     def on_reload(self):
         pass
 
-    # Call on different thread
+    # Use Different Thread
     def automate_search(self, save_func:callable, search_term:str, auto_choice:bool):
         query_url = self.get_root().settings.get_value('activity-webbrowser-query-url').unpack()
+
+        # Use Different Thread
         def on_result_load():
             query_hostname = urlparse(query_url).hostname.lower()
             if query_hostname.startswith('www.'):
@@ -222,8 +224,8 @@ class WebBrowser(WebKit.WebView):
                 current_hostname = current_hostname[4:]
             if not query_hostname == current_hostname:
                 self.on_load_callback = lambda: None
-                self.attachment_requested(save_func)
-                self.close()
+                GLib.idle_add(self.attachment_requested, save_func)
+                GLib.idle_add(self.close)
 
         def on_html_extracted(raw_html):
             self.on_load_callback = lambda: threading.Thread(target=on_result_load, daemon=True).start()
@@ -235,6 +237,7 @@ class WebBrowser(WebKit.WebView):
                     result = random.choice(results[min(5, len(results)):])
                     GLib.timeout_add(5000, self.load_uri, result["href"])
 
+        # Use Different Thread
         def on_search_page_ready():
             GLib.timeout_add(5000, self.extract_html, on_html_extracted)
 

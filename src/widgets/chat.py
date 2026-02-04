@@ -975,9 +975,10 @@ class ChatRow(Gtk.ListBoxRow):
         popup.set_pointing_to(rect)
         popup.popup()
 
+    # Call in different thread
     def update_profile_pictures(self):
         for msg in list(self.chat.container):
-            msg.update_profile_picture()
+            GLib.idle_add(msg.update_profile_picture)
 
     def edit(self, new_name:str, is_template:bool):
         if not new_name:

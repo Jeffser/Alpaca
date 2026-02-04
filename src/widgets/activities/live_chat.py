@@ -131,6 +131,7 @@ class LiveChat(Adw.Bin):
         else:
             return models.added.FallbackModel
 
+    # Use Different Thread
     def try_turning_on_mic(self):
         tries = 0
         while tries < 6:

@@ -38,16 +38,16 @@ class BaseInstance:
 
     def prepare_chat(self, bot_message, model:str):
         chat_element = bot_message.get_ancestor(chat.Chat)
-        bot_message.block_container.show_generating_block()
+        GLib.idle_add(bot_message.block_container.show_generating_block)
         if chat_element and chat_element.chat_id:
-            chat_element.row.spinner.set_visible(True)
+            GLib.idle_add(chat_element.row.spinner.set_visible, True)
             try:
-                bot_message.get_root().global_footer.toggle_action_button(False)
+                GLib.idle_add(bot_message.get_root().global_footer.toggle_action_button, False)
             except:
                 pass
         
             chat_element.busy = True
-            chat_element.set_visible_child_name('content')
+            GLib.idle_add(chat_element.set_visible_child_name, 'content')
 
         messages = chat_element.convert_to_ollama()[:list(chat_element.container).index(bot_message)]
 
@@ -323,14 +323,16 @@ class BaseInstance:
                 generated_title = generated_title[:30].strip() + '...'
 
             if data.get('emoji'):
-                chat.row.edit(
-                    new_name='{} {}'.format(data.get('emoji').replace('\n', '').strip(), generated_title),
-                    is_template=chat.is_template
+                GLib.idle_add(
+                    chat.row.edit,
+                    '{} {}'.format(data.get('emoji').replace('\n', '').strip(), generated_title),
+                    chat.is_template
                 )
             else:
-                chat.row.edit(
-                    new_name=generated_title,
-                    is_template=chat.is_template
+                GLib.idle_add(
+                    chat.row.edit,
+                    generated_title,
+                    chat.is_template
                 )
         except Exception as e:
             logger.error(e)
@@ -674,7 +676,7 @@ class OllamaManaged(BaseInstance):
                 logger.error(e)
                 if not is_ollama_installed():
                     if self.row:
-                        OllamaManager(self).present(self.row.get_root())
+                        GLib.idle_add(lambda: OllamaManager(self).present(self.row.get_root()))
                 else:
                     dialog.simple_error(
                         parent = self.row.get_root() if self.row else None,
@@ -683,7 +685,7 @@ class OllamaManaged(BaseInstance):
                         error_log = e
                     )
                 if self.row:
-                    self.row.get_parent().unselect_all()
+                    GLib.idle_add(self.row.get_parent().unselect_all)
                 self.stop()
 
 class Ollama(BaseInstance):
