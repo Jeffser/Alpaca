@@ -58,7 +58,7 @@ Language                | Contributors
 🇮🇳 Hindi                | [Aritra Saha](https://github.com/olumolu)
 🇹🇷 Turkish              | [YusaBecerikli](https://github.com/YusaBecerikli)
 🇺🇦 Ukrainian            | [Simon](https://github.com/OriginalSimon)
-🇩🇪 German               | [Marcel Margenberg](https://github.com/MehrzweckMandala)
+🇩🇪 German               | [Marcel Margenberg](https://github.com/MehrzweckMandala) , [Magnus Schlinsog](https://github.com/mags0ft) , [Ina Krapp](https://github.com/InaKrapp)
 🇮🇱 Hebrew               | [Yosef Or Boczko](https://github.com/yoseforb)
 🇮🇳 Telugu               | [Aryan Karamtoth](https://github.com/SpaciousCoder78)
 🇮🇹 Italian              | [Edoardo Brogiolo](https://github.com/edo0)
