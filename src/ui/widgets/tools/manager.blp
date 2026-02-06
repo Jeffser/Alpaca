@@ -1,0 +1,39 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $AlpacaToolManager: Adw.NavigationPage {
+  title: _("Tool Manager");
+  tag: "tool_manager";
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Gtk.Stack main_stack {//to be used once I add search
+      Gtk.StackPage {
+        name: "content";
+        child: Adw.PreferencesPage {
+          Adw.PreferencesGroup {
+            title: _("Available Tools");
+            description: _("Give additional functionality to your models, you can add additional tools from external MCP servers.");
+            header-suffix: Gtk.Button {
+              icon-name: "list-add-symbolic";
+              valign: center;
+              tooltip-text: _("Add MCP Server");
+              clicked => $add_mcp_server();
+              styles [
+                "flat"
+              ]
+            };
+            Gtk.ListBox list_box {
+              selection-mode: none;
+              styles [
+                "boxed-list"
+              ]
+            }
+          }
+        };
+      }
+    };
+  };
+}

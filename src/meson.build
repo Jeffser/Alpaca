@@ -63,6 +63,7 @@ blueprints = files(
   'ui/widgets/attachments/image_attachment.blp',
   'ui/widgets/attachments/attachment.blp',
   'ui/widgets/tools/selector.blp',
+  'ui/widgets/tools/manager.blp',
   'ui/widgets/voice/microphone_button.blp',
   'ui/widgets/voice/dictate_button.blp',
   'ui/widgets/voice/podcast_dialog.blp',

@@ -274,6 +274,8 @@ template $AlpacaWindow: Adw.ApplicationWindow {
     }
 
     $AlpacaModelManager model_manager {}
+
+    $AlpacaToolManager tool_manager {}
   };
 }
 
@@ -292,6 +294,11 @@ menu primary_menu {
     item {
       label: _("Manage Models");
       action: "app.model_manager";
+    }
+
+    item {
+      label: _("Manage Tools");
+      action: "app.tool_manager";
     }
   }
 

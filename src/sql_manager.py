@@ -196,11 +196,6 @@ class Instance:
                     "type": "TEXT NOT NULL",
                     "properties": "TEXT NOT NULL" #JSON
                 },
-                "tool_parameters": {
-                    "name": "TEXT NOT NULL PRIMARY KEY",
-                    "variables": "TEXT NOT NULL",
-                    "activated": "INTEGER NOT NULL"
-                },
                 "online_instance_model_list": {
                     "id": "TEXT NOT NULL PRIMARY KEY",
                     "list": "TEXT NOT NULL" #JSON
@@ -210,6 +205,12 @@ class Instance:
                     "name": "TEXT NOT NULL",
                     "color": "TEXT",
                     "parent": "TEXT"
+                },
+                "mcp_servers": {
+                    "id": "TEXT NOT NULL PRIMARY KEY",
+                    "name": "TEXT NOT NULL",
+                    "url": "TEXT",
+                    "tools": "TEXT NOT NULL" #JSON
                 }
             }
 
@@ -234,6 +235,9 @@ class Instance:
             columns = [col[1] for col in c.cursor.fetchall()]
             if 'character' not in columns:
                 c.cursor.execute("ALTER TABLE model_preferences ADD COLUMN character TEXT")
+
+            if len(c.cursor.execute("SELECT id FROM mcp_servers WHERE id='0'").fetchall()) == 0:
+                Instance.insert_or_update_mcp_server('0', _('Alpaca Tools'))
 
             # Remove stuff from previous versions (cleaning)
             try:
@@ -907,3 +911,22 @@ class Instance:
 
         for row in result:
             Instance.remove_folder(row[0])
+
+    #################
+    ## MCP Servers ##
+    #################
+
+    def insert_or_update_mcp_server(mcp_id:str, name:str, url:str='', tools:dict={}):
+        with SQLiteConnection() as c:
+            if c.cursor.execute(
+                "SELECT id FROM mcp_servers WHERE id=?", (mcp_id,)
+            ).fetchone():
+                c.cursor.execute(
+                    f"UPDATE mcp_servers SET name=?, url=?, tools=? WHERE id=?",
+                    (name, url, json.dumps(tools), mcp_id)
+                )
+            else:
+                c.cursor.execute(
+                    f"INSERT INTO mcp_servers (id, name, url, tools) VALUES (?, ?, ?, ?)",
+                    (mcp_id, name, url, json.dumps(tools))
+                )

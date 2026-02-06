@@ -21,6 +21,7 @@ class Base(GObject.Object):
     properties:list = []
 
     runnable:bool = True
+    enabled_by_default:bool = True
     required_libraries:list = []
 
     def get_metadata(self) -> dict:
@@ -48,6 +49,9 @@ class Base(GObject.Object):
         }
 
         return metadata
+
+    def __str__(self) -> str:
+        return self.display_name
 
 class NoTool(Base):
     display_name:str = _('No Tool')

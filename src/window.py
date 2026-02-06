@@ -385,6 +385,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
             'model_manager' : [lambda *_: self.push_or_pop('model_manager'), ['<primary>m']],
             'model_manager_available' : [lambda *_: self.open_available_model_page()],
             'instance_manager' : [lambda *_: self.push_or_pop('instance_manager'), ['<primary>i']],
+            'tool_manager' : [lambda *_: self.push_or_pop('tool_manager'), ['<primary>t']],
             'add_model_by_name' : [lambda *i: Widgets.dialog.simple_entry(
                 parent=self,
                 heading=_('Pull Model'),
@@ -440,4 +441,5 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 instance_listbox=self.instance_listbox,
                 selected_instance_id=self.settings.get_value('selected-instance').unpack()
             )
+
 
