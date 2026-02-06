@@ -64,7 +64,7 @@ class Code(Gtk.Box):
 
     def save_edit(self, code:str) -> None:
         self.buffer.set_text(code, len(code.encode('utf-8')))
-        self.get_ancestor(message.Message).save()
+        GLib.idle_add(self.get_ancestor(message.Message).save)
 
     @Gtk.Template.Callback()
     def copy_code(self, button=None) -> None:
