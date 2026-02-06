@@ -249,11 +249,10 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 content = old_attachment.file_content
             )
             old_attachment.delete()
-            SQL.insert_or_update_attachment(m_element, attachment)
+            GLib.idle_add(SQL.insert_or_update_attachment, m_element, attachment)
 
         m_element.block_container.set_content(raw_message)
-
-        SQL.insert_or_update_message(m_element)
+        GLib.idle_add(m_element.save)
 
         buffer.delete(buffer.get_start_iter(), buffer.get_end_iter())
         if mode==0:
@@ -264,7 +263,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 author=current_model
             )
             current_chat.add_message(m_element_bot)
-            SQL.insert_or_update_message(m_element_bot)
+            GLib.idle_add(m_element_bot.save)
             if len(available_tools) > 0:
                 GLib.idle_add(threading.Thread(target=self.get_current_instance().use_tools, args=(m_element_bot, current_model, available_tools, True), daemon=True).start)
             else:

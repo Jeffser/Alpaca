@@ -38,9 +38,9 @@ class QuickAskWindow(Adw.ApplicationWindow):
         main_window.present()
         new_chat = main_window.get_chat_list_page().new_chat(self.chat.get_name())
         for message in list(self.chat.container):
-            SQL.insert_or_update_message(message, new_chat.chat_id)
+            GLib.idle_add(message.save)
             for attachment in list(message.attachment_container.container) + list(message.image_attachment_container.container):
-                SQL.insert_or_update_attachment(message, attachment)
+                GLib.idle_add(SQL.insert_or_update_attachment, message, attachment)
         new_chat.row.get_parent().select_row(new_chat.row)
         self.close()
 

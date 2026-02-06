@@ -670,8 +670,7 @@ class Chat(Gtk.Stack):
                 SQL.insert_or_update_attachment(message_element, attachment)
                 self.add_message(message_element)
                 message_element.block_container.set_content('')
-                if self.chat_id:
-                    SQL.insert_or_update_message(message_element)
+                GLib.idle_add(message_element.save)
 
             first_message_content = character_data.get('first_mes')
             if first_message_content:
@@ -683,8 +682,7 @@ class Chat(Gtk.Stack):
                 )
                 self.add_message(message_element)
                 message_element.block_container.set_content(first_message_content)
-                if self.chat_id:
-                    SQL.insert_or_update_message(message_element)
+                GLib.idle_add(message_element.save)
 
             if not ignore_greetings:
                 alternate_greetings = character_data.get('alternate_greetings', [])
@@ -1149,3 +1147,4 @@ class ChatRow(Gtk.ListBoxRow):
             callback = lambda option, options=options: options[option](),
             items = options.keys()
         )
+
