@@ -130,7 +130,11 @@ class ModelManager(Adw.NavigationPage):
         instance.local_models = None # Reset cache
         local_models = instance.get_local_models()
         for model in local_models:
-            self.create_added_model(model.get('name'), instance)
+            self.create_added_model(
+                model_name=model.get('name'),
+                instance=instance,
+                data=model
+            )
 
         if importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice'):
             # Speech to Text
@@ -186,12 +190,13 @@ class ModelManager(Adw.NavigationPage):
     def open_instance_manager(self, button):
         self.get_root().main_navigation_view.push_by_tag('instance_manager')
 
-    def create_added_model(self, model_name:str, instance, append_row=True):
+    def create_added_model(self, model_name:str, instance, append_row:bool=True, data:dict={}):
         model_element = basic.BasicModelButton(
             model_name=model_name,
             instance=instance,
             dialog_callback=added.AddedModelDialog,
-            remove_callback=common.remove_added_model
+            remove_callback=common.remove_added_model,
+            data=data
         )
         if append_row:
             added.append_to_model_selector(model_element.row)

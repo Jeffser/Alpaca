@@ -210,7 +210,10 @@ class BasicModelButton(Gtk.Button):
         self.set_tooltip_text(prettify_model_name(self.get_name(), False))
 
         if self.instance:
-            self.data = self.instance.get_model_info(model_name)
+            if len(data) > 0:
+                self.data = data
+            else:
+                self.data = self.instance.get_model_info(model_name)
             self.row = AddedModelRow(self)
         else:
             self.data = data
@@ -244,6 +247,9 @@ class BasicModelButton(Gtk.Button):
         return set([c for c in available_models_data.get(self.get_name().split(':')[0], {}).get('categories', []) if c not in ('small', 'medium', 'big', 'huge')])
 
     def get_vision(self) -> bool:
+        if 'capabilities' not in self.data:
+            self.data = self.instance.get_model_info(self.get_name())
+
         return 'vision' in self.data.get('capabilities', [])
 
     def update_profile_picture(self):

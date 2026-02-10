@@ -346,7 +346,20 @@ class BaseInstance:
 
     def get_local_models(self) -> list:
         try:
-            return [{'name': m.model} for m in self.client.list().models if m.model]
+            model_list = []
+
+            for m in self.client.list().models:
+                model_list.append({
+                    'name': m.model,
+                    'modified_at': m.modified_at,
+                    'digest': m.digest,
+                    'size': m.size,
+                    'details': m.details
+                })
+
+            return model_list
+
+            return [{'name': m.model} for m in models if m.model]
         except Exception as e:
             if self.instance_type != 'ollama:managed' or is_ollama_installed():
                 dialog.simple_error(
@@ -514,7 +527,7 @@ class OllamaManaged(BaseInstance):
             try:
                 for line in iter(pipe.readline, ''):
                     self.log_raw += line
-                    #print(line, end='')
+                    print(line, end='')
                     if 'msg="model request too large for system"' in line and self.row:
                         dialog.show_toast(_("Model request too large for system"), self.row.get_root())
                     elif 'library=cpu' in line:
