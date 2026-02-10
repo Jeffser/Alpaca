@@ -107,7 +107,7 @@ class Terminal(Base):
     icon_name:str = 'terminal-symbolic'
 
     name:str = 'run_command'
-    description:str = 'Request permission to run a command in a terminal returning its result, add sudo if root permission is needed'
+    description:str = 'Request a shell command to be reviewed and optionally executed by the host application'
     properties:list = [
         Property(
             name='command',

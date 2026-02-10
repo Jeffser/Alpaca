@@ -127,6 +127,8 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.last_selected_instance_row.instance.stop()
 
             self.last_selected_instance_row = row
+            if row and row.instance:
+                row.instance.start()
 
             self.model_manager.update_added_model_list()
             self.model_manager.update_available_model_list()
@@ -135,7 +137,6 @@ class AlpacaWindow(Adw.ApplicationWindow):
                 self.settings.set_string('selected-instance', row.instance.instance_id)
                 self.get_application().lookup_action('model_creator_existing').set_enabled(row.instance.instance_type in ('ollama', 'ollama:managed'))
                 self.get_application().lookup_action('model_creator_gguf').set_enabled(row.instance.instance_type in ('ollama', 'ollama:managed'))
-
             listbox.set_sensitive(True)
         if listbox.get_sensitive():
             listbox.set_sensitive(False)

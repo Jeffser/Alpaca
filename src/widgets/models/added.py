@@ -113,7 +113,7 @@ class AddedModelDialog(Adw.Dialog):
             metadata[_('Parent Model')] = prettify_model_name(parent_model)
 
         if 'modified_at' in self.model.data:
-            metadata[_('Modified At')] = datetime.datetime.strptime(':'.join(self.model.data['modified_at'].split(':')[:2]), '%Y-%m-%dT%H:%M').strftime('%Y-%m-%d %H:%M')
+            metadata[_('Modified At')] = self.model.data.get('modified_at').strftime('%Y-%m-%d %H:%M')
         else:
             metadata[_('Modified At')] = None
 

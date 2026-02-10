@@ -972,6 +972,15 @@ modules:
       - type: file
         url: https://files.pythonhosted.org/packages/fd/aa/3e0508d5a5dd96529cdc5a97011299056e14c6505b678fd58938792794b1/zstandard-0.25.0.tar.gz
         sha256: 7713e1179d162cf5c7906da876ec2ccb9c3a9dcbdffef0cc7f70c3667a205f0b
+  - name: python3-ollama
+    buildsystem: simple
+    build-commands:
+      - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
+        --prefix=${FLATPAK_DEST} "ollama" --no-build-isolation
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/47/4f/4a617ee93d8208d2bcf26b2d8b9402ceaed03e3853c754940e2290fed063/ollama-0.6.1-py3-none-any.whl
+        sha256: fc4c984b345735c5486faeee67d8a265214a31cbb828167782dc642ce0a2bf8c
   - name: libspelling
     builddir: true
     buildsystem: meson
