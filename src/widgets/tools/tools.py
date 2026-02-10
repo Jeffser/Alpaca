@@ -90,7 +90,7 @@ class WebSearch(Base):
 
     def run(self, arguments, messages, bot_message) -> tuple:
         self.result = 0 # 0=loading | "TEXT"=ok | None=error |
-        search_term = arguments.get("search_term").strip()
+        search_term = arguments.get("search_term", "").strip()
         if not search_term:
             return "I could not find any results", "Error: Search term was not provided"
 
