@@ -144,19 +144,22 @@ class BaseInstance:
             if completion.choices[0] and completion.choices[0].message:
                 if completion.choices[0].message.tool_calls:
                     for call in completion.choices[0].message.tool_calls:
+                        # Parse arguments once
+                        arguments = json.loads(call.function.arguments)
+                        
                         if available_tools.get(call.function.name):
-                            message_response, tool_response = available_tools.get(call.function.name).run(call.function.arguments, messages, bot_message)
+                            message_response, tool_response = available_tools.get(call.function.name).run(arguments, messages, bot_message)
                             generate_message = generate_message and not bool(message_response)
 
                             attachment_content = []
 
-                            if len(json.loads(call.function.arguments)) > 0:
+                            if len(arguments) > 0:
                                 attachment_content += [
                                     '## {}'.format(_('Arguments')),
                                     '| {} | {} |'.format(_('Argument'), _('Value')),
                                     '| --- | --- |'
                                 ]
-                                attachment_content += ['| {} | {} |'.format(k, v) for k, v in json.loads(call.function.arguments).items()]
+                                attachment_content += ['| {} | {} |'.format(k, v) for k, v in arguments.items()]
 
                             attachment_content += [
                                 '## {}'.format(_('Result')),
@@ -173,7 +176,6 @@ class BaseInstance:
                         else:
                             tool_response = ''
 
-                        arguments = json.loads(call.function.arguments)
                         messages.append({
                             "role": "tool",
                             "tool_call_id": call.id,
