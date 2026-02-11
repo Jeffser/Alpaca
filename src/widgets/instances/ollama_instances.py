@@ -101,14 +101,13 @@ class BaseInstance:
 
         message_response = ''
         try:
-            params = {
-                "model": model,
-                "messages": messages,
-                "stream": False,
-                "tools": [v.get_metadata() for v in available_tools.values()],
-                "think": False
-            }
-            response = self.client.chat(**params)
+            response = self.client.chat(
+                model=model,
+                messages=messages,
+                stream=False,
+                tools=[v.get_metadata() for v in available_tools.values()],
+                think=False
+            )
 
 
             if response.message.tool_calls:
