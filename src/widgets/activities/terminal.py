@@ -29,7 +29,7 @@ commands = {
         'python -m http.server 8080 --directory "{sourcedir}"'
     ],
     'bash': [
-        'flatpak-spawn --host \'bash -c "{script}"\''
+        'flatpak-spawn --host env TERM=xterm-256color script -q -c {script} /dev/null'
     ] if IN_FLATPAK else ["{script}"]
 }
 
