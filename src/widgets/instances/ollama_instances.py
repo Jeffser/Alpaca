@@ -2,11 +2,11 @@
 
 from gi.repository import Adw, Gtk, GLib
 
-import requests, json, logging, os, shutil, subprocess, threading, re, signal, pwd, getpass, datetime, time
+import json, logging, os, shutil, subprocess, threading, re, signal, pwd, getpass, datetime, time, ollama
 from .ollama_manager import OllamaManager, get_latest_ollama_tag
 from .. import dialog, tools, chat
 from ...ollama_models import OLLAMA_MODELS
-from ...constants import data_dir, cache_dir, TITLE_GENERATION_PROMPT_OLLAMA, MAX_TOKENS_TITLE_GENERATION, OLLAMA_BINARY_PATH, CAN_SELF_MANAGE_OLLAMA, is_ollama_installed
+from ...constants import data_dir, cache_dir, TITLE_GENERATION_PROMPT_OLLAMA, OLLAMA_BINARY_PATH, CAN_SELF_MANAGE_OLLAMA, is_ollama_installed
 from ...sql_manager import generate_uuid, dict_to_metadata_string, Instance as SQL
 
 logger = logging.getLogger(__name__)
@@ -101,59 +101,56 @@ class BaseInstance:
 
         message_response = ''
         try:
-            params = {
-                "model": model,
-                "messages": messages,
-                "stream": False,
-                "tools": [v.get_metadata() for v in available_tools.values()],
-                "think": False
-            }
-            response = requests.post(
-                '{}/api/chat'.format(self.properties.get('url')),
-                headers={
-                    "Authorization": "Bearer {}".format(self.properties.get('api')),
-                    "Content-Type": "application/json"
-                },
-                data=json.dumps(params),
-                verify=not self.properties.get('allow_self_signed_ssl', False)
+            response = self.client.chat(
+                model=model,
+                messages=messages,
+                stream=False,
+                tools=[v.get_metadata() for v in available_tools.values()],
+                think=False
             )
-            tool_calls = response.json().get('message', {}).get('tool_calls', [])
-            for tc in tool_calls:
-                function = tc.get('function')
-                if available_tools.get(function.get('name')):
-                    message_response, tool_response = available_tools.get(function.get('name')).run(function.get('arguments'), messages, bot_message)
-                    generate_message = generate_message and not bool(message_response)
 
-                    attachment_content = []
 
-                    if len(function.get('arguments', {})) > 0:
+            if response.message.tool_calls:
+                for tool in response.message.tool_calls:
+                    selected_tool = available_tools.get(tool.function.name)
+                    if selected_tool:
+                        message_response, tool_response = selected_tool.run(
+                            tool.function.arguments,
+                            messages,
+                            bot_message
+                        )
+                        generate_message = generate_message and not bool(message_response)
+
+                        attachment_content = []
+
+                        if len(tool.function.arguments) > 0:
+                            attachment_content += [
+                                '## {}'.format(_('Arguments')),
+                                '| {} | {} |'.format(_('Argument'), _('Value')),
+                                '| --- | --- |'
+                            ]
+                            attachment_content += ['| {} | {} |'.format(k, v) for k, v in tool.function.arguments.items()]
+
                         attachment_content += [
-                            '## {}'.format(_('Arguments')),
-                            '| {} | {} |'.format(_('Argument'), _('Value')),
-                            '| --- | --- |'
+                            '## {}'.format(_('Result')),
+                            str(tool_response)
                         ]
-                        attachment_content += ['| {} | {} |'.format(k, v) for k, v in function.get('arguments', {}).items()]
 
-                    attachment_content += [
-                        '## {}'.format(_('Result')),
-                        str(tool_response)
-                    ]
-
-                    attachment = bot_message.add_attachment(
-                        file_id = generate_uuid(),
-                        name = available_tools.get(function.get('name')).display_name,
-                        attachment_type = 'tool',
-                        content = '\n'.join(attachment_content)
-                    )
-                    SQL.insert_or_update_attachment(bot_message, attachment)
-                    messages.append({
-                        'role': 'assistant',
-                        'content': '',
-                    })
-                    messages.append({
-                        'role': 'tool',
-                        'content': str(tool_response)
-                    })
+                        attachment = bot_message.add_attachment(
+                            file_id = generate_uuid(),
+                            name = selected_tool.display_name,
+                            attachment_type = 'tool',
+                            content = '\n'.join(attachment_content)
+                        )
+                        SQL.insert_or_update_attachment(bot_message, attachment)
+                        messages.append({
+                            'role': 'assistant',
+                            'content': '',
+                        })
+                        messages.append({
+                            'role': 'tool',
+                            'content': str(tool_response)
+                        })
         except Exception as e:
             if self.instance_type != 'ollama:managed' or is_ollama_installed():
                 dialog.simple_error(
@@ -216,44 +213,46 @@ class BaseInstance:
             if self.properties.get('seed', 0) != 0:
                 params["options"]["seed"] = self.properties.get('seed')
 
-        data = {'done': True}
         if chat.busy:
             try:
-                response = requests.post(
-                    '{}/api/chat'.format(self.properties.get('url')),
-                    headers={
-                        "Authorization": "Bearer {}".format(self.properties.get('api')),
-                        "Content-Type": "application/json"
-                    },
-                    data=json.dumps(params),
-                    stream=True,
-                    verify=not self.properties.get('allow_self_signed_ssl', False)
-                )
+                response = self.client.chat(**params)
                 bot_message.block_container.clear()
-                if response.status_code == 200:
-                    for line in response.iter_lines():
-                        if line:
-                            data = json.loads(line.decode('utf-8'))
-                            content = data.get('message', {}).get('content')
-                            think_content = data.get('message', {}).get('thinking')
-                            if content:
-                                bot_message.update_message(content)
-                            if think_content:
-                                bot_message.update_thinking(think_content)
-                        if not chat.busy or data.get('done'):
-                            break
-                else:
-                    response_json = response.json()
-                    if response_json.get('error') == 'unauthorized' and response_json.get('signin_url'):
+
+                for block in response:
+                    content = block.message.content
+                    if content:
+                        bot_message.update_message(content)
+
+                    think_content = block.message.thinking
+                    if think_content:
+                        bot_message.update_thinking(think_content)
+
+                    if not chat.busy or block.done:
+                        break
+            except ollama.ResponseError as e:
+                logger.error(e)
+                if e.status_code == 401:
+                    if self.instance_type == 'ollama:managed':
+                        with open(os.path.join(data_dir, '.ollama', 'id_ed25519'), 'rb') as f:
+                            signin_url = self.signin_request()
+                            attachment = bot_message.add_attachment(
+                                file_id = generate_uuid(),
+                                name = 'Ollama Login',
+                                attachment_type = 'link',
+                                content = signin_url
+                            )
+                            SQL.insert_or_update_attachment(bot_message, attachment)
+                            bot_message.update_message("🦙 Just a quick heads-up! To access the Ollama cloud models, you'll need to log into your Ollama account first.")
+                    elif self.instance_type == 'ollama:cloud':
+                        bot_message.update_message("🦙 Please verify that the API key provided in the instance preferences is valid.")
+                    else:
                         attachment = bot_message.add_attachment(
                             file_id = generate_uuid(),
-                            name = 'Ollama Login',
+                            name = 'Ollama Login Tutorial',
                             attachment_type = 'link',
-                            content = response_json.get('signin_url')
+                            content = 'https://docs.ollama.com/api/authentication'
                         )
-                        SQL.insert_or_update_attachment(bot_message, attachment)
-                        bot_message.update_message("🦙 Just a quick heads-up! To access the Ollama cloud models, you'll need to log into your Ollama account first.")
-                    logger.error(response.content)
+                        bot_message.update_message("🦙 Just a quick heads-up! To access the Ollama cloud models, you'll need to log into your Ollama account first from the server.")
             except Exception as e:
                 if self.instance_type != 'ollama:managed' or is_ollama_installed():
                     dialog.simple_error(
@@ -279,7 +278,6 @@ class BaseInstance:
                 "temperature": 0.2
             },
             "model": model or fallback_model,
-            "max_tokens": MAX_TOKENS_TITLE_GENERATION,
             "stream": False,
             "messages": [
                 {
@@ -291,9 +289,6 @@ class BaseInstance:
                 "type": "object",
                 "properties": {
                     "title": {
-                        "type": "string"
-                    },
-                    "emoji": {
                         "type": "string"
                     }
                 },
@@ -307,36 +302,20 @@ class BaseInstance:
         if self.properties.get("override_parameters"):
             params["options"]["num_ctx"] = self.properties.get('num_ctx', 16384)
         try:
-            response = requests.post(
-                '{}/api/chat'.format(self.properties.get('url')),
-                headers={
-                    "Authorization": "Bearer {}".format(self.properties.get('api')),
-                    "Content-Type": "application/json"
-                },
-                data=json.dumps(params),
-                verify=not self.properties.get('allow_self_signed_ssl', False)
-            )
-            data = json.loads(response.json().get('message', {}).get('content', '{"title": "New Chat"}'))
+            response = self.client.chat(**params)
+            data = json.loads(response.message.content or '{"title": "New Chat"}')
             generated_title = data.get('title').replace('\n', '').strip()
 
             if len(generated_title) > 30:
                 generated_title = generated_title[:30].strip() + '...'
 
-            if data.get('emoji'):
-                GLib.idle_add(
-                    chat.row.edit,
-                    '{} {}'.format(data.get('emoji').replace('\n', '').strip(), generated_title),
-                    chat.is_template
-                )
-            else:
-                GLib.idle_add(
-                    chat.row.edit,
-                    generated_title,
-                    chat.is_template
-                )
+            GLib.idle_add(
+                chat.row.edit,
+                generated_title,
+                chat.is_template
+            )
         except Exception as e:
             logger.error(e)
-
 
     def get_default_model(self):
         local_models = self.get_local_models()
@@ -356,21 +335,30 @@ class BaseInstance:
         pass
 
     def start(self):
-        pass
+        self.client = ollama.Client(
+            host=self.properties.get('url'),
+            headers={
+                'Authorization': 'Bearer {}'.format(self.properties.get('api'))
+            },
+            verify=not self.properties.get('allow_self_signed_ssl', False)
+        )
 
     def get_local_models(self) -> list:
-        if not self.process:
-            self.start()
         try:
-            response = requests.get(
-                '{}/api/tags'.format(self.properties.get('url')),
-                headers={
-                    'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-                },
-                verify=not self.properties.get('allow_self_signed_ssl', False)
-            )
-            if response.status_code == 200:
-                return json.loads(response.text).get('models')
+            model_list = []
+
+            for m in self.client.list().models:
+                model_list.append({
+                    'name': m.model,
+                    'modified_at': m.modified_at,
+                    'digest': m.digest,
+                    'size': m.size,
+                    'details': m.details
+                })
+
+            return model_list
+
+            return [{'name': m.model} for m in models if m.model]
         except Exception as e:
             if self.instance_type != 'ollama:managed' or is_ollama_installed():
                 dialog.simple_error(
@@ -399,57 +387,27 @@ class BaseInstance:
         return {}
 
     def get_model_info(self, model_name:str) -> dict:
-        if not self.process:
-            self.start()
         try:
-            response = requests.post(
-                '{}/api/show'.format(self.properties.get('url')),
-                headers={
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-                },
-                data=json.dumps({
-                    "name": model_name
-                }),
-                stream=False,
-                verify=not self.properties.get('allow_self_signed_ssl', False)
-            )
-            if response.status_code == 200:
-                return json.loads(response.text)
+            response = self.client.show(model_name)
+            return response
         except Exception as e:
             logger.error(e)
         return {}
 
     def pull_model(self, model):
-        if not self.process:
-            self.start()
         try:
-            response = requests.post(
-                '{}/api/pull'.format(self.properties.get('url')),
-                headers={
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-                },
-                data=json.dumps({
-                    'model': model.get_name(),
-                    'stream': True
-                }),
-                stream=True,
-                verify=not self.properties.get('allow_self_signed_ssl', False)
+            response = self.client.pull(
+                model=model.get_name(),
+                stream=True
             )
-            if response.status_code == 200:
-                for line in response.iter_lines():
-                    if line:
-                        data = json.loads(line.decode("utf-8"))
-                        if data.get('error'):
-                            raise Exception(data.get('error'))
-                        if data.get('status'):
-                            model.append_progress_line(data.get('status'))
-                        if data.get('total') and data.get('completed'):
-                            model.update_progressbar(data.get('completed') / data.get('total'))
-                        if data.get('status') == 'success':
-                            model.update_progressbar(-1)
-                            return
+            for chunk in response:
+                if chunk.status:
+                    model.append_progress_line(chunk.status)
+                if chunk.total and chunk.completed:
+                    model.update_progressbar(chunk.completed / chunk.total)
+                if chunk.status == 'success':
+                    model.update_progressbar(-1)
+                    break
         except Exception as e:
             if self.instance_type != 'ollama:managed' or is_ollama_installed():
                 dialog.simple_error(
@@ -461,81 +419,39 @@ class BaseInstance:
                 logger.error(e)
             model.get_parent().get_parent().remove(model.get_parent())
 
-    def gguf_exists(self, sha256:str) -> bool:
-        if not self.process:
-            self.start()
-        try:
-            return requests.head(
-                '{}/api/blobs/sha256:{}'.format(self.properties.get('url'), sha256),
-                headers={
-                    'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-                },
-                verify=not self.properties.get('allow_self_signed_ssl', False)
-            ).status_code == 200
-        except Exception as e:
-            return False
-
-    def upload_gguf(self, gguf_path:str, sha256:str):
-        if not self.process:
-            self.start()
-        with open(gguf_path, 'rb') as f:
-            requests.post(
-                '{}/api/blobs/sha256:{}'.format(self.properties.get('url'), sha256),
-                data=f,
-                headers={
-                    'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-                },
-                verify=not self.properties.get('allow_self_signed_ssl', False)
-            )
+    def upload_gguf(self, gguf_path:str):
+        digest = self.client.create_blob(gguf_path)
+        return digest
 
     def create_model(self, data:dict, model):
-        if not self.process:
-            self.start()
         try:
-            response = requests.post(
-                '{}/api/create'.format(self.properties.get('url')),
-                headers={
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-                },
-                data=json.dumps(data),
-                stream=True,
-                verify=not self.properties.get('allow_self_signed_ssl', False)
+            response = self.client.create(
+                model=data.get('model'),
+                from_=data.get('from'),
+                template=data.get('template'),
+                files=data.get('files'),
+                parameters=data.get('parameters'),
+                stream=True
             )
-            if response.status_code == 200:
-                for line in response.iter_lines():
-                    if line:
-                        data = json.loads(line.decode("utf-8"))
-                        if data.get('status'):
-                            model.append_progress_line(data.get('status'))
-                        if data.get('total') and data.get('completed'):
-                            model.update_progressbar(data.get('completed') / data.get('total'))
-                        if data.get('status') == 'success':
-                            model.update_progressbar(-1)
-                            return
+            for chunk in response:
+                if chunk.status:
+                    model.append_progress_line(chunk.status)
+                if chunk.total and chunk.completed:
+                    model.update_progressbar(chunk.completed / chunk.total)
+                if chunk.status == 'success':
+                    model.update_progressbar(-1)
+                    break
         except Exception as e:
             model.get_parent().get_parent().remove(model.get_parent())
             logger.error(e)
 
     def delete_model(self, model_name:str):
-        if not self.process:
-            self.start()
         try:
-            response = requests.delete(
-                '{}/api/delete'.format(self.properties.get('url')),
-                headers={
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-                },
-                data=json.dumps({
-                    "name": model_name
-                }),
-                verify=not self.properties.get('allow_self_signed_ssl', False)
-            )
-            return response.status_code == 200
+            response = self.client.delete(model_name)
+            return response.status == 'success'
         except Exception as e:
-            return False
-
+            logger.error(e)
+        return False
 
 class OllamaManaged(BaseInstance):
     instance_type = 'ollama:managed'
@@ -583,6 +499,26 @@ class OllamaManaged(BaseInstance):
                     self.properties[key][override] = properties.get(key, {}).get(override, self.default_properties.get(key).get(override))
             else:
                 self.properties[key] = properties.get(key, self.default_properties.get(key))
+
+    def signin_request(self) -> str:
+        # For use with cloud models, returns the url even though it also opens it
+        try:
+            params = {
+                "OLLAMA_HOST": self.properties.get('url')
+            }
+            result = subprocess.run(
+                [OLLAMA_BINARY_PATH, 'signin'],
+                capture_output=True,
+                text=True,
+                env={**os.environ, **params},
+            )
+            output = result.stdout + result.stderr
+            url_match = re.search(r'https://ollama\.com/connect\?\S+', output)
+            if url_match:
+                return url_match.group(0)
+        except Exception as e:
+            logger.error(e)
+        return ''
 
     def log_output(self, pipe):
         AMD_support_label = "\n<a href='https://jeffser.com/alpaca/installation-guide.html'>{}</a>".format(_('Alpaca Support'))
@@ -644,6 +580,7 @@ class OllamaManaged(BaseInstance):
             try:
                 logger.info("Starting Alpaca's Ollama instance...")
                 params = self.properties.get('overrides', {}).copy()
+                params["HOME"] = data_dir
                 params["OLLAMA_HOST"] = self.properties.get('url')
                 params["OLLAMA_MODELS"] = self.properties.get('model_directory')
                 if self.properties.get("expose"):
@@ -687,6 +624,13 @@ class OllamaManaged(BaseInstance):
                 if self.row:
                     GLib.idle_add(self.row.get_parent().unselect_all)
                 self.stop()
+        self.client = ollama.Client(
+            host=self.properties.get('url'),
+            headers={
+                'Authorization': 'Bearer {}'.format(self.properties.get('api'))
+            },
+            verify=not self.properties.get('allow_self_signed_ssl', False)
+        )
 
 class Ollama(BaseInstance):
     instance_type = 'ollama'
@@ -759,44 +703,31 @@ class OllamaCloud(BaseInstance):
         return local_models
 
     def get_available_models(self) -> dict:
-        if not self.process:
-            self.start()
         try:
-            response = requests.get(
-                '{}/api/tags'.format(self.properties.get('url')),
-                headers={
-                    'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-                },
-                verify=not self.properties.get('allow_self_signed_ssl', False)
-            )
-            if response.status_code == 200:
-                available_models = {}
+            response = self.client.list()
+            available_models = {}
+            for model in response.models:
+                if ':' in model.model:
+                    model_name, model_tag = model.model.split(':')
+                else:
+                    model_name, model_tag = model.model, ''
 
-                for model in [m.get('model') for m in response.json().get('models', [])]:
-                    if ':' in model:
-                        model_name, model_tag = model.split(':')
-                    else:
-                        model_name, model_tag = model, ''
-
-                    if not available_models.get(model_name):
-                        model_metadata = OLLAMA_MODELS.get(model_name)
-                        if model_metadata:
-                            available_models[model_name] = {
-                                'url': model_metadata.get('url'),
-                                'tags': [],
-                                'author': model_metadata.get('author'),
-                                'categories': model_metadata.get('categories'),
-                                'languages': model_metadata.get('languages'),
-                                'description': model_metadata.get('description')
-                            }
-                        else:
-                            available_models[model_name] = {
-                                'tags': [],
-                                'categories': ['cloud']
-                            }
-
-                    available_models[model_name]['tags'].append([model_tag, 'cloud'])
-
+                model_metadata = OLLAMA_MODELS.get(model_name)
+                if model_metadata:
+                    available_models[model_name] = {
+                        'url': model_metadata.get('url'),
+                        'tags': [],
+                        'author': model_metadata.get('author'),
+                        'categories': model_metadata.get('categories'),
+                        'languages': model_metadata.get('languages'),
+                        'description': model_metadata.get('description')
+                    }
+                else:
+                    available_models[model_name] = {
+                        'tags': [],
+                        'categories': ['cloud']
+                    }
+                available_models[model_name]['tags'].append([model_tag, 'cloud'])
                 return available_models
         except Exception as e:
             if self.instance_type != 'ollama:managed' or is_ollama_installed():

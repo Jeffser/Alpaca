@@ -90,7 +90,7 @@ class WebSearch(Base):
 
     def run(self, arguments, messages, bot_message) -> tuple:
         self.result = 0 # 0=loading | "TEXT"=ok | None=error |
-        search_term = arguments.get("search_term").strip()
+        search_term = arguments.get("search_term", "").strip()
         if not search_term:
             return "I could not find any results", "Error: Search term was not provided"
 
@@ -107,7 +107,7 @@ class Terminal(Base):
     icon_name:str = 'terminal-symbolic'
 
     name:str = 'run_command'
-    description:str = 'Request permission to run a command in a terminal returning its result, add sudo if root permission is needed'
+    description:str = 'Request a shell command to be reviewed and optionally executed by the host application'
     properties:list = [
         Property(
             name='command',
