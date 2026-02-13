@@ -213,6 +213,7 @@ class BaseInstance:
             if self.properties.get('seed', 0) != 0:
                 params["options"]["seed"] = self.properties.get('seed')
 
+        metadata_string = None
         if chat.busy:
             try:
                 response = self.client.chat(**params)
@@ -226,8 +227,19 @@ class BaseInstance:
                     think_content = block.message.thinking
                     if think_content:
                         bot_message.update_thinking(think_content)
+                    if block.done:
+                        data = {
+                            'total_duration': block.total_duration,
+                            'load_duration': block.load_duration,
+                            'prompt_eval_count': block.prompt_eval_count,
+                            'prompt_eval_duration': block.prompt_eval_duration,
+                            'eval_count': block.eval_count,
+                            'eval_duration': block.eval_duration
+                        }
+                        metadata_string = dict_to_metadata_string(data)
 
-                    if not chat.busy or block.done:
+                        break
+                    if not chat.busy:
                         break
             except ollama.ResponseError as e:
                 logger.error(e)
@@ -264,9 +276,9 @@ class BaseInstance:
                     logger.error(e)
                 if self.row:
                     self.row.get_parent().unselect_all()
-        metadata_string = None
-        if self.properties.get('show_response_metadata'):
-            metadata_string = dict_to_metadata_string(data)
+
+        if not self.properties.get('show_response_metadata'):
+            metadata_string = None
         bot_message.finish_generation(metadata_string)
 
     def generate_chat_title(self, chat, prompt:str, fallback_model:str):

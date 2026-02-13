@@ -140,10 +140,6 @@ class BlockContainer(Gtk.Box):
             self.thinking_block = blocks.Thinking()
             GLib.idle_add(self.prepend, self.thinking_block)
 
-    def remove_thinking_block(self):
-        if self.thinking_block.get_parent():
-            self.remove(self.thinking_block)
-
     def clear(self) -> None:
         for child in list(self):
             if child != self.generating_block:
@@ -313,7 +309,22 @@ class Message(Gtk.Box):
             GLib.idle_add(self.attachment_container.add_attachment, new_attachment)
             return new_attachment
 
-    def update_message(self, content):
+    def remove_and_attach_thought(self):
+        if self.block_container.thinking_block and self.block_container.thinking_block.get_parent():
+            attachment = attachments.Attachment(
+                generate_uuid(),
+                _('Thought'),
+                'thought',
+                self.block_container.thinking_block.get_content()
+            )
+            self.attachment_container.add_attachment(attachment)
+            SQL.insert_or_update_attachment(self, attachment)
+
+            if self.block_container.thinking_block.get_parent():
+                self.block_container.remove(self.block_container.thinking_block)
+            self.block_container.thinking_block = None
+
+    def update_message(self, content:str):
         if content:
             GLib.idle_add(self.block_container.generating_block.append_content, content)
             GLib.idle_add(self.main_stack.set_visible_child_name, 'content')
@@ -323,16 +334,8 @@ class Message(Gtk.Box):
                 vadjustment = chat_element.scrolledwindow.get_vadjustment()
                 if vadjustment.get_value() + 150 >= vadjustment.get_upper() - vadjustment.get_page_size():
                     GLib.idle_add(vadjustment.set_value, vadjustment.get_upper() - vadjustment.get_page_size())
-        if self.block_container.thinking_block and self.block_container.thinking_block.get_parent():
-            attachment = attachments.Attachment(
-                generate_uuid(),
-                _('Thought'),
-                'thought',
-                self.block_container.thinking_block.get_content()
-            )
-            GLib.idle_add(self.attachment_container.add_attachment, attachment)
-            SQL.insert_or_update_attachment(self, attachment)
-            GLib.idle_add(self.block_container.remove_thinking_block)
+
+            GLib.idle_add(self.remove_and_attach_thought)
 
     def update_thinking(self, content):
         if content:
