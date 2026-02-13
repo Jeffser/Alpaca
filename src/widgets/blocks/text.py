@@ -17,6 +17,7 @@ def markdown_to_pango(text:str) -> str:
     text = text.replace("<|end_of_solution|>", "")
     text = re.sub(r'`([^`\n]*?)`', r'<tt>\1</tt>', text)
     text = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', text, flags=re.MULTILINE)
+    text = re.sub(r'\*(.*?)\*', r'<i>\1</i>', text, flags=re.MULTILINE)
     text = re.sub(r'^####\s+(.*)', r'<span size="medium" weight="bold">\1</span>', text, flags=re.MULTILINE)
     text = re.sub(r'^###\s+(.*)', r'<span size="large">\1</span>', text, flags=re.MULTILINE)
     text = re.sub(r'^##\s+(.*)', r'<span size="x-large">\1</span>', text, flags=re.MULTILINE)
