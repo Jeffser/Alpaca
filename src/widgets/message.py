@@ -229,7 +229,7 @@ class Message(Gtk.Box):
         self.update_profile_picture()
 
     def get_content(self) -> str:
-        return ''.join(self.block_container.get_content())
+        return '\n'.join(self.block_container.get_content())
 
     def get_content_for_dictation(self) -> str:
         return '\n'.join([c.get_content_for_dictation().strip() for c in list(self.block_container) if c is not None])
@@ -373,10 +373,10 @@ class Message(Gtk.Box):
 
         if chat_element and root:
             chat_element.stop_message()
+        self.dt = datetime.datetime.now()
         buffer = self.block_container.generating_block.buffer
         final_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
-        self.block_container.add_content(final_text)
-        self.dt = datetime.datetime.now()
+        GLib.idle_add(self.block_container.add_content, final_text)
         GLib.idle_add(self.block_container.remove_generating_block)
         GLib.idle_add(self.update_profile_picture)
         GLib.idle_add(send_notification)
@@ -393,10 +393,13 @@ class Message(Gtk.Box):
 
         #sys.exit() #Exit thread
 
-    def save(self):
+    def save(self, force_content:str=""):
         chat_element = self.get_ancestor(chat.Chat)
         if chat_element and chat_element.chat_id:
-            SQL.insert_or_update_message(self)
+            SQL.insert_or_update_message(
+                self,
+                force_content=force_content
+            )
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/message/global_message_textview.ui')
 class GlobalMessageTextView(GtkSource.View):

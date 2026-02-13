@@ -529,7 +529,7 @@ class Instance:
     ## MESSAGES ##
     ##############
 
-    def insert_or_update_message(message, force_chat_id: str = None) -> None:
+    def insert_or_update_message(message, force_chat_id: str = None, force_content: str = None) -> None:
         message_author = ["user", "assistant", "system"][message.mode]
         chat_element = message.get_ancestor(Widgets.chat.Chat)
 
@@ -548,7 +548,7 @@ class Instance:
                         message_author,
                         message.get_model() or "",
                         message.dt.strftime("%Y/%m/%d %H:%M:%S"),
-                        message.get_content() or "",
+                        force_content or message.get_content() or "",
                         message.message_id,
                     ),
                 )
@@ -565,7 +565,7 @@ class Instance:
                         message_author,
                         message.get_model() or "",
                         message.dt.strftime("%Y/%m/%d %H:%M:%S"),
-                        message.get_content() or "",
+                        force_content or message.get_content() or "",
                     ),
                 )
 
@@ -608,6 +608,7 @@ class Instance:
 
     def delete_attachment(attachment) -> None:
         with SQLiteConnection() as c:
+            print('!!!!!!!!!!!!!!',attachment.get_name())
             c.cursor.execute(
                 "DELETE FROM attachment WHERE id=?", (attachment.get_name(),)
             )

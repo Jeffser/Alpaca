@@ -9,10 +9,7 @@ class Separator(Gtk.Separator):
     __gtype_name__ = 'AlpacaSeparator'
 
     def __init__(self):
-        super().__init__(
-            margin_top=10,
-            margin_bottom=10
-        )
+        super().__init__()
 
     def get_content(self) -> str:
         return '---'

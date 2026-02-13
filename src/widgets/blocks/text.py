@@ -103,17 +103,18 @@ class EditingText(Gtk.Box):
     def save_edit(self, button=None):
         message = self.get_ancestor(Message)
         buffer = self.textview.get_buffer()
-        GLib.idle_add(message.block_container.set_content, buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False))
+        raw_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
+        GLib.idle_add(message.block_container.set_content, raw_text)
         message.set_halign(2 if message.mode == 0 else 0)
         self.set_visible(False)
         message.popup.change_status(True)
         message.main_stack.set_visible_child_name('content')
-        GLib.idle_add(message.save)
+        GLib.idle_add(message.save, raw_text)
         response_index = list(message.get_parent()).index(message) + 1
         if len(list(message.get_parent())) > response_index:
             next_message = list(message.get_parent())[response_index]
             if next_message.mode == 1 and next_message.get_root().settings.get_value('regenerate-after-edit').unpack():
-                next_message.popup.regenerate_message()
+                GLib.idle_add(next_message.popup.regenerate_message)
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/blocks/text.ui')
 class Text(Gtk.Label):
@@ -153,6 +154,6 @@ class Text(Gtk.Label):
         return ''
 
     def set_content(self, value:str) -> None:
-        self.raw_text = value
+        self.raw_text = value.strip()
         self.set_markup(markdown_to_pango(self.raw_text))
 
