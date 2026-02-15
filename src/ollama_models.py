@@ -18,6 +18,7 @@ OLLAMA_MODELS = {
         "categories": [
                 "tools",
                 "huge",
+                "code",
                 "multilingual"
         ],
         "languages": [
@@ -47,7 +48,8 @@ OLLAMA_MODELS = {
         "author": "Qwen Team",
         "categories": [
                 "tools",
-                "huge"
+                "huge",
+                "code"
         ],
         "languages": [
                 "en"
@@ -104,6 +106,7 @@ OLLAMA_MODELS = {
                 "small",
                 "medium",
                 "big",
+                "code",
                 "multilingual"
         ],
         "languages": [
@@ -144,9 +147,9 @@ OLLAMA_MODELS = {
                 "small",
                 "medium",
                 "huge",
+                "code",
                 "math",
-                "multilingual",
-                "code"
+                "multilingual"
         ],
         "languages": [
                 "en"
@@ -196,7 +199,8 @@ OLLAMA_MODELS = {
         "categories": [
                 "tools",
                 "small",
-                "medium"
+                "medium",
+                "code"
         ],
         "languages": [
                 "en"
@@ -348,6 +352,7 @@ OLLAMA_MODELS = {
                 "medium",
                 "big",
                 "huge",
+                "code",
                 "multilingual"
         ],
         "languages": [
@@ -485,7 +490,8 @@ OLLAMA_MODELS = {
                 "medium",
                 "big",
                 "huge",
-                "multilingual"
+                "multilingual",
+                "code"
         ],
         "languages": [
                 "en",
@@ -774,7 +780,8 @@ OLLAMA_MODELS = {
         "author": "Mistral AI",
         "categories": [
                 "tools",
-                "huge"
+                "huge",
+                "code"
         ],
         "languages": [
                 "en"
@@ -1118,7 +1125,8 @@ OLLAMA_MODELS = {
         "categories": [
                 "tools",
                 "big",
-                "huge"
+                "huge",
+                "code"
         ],
         "languages": [
                 "en"
@@ -1671,7 +1679,8 @@ OLLAMA_MODELS = {
         "author": "Cohere",
         "categories": [
                 "tools",
-                "huge"
+                "huge",
+                "code"
         ],
         "languages": [
                 "en"
@@ -3137,7 +3146,8 @@ OLLAMA_MODELS = {
                 "small",
                 "medium",
                 "big",
-                "huge"
+                "huge",
+                "code"
         ],
         "languages": [
                 "en"
@@ -3182,7 +3192,8 @@ OLLAMA_MODELS = {
         "categories": [
                 "tools",
                 "small",
-                "medium"
+                "medium",
+                "code"
         ],
         "languages": [
                 "en"
@@ -3430,7 +3441,8 @@ OLLAMA_MODELS = {
                 "tools",
                 "small",
                 "medium",
-                "huge"
+                "huge",
+                "code"
         ],
         "languages": [
                 "en"
@@ -3452,7 +3464,8 @@ OLLAMA_MODELS = {
         "author": "Nvidia",
         "categories": [
                 "tools",
-                "huge"
+                "huge",
+                "code"
         ],
         "languages": [
                 "en"
@@ -4003,8 +4016,8 @@ OLLAMA_MODELS = {
                 "small",
                 "medium",
                 "big",
-                "multilingual",
-                "code"
+                "code",
+                "multilingual"
         ],
         "languages": [
                 "en",
@@ -4066,6 +4079,7 @@ OLLAMA_MODELS = {
                 "medium",
                 "big",
                 "huge",
+                "code",
                 "multilingual"
         ],
         "languages": [
@@ -4177,7 +4191,8 @@ OLLAMA_MODELS = {
         "author": "Fireworks AI",
         "categories": [
                 "tools",
-                "huge"
+                "huge",
+                "code"
         ],
         "languages": [
                 "en"
@@ -4631,8 +4646,8 @@ OLLAMA_MODELS = {
                 "small",
                 "medium",
                 "big",
-                "multilingual",
-                "code"
+                "code",
+                "multilingual"
         ],
         "author": "IBM Research",
         "languages": [
@@ -4798,10 +4813,12 @@ OLLAMA_MODELS = {
         "url": "https://ollama.com/library/deepseek-r1",
         "categories": [
                 "tools",
+                "reasoning",
                 "medium",
                 "small",
                 "big",
                 "huge",
+                "code",
                 "math"
         ],
         "author": "DeepSeek Team",
@@ -5056,7 +5073,8 @@ OLLAMA_MODELS = {
                 "small",
                 "medium",
                 "math",
-                "multilingual"
+                "multilingual",
+                "code"
         ],
         "author": "Microsoft",
         "languages": [
@@ -5102,7 +5120,8 @@ OLLAMA_MODELS = {
                 "vision",
                 "tools",
                 "small",
-                "medium"
+                "medium",
+                "code"
         ],
         "author": "IBM for Code Intelligence",
         "languages": [
@@ -5131,6 +5150,7 @@ OLLAMA_MODELS = {
                 "small",
                 "medium",
                 "big",
+                "code",
                 "multilingual"
         ],
         "author": "IBM for Code Intelligence",
@@ -5165,7 +5185,8 @@ OLLAMA_MODELS = {
         "categories": [
                 "tools",
                 "medium",
-                "big"
+                "big",
+                "code"
         ],
         "author": "Cohere",
         "languages": [
@@ -5189,8 +5210,8 @@ OLLAMA_MODELS = {
         "categories": [
                 "tools",
                 "huge",
-                "multilingual",
-                "code"
+                "code",
+                "multilingual"
         ],
         "author": "Command A Team",
         "languages": [
@@ -5263,6 +5284,7 @@ OLLAMA_MODELS = {
         "url": "https://ollama.com/library/qwen3",
         "categories": [
                 "tools",
+                "reasoning",
                 "medium",
                 "small",
                 "big",
@@ -5439,8 +5461,8 @@ OLLAMA_MODELS = {
                 "vision",
                 "tools",
                 "huge",
-                "multilingual",
-                "code"
+                "code",
+                "multilingual"
         ],
         "author": "Meta",
         "languages": [
@@ -5541,7 +5563,8 @@ OLLAMA_MODELS = {
                 "vision",
                 "tools",
                 "big",
-                "huge"
+                "huge",
+                "code"
         ],
         "author": "Mistral AI",
         "languages": [
@@ -5582,7 +5605,8 @@ OLLAMA_MODELS = {
                 "small",
                 "medium",
                 "big",
-                "huge"
+                "huge",
+                "code"
         ],
         "author": "Deep Cogito",
         "languages": [
@@ -5754,10 +5778,11 @@ OLLAMA_MODELS = {
         "url": "https://ollama.com/library/magistral",
         "categories": [
                 "tools",
+                "reasoning",
                 "big",
                 "huge",
-                "multilingual",
-                "code"
+                "code",
+                "multilingual"
         ],
         "author": "Mistral AI",
         "languages": [
@@ -5803,7 +5828,8 @@ OLLAMA_MODELS = {
                 "vision",
                 "tools",
                 "big",
-                "huge"
+                "huge",
+                "code"
         ],
         "author": "Mistral AI",
         "languages": [
@@ -5837,9 +5863,11 @@ OLLAMA_MODELS = {
         "url": "https://ollama.com/library/gpt-oss",
         "categories": [
                 "tools",
+                "reasoning",
                 "big",
                 "huge",
-                "cloud"
+                "cloud",
+                "code"
         ],
         "author": "OpenAI",
         "languages": [
@@ -5948,8 +5976,10 @@ OLLAMA_MODELS = {
         "url": "https://ollama.com/library/deepseek-v3.1",
         "categories": [
                 "tools",
+                "reasoning",
                 "huge",
-                "cloud"
+                "cloud",
+                "code"
         ],
         "author": "DeepSeek Team",
         "languages": [
@@ -6000,6 +6030,7 @@ OLLAMA_MODELS = {
         "categories": [
                 "vision",
                 "tools",
+                "reasoning",
                 "medium",
                 "small",
                 "big",
@@ -6024,6 +6055,7 @@ OLLAMA_MODELS = {
         "url": "https://ollama.com/library/glm-4.6",
         "categories": [
                 "tools",
+                "reasoning",
                 "cloud",
                 "code"
         ],
@@ -6105,6 +6137,7 @@ OLLAMA_MODELS = {
                 "medium",
                 "big",
                 "huge",
+                "code",
                 "multilingual"
         ],
         "author": "IBM Research",
@@ -6153,6 +6186,7 @@ OLLAMA_MODELS = {
         "url": "https://ollama.com/library/minimax-m2",
         "categories": [
                 "tools",
+                "reasoning",
                 "cloud",
                 "code",
                 "math",
@@ -6207,30 +6241,12 @@ OLLAMA_MODELS = {
         "url": "https://ollama.com/library/gpt-oss-safeguard",
         "categories": [
                 "tools",
+                "reasoning",
                 "big",
-                "huge"
-        ],
-        "author": "OpenAI",
-        "languages": [
-                "en"
-        ],
-    },
-    "gemini-3-pro-preview": {
-        "tags": [
-                [
-                        "latest",
-                        "cloud"
-                ]
-        ],
-        "description": _("Google's most intelligent model with SOTA reasoning and multimodal understanding, and powerful agentic and vibe coding capabilities."),
-        "url": "https://ollama.com/library/gemini-3-pro-preview",
-        "categories": [
-                "vision",
-                "tools",
-                "cloud",
+                "huge",
                 "code"
         ],
-        "author": "Google DeepMind",
+        "author": "OpenAI",
         "languages": [
                 "en"
         ],
@@ -6246,6 +6262,7 @@ OLLAMA_MODELS = {
         "url": "https://ollama.com/library/kimi-k2-thinking",
         "categories": [
                 "tools",
+                "reasoning",
                 "cloud",
                 "code",
                 "multilingual"
@@ -6321,7 +6338,8 @@ OLLAMA_MODELS = {
                 "small",
                 "big",
                 "huge",
-                "cloud"
+                "cloud",
+                "code"
         ],
         "author": "Mistral AI",
         "languages": [
@@ -6377,8 +6395,10 @@ OLLAMA_MODELS = {
         "url": "https://ollama.com/library/qwen3-next",
         "categories": [
                 "tools",
+                "reasoning",
                 "huge",
-                "cloud"
+                "cloud",
+                "code"
         ],
         "author": "Alibaba",
         "languages": [
@@ -6404,8 +6424,10 @@ OLLAMA_MODELS = {
         "url": "https://ollama.com/library/nemotron-3-nano",
         "categories": [
                 "tools",
+                "reasoning",
                 "huge",
-                "cloud"
+                "cloud",
+                "code"
         ],
         "author": "Nvidia",
         "languages": [
@@ -6527,8 +6549,10 @@ OLLAMA_MODELS = {
         "url": "https://ollama.com/library/glm-4.7-flash",
         "categories": [
                 "tools",
+                "reasoning",
                 "big",
-                "huge"
+                "huge",
+                "code"
         ],
         "author": "THUDM",
         "languages": [
@@ -6627,7 +6651,9 @@ OLLAMA_MODELS = {
         "categories": [
                 "vision",
                 "tools",
-                "cloud"
+                "reasoning",
+                "cloud",
+                "code"
         ],
         "author": "Google Deepmind",
         "languages": [
@@ -6755,6 +6781,7 @@ OLLAMA_MODELS = {
         "url": "https://ollama.com/library/glm-4.7",
         "categories": [
                 "tools",
+                "reasoning",
                 "cloud",
                 "code"
         ],
@@ -6774,7 +6801,9 @@ OLLAMA_MODELS = {
         "url": "https://ollama.com/library/deepseek-v3.2",
         "categories": [
                 "tools",
-                "cloud"
+                "reasoning",
+                "cloud",
+                "code"
         ],
         "author": "DeepSeek Team",
         "languages": [
@@ -6793,7 +6822,8 @@ OLLAMA_MODELS = {
         "categories": [
                 "vision",
                 "tools",
-                "cloud"
+                "cloud",
+                "code"
         ],
         "author": "Mistral AI",
         "languages": [
@@ -6812,7 +6842,8 @@ OLLAMA_MODELS = {
         "categories": [
                 "tools",
                 "cloud",
-                "code"
+                "code",
+                "multilingual"
         ],
         "author": "Mistral AI",
         "languages": [
@@ -6833,9 +6864,9 @@ OLLAMA_MODELS = {
         "description": _("LFM2.5 is a new family of hybrid models designed for on-device deployment."),
         "url": "https://ollama.com/library/lfm2.5-thinking",
         "categories": [
+                "tools",
                 "small",
-                "medium",
-                "multilingual"
+                "medium"
         ],
         "author": "Liquid",
         "languages": [
@@ -6861,9 +6892,113 @@ OLLAMA_MODELS = {
         "categories": [
                 "vision",
                 "tools",
-                "cloud"
+                "reasoning",
+                "cloud",
+                "code"
         ],
         "author": "Kimi Team",
+        "languages": [
+                "en"
+        ],
+    },
+    "qwen3-coder-next": {
+        "tags": [
+                [
+                        "latest",
+                        "52 GB"
+                ],
+                [
+                        "cloud",
+                        "cloud"
+                ],
+                [
+                        "q4_K_M",
+                        "52 GB"
+                ],
+                [
+                        "q8_0",
+                        "85 GB"
+                ]
+        ],
+        "description": _("Qwen3-Coder-Next is a coding-focused language model from Alibaba's Qwen team, optimized for agentic coding workflows and local development."),
+        "url": "https://ollama.com/library/qwen3-coder-next",
+        "categories": [
+                "tools",
+                "huge",
+                "cloud",
+                "code"
+        ],
+        "author": "Alibaba",
+        "languages": [
+                "en"
+        ],
+    },
+    "glm-ocr": {
+        "tags": [
+                [
+                        "latest",
+                        "2.2 GB"
+                ],
+                [
+                        "q8_0",
+                        "1.6 GB"
+                ],
+                [
+                        "bf16",
+                        "2.2 GB"
+                ]
+        ],
+        "description": _("GLM-OCR is a multimodal OCR model for complex document understanding, built on the GLM-V encoder–decoder architecture."),
+        "url": "https://ollama.com/library/glm-ocr",
+        "categories": [
+                "vision",
+                "tools",
+                "small",
+                "medium",
+                "big",
+                "code"
+        ],
+        "author": "THUDM",
+        "languages": [
+                "en"
+        ],
+    },
+    "glm-5": {
+        "tags": [
+                [
+                        "cloud",
+                        "cloud"
+                ]
+        ],
+        "description": _("A strong reasoning and agentic model from Z.ai with 744B total parameters (40B active), built for complex systems engineering and long-horizon tasks."),
+        "url": "https://ollama.com/library/glm-5",
+        "categories": [
+                "tools",
+                "reasoning",
+                "cloud",
+                "code"
+        ],
+        "author": "THUDM",
+        "languages": [
+                "en"
+        ],
+    },
+    "minimax-m2.5": {
+        "tags": [
+                [
+                        "cloud",
+                        "cloud"
+                ]
+        ],
+        "description": _("MiniMax-M2.5 is a state-of-the-art large language model designed for real-world productivity and coding tasks."),
+        "url": "https://ollama.com/library/minimax-m2.5",
+        "categories": [
+                "tools",
+                "reasoning",
+                "cloud",
+                "code"
+        ],
+        "author": "MiniMax",
         "languages": [
                 "en"
         ],
