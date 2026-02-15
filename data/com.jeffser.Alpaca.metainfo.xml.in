@@ -89,6 +89,23 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/blob/main/CONTRIBUTING.md</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="9.1.0" date="2026-02-15">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/9.1.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Ollama instances now use the Ollama library directly</li>
+          <li>Improved text rendering in messages</li>
+          <li>Added italic rule to markdown renderer</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Implemented proper error handling in some tools</li>
+          <li>Fixed direct terminal access on Flatpak</li>
+          <li>Fixed thought attachment not being added correctly</li>
+        </ul>
+      </description>
+    </release>
     <release version="9.0.5" date="2026-02-03">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/9.0.5</url>
       <description>
