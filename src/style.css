@@ -1,5 +1,6 @@
-.modelfile_textview {
+.modelfile_textview, .latex_renderer, .transparent_background {
   background: transparent;
+  background-color: transparent;
 }
 .message_text_view {
   padding: 0 5px 0 5px;
@@ -112,10 +113,6 @@ stacksidebar {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, var(--window-bg-color) 100%);
 }
 
-.latex_renderer {
-  background-color: transparent;
-}
-
 .br0 {
   border-radius: 0px;
 }
@@ -149,83 +146,110 @@ flowboxchild {
   padding: 0px;
 }
 
-/*-----------FOLDER COLOURS--------*/
+/*-----------COLOURS--------*/
 
-.folder-blue headerbar, row.folder-blue {
+.folder-blue headerbar, row.folder-blue, .pill-blue {
   background-color: color-mix(in srgb, var(--accent-blue) 30%, transparent);
   color: color-mix(in srgb, var(--accent-blue) 50%, currentColor);
 }
 .button-blue {
   color: var(--accent-blue);
 }
+.category-filter-blue {
+  color: color-mix(in srgb, var(--accent-blue) 50%, currentColor);
+}
 
-.folder-teal headerbar, row.folder-teal {
+.folder-teal headerbar, row.folder-teal, .pill-teal {
   background-color: color-mix(in srgb, var(--accent-teal) 30%, transparent);
   color: color-mix(in srgb, var(--accent-teal) 50%, currentColor);
 }
 .button-teal {
   color: var(--accent-teal);
 }
+.category-filter-teal {
+  color: color-mix(in srgb, var(--accent-teal) 50%, currentColor);
+}
 
 
-.folder-green headerbar, row.folder-green {
+.folder-green headerbar, row.folder-green, .pill-green {
   background-color: color-mix(in srgb, var(--accent-green) 30%, transparent);
   color: color-mix(in srgb, var(--accent-green) 50%, currentColor);
 }
 .button-green {
   color: var(--accent-green);
 }
+.category-filter-green {
+  color: color-mix(in srgb, var(--accent-green) 50%, currentColor);
+}
 
 
-.folder-yellow headerbar, row.folder-yellow {
+.folder-yellow headerbar, row.folder-yellow, .pill-yellow {
   background-color: color-mix(in srgb, var(--accent-yellow) 30%, transparent);
   color: color-mix(in srgb, var(--accent-yellow) 50%, currentColor);
 }
 .button-yellow {
   color: var(--accent-yellow);
 }
+.category-filter-yellow {
+  color: color-mix(in srgb, var(--accent-yellow) 50%, currentColor);
+}
 
 
-.folder-orange headerbar, row.folder-orange {
+.folder-orange headerbar, row.folder-orange, .pill-orange {
   background-color: color-mix(in srgb, var(--accent-orange) 30%, transparent);
   color: color-mix(in srgb, var(--accent-orange) 50%, currentColor);
 }
 .button-orange {
   color: var(--accent-orange);
 }
+.category-filter-orange {
+  color: color-mix(in srgb, var(--accent-orange) 50%, currentColor);
+}
 
 
-.folder-red headerbar, row.folder-red {
+.folder-red headerbar, row.folder-red, .pill-red {
   background-color: color-mix(in srgb, var(--accent-red) 30%, transparent);
   color: color-mix(in srgb, var(--accent-red) 50%, currentColor);
 }
 .button-red {
   color: var(--accent-red);
 }
+.category-filter-red {
+  color: color-mix(in srgb, var(--accent-red) 50%, currentColor);
+}
 
 
-.folder-pink headerbar, row.folder-pink {
+.folder-pink headerbar, row.folder-pink, .pill-pink {
   background-color: color-mix(in srgb, var(--accent-pink) 30%, transparent);
   color: color-mix(in srgb, var(--accent-pink) 50%, currentColor);
 }
 .button-pink {
   color: var(--accent-pink);
 }
+.category-filter-pink {
+  color: color-mix(in srgb, var(--accent-pink) 50%, currentColor);
+}
 
 
-.folder-purple headerbar, row.folder-purple {
+.folder-purple headerbar, row.folder-purple, .pill-purple {
   background-color: color-mix(in srgb, var(--accent-purple) 30%, transparent);
   color: color-mix(in srgb, var(--accent-purple) 50%, currentColor);
 }
 .button-purple {
   color: var(--accent-purple);
 }
+.category-filter-purple {
+  color: color-mix(in srgb, var(--accent-purple) 50%, currentColor);
+}
 
-.folder-slate headerbar, row.folder-slate {
+.folder-slate headerbar, row.folder-slate, .pill-slate {
   background-color: color-mix(in srgb, var(--accent-slate) 30%, transparent);
   color: color-mix(in srgb, var(--accent-slate) 50%, currentColor);
 }
 .button-slate {
   color: var(--accent-slate);
+}
+.category-filter-slate {
+  color: color-mix(in srgb, var(--accent-slate) 50%, currentColor);
 }
 

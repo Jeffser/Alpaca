@@ -140,7 +140,7 @@ class AvailableModelDialog(Adw.Dialog):
         self.model = model
 
         self.title_label.set_label(self.model.model_title)
-        for category in set(self.model.data.get('categories', [])):
+        for category in self.model.data.get('categories', []):
             self.category_container.append(CategoryPill(category, True))
 
         model_list = list_from_selector()
@@ -231,7 +231,7 @@ class BasicModelButton(Gtk.Button):
                 self.set_subtitle(family)
 
         self.category_container.set_visible(len(self.data.get('categories', [])))
-        for category in set(self.data.get('categories', [])):
+        for category in self.data.get('categories', []):
             self.category_container.append(CategoryPill(category, False))
 
         if icon_name:
@@ -347,6 +347,7 @@ class BasicModelButton(Gtk.Button):
 
     @Gtk.Template.Callback()
     def show_popup(self, *args):
+        print(self.data.get('categories', []))
         rect = Gdk.Rectangle()
         if len(args) == 4:
             rect.x, rect.y = args[2], args[3]

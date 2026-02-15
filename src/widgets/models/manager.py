@@ -90,7 +90,7 @@ class ModelManager(Adw.NavigationPage):
                         halign=3
                     )
                     icon = Gtk.Image.new_from_icon_name(category.get('icon', 'language-symbolic'))
-                    icon.set_css_classes(category.get('css', []))
+                    icon.add_css_class('category-filter-{}'.format(category.get('color', 'slate')))
                     pill_container.append(icon)
                     pill_container.append(Gtk.Label(label=category.get('name')))
                     checkbtn = Gtk.CheckButton(
@@ -108,8 +108,12 @@ class ModelManager(Adw.NavigationPage):
 
         # Available Model List
         for name, model_info in available_models_data.items():
-            if 'huge' not in model_info.get('categories', []) or 'small' in model_info.get('categories', []) or 'medium' in model_info.get('categories', []) or 'big' in model_info.get('categories', []) or os.getenv('ALPACA_SHOW_HUGE_MODELS', '0') == '1':
-                if 'embedding' not in model_info.get('categories', []) or os.getenv('ALPACA_SHOW_EMBEDDING_MODELS', '0') == '1':
+            # order categories
+            model_info['categories'] = list(set(model_info.get('categories', [])))
+            order_reference = list(MODEL_CATEGORIES_METADATA.keys())
+            model_info['categories'].sort(key=lambda x: order_reference.index(x) if x in order_reference else len(order_reference))
+            if 'huge' not in model_info.get('categories') or 'small' in model_info.get('categories') or 'medium' in model_info.get('categories') or 'big' in model_info.get('categories') or os.getenv('ALPACA_SHOW_HUGE_MODELS', '0') == '1':
+                if 'embedding' not in model_info.get('categories') or os.getenv('ALPACA_SHOW_EMBEDDING_MODELS', '0') == '1':
                     model_element = basic.BasicModelButton(
                         model_name=name,
                         subtitle=model_info.get('description'),

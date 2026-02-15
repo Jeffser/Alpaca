@@ -240,19 +240,70 @@ SAMPLE_PROMPTS = [
 ]
 
 MODEL_CATEGORIES_METADATA = {
-    'multilingual': {'name': _('Multilingual'), 'css': ['accent'], 'icon': 'language-symbolic'},
-    'code': {'name': _('Code'), 'css': ['accent'], 'icon': 'code-symbolic'},
-    'math': {'name': _('Math'), 'css': ['accent'], 'icon': 'accessories-calculator-symbolic'},
-    'vision': {'name': _('Vision'), 'css': ['accent'], 'icon': 'eye-open-negative-filled-symbolic'},
-    'embedding': {'name': _('Embedding'), 'css': ['error'], 'icon': 'brain-augemnted-symbolic'},
-    'tools': {'name': _('Tools'), 'css': ['accent'], 'icon': 'wrench-wide-symbolic'},
-    'reasoning': {'name': _('Reasoning'), 'css': ['accent'], 'icon': 'brain-augemnted-symbolic'},
-    'cloud': {'name': _('Cloud'), 'css': ['accent'], 'icon': 'cloud-filled-symbolic'},
-    'small': {'name': _('Small'), 'css': ['success'], 'icon': 'leaf-symbolic'},
-    'medium': {'name': _('Medium'), 'css': ['brown'], 'icon': 'sprout-symbolic'},
-    'big': {'name': _('Big'), 'css': ['warning'], 'icon': 'tree-circle-symbolic'},
-    'huge': {'name': _('Huge'), 'css': ['error'], 'icon': 'weight-symbolic'},
-    'language': {'css': [], 'icon': 'language-symbolic'}
+    'small': {
+        'name': _('Small'),
+        'color': 'green',
+        'icon': 'leaf-symbolic'
+    },
+    'medium': {
+        'name': _('Medium'),
+        'color': 'yellow',
+        'icon': 'sprout-symbolic'
+    },
+    'big': {
+        'name': _('Big'),
+        'color': 'red',
+        'icon': 'tree-circle-symbolic'
+    },
+    'huge': {
+        'name': _('Huge'),
+        'color': 'red',
+        'icon': 'weight-symbolic'
+    },
+    'multilingual': {
+        'name': _('Multilingual'),
+        'color': 'teal',
+        'icon': 'language-symbolic'
+    },
+    'code': {
+        'name': _('Code'),
+        'color': 'blue',
+        'icon': 'code-symbolic'
+    },
+    'math': {
+        'name': _('Math'),
+        'color': 'red',
+        'icon': 'accessories-calculator-symbolic'
+    },
+    'vision': {
+        'name': _('Vision'),
+        'color': 'pink',
+        'icon': 'eye-open-negative-filled-symbolic'
+    },
+    'embedding': {
+        'name': _('Embedding'),
+        'color': 'green',
+        'icon': 'brain-augemnted-symbolic'
+    },
+    'tools': {
+        'name': _('Tools'),
+        'color': 'orange',
+        'icon': 'wrench-wide-symbolic'
+    },
+    'reasoning': {
+        'name': _('Reasoning'),
+        'color': 'purple',
+        'icon': 'brain-augemnted-symbolic'
+    },
+    'cloud': {
+        'name': _('Cloud'),
+        'color': 'green',
+        'icon': 'cloud-filled-symbolic'
+    },
+    'language': {
+        'color': 'slate',
+        'icon': 'language-symbolic'
+    }
 }
 
 CODE_LANGUAGE_FALLBACK = {
