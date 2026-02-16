@@ -3,7 +3,7 @@
 Code block handling
 """
 
-from gi.repository import Adw, Gtk, Gdk, GtkSource
+from gi.repository import Adw, Gtk, Gdk, GtkSource, GLib
 from .. import dialog, activities, message
 from ...sql_manager import generate_uuid
 from ...constants import CODE_LANGUAGE_FALLBACK, CODE_LANGUAGE_PROPERTIES
