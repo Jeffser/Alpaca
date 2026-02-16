@@ -29,7 +29,7 @@ commands = {
         'python -m http.server 8080 --directory "{sourcedir}"'
     ],
     'bash': [
-        'flatpak-spawn --host env TERM=xterm-256color script -q -c {script} /dev/null'
+        'flatpak-spawn --host env TERM=xterm-256color script -q -c "{script}" /dev/null'
     ] if IN_FLATPAK else ["{script}"]
 }
 
@@ -204,6 +204,7 @@ mermaid.initialize({{ startOnLoad: true }});
             settings = Gio.Settings(schema_id="com.jeffser.Alpaca")
             if settings.get_value('activity-terminal-type').unpack() == 0:
                 for command in commands.get('bash'):
+                    runtime_code = runtime_code.replace('"', '\\"')
                     script.append(command.format(script=runtime_code))
             else:
                 runtime_code="ssh -t {}@{} -- '{}'".format(
