@@ -89,6 +89,24 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/blob/main/CONTRIBUTING.md</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="9.1.1" date="2026-02-16">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/9.1.1</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Improved categorization and filtering of Ollama models</li>
+          <li>Improved text rendering in attachments</li>
+          <li>Improved tool usage with Ollama instances</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed code block not being able to save changes</li>
+          <li>Fixed bash code execution not working with direct terminal access on Flatpak</li>
+          <li>Fixed "keep alive" parameter not being saved for Ollama instances</li>
+          <li>Removed background color from language pills in models dialogs</li>
+        </ul>
+      </description>
+    </release>
     <release version="9.1.0" date="2026-02-15">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/9.1.0</url>
       <description>
