@@ -147,14 +147,12 @@ class AddedModelDialog(Adw.Dialog):
             self.context_system_container.set_child(InfoBox(_('Context'), system, False))
 
         available_models_data = get_available_models_data()
-        categories = available_models_data.get(self.model.get_name().split(':')[0], {}).get('categories', [])
+        categories = self.model.get_categories()
         languages = available_models_data.get(self.model.get_name().split(':')[0], {}).get('languages', [])
-        if not categories:
-            categories = available_models_data.get(self.model.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('categories', [])
+        if not languages:
             languages = available_models_data.get(self.model.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('languages', [])
         for category in set(categories):
-            if category not in ('small', 'medium', 'big', 'huge'):
-                self.categories_container.append(CategoryPill(category, True))
+            self.categories_container.append(CategoryPill(category, True))
 
         for language in ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in languages]:
             self.language_flowbox.append(CategoryPill(language, True))

@@ -17,6 +17,13 @@ template $AlpacaModelManager: Adw.NavigationPage {
         active: bind searchbar.search-mode-enabled;
       }
 
+      [start]
+      Gtk.MenuButton filter_button {
+        icon-name: "funnel-symbolic";
+        tooltip-text: _("Filter Models");
+        visible: false;
+      }
+
       title-widget: Adw.ViewSwitcher top_view_switcher {
         stack: view_stack;
         policy: wide;
@@ -41,21 +48,11 @@ template $AlpacaModelManager: Adw.NavigationPage {
         }
         search-mode-enabled: bind search_toggle.active;
         key-capture-widget: view_stack;
-
-        Gtk.Box {
-          spacing: 10;
-          Gtk.SearchEntry searchentry {
-            hexpand: true;
-            search-changed => $search_changed();
-            search-delay: 100;
-            placeholder-text: _("Search models");
-          }
-
-          Gtk.MenuButton filter_button {
-            icon-name: "funnel-symbolic";
-            tooltip-text: _("Filter Models");
-            visible: false;
-          }
+        Gtk.SearchEntry searchentry {
+          hexpand: true;
+          search-changed => $search_changed();
+          search-delay: 100;
+          placeholder-text: _("Search models");
         }
       }
     }

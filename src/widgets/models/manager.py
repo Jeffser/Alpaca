@@ -77,7 +77,6 @@ class ModelManager(Adw.NavigationPage):
         available_models_data = common.get_available_models_data()
 
         # Filter
-        self.filter_button.set_visible(len(available_models_data) > 0)
         container = Gtk.Box(
             orientation=1,
             spacing=5
@@ -105,6 +104,7 @@ class ModelManager(Adw.NavigationPage):
                 has_arrow=True
             )
         )
+        self.filter_button.set_visible('ollama' in instance.instance_type and len(available_models_data) > 0)
 
         # Available Model List
         for name, model_info in available_models_data.items():
@@ -123,7 +123,6 @@ class ModelManager(Adw.NavigationPage):
                     self.available_model_flowbox.append(model_element)
                     model_element.get_parent().set_focusable(False)
         self.update_available_visibility()
-        self.filter_button.set_visible('ollama' in instance.instance_type)
 
     def update_added_model_list(self):
         self.added_model_flowbox.remove_all()
@@ -175,12 +174,12 @@ class ModelManager(Adw.NavigationPage):
 
         for model in list(self.added_model_flowbox):
             string_search = re.search(query, model.get_child().get_search_string(), re.IGNORECASE)
-            category_filter = len(filtered_categories) == 0 or model.get_child().get_search_categories() & filtered_categories or not self.searchbar.get_search_mode()
+            category_filter = len(filtered_categories) == 0 or model.get_child().get_search_categories() & filtered_categories
             model.set_visible(string_search and category_filter)
 
         for model in list(self.available_model_flowbox):
             string_search = re.search(query, model.get_child().get_search_string(), re.IGNORECASE)
-            category_filter = len(filtered_categories) == 0 or model.get_child().get_search_categories() & filtered_categories or not self.searchbar.get_search_mode()
+            category_filter = len(filtered_categories) == 0 or model.get_child().get_search_categories() & filtered_categories
             model.set_visible(string_search and category_filter)
 
         self.update_added_visibility()

@@ -243,14 +243,38 @@ class BasicModelButton(Gtk.Button):
         return '{} {} {}'.format(self.get_name(), self.model_title, self.data.get('system', None))
 
     def get_search_categories(self) -> set:
+        return set(self.get_categories())
+
+    def get_categories(self) -> list:
+        if len(self.data.get('categories', [])) > 0:
+            return list(set(self.data.get('categories')))
+
         available_models_data = get_available_models_data()
-        return set([c for c in available_models_data.get(self.get_name().split(':')[0], {}).get('categories', []) if c not in ('small', 'medium', 'big', 'huge')])
+        categories = available_models_data.get(self.get_name().split(':')[0], {}).get('categories', [])
+        if not categories:
+            parent_model = self.data.get('details', {}).get('parent_model', '')
+            categories = available_models_data.get(parent_model.split(':')[0], {}).get('categories', [])
+
+        categories = [c for c in categories if c not in ('small', 'medium', 'big', 'huge', 'cloud', 'vision', 'tools')]
+
+        if self.get_vision():
+            categories.append('vision')
+        if self.can_use_tools():
+            categories.append('tools')
+
+        return list(set(categories))
 
     def get_vision(self) -> bool:
-        if 'capabilities' not in self.data:
+        if 'capabilities' not in self.data and self.instance:
             self.data = self.instance.get_model_info(self.get_name())
 
         return 'vision' in self.data.get('capabilities', [])
+
+    def can_use_tools(self) -> bool:
+        if 'capabilities' not in self.data and self.instance:
+            self.data = self.instance.get_model_info(self.get_name())
+
+        return 'tools' in self.data.get('capabilities', [])
 
     def update_profile_picture(self):
         self.set_image_data(SQL.get_model_preferences(self.get_name()).get('picture'))
