@@ -39,10 +39,13 @@ class BaseInstance:
             del self.properties['seed']
         self.properties['url'] = self.instance_url
 
-        self.client = openai.OpenAI(
-            base_url=self.properties.get('url').strip(),
-            api_key=self.properties.get('api')
-        )
+        arguments = {
+            'api_key': self.properties.get('api')
+        }
+        if self.instance_type != 'chatgpt':
+            arguments['base_url'] = self.properties.get('url').strip()
+
+        self.client = openai.OpenAI(**arguments)
 
     def stop(self):
         pass
