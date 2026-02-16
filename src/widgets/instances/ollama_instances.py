@@ -166,7 +166,7 @@ class BaseInstance:
                     if chunk.message.tool_calls:
                         tool_calls.extend(chunk.message.tool_calls)
 
-                    if chunk.done:
+                    if chunk.done or not chat.busy:
                         data = {
                             'total_duration': chunk.total_duration,
                             'load_duration': chunk.load_duration,
@@ -180,7 +180,7 @@ class BaseInstance:
 
                 GLib.idle_add(bot_message.remove_and_attach_thought)
 
-                if not tool_calls:
+                if not tool_calls or not chat.busy:
                     break
 
                 messages.append({'role': 'assistant', 'thinking': thought, 'content': content, 'tool_calls': tool_calls})
