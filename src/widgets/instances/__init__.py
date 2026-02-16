@@ -38,6 +38,8 @@ class InstancePreferencesDialog(Adw.Dialog):
     temperature_el = Gtk.Template.Child()
     seed_el = Gtk.Template.Child()
     context_size_el = Gtk.Template.Child()
+
+    keep_alive_group = Gtk.Template.Child()
     keep_alive_selector_el = Gtk.Template.Child()
     keep_alive_minutes_el = Gtk.Template.Child()
 
@@ -105,8 +107,16 @@ class InstancePreferencesDialog(Adw.Dialog):
 
         # KEEP ALIVE GROUP
         if 'keep_alive' in self.instance.properties:
-            self.keep_alive_selector_el.set_selected(0 if self.instance.properties.get('keep_alive', -1) > 0 else self.instance.properties.get('keep_alive') + 2)
-            self.keep_alive_preset_changed(self.keep_alive_selector_el)
+            val = self.instance.properties.get('keep_alive', -1)
+            if val > 0:
+                selected_index = 0
+            elif val < 0:
+                selected_index = 1
+            else:
+                selected_index = 2
+
+            self.keep_alive_selector_el.set_selected(selected_index)
+            #self.keep_alive_preset_changed(self.keep_alive_selector_el)
             self.keep_alive_selector_el.get_ancestor(Adw.PreferencesGroup).set_visible(True)
 
         # OVERRIDES GROUP
@@ -207,18 +217,18 @@ class InstancePreferencesDialog(Adw.Dialog):
     def save_requested(self, button=None):
         def save_elements_values(elements:list):
             for el in elements:
-                if el.get_visible():
-                    key = el.get_name()
-                    new_value = self.get_value(el)
-                    if key in self.instance.properties:
-                        self.instance.properties[key] = new_value
-                    elif key.removeprefix('override:') in self.instance.properties.get('overrides', {}):
-                        self.instance.properties['overrides'][key.removeprefix('override:')] = new_value
+                key = el.get_name()
+                new_value = self.get_value(el)
+                print(key, new_value)
+                if key in self.instance.properties:
+                    self.instance.properties[key] = new_value
+                elif key.removeprefix('override:') in self.instance.properties.get('overrides', {}):
+                    self.instance.properties['overrides'][key.removeprefix('override:')] = new_value
 
-                    if isinstance(el, Adw.ExpanderRow):
-                        save_elements_values(list(list(list(list(el)[0])[1])[0]))
+                if isinstance(el, Adw.ExpanderRow):
+                    save_elements_values(list(list(list(list(el)[0])[1])[0]))
 
-        for group in (self.connection_group, self.tweak_group, self.parameters_group, self.overrides_group, self.model_group):
+        for group in (self.connection_group, self.tweak_group, self.parameters_group, self.keep_alive_group, self.overrides_group, self.model_group):
             save_elements_values(list(list(list(list(group)[0])[1])[0]))
 
         if not self.instance.instance_id:
