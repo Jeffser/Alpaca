@@ -45,7 +45,9 @@ class CategoryPill(Gtk.Box):
         self.label.set_label('<span weight="bold">{}</span>'.format(category_name))
         self.label.set_visible(show_label)
 
-        self.add_css_class('pill-{}'.format(MODEL_CATEGORIES_METADATA.get(category_id, {}).get('color', 'slate')))
+        color = MODEL_CATEGORIES_METADATA.get(category_id, {}).get('color')
+        if color:
+            self.add_css_class('pill-{}'.format(color))
 
 def get_available_models_data() -> list:
     global available_models_data

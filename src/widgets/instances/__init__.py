@@ -219,7 +219,6 @@ class InstancePreferencesDialog(Adw.Dialog):
             for el in elements:
                 key = el.get_name()
                 new_value = self.get_value(el)
-                print(key, new_value)
                 if key in self.instance.properties:
                     self.instance.properties[key] = new_value
                 elif key.removeprefix('override:') in self.instance.properties.get('overrides', {}):

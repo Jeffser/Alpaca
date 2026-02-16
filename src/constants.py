@@ -301,7 +301,6 @@ MODEL_CATEGORIES_METADATA = {
         'icon': 'cloud-filled-symbolic'
     },
     'language': {
-        'color': 'slate',
         'icon': 'language-symbolic'
     }
 }
