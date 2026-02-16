@@ -120,8 +120,9 @@ class BaseInstance:
 
         self.generate_response(bot_message, chat, messages, model)
 
-    def use_tools(self, bot_message, model:str, available_tools:dict, generate_message:bool):
+    def use_tools(self, bot_message, model:str, available_tools:dict):
         chat, messages = self.prepare_chat(bot_message, model)
+        generate_message = True
 
         if chat.chat_id and chat.get_name().startswith(_("New Chat")):
             threading.Thread(

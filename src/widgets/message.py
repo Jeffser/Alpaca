@@ -98,8 +98,7 @@ class OptionPopup(Gtk.Popover):
                     args=(
                         message_element,
                         current_model,
-                        tools,
-                        True
+                        tools
                     ),
                     daemon=True
                 ).start)

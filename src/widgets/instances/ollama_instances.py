@@ -85,7 +85,7 @@ class BaseInstance:
             ).start()
         self.generate_response(bot_message, chat, messages, model)
 
-    def use_tools(self, bot_message, model:str, available_tools:dict, generate_message:bool):
+    def use_tools(self, bot_message, model:str, available_tools:dict):
         chat, messages = self.prepare_chat(bot_message, model)
 
         if chat.chat_id and chat.get_name().startswith(_("New Chat")):
@@ -99,75 +99,9 @@ class BaseInstance:
                 daemon=True
             ).start()
 
-        message_response = ''
-        try:
-            response = self.client.chat(
-                model=model,
-                messages=messages,
-                stream=False,
-                tools=[v.get_metadata() for v in available_tools.values()],
-                think=False
-            )
+        self.generate_response(bot_message, chat, messages, model, available_tools=available_tools)
 
-
-            if response.message.tool_calls:
-                for tool in response.message.tool_calls:
-                    selected_tool = available_tools.get(tool.function.name)
-                    if selected_tool:
-                        message_response, tool_response = selected_tool.run(
-                            tool.function.arguments,
-                            messages,
-                            bot_message
-                        )
-                        generate_message = generate_message and not bool(message_response)
-
-                        attachment_content = []
-
-                        if len(tool.function.arguments) > 0:
-                            attachment_content += [
-                                '## {}'.format(_('Arguments')),
-                                '| {} | {} |'.format(_('Argument'), _('Value')),
-                                '| --- | --- |'
-                            ]
-                            attachment_content += ['| {} | {} |'.format(k, v) for k, v in tool.function.arguments.items()]
-
-                        attachment_content += [
-                            '## {}'.format(_('Result')),
-                            str(tool_response)
-                        ]
-
-                        attachment = bot_message.add_attachment(
-                            file_id = generate_uuid(),
-                            name = selected_tool.display_name,
-                            attachment_type = 'tool',
-                            content = '\n'.join(attachment_content)
-                        )
-                        SQL.insert_or_update_attachment(bot_message, attachment)
-                        messages.append({
-                            'role': 'assistant',
-                            'content': '',
-                        })
-                        messages.append({
-                            'role': 'tool',
-                            'content': str(tool_response)
-                        })
-        except Exception as e:
-            if self.instance_type != 'ollama:managed' or is_ollama_installed():
-                dialog.simple_error(
-                    parent = bot_message.get_root(),
-                    title = _('Tool Error'),
-                    body = _('An error occurred while running tool'),
-                    error_log = e
-                )
-                logger.error(e)
-
-        if generate_message:
-            self.generate_response(bot_message, chat, messages, model)
-        else:
-            bot_message.block_container.set_content(str(message_response))
-            bot_message.finish_generation('')
-
-    def generate_response(self, bot_message, chat, messages:list, model:str):
+    def generate_response(self, bot_message, chat, messages:list, model:str, available_tools:dict={}):
         if self.properties.get('share_name', 0) > 0:
             user_display_name = None
             if self.properties.get('share_name') == 1:
@@ -200,10 +134,10 @@ class BaseInstance:
 
         params = {
             "model": model,
-            "messages": messages,
             "stream": True,
             "think": self.properties.get('think', False) and 'thinking' in model_info.get('capabilities', []),
-            "keep_alive": self.properties.get('keep_alive', 300)
+            "keep_alive": self.properties.get('keep_alive', 300),
+            "tools": [v.get_metadata() for v in available_tools.values()]
         }
 
         if self.properties.get("override_parameters"):
@@ -213,69 +147,115 @@ class BaseInstance:
             if self.properties.get('seed', 0) != 0:
                 params["options"]["seed"] = self.properties.get('seed')
 
-        metadata_string = None
-        if chat.busy:
-            try:
+        metadata_string = ""
+        tool_calls = []
+        thought = ""
+        content = ""
+        try:
+            while chat.busy:
+                params['messages'] = messages
                 response = self.client.chat(**params)
                 bot_message.block_container.clear()
+                for chunk in response:
+                    if chunk.message.thinking:
+                        bot_message.update_thinking(chunk.message.thinking)
+                        thought += chunk.message.thinking
+                    if chunk.message.content:
+                        bot_message.update_message(chunk.message.content)
+                        content += chunk.message.content
+                    if chunk.message.tool_calls:
+                        tool_calls.extend(chunk.message.tool_calls)
 
-                for block in response:
-                    content = block.message.content
-                    if content:
-                        bot_message.update_message(content)
-
-                    think_content = block.message.thinking
-                    if think_content:
-                        bot_message.update_thinking(think_content)
-                    if block.done:
+                    if chunk.done:
                         data = {
-                            'total_duration': block.total_duration,
-                            'load_duration': block.load_duration,
-                            'prompt_eval_count': block.prompt_eval_count,
-                            'prompt_eval_duration': block.prompt_eval_duration,
-                            'eval_count': block.eval_count,
-                            'eval_duration': block.eval_duration
+                            'total_duration': chunk.total_duration,
+                            'load_duration': chunk.load_duration,
+                            'prompt_eval_count': chunk.prompt_eval_count,
+                            'prompt_eval_duration': chunk.prompt_eval_duration,
+                            'eval_count': chunk.eval_count,
+                            'eval_duration': chunk.eval_duration
                         }
                         metadata_string = dict_to_metadata_string(data)
+                        break
 
-                        break
-                    if not chat.busy:
-                        break
-            except ollama.ResponseError as e:
-                logger.error(e)
-                if e.status_code == 401:
-                    if self.instance_type == 'ollama:managed':
-                        with open(os.path.join(data_dir, '.ollama', 'id_ed25519'), 'rb') as f:
-                            signin_url = self.signin_request()
-                            attachment = bot_message.add_attachment(
-                                file_id = generate_uuid(),
-                                name = 'Ollama Login',
-                                attachment_type = 'link',
-                                content = signin_url
-                            )
-                            SQL.insert_or_update_attachment(bot_message, attachment)
-                            bot_message.update_message("🦙 Just a quick heads-up! To access the Ollama cloud models, you'll need to log into your Ollama account first.")
-                    elif self.instance_type == 'ollama:cloud':
-                        bot_message.update_message("🦙 Please verify that the API key provided in the instance preferences is valid.")
-                    else:
+                GLib.idle_add(bot_message.remove_and_attach_thought)
+
+                if not tool_calls:
+                    break
+
+                messages.append({'role': 'assistant', 'thinking': thought, 'content': content, 'tool_calls': tool_calls})
+
+                for call in tool_calls:
+                    selected_tool = available_tools.get(call.function.name)
+                    message_response, tool_response = selected_tool.run(
+                        call.function.arguments,
+                        messages,
+                        bot_message
+                    )
+                    messages.append({"role": "tool", "tool_name": call.function.name, "content": str(tool_response)})
+                    attachment_content = []
+
+                    if len(call.function.arguments) > 0:
+                        attachment_content += [
+                            '## {}'.format(_('Arguments')),
+                            '| {} | {} |'.format(_('Argument'), _('Value')),
+                            '| --- | --- |'
+                        ]
+                        attachment_content += ['| {} | {} |'.format(k, v) for k, v in call.function.arguments.items()]
+
+                    attachment_content += [
+                        '## {}'.format(_('Result')),
+                        str(tool_response)
+                    ]
+
+                    def add_attachment():
                         attachment = bot_message.add_attachment(
                             file_id = generate_uuid(),
-                            name = 'Ollama Login Tutorial',
-                            attachment_type = 'link',
-                            content = 'https://docs.ollama.com/api/authentication'
+                            name = selected_tool.display_name,
+                            attachment_type = 'tool',
+                            content = '\n'.join(attachment_content)
                         )
-                        bot_message.update_message("🦙 Just a quick heads-up! To access the Ollama cloud models, you'll need to log into your Ollama account first from the server.")
-            except Exception as e:
-                if self.instance_type != 'ollama:managed' or is_ollama_installed():
-                    dialog.simple_error(
-                        parent = bot_message.get_root(),
-                        title = _('Instance Error'),
-                        body = _('Message generation failed'),
-                        error_log = e
+                        SQL.insert_or_update_attachment(bot_message, attachment)
+                    GLib.idle_add(add_attachment)
+
+                    if message_response:
+                        bot_message.block_container.set_content(str(message_response))
+                        break
+        except ollama.ResponseError as e:
+            logger.error(e)
+            if e.status_code == 401:
+                if self.instance_type == 'ollama:managed':
+                    with open(os.path.join(data_dir, '.ollama', 'id_ed25519'), 'rb') as f:
+                        signin_url = self.signin_request()
+                        attachment = bot_message.add_attachment(
+                            file_id = generate_uuid(),
+                            name = 'Ollama Login',
+                            attachment_type = 'link',
+                            content = signin_url
+                        )
+                        SQL.insert_or_update_attachment(bot_message, attachment)
+                        bot_message.update_message("🦙 Just a quick heads-up! To access the Ollama cloud models, you'll need to log into your Ollama account first.")
+                elif self.instance_type == 'ollama:cloud':
+                    bot_message.update_message("🦙 Please verify that the API key provided in the instance preferences is valid.")
+                else:
+                    attachment = bot_message.add_attachment(
+                        file_id = generate_uuid(),
+                        name = 'Ollama Login Tutorial',
+                        attachment_type = 'link',
+                        content = 'https://docs.ollama.com/api/authentication'
                     )
-                    logger.error(e)
-                if self.row:
-                    self.row.get_parent().unselect_all()
+                    bot_message.update_message("🦙 Just a quick heads-up! To access the Ollama cloud models, you'll need to log into your Ollama account first from the server.")
+        except Exception as e:
+            if self.instance_type != 'ollama:managed' or is_ollama_installed():
+                dialog.simple_error(
+                    parent = bot_message.get_root(),
+                    title = _('Instance Error'),
+                    body = _('Message generation failed'),
+                    error_log = e
+                )
+                logger.error(e)
+            if self.row:
+                self.row.get_parent().unselect_all()
 
         if not self.properties.get('show_response_metadata'):
             metadata_string = None

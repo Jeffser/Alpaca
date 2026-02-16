@@ -216,7 +216,7 @@ class LiveChat(Adw.Bin):
             chat.busy = True
             current_instance = self.get_current_instance()
             if len(available_tools) > 0:
-                GLib.idle_add(threading.Thread(target=current_instance.use_tools, args=(m_element_bot, current_model, available_tools, True), daemon=True).start)
+                GLib.idle_add(threading.Thread(target=current_instance.use_tools, args=(m_element_bot, current_model, available_tools), daemon=True).start)
             else:
                 GLib.idle_add(threading.Thread(target=current_instance.generate_message, args=(m_element_bot, current_model), daemon=True).start)
 

@@ -601,7 +601,9 @@ class Chat(Gtk.Stack):
                     'text': ''
                 })
                 for attachment in message.attachment_container.get_content():
-                    if attachment.get('type') not in ('thought', 'metadata'):
+                    if attachment.get('type') == 'thought':
+                        message_data['thinking'] = attachment.get('content')
+                    elif attachment.get('type') != 'metadata':
                         message_data['content'][0]['text'] += '```{} ({})\n{}\n```\n\n'.format(attachment.get('name'), attachment.get('type'), attachment.get('content'))
                 message_data['content'][0 if ("text" in message_data.get("content", [''])[0]) else 1]['text'] += message.get_content()
                 if include_metadata:
