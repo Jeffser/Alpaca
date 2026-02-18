@@ -710,7 +710,7 @@ class OllamaCloud(BaseInstance):
                         'url': model_metadata.get('url'),
                         'tags': [],
                         'author': model_metadata.get('author'),
-                        'categories': model_metadata.get('categories'),
+                        'categories': [c for c in model_metadata.get('categories') if c not in ['small', 'medium', 'big', 'huge']],
                         'languages': model_metadata.get('languages'),
                         'description': model_metadata.get('description')
                     }
@@ -720,7 +720,7 @@ class OllamaCloud(BaseInstance):
                         'categories': ['cloud']
                     }
                 available_models[model_name]['tags'].append([model_tag, 'cloud'])
-                return available_models
+            return available_models
         except Exception as e:
             if self.instance_type != 'ollama:managed' or is_ollama_installed():
                 dialog.simple_error(
@@ -733,3 +733,4 @@ class OllamaCloud(BaseInstance):
             if self.row:
                 self.row.get_parent().unselect_all()
         return {}
+
