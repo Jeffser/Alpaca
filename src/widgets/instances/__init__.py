@@ -98,7 +98,6 @@ class InstancePreferencesDialog(Adw.Dialog):
         self.set_simple_element_value(self.metadata_el)
         self.set_simple_element_value(self.self_signed_ssl_el)
         self.set_simple_element_value(self.max_tokens_el)
-        self.set_simple_element_value(self.vulkan_el)
 
         # PARAMETERS GROUP
         self.set_simple_element_value(self.override_parameters_el)
