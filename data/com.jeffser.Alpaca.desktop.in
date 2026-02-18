@@ -8,3 +8,8 @@ Categories=Utility;Development;Chat;
 Keywords=ai;ollama;llm
 StartupNotify=true
 X-Purism-FormFactor=Workstation;Mobile;
+Actions=quick-ask;
+
+[Desktop Action quick-ask]
+Name=Quick Ask
+Exec=alpaca --quick-ask
