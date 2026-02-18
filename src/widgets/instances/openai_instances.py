@@ -18,7 +18,7 @@ class BaseInstance:
     limitations = ()
 
     default_properties = {
-        'name': _('Instances'),
+        'name': _('Instance'),
         'api': '',
         'max_tokens': 2048,
         'override_parameters': True,
