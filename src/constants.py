@@ -372,6 +372,15 @@ EMPTY_CHARA_CARD = {
     }
 }
 
+WEB_BROWSER_HTML_EXTRACT_JS = """
+(function() {
+return (
+    document.querySelector("main") ||
+    document.querySelector("#content")
+)?.innerHTML ?? document.documentElement.outerHTML;
+})()
+"""
+
 # The identifier when inside the Flatpak runtime
 IN_FLATPAK = bool(os.getenv("FLATPAK_ID"))
 IN_SNAP = bool(os.getenv("FLATPAK_ID"))

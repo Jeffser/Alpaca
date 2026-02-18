@@ -3,7 +3,7 @@
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, WebKit
 from .. import dialog, attachments, models
 from ...sql_manager import generate_uuid, Instance as SQL
-from ...constants import cache_dir
+from ...constants import cache_dir, WEB_BROWSER_HTML_EXTRACT_JS
 from markitdown import MarkItDown
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
@@ -134,10 +134,9 @@ class WebBrowser(WebKit.WebView):
             raw_html = webview.evaluate_javascript_finish(res).to_string()
             save_func(raw_html)
 
-        script = 'document.documentElement.outerHTML'
         self.evaluate_javascript(
-            script,
-            len(script.encode('utf-8')),
+            WEB_BROWSER_HTML_EXTRACT_JS,
+            -1,
             None,
             None,
             None,
@@ -146,6 +145,21 @@ class WebBrowser(WebKit.WebView):
         )
 
     def extract_md(self, save_func:callable):
+        def on_html_extracted(raw_html:str):
+            md = MarkItDown(enable_plugins=False)
+            markdown_text = raw_html
+            try:
+                with tempfile.NamedTemporaryFile("w", suffix=".html", delete=False) as tmp_file:
+                    tmp_file.write(raw_html)
+                    markdown_text = md.convert(tmp_file.name).text_content
+                    markdown_text = markdown_text.replace('![](data:image/svg+xml;base64...)', '')
+            except Exception as e:
+                print(e)
+            save_func(markdown_text)
+
+        self.extract_html(on_html_extracted)
+
+        return
         def on_evaluated(webview, res, user_data):
             md = MarkItDown(enable_plugins=False)
             raw_html = webview.evaluate_javascript_finish(res).to_string()
@@ -157,23 +171,7 @@ class WebBrowser(WebKit.WebView):
             markdown_text = markdown_text.replace('![](data:image/svg+xml;base64...)', '')
             save_func(markdown_text)
 
-
-        readability_path = os.path.join(cache_dir, 'Readability.js')
-        if not os.path.isfile(readability_path):
-            response = requests.get('https://raw.githubusercontent.com/mozilla/readability/refs/heads/main/Readability.js', stream=True)
-            with open(readability_path, 'wb') as f:
-                for chunk in response.iter_content(chunk_size=8192):
-                    f.write(chunk)
-
-        with open(readability_path) as f:
-            script = f.read() + """
-            (function() {
-                var docClone = document.cloneNode(true);
-                var article = new Readability(docClone).parse();
-                return document.documentElement.outerHTML;
-                return article ? article.content : document.documentElement.outerHTML;
-            })();
-            """
+        script = "(function() {return document.documentElement.outerHTML;})"
 
         self.evaluate_javascript(
             script,
