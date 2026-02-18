@@ -71,6 +71,7 @@ class QuickAskWindow(Adw.ApplicationWindow):
         if not current_instance:
             Widgets.dialog.show_toast(_("Please select an instance in Alpaca before chatting"), self)
             return
+        current_instance.start()
         current_model = self.get_selected_model().get_name()
         if current_model is None:
             Widgets.dialog.show_toast(_("Please select add a model for this instance in Alpaca before chatting"), self)

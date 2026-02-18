@@ -45,13 +45,14 @@ class BaseInstance:
         if self.instance_type != 'chatgpt':
             arguments['base_url'] = self.properties.get('url').strip()
 
-        self.client = openai.OpenAI(**arguments)
+        self.client = None
 
     def stop(self):
-        pass
+        self.client = None
 
     def start(self):
-        pass
+        if not self.client:
+            self.client = openai.OpenAI(**arguments)
 
     def get_active_lore(self, messages:list, lorebook:dict) -> str:
         if len(lorebook.get('entries', [])) == 0:

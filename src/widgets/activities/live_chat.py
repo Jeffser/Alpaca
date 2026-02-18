@@ -154,6 +154,7 @@ class LiveChat(Adw.Bin):
         if not current_instance:
             dialog.show_toast(_("Please select an instance in Alpaca before chatting"), self.get_root())
             return
+        current_instance.start()
         current_model = self.get_selected_model().get_name()
         if not current_model:
             dialog.show_toast(_("Please select add a model for this instance in Alpaca before chatting"), self.get_root())

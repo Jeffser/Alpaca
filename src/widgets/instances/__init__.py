@@ -258,6 +258,8 @@ class InstancePreferencesDialog(Adw.Dialog):
         else:
             self.get_root().instance_manager_stack.set_visible_child_name('no-instances')
 
+        self.instance.start()
+
         self.close()
 
     @Gtk.Template.Callback()

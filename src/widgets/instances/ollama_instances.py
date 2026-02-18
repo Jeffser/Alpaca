@@ -317,16 +317,17 @@ class BaseInstance:
             return self.properties.get('title_model')
 
     def stop(self):
-        pass
+        self.client = None
 
     def start(self):
-        self.client = ollama.Client(
-            host=self.properties.get('url'),
-            headers={
-                'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-            },
-            verify=not self.properties.get('allow_self_signed_ssl', False)
-        )
+        if not self.client:
+            self.client = ollama.Client(
+                host=self.properties.get('url'),
+                headers={
+                    'Authorization': 'Bearer {}'.format(self.properties.get('api'))
+                },
+                verify=not self.properties.get('allow_self_signed_ssl', False)
+            )
 
     def get_local_models(self) -> list:
         try:
@@ -485,6 +486,8 @@ class OllamaManaged(BaseInstance):
             else:
                 self.properties[key] = properties.get(key, self.default_properties.get(key))
 
+        self.client = None
+
     def signin_request(self) -> str:
         # For use with cloud models, returns the url even though it also opens it
         try:
@@ -559,6 +562,7 @@ class OllamaManaged(BaseInstance):
                 self.process = None
                 self.log_raw += '\nOllama stopped by Alpaca\n'
                 logger.info("Stopped Alpaca's Ollama instance")
+        self.client = None
 
     def start(self):
         if not self.process:
@@ -609,13 +613,14 @@ class OllamaManaged(BaseInstance):
                 if self.row:
                     GLib.idle_add(self.row.get_parent().unselect_all)
                 self.stop()
-        self.client = ollama.Client(
-            host=self.properties.get('url'),
-            headers={
-                'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-            },
-            verify=not self.properties.get('allow_self_signed_ssl', False)
-        )
+        if not self.client:
+            self.client = ollama.Client(
+                host=self.properties.get('url'),
+                headers={
+                    'Authorization': 'Bearer {}'.format(self.properties.get('api'))
+                },
+                verify=not self.properties.get('allow_self_signed_ssl', False)
+            )
 
 class Ollama(BaseInstance):
     instance_type = 'ollama'
@@ -646,6 +651,8 @@ class Ollama(BaseInstance):
         for key in self.default_properties:
             self.properties[key] = properties.get(key, self.default_properties.get(key))
 
+        self.client = None
+
 class OllamaCloud(BaseInstance):
     instance_type = 'ollama:cloud'
     instance_type_display = _('Ollama (Cloud)')
@@ -672,6 +679,8 @@ class OllamaCloud(BaseInstance):
         self.row = None
         for key in self.default_properties:
             self.properties[key] = properties.get(key, self.default_properties.get(key))
+
+        self.client = None
 
     def pull_model(self, model):
         SQL.append_online_instance_model_list(self.instance_id, model.get_name())
@@ -726,4 +735,5 @@ class OllamaCloud(BaseInstance):
             if self.row:
                 self.row.get_parent().unselect_all()
         return {}
+
 
