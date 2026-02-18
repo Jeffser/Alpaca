@@ -297,7 +297,7 @@ MODEL_CATEGORIES_METADATA = {
     },
     'cloud': {
         'name': _('Cloud'),
-        'color': 'green',
+        'color': 'slate',
         'icon': 'cloud-filled-symbolic'
     },
     'language': {
