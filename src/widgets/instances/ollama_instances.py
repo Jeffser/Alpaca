@@ -125,13 +125,6 @@ class BaseInstance:
                     'content': model_info.get('system')
                 })
 
-        time_now = datetime.datetime.now().replace(microsecond=0).astimezone().isoformat()
-
-        messages.insert(0, {
-            'role': 'system',
-            'content': 'Current time is {}'.format(time_now),
-        })
-
         params = {
             "model": model,
             "stream": True,
