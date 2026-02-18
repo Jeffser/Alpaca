@@ -10,7 +10,6 @@ from .. import dialog, attachments, characters
 from .common import CategoryPill, get_available_models_data, InfoBox
 
 logger = logging.getLogger(__name__)
-model_selector_model = None
 
 class AddedModelRow(GObject.Object):
     __gtype_name__ = 'AlpacaAddedModelRow'
@@ -25,6 +24,8 @@ class AddedModelRow(GObject.Object):
     def __str__(self):
         return prettify_model_name(self.model.get_name())
 
+model_selector_model = Gio.ListStore.new(AddedModelRow)
+
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/added_selector.ui')
 class AddedModelSelector(Gtk.Stack):
     __gtype_name__ = 'AlpacaAddedModelSelector'
@@ -33,8 +34,6 @@ class AddedModelSelector(Gtk.Stack):
 
     def __init__(self):
         global model_selector_model
-        if not model_selector_model:
-            model_selector_model = Gio.ListStore.new(AddedModelRow)
         model_selector_model.connect('notify::n-items', self.n_items_changed)
 
         super().__init__()
