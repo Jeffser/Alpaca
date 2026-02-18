@@ -159,30 +159,6 @@ class WebBrowser(WebKit.WebView):
 
         self.extract_html(on_html_extracted)
 
-        return
-        def on_evaluated(webview, res, user_data):
-            md = MarkItDown(enable_plugins=False)
-            raw_html = webview.evaluate_javascript_finish(res).to_string()
-            markdown_text = ''
-            with tempfile.NamedTemporaryFile("w", suffix=".html", delete=False) as tmp_file:
-                tmp_file.write(raw_html)
-                markdown_text = md.convert(tmp_file.name).text_content
-
-            markdown_text = markdown_text.replace('![](data:image/svg+xml;base64...)', '')
-            save_func(markdown_text)
-
-        script = "(function() {return document.documentElement.outerHTML;})"
-
-        self.evaluate_javascript(
-            script,
-            len(script.encode('utf-8')),
-            None,
-            None,
-            None,
-            on_evaluated,
-            None
-        )
-
     @Gtk.Template.Callback()
     def attach_clicked(self, button):
         self.attachment_requested(self.save)
