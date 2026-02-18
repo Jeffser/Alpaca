@@ -52,13 +52,7 @@ class QuickAskWindow(Adw.ApplicationWindow):
         return Widgets.models.added.FallbackModel
 
     def get_current_instance(self):
-        selected_instance = self.settings.get_value('selected-instance').unpack()
-        instances = SQL.get_instances()
-        if len(instances) > 0:
-            matching_instances = [i for i in instances if i.get('id') == selected_instance]
-            if len(matching_instances) > 0:
-                return Widgets.instances.create_instance_row(matching_instances[0]).instance
-            return Widgets.instances.create_instance_row(instances[0]).instance
+        return self.get_application().get_main_window().get_current_instance()
 
     def send_message(self, mode:int=0, available_tools:dict={}): #mode 0=user 1=system
         buffer = self.global_footer.get_buffer()
