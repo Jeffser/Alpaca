@@ -38,10 +38,11 @@ class QuickAskWindow(Adw.ApplicationWindow):
         main_window.present()
         new_chat = main_window.get_chat_list_page().new_chat(self.chat.get_name())
         for message in list(self.chat.container):
-            GLib.idle_add(message.save)
-            for attachment in list(message.attachment_container.container) + list(message.image_attachment_container.container):
-                GLib.idle_add(SQL.insert_or_update_attachment, message, attachment)
-        new_chat.row.get_parent().select_row(new_chat.row)
+            SQL.insert_or_update_message(message, force_chat_id=new_chat.chat_id)
+            #for attachment in list(message.attachment_container.container) + list(message.image_attachment_container.container):
+                #GLib.idle_add(SQL.insert_or_update_attachment, message, attachment)
+        new_chat.load_messages()
+        GLib.idle_add(new_chat.row.get_parent().select_row, new_chat.row)
         self.close()
 
     def get_selected_model(self):
