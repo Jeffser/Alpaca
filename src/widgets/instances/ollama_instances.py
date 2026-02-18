@@ -456,10 +456,10 @@ class OllamaManaged(BaseInstance):
         'title_model': None,
         'overrides': {
             'HSA_OVERRIDE_GFX_VERSION': '',
-            'CUDA_VISIBLE_DEVICES': '0',
-            'ROCR_VISIBLE_DEVICES': '1',
-            'HIP_VISIBLE_DEVICES': '1',
-            'OLLAMA_VULKAN': '0'
+            'CUDA_VISIBLE_DEVICES': '',
+            'ROCR_VISIBLE_DEVICES': '',
+            'HIP_VISIBLE_DEVICES': '',
+            'OLLAMA_VULKAN': ''
         },
         'think': False,
         'expose': False,
