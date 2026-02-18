@@ -32,6 +32,7 @@ class InstancePreferencesDialog(Adw.Dialog):
     metadata_el = Gtk.Template.Child()
     self_signed_ssl_el = Gtk.Template.Child()
     max_tokens_el = Gtk.Template.Child()
+    vulkan_el = Gtk.Template.Child()
 
     parameters_group = Gtk.Template.Child()
     override_parameters_el = Gtk.Template.Child()
@@ -48,7 +49,6 @@ class InstancePreferencesDialog(Adw.Dialog):
     override_1_el = Gtk.Template.Child()
     override_2_el = Gtk.Template.Child()
     override_3_el = Gtk.Template.Child()
-    override_4_el = Gtk.Template.Child()
 
     model_group = Gtk.Template.Child()
     model_directory_el = Gtk.Template.Child()
@@ -98,6 +98,7 @@ class InstancePreferencesDialog(Adw.Dialog):
         self.set_simple_element_value(self.metadata_el)
         self.set_simple_element_value(self.self_signed_ssl_el)
         self.set_simple_element_value(self.max_tokens_el)
+        self.set_simple_element_value(self.vulkan_el)
 
         # PARAMETERS GROUP
         self.set_simple_element_value(self.override_parameters_el)
@@ -116,11 +117,10 @@ class InstancePreferencesDialog(Adw.Dialog):
                 selected_index = 2
 
             self.keep_alive_selector_el.set_selected(selected_index)
-            #self.keep_alive_preset_changed(self.keep_alive_selector_el)
             self.keep_alive_selector_el.get_ancestor(Adw.PreferencesGroup).set_visible(True)
 
         # OVERRIDES GROUP
-        for el in [self.override_0_el, self.override_1_el, self.override_2_el, self.override_3_el, self.override_4_el]:
+        for el in [self.override_0_el, self.override_1_el, self.override_2_el, self.override_3_el, self.vulkan_el]:
             self.set_simple_element_value(el)
 
         #MODEL GROUP
@@ -170,6 +170,8 @@ class InstancePreferencesDialog(Adw.Dialog):
                         if model.get_string() == prettify_model_name(value):
                             el.set_selected(i)
                             break
+            elif el.get_name() == 'override:OLLAMA_VULKAN':
+                el.set_active(value or self.instance.properties.get('overrides', {}).get('OLLAMA_VULKAN', '0') == '1')
             elif el.get_name() == 'model_directory':
                 el.set_subtitle(value)
             elif isinstance(el, Adw.ExpanderRow):
@@ -200,6 +202,8 @@ class InstancePreferencesDialog(Adw.Dialog):
             return self.model_list[index - 1].get('name')
         elif el.get_name() == 'model_directory':
             return el.get_subtitle()
+        elif el.get_name() == 'override:OLLAMA_VULKAN':
+            return '1' if el.get_active() else ''
         elif isinstance(el, Adw.PasswordEntryRow):
             return el.get_text().strip() or self.instance.properties.get(el.get_name()) or 'NOKEY'
         elif isinstance(el, Adw.ExpanderRow):
@@ -291,6 +295,10 @@ class InstancePreferencesDialog(Adw.Dialog):
             parent = self.get_root(),
             callback = lambda res, row=self.model_directory_el: row.set_subtitle(res.get_path() if res else row.get_subtitle())
         )
+
+    @Gtk.Template.Callback()
+    def open_link(self, button):
+        Gio.AppInfo.launch_default_for_uri(button.get_tooltip_text())
 
 # Fallback for when there are no instances
 class Empty:

@@ -211,9 +211,9 @@ template $AlpacaInstancePreferencesDialog: Adw.Dialog {
         description: _("These entries are optional, they are used to troubleshoot GPU related problems with Ollama");
 
         header-suffix: Gtk.Button {
-          name: "https://docs.ollama.com/gpu#overrides-on-linux";
           tooltip-text: "https://docs.ollama.com/gpu#overrides-on-linux";
           icon-name: "globe-symbolic";
+          clicked => $open_link();
           valign: center;
           styles [
             "flat"
@@ -240,8 +240,9 @@ template $AlpacaInstancePreferencesDialog: Adw.Dialog {
           name: "override:HIP_VISIBLE_DEVICES";
         }
 
-        Adw.EntryRow override_4_el {
-          title: "OLLAMA_VULKAN";
+        Adw.SwitchRow vulkan_el {
+          title: _("Use Vulkan (Experimental)");
+          subtitle: _("Use Vulkan for hardware acceleration. May improve performance on some GPUs, but use with caution as it may be unstable");
           name: "override:OLLAMA_VULKAN";
         }
       }
