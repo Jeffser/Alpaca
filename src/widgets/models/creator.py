@@ -16,6 +16,7 @@ class ModelCreatorDialog(Adw.Dialog):
     base_el = Gtk.Template.Child()
     name_el = Gtk.Template.Child()
     tag_el = Gtk.Template.Child()
+    chara_card_el = Gtk.Template.Child()
     context_attachment_button = Gtk.Template.Child()
     context_attachment_container = Gtk.Template.Child()
     context_el = Gtk.Template.Child()
@@ -32,6 +33,8 @@ class ModelCreatorDialog(Adw.Dialog):
 
         self.name_el.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
         self.tag_el.get_delegate().connect("insert-text", lambda *_: self.check_alphanumeric(*_, ['-', '.', '_', ' ']))
+
+        self.chara_card_el.set_visible(not self.gguf_path)
 
         self.context_attachment_button.connect('clicked', lambda *_: self.context_attachment_container.attachment_request(True))
 
@@ -128,6 +131,7 @@ class ModelCreatorDialog(Adw.Dialog):
             self.show_toast(_("Please add a name"))
             return
 
+        base_model_name = self.base_el.get_selected_item().model.get_name()
         tag_name = self.tag_el.get_text() or 'custom'
         model_name = '{}:{}'.format(main_name, tag_name).strip().replace(' ', '-').lower()
         pretty_name = prettify_model_name(model_name)
@@ -136,6 +140,12 @@ class ModelCreatorDialog(Adw.Dialog):
             if model_name == row:
                 self.show_toast(_("Model name is already in use"))
                 return
+
+        if self.chara_card_el.get_active():
+            base_model_preferences = SQL.get_model_preferences(base_model_name)
+            SQL.insert_or_update_model_picture(model_name, base_model_preferences.get('picture'))
+            SQL.insert_or_update_model_voice(model_name, base_model_preferences.get('voice'))
+            SQL.insert_or_update_model_character(model_name, base_model_preferences.get('character'))
 
         system_message = []
         for attachment in self.context_attachment_container.get_content():
@@ -166,7 +176,7 @@ class ModelCreatorDialog(Adw.Dialog):
         }
 
         if not self.gguf_path:
-            data_json['from'] = self.base_el.get_selected_item().model.get_name()
+            data_json['from'] = base_model_name
 
         threading.Thread(target=self.create_model, args=(data_json,), daemon=True).start()
         self.close()

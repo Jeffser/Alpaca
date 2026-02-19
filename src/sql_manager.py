@@ -643,22 +643,6 @@ class Instance:
     ## MODEL ##
     ###########
 
-    def insert_or_update_model_picture(model_id: str, picture_content: str) -> None:
-        with SQLiteConnection() as c:
-            if c.cursor.execute(
-                "SELECT id FROM model WHERE id=?", (model_id,)
-            ).fetchone():
-                c.cursor.execute(
-                    "UPDATE model SET picture=? WHERE id=?",
-                    (picture_content, model_id),
-                )
-
-            else:
-                c.cursor.execute(
-                    "INSERT INTO model (id, picture) VALUES (?, ?)",
-                    (model_id, picture_content),
-                )
-
     def remove_model_preferences(model_id: str) -> None:
         with SQLiteConnection() as c:
             c.cursor.execute("DELETE FROM model_preferences WHERE id=?", (model_id,))
