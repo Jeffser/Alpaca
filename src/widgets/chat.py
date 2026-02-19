@@ -318,9 +318,11 @@ class Folder(Adw.NavigationPage):
 
     def auto_select_model(self):
         def find_model_index(model_name:str) -> int:
-            if len(list(models.added.model_selector_model)) == 0 or not model_name:
+            text_models = models.text.list_from_selector()
+
+            if len(text_models) == 0 or not model_name:
                 return -1
-            detected_models = [i for i, future_row in enumerate(list(models.added.model_selector_model)) if future_row.model.get_name() == model_name]
+            detected_models = [i for i, m in enumerate(list(text_models.keys())) if m == model_name]
             if len(detected_models) > 0:
                 return detected_models[0]
             return -1

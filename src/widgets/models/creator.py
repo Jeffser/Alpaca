@@ -1,13 +1,10 @@
 # creator.py
 
-from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GObject
-import logging, os, re, datetime, threading, sys, glob, icu, base64, hashlib, importlib.util
-from ...constants import STT_MODELS, TTS_VOICES, data_dir, cache_dir
+from gi.repository import Gtk, Gio, Adw
+import logging, os, re, threading
 from ...sql_manager import prettify_model_name, Instance as SQL
-from .. import dialog, attachments
-from .basic import BasicModelButton
-from .added import list_from_selector, AddedModelRow, AddedModelDialog, get_model
-from .common import CategoryPill, remove_added_model
+from .. import attachments
+from .text import TextModelRow, list_from_selector, get_model
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +25,7 @@ class ModelCreatorDialog(Adw.Dialog):
     focus_el = Gtk.Template.Child()
     num_ctx_el = Gtk.Template.Child()
 
-    def __init__(self, instance, base_row:AddedModelRow=None, gguf_path:str=""):
+    def __init__(self, instance, base_row:TextModelRow=None, gguf_path:str=""):
         super().__init__()
         self.instance = instance
         self.gguf_path = gguf_path
@@ -53,7 +50,7 @@ class ModelCreatorDialog(Adw.Dialog):
             factory.connect("bind", lambda factory, list_item: list_item.get_child().set_label(list_item.get_item().name))
             self.base_el.set_factory(factory)
             if base_row:
-                self.base_el.set_model(Gio.ListStore.new(AddedModelRow))
+                self.base_el.set_model(Gio.ListStore.new(TextModelRow))
                 self.base_el.get_model().append(base_row)
             else:
                 self.base_el.set_model(get_model())
@@ -179,7 +176,7 @@ class ModelCreatorDialog(Adw.Dialog):
         if not data.get('model'):
             return
 
-        model_el = window.model_manager.create_added_model(
+        model_el = window.model_manager.create_text_model(
             model_name=data.get('model'),
             instance=self.instance,
             append_row=False

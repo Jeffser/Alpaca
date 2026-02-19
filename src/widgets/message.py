@@ -31,16 +31,16 @@ class OptionPopup(Gtk.Popover):
     @Gtk.Template.Callback()
     def on_show(self, udata):
         message_element = self.get_ancestor(Message)
-        found_model = models.added.list_from_selector().get(message_element.author)
+        found_model = models.text.list_from_selector().get(message_element.author)
         self.model_button.set_visible(bool(found_model))
 
     @Gtk.Template.Callback()
     def show_model_dialog(self, button):
         self.popdown()
         message_element = self.get_ancestor(Message)
-        found_model = models.added.list_from_selector().get(message_element.author)
+        found_model = models.text.list_from_selector().get(message_element.author)
         if found_model:
-            models.added.AddedModelDialog(found_model).present(self.get_root())
+            models.text.TextModelDialog(found_model).present(self.get_root())
 
     @Gtk.Template.Callback()
     def delete_message(self, button=None):
@@ -559,8 +559,8 @@ class GlobalFooter(Gtk.Box):
         settings.bind('show-model-manager-shortcut', self.model_manager_shortcut, 'visible', Gio.SettingsBindFlags.DEFAULT)
 
         self.model_selector.selector.connect('notify::selected', lambda dropdown, gparam: self.tool_selector.model_changed(dropdown))
-        self.action_stack.set_sensitive(len(models.added.model_selector_model) > 0)
-        models.added.model_selector_model.connect('notify::n-items', lambda m, p: self.action_stack.set_sensitive(len(m) > 0))
+        self.action_stack.set_sensitive(len(models.text.model_selector_model) > 0)
+        models.text.model_selector_model.connect('notify::n-items', lambda m, p: self.action_stack.set_sensitive(len(m) > 0))
         GLib.idle_add(self.set_send_callback)
 
     def set_send_callback(self):

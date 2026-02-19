@@ -1,2 +1,2 @@
 # __init__.py
-from . import added, common, creator, basic, manager
+from . import common, creator, basic, manager, text

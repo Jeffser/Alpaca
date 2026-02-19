@@ -277,7 +277,7 @@ class AlpacaWindow(Adw.ApplicationWindow):
         if selected_item:
             return selected_item.model
         else:
-            return Widgets.models.added.FallbackModel
+            return Widgets.models.text.FallbackModel
 
     def get_current_instance(self):
         if self.instance_listbox.get_selected_row():

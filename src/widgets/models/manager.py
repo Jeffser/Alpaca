@@ -1,7 +1,7 @@
 # manager.py
 
 from gi.repository import Gtk, Adw, GLib
-from . import added, basic, common
+from . import text, basic, common
 
 import os, importlib.util, re
 from ...constants import data_dir, STT_MODELS, TTS_VOICES, REMBG_MODELS, MODEL_CATEGORIES_METADATA
@@ -126,14 +126,14 @@ class ModelManager(Adw.NavigationPage):
 
     def update_added_model_list(self):
         self.added_model_flowbox.remove_all()
-        added.empty_model_selector()
+        text.empty_model_selector()
         instance = self.get_root().get_current_instance()
 
         # Normal Models
         instance.local_models = None # Reset cache
         local_models = instance.get_local_models()
         for model in local_models:
-            self.create_added_model(
+            self.create_text_model(
                 model_name=model.get('name'),
                 instance=instance,
                 data=model
@@ -193,16 +193,16 @@ class ModelManager(Adw.NavigationPage):
     def open_instance_manager(self, button):
         self.get_root().main_navigation_view.push_by_tag('instance_manager')
 
-    def create_added_model(self, model_name:str, instance, append_row:bool=True, data:dict={}):
+    def create_text_model(self, model_name:str, instance, append_row:bool=True, data:dict={}):
         model_element = basic.BasicModelButton(
             model_name=model_name,
             instance=instance,
-            dialog_callback=added.AddedModelDialog,
-            remove_callback=common.remove_added_model,
+            dialog_callback=text.TextModelDialog,
+            remove_callback=common.remove_text_model,
             data=data
         )
         if append_row:
-            added.append_to_model_selector(model_element.row)
+            text.append_to_model_selector(model_element.row)
         self.added_model_flowbox.prepend(model_element)
         model_element.get_parent().set_focusable(False)
         self.update_added_visibility()

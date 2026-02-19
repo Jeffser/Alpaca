@@ -908,3 +908,4 @@ class Instance:
 
         for row in result:
             Instance.remove_folder(row[0])
+

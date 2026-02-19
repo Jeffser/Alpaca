@@ -3,7 +3,7 @@
 from gi.repository import Gtk
 import os, threading, importlib.util
 from .. import dialog
-from ...constants import data_dir, cache_dir, STT_MODELS, TTS_VOICES, REMBG_MODELS, MODEL_CATEGORIES_METADATA
+from ...constants import data_dir, cache_dir, MODEL_CATEGORIES_METADATA
 from ...sql_manager import Instance as SQL
 
 available_models_data = {}
@@ -101,11 +101,11 @@ def get_tts_path() -> str or None:
                 return tts_model_path
 
 # Callbacks for removing models
-def remove_added_model(model):
+def remove_text_model(model):
     window = model.get_root().get_application().get_main_window()
 
     if model.instance.delete_model(model.get_name()):
-        from .added import delete_from_model_selector
+        from .text import delete_from_model_selector
         delete_from_model_selector(model.get_name())
         SQL.remove_model_preferences(model.get_name())
         threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures, daemon=True).start()

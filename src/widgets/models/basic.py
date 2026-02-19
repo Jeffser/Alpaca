@@ -1,13 +1,11 @@
 # basic.py
 
-from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GObject
-import logging, os, re, datetime, threading, sys, glob, icu, base64, hashlib, importlib.util, json
-from PIL import Image
-from ...constants import STT_MODELS, TTS_VOICES, REMBG_MODELS, data_dir, cache_dir
+from gi.repository import Gtk, Gio, Adw, GLib, Gdk
+import threading, icu, base64
 from ...sql_manager import prettify_model_name, Instance as SQL
-from .. import dialog, attachments
-from .added import AddedModelRow, AddedModelDialog, append_to_model_selector, list_from_selector
-from .common import CategoryPill, get_available_models_data, prompt_existing, remove_added_model
+from .. import dialog
+from .text import TextModelDialog, TextModelRow, append_to_model_selector, list_from_selector
+from .common import CategoryPill, get_available_models_data, prompt_existing
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/basic_dialog.ui')
 class BasicModelDialog(Adw.Dialog):
@@ -214,7 +212,7 @@ class BasicModelButton(Gtk.Button):
                 self.data = data
             else:
                 self.data = self.instance.get_model_info(model_name)
-            self.row = AddedModelRow(self)
+            self.row = TextModelRow(self)
         else:
             self.data = data
             self.row = None
@@ -250,10 +248,18 @@ class BasicModelButton(Gtk.Button):
             return list(set(self.data.get('categories')))
 
         available_models_data = get_available_models_data()
-        categories = available_models_data.get(self.get_name().split(':')[0], {}).get('categories', [])
+
+        separated_name = self.get_name().split(':')
+        model_name = separated_name[0]
+        if len(separated_name) > 1:
+            model_tag = separated_name[1]
+        else:
+            model_tag = ""
+
+        categories = available_models_data.get(model_name, {}).get('categories', [])
         if not categories:
             parent_model = self.data.get('details', {}).get('parent_model', '')
-            categories = available_models_data.get(parent_model.split(':')[0], {}).get('categories', [])
+            categories = available_models_data.get(parent_model, {}).get('categories', [])
 
         categories = [c for c in categories if c not in ('small', 'medium', 'big', 'huge', 'cloud', 'vision', 'tools')]
 
@@ -261,6 +267,15 @@ class BasicModelButton(Gtk.Button):
             categories.append('vision')
         if self.can_use_tools():
             categories.append('tools')
+
+        print(model_name)
+        for tag in available_models_data.get(model_name, {}).get('tags', []):
+            print(model_tag)
+            if tag[0] == model_tag:
+                if tag[1] == "cloud":
+                    categories.append('cloud')
+                else:
+                    break
 
         return list(set(categories))
 
@@ -308,7 +323,7 @@ class BasicModelButton(Gtk.Button):
 
     def prompt_create_child(self):
         dialog = self.get_root().get_visible_dialog()
-        if dialog and isinstance(dialog, AddedModelDialog):
+        if dialog and isinstance(dialog, TextModelDialog):
             dialog.close()
         prompt_existing(self.get_root(), self.instance, self.row)
 
@@ -404,7 +419,7 @@ def confirm_pull_model(window, model_name:str):
     if model_name and model_name not in list(list_from_selector()):
         instance = window.get_current_instance()
         if instance:
-            model_el = window.model_manager.create_added_model(
+            model_el = window.model_manager.create_text_model(
                 model_name=model_name,
                 instance=instance,
                 append_row=False
@@ -412,3 +427,4 @@ def confirm_pull_model(window, model_name:str):
             model_el.update_progressbar(1)
             threading.Thread(target=instance.pull_model, args=(model_el,)).start()
             window.model_manager.view_stack.set_visible_child_name('added_models')
+

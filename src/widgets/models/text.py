@@ -1,0 +1,338 @@
+# text.py
+
+from gi.repository import Gtk, Gio, Adw, GLib, GObject
+import re, threading, icu, base64, importlib.util, io, json
+from PIL import Image
+from PIL.PngImagePlugin import PngInfo
+from ...constants import TTS_VOICES
+from ...sql_manager import prettify_model_name, Instance as SQL
+from .. import dialog, attachments, characters
+from .common import CategoryPill, get_available_models_data, InfoBox
+
+class TextModelRow(GObject.Object):
+    __gtype_name__ = 'AlpacaTextModelRow'
+
+    name = GObject.Property(type=str)
+
+    def __init__(self, model):
+        super().__init__()
+        self.model = model
+        self.name = prettify_model_name(self.model.get_name())
+
+    def __str__(self):
+        return prettify_model_name(self.model.get_name())
+
+model_selector_model = Gio.ListStore.new(TextModelRow)
+
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/text_selector.ui')
+class TextModelSelector(Gtk.Stack):
+    __gtype_name__ = 'AlpacaTextModelSelector'
+
+    selector = Gtk.Template.Child()
+
+    def __init__(self):
+        global model_selector_model
+        model_selector_model.connect('notify::n-items', self.n_items_changed)
+
+        super().__init__()
+
+        self.selector.set_model(model_selector_model)
+        list(self.selector)[0].add_css_class('flat')
+        self.selector.set_expression(Gtk.PropertyExpression.new(TextModelRow, None, "name"))
+        factory = Gtk.SignalListItemFactory()
+        factory.connect("setup", lambda factory, list_item: list_item.set_child(Gtk.Label(ellipsize=3, xalign=0)))
+        factory.connect("bind", lambda factory, list_item: list_item.get_child().set_text(list_item.get_item().name))
+        self.selector.set_factory(factory)
+        list(list(self.selector)[1].get_child())[1].set_propagate_natural_width(True)
+        GLib.idle_add(self.n_items_changed, self.selector.get_model())
+
+    def get_model(self):
+        return self.selector.get_model()
+
+    def n_items_changed(self, model, gparam=None):
+        self.selector.set_enable_search(len(model) > 10)
+        self.set_visible_child_name('selector' if len(model) > 0 else 'no-models')
+
+    def set_selected(self, index:int):
+        self.selector.set_selected(index)
+
+    def get_selected_item(self):
+        return self.selector.get_selected_item()
+
+@Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/text_dialog.ui')
+class TextModelDialog(Adw.Dialog):
+    __gtype_name__ = 'AlpacaTextModelDialog'
+
+    create_child_button = Gtk.Template.Child()
+    language_button = Gtk.Template.Child()
+    language_flowbox = Gtk.Template.Child()
+    pfp_stack = Gtk.Template.Child()
+    image = Gtk.Template.Child()
+    title_label = Gtk.Template.Child()
+    voice_combo = Gtk.Template.Child()
+    metadata_container = Gtk.Template.Child()
+    information_container = Gtk.Template.Child()
+    description_container = Gtk.Template.Child()
+    context_attachment_container = Gtk.Template.Child()
+    context_system_container = Gtk.Template.Child()
+    categories_container = Gtk.Template.Child()
+    navigation_view = Gtk.Template.Child()
+
+    def __init__(self, model):
+        super().__init__()
+        self.model = model
+        self.image.get_ancestor(Gtk.ToggleButton).set_overflow(1)
+
+        self.create_child_button.set_visible(self.model.instance.instance_type in ('ollama', 'ollama:managed'))
+
+        self.update_profile_picture()
+
+        self.title_label.set_label(prettify_model_name(self.model.get_name(), True)[0])
+
+        self.voice_combo.set_visible(importlib.util.find_spec('kokoro') and importlib.util.find_spec('sounddevice'))
+
+        selected_voice = SQL.get_model_preferences(self.model.get_name()).get('voice', None)
+        selected_index = 0
+        for i, (name, value) in enumerate(TTS_VOICES.items()):
+            if value == selected_voice:
+                selected_index = i + 1
+            self.voice_combo.get_model().append(name)
+        self.voice_combo.set_selected(selected_index)
+
+        parent_model = self.model.data.get('details', {}).get('parent_model')
+        metadata={
+            _('Tag'): prettify_model_name(self.model.get_name(), True)[1],
+            _('Family'): prettify_model_name(self.model.data.get('details', {}).get('family')),
+            _('Parameter Size'): self.model.data.get('details', {}).get('parameter_size'),
+            _('Quantization Level'): self.model.data.get('details', {}).get('quantization_level')
+        }
+        if parent_model and '/' not in parent_model:
+            metadata[_('Parent Model')] = prettify_model_name(parent_model)
+
+        if 'modified_at' in self.model.data:
+            metadata[_('Modified At')] = self.model.data.get('modified_at').strftime('%Y-%m-%d %H:%M')
+        else:
+            metadata[_('Modified At')] = None
+
+        for name, value in metadata.items():
+            if value:
+                self.information_container.append(InfoBox(name, value, True))
+
+        if self.model.data.get('description'):
+            self.description_container.set_child(InfoBox(_('Description'), self.model.data.get('description'), False))
+
+        if self.model.data.get('system'):
+            system = self.model.data.get('system')
+
+            attachment_container = attachments.AttachmentContainer()
+            self.context_attachment_container.set_child(attachment_container)
+
+            pattern = re.compile(r"```(.+?)\n(.*?)```", re.DOTALL)
+            matches = pattern.finditer(system)
+            for match in matches:
+                attachment = attachments.Attachment(
+                    file_id='-1',
+                    file_name=match.group(1).strip(),
+                    file_type='model_context',
+                    file_content=match.group(2).strip()
+                )
+                attachment_container.add_attachment(attachment)
+
+            self.context_attachment_container.get_parent().set_visible(len(list(attachment_container.container)) > 0)
+
+            system = pattern.sub('', system).strip()
+            self.context_system_container.set_child(InfoBox(_('Context'), system, False))
+
+        available_models_data = get_available_models_data()
+        categories = self.model.get_categories()
+        languages = available_models_data.get(self.model.get_name().split(':')[0], {}).get('languages', [])
+        if not languages:
+            languages = available_models_data.get(self.model.data.get('details', {}).get('parent_model', '').split(':')[0], {}).get('languages', [])
+        for category in set(categories):
+            self.categories_container.append(CategoryPill(category, True))
+
+        for language in ['language:' + icu.Locale(lan).getDisplayLanguage(icu.Locale(lan)).title() for lan in languages]:
+            self.language_flowbox.append(CategoryPill(language, True))
+        self.language_button.set_visible(len(languages) > 1)
+
+    def update_character_page(self, character_data):
+        existing_page = self.navigation_view.find_page("character")
+        if existing_page:
+            self.navigation_view.remove(existing_page)
+
+        self.navigation_view.add(characters.CharacterPage(character_data))
+
+    def update_profile_picture(self):
+        if self.model.image.get_paintable():
+            self.image.set_from_paintable(self.model.image.get_paintable())
+            self.pfp_stack.set_visible_child_name('pfp')
+        else:
+            self.pfp_stack.set_visible_child_name('no-pfp')
+
+    @Gtk.Template.Callback()
+    def character_row_activated(self, row):
+        character_data = SQL.get_model_preferences(self.model.get_name()).get('character', {})
+        self.update_character_page(character_data)
+        self.navigation_view.push_by_tag('character')
+
+    @Gtk.Template.Callback()
+    def prompt_remove_model(self, button):
+        self.model.prompt_remove_model()
+
+    @Gtk.Template.Callback()
+    def prompt_create_child(self, button):
+        self.model.prompt_create_child()
+
+    @Gtk.Template.Callback()
+    def update_voice(self, comborow, gparam):
+        if comborow.get_selected() == 0:
+            SQL.insert_or_update_model_voice(self.model.get_name(), None)
+        else:
+            voice = TTS_VOICES.get(comborow.get_selected_item().get_string())
+            SQL.insert_or_update_model_voice(self.model.get_name(), voice)
+
+    def preview_character_data(self, character_data:dict):
+        self.update_character_page(character_data)
+        self.navigation_view.push_by_tag('character')
+
+    def set_profile_picture_from_file(self, file):
+        if file:
+            picture_b64 = attachments.extract_image(file.get_path(), 480)
+            SQL.insert_or_update_model_picture(self.model.get_name(), picture_b64)
+
+            # Retrieve character data
+            image_data = base64.b64decode(picture_b64)
+            image_file = io.BytesIO(image_data)
+            character_data = {}
+            with Image.open(image_file) as img:
+                img.load()
+                raw_chara = img.info.get('chara')
+                if raw_chara:
+                    try:
+                        decoded_json = base64.b64decode(raw_chara).decode('utf-8')
+                        character_data = json.loads(decoded_json)
+                    except:
+                        character_data = json.loads(raw_chara)
+            if len(character_data.keys()) > 0:
+                dialog.simple(
+                    parent=self.get_root(),
+                    heading=_("Character Card Detected"),
+                    body=_("Import character card data from picture?"),
+                    callback=lambda char_data=character_data: self.preview_character_data(char_data)
+                )
+
+            self.model.update_profile_picture()
+            self.update_profile_picture()
+            window = self.get_root().get_application().get_main_window()
+            threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures, daemon=True).start()
+
+    @Gtk.Template.Callback()
+    def remove_profile_picture(self, button=None):
+        SQL.insert_or_update_model_picture(self.model.get_name(), None)
+        self.model.update_profile_picture()
+        self.update_profile_picture()
+        window = self.get_root().get_application().get_main_window()
+        threading.Thread(target=window.chat_bin.get_child().row.update_profile_pictures, daemon=True).start()
+
+    @Gtk.Template.Callback()
+    def export_profile_picture(self, button):
+        popover = button.get_ancestor(Gtk.Popover)
+        if popover:
+            popover.popdown()
+
+        def include_character():
+            existing_page = self.navigation_view.find_page("export_character")
+            if existing_page:
+                self.navigation_view.remove(existing_page)
+            self.navigation_view.push(characters.CharacterExportPage())
+
+        def simple_result(file_dialog, result):
+            file = file_dialog.save_finish(result)
+            if file:
+                picture_b64 = SQL.get_model_preferences(self.model.get_name()).get('picture')
+                image_data = base64.b64decode(picture_b64)
+                image_file = io.BytesIO(image_data)
+                with Image.open(image_file) as img:
+                    img.load()
+                    img.save(
+                        file.get_path(),
+                        format="PNG",
+                        pnginfo=PngInfo(),
+                        exif=img.info.get('exif'),
+                        dpi=img.info.get('dpi')
+                    )
+                toast_overlay = self.get_ancestor(Adw.ToastOverlay)
+                toast = Adw.Toast(
+                    title=_("Profile Picture Exported Successfully")
+                )
+                toast_overlay.add_toast(toast)
+
+        def simple():
+            Gtk.FileDialog(initial_name='{}.png'.format(_("Image"))).save(
+                self.get_root(),
+                None,
+                simple_result
+            )
+
+        character_dict = SQL.get_model_preferences(self.model.get_name()).get('character', {})
+        use_character = character_dict.get('data', {}).get('extensions', {}).get('com.jeffser.Alpaca', {}).get('enabled', False)
+
+        if use_character:
+            options = {
+                _('Cancel'): {},
+                _('Include Character Card'): {
+                    'callback': include_character
+                },
+                _('Only Export Picture'): {
+                    'callback': simple,
+                    'appearance': 'suggested',
+                    'default': True
+                }
+            }
+
+            dialog.Options(
+                _("Export Profile Picture"),
+                _("Do you want to include the character card data for use outside of Alpaca?"),
+                list(options.keys())[0],
+                options
+            ).show(self.get_root())
+        else:
+            simple()
+
+    @Gtk.Template.Callback()
+    def change_profile_picture(self, button):
+        file_filter = Gtk.FileFilter()
+        file_filter.add_pixbuf_formats()
+
+        dialog.simple_file(
+            parent = self.get_root(),
+            file_filters = [file_filter],
+            callback = self.set_profile_picture_from_file
+        )
+
+def append_to_model_selector(row):
+    global model_selector_model
+    model_selector_model.append(row)
+
+def delete_from_model_selector(model_name:str):
+    global model_selector_model
+    found_models = [i for i, row in enumerate(list(model_selector_model)) if row.model.get_name() == model_name]
+    if found_models:
+        model_selector_model.remove(found_models[0])
+
+def empty_model_selector():
+    global model_selector_model
+    model_selector_model.remove_all()
+
+def list_from_selector() -> dict:
+    global model_selector_model
+    return {m.model.get_name(): m.model for m in list(model_selector_model)}
+
+def get_model():
+    global model_selector_model
+    return model_selector_model
+
+class FallbackModel:
+    def get_name(): return None
+    def get_vision() -> bool: return False
+

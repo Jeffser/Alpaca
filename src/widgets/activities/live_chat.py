@@ -129,7 +129,7 @@ class LiveChat(Adw.Bin):
         if selected_item:
             return selected_item.model
         else:
-            return models.added.FallbackModel
+            return models.text.FallbackModel
 
     # Use Different Thread
     def try_turning_on_mic(self):

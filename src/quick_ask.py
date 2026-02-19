@@ -48,7 +48,7 @@ class QuickAskWindow(Adw.ApplicationWindow):
         if item:
             return item.model
 
-        return Widgets.models.added.FallbackModel
+        return Widgets.models.text.FallbackModel
 
     def get_current_instance(self):
         return self.get_application().get_main_window().get_current_instance()
