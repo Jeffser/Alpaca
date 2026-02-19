@@ -387,6 +387,8 @@ class BaseInstance:
                 stream=True
             )
             for chunk in response:
+                if not model.get_root():
+                    break
                 if chunk.status:
                     model.append_progress_line(chunk.status)
                 if chunk.total and chunk.completed:

@@ -119,7 +119,17 @@ class PullingModelDialog(Adw.Dialog):
 
     @Gtk.Template.Callback()
     def prompt_stop_download(self, button):
-        pass
+        def stop_download():
+            self.model.remove_model()
+
+        dialog.simple(
+            parent=self.get_root(),
+            heading=_("Stop Pull"),
+            body=_("Are you sure you want to stop pulling '{}'?").format(prettify_model_name(self.model.get_name())),
+            callback=stop_download,
+            button_name=_("Stop"),
+            button_appearance="destructive"
+        )
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/models/available_dialog.ui')
 class AvailableModelDialog(Adw.Dialog):
