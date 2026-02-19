@@ -89,6 +89,33 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/blob/main/CONTRIBUTING.md</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="9.2.0" date="2026-02-18">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/9.2.0</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Added the argument --add-model</li>
+          <li>Added the option to copy character card when creating a child model</li>
+          <li>Improved website attachment converter</li>
+          <li>Added Quick Ask shortcut to desktop icon</li>
+          <li>Added option to use Vulkan with Ollama (Managed) instances</li>
+          <li>Changed the color of the "Cloud" category</li>
+        </ul>
+        <p>Internal</p>
+        <ul>
+          <li>Renamed "Added Models" to "Text Models" in code</li>
+          <li>Gracefully start and end instances</li>
+          <li>Removed time context from Ollama instances</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed option to cancel a download</li>
+          <li>Fixed Quick Ask not saving properly</li>
+          <li>Fixed Quick Ask not working with Ollama (Managed) instances</li>
+          <li>Fixed list of available models for Ollama (Cloud) instances</li>
+        </ul>
+      </description>
+    </release>
     <release version="9.1.1" date="2026-02-16">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/9.1.1</url>
       <description>
