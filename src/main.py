@@ -36,7 +36,7 @@ GtkSource.init()
 GLib.set_prgname("Alpaca")
 GLib.set_application_name("Alpaca")
 
-from .widgets import activities
+from .widgets import activities, models
 from .constants import TRANSLATORS, LEGAL_NOTICE, cache_dir, data_dir, config_dir, source_dir
 from .sql_manager import Instance as SQL
 
@@ -53,6 +53,7 @@ import threading
 
 from pydbus import SessionBus
 from datetime import datetime
+from urllib.parse import urlparse, parse_qs
 
 logger = logging.getLogger(__name__)
 
@@ -79,6 +80,9 @@ class AlpacaService:
             <method name="PresentLive"/>
             <method name="Activity">
                 <arg type="s" name="activity_name" direction="in"/>
+            </method>
+            <method name="Model">
+                <arg type="s" name="model_name" direction="in"/>
             </method>
         </interface>
     </node>
@@ -121,6 +125,24 @@ class AlpacaService:
         if page:
             activities.launch_detached_activity(page(), self.app.props.active_window)
 
+    def Model(self, model_name:str):
+        main_window = self.app.props.active_window
+
+        for dialog in main_window.get_dialogs():
+            GLib.idle_add(dialog.force_close)
+        found_model = models.text.list_from_selector().get(model_name)
+        if found_model:
+            GLib.idle_add(models.text.TextModelDialog(found_model).present, main_window)
+        else:
+            if main_window.get_current_instance().instance_type == 'empty':
+                GLib.timeout_add(5000, models.basic.confirm_pull_model, main_window, model_name)
+            else:
+                GLib.idle_add(models.basic.confirm_pull_model, main_window, model_name)
+            if main_window.main_navigation_view.get_visible_page().get_tag() != 'model_manager':
+                GLib.idle_add(main_window.main_navigation_view.push_by_tag, 'model_manager')
+
+        GLib.idle_add(self.Present)
+
 class AlpacaApplication(Adw.Application):
     __gtype_name__ = 'AlpacaApplication'
 
@@ -157,6 +179,8 @@ class AlpacaApplication(Adw.Application):
         elif self.args.live_chat:  # DEPRECATED
             logger.warning('--live-chat is deprecated, use --activity live-chat')
             app_service.Activity('live-chat')
+        elif self.args.add_model:
+            app_service.Model(self.args.add_model)
         else:
             app_service.Present()
 
@@ -240,11 +264,24 @@ def main(version):
     parser.add_argument('--list-chats', action='store_true', help='display all the current chats in root directory')
     parser.add_argument('--list-activities', action='store_true', help='display all activities that can be launched with --activity')
 
+    parser.add_argument('--add-model', type=str, metavar='MODEL', help='add a model from the active instance by the name')
     parser.add_argument('--activity', type=str, metavar='ACTIVITY', help='open an activity directly')
     parser.add_argument('--new-chat', type=str, metavar='CHAT', help='start a new chat with the specified title')
     parser.add_argument('--ask', type=str, metavar='"MESSAGE"', help='open Quick Ask with a message')
 
     parser.add_argument('--live-chat', action='store_true', help='open Live Chat (DEPRECATED, USE --activity live-chat)')
+
+    # check for alpaca://
+    args_list = sys.argv[1:]
+    if args_list and args_list[0].startswith('alpaca://'):
+        url_data = urlparse(args_list[0])
+        params = parse_qs(url_data.query)
+        model_name = params.get('model', [None])[0]
+
+        if model_name:
+            del sys.argv[1]
+            sys.argv.extend(['--add-model', model_name])
+
     args = parser.parse_args()
 
     if args.version:

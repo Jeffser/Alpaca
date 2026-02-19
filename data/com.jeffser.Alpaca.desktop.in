@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Alpaca
-Exec=alpaca
+Exec=alpaca %u
 Icon=com.jeffser.Alpaca
 Terminal=false
 Type=Application
@@ -8,6 +8,7 @@ Categories=Utility;Development;Chat;
 Keywords=ai;ollama;llm
 StartupNotify=true
 X-Purism-FormFactor=Workstation;Mobile;
+MimeType=x-scheme-handler/alpaca;
 Actions=quick-ask;
 
 [Desktop Action quick-ask]

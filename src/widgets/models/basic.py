@@ -415,7 +415,7 @@ class BasicModelButton(Gtk.Button):
 def confirm_pull_model(window, model_name:str):
     if model_name and model_name not in list(list_from_selector()):
         instance = window.get_current_instance()
-        if instance:
+        if instance.instance_type != 'empty':
             model_el = window.model_manager.create_text_model(
                 model_name=model_name,
                 instance=instance,
