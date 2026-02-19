@@ -65,8 +65,8 @@ src/ui/widgets/message/message.blp
 src/ui/widgets/message/popup.blp
 src/ui/widgets/message/scrollable_textview.blp
 
-src/ui/widgets/models/added_dialog.blp
-src/ui/widgets/models/added_selector.blp
+src/ui/widgets/models/text_dialog.blp
+src/ui/widgets/models/text_selector.blp
 src/ui/widgets/models/available_dialog.blp
 src/ui/widgets/models/basic_button.blp
 src/ui/widgets/models/basic_dialog.blp
@@ -119,7 +119,7 @@ src/widgets/instances/ollama_manager.py
 src/widgets/instances/openai_instances.py
 
 src/widgets/models/__init__.py
-src/widgets/models/added.py
+src/widgets/models/text.py
 src/widgets/models/basic.py
 src/widgets/models/common.py
 src/widgets/models/creator.py
