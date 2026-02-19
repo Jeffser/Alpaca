@@ -268,9 +268,7 @@ class BasicModelButton(Gtk.Button):
         if self.can_use_tools():
             categories.append('tools')
 
-        print(model_name)
         for tag in available_models_data.get(model_name, {}).get('tags', []):
-            print(model_tag)
             if tag[0] == model_tag:
                 if tag[1] == "cloud":
                     categories.append('cloud')
@@ -386,7 +384,6 @@ class BasicModelButton(Gtk.Button):
 
     @Gtk.Template.Callback()
     def show_popup(self, *args):
-        print(self.data.get('categories', []))
         rect = Gdk.Rectangle()
         if len(args) == 4:
             rect.x, rect.y = args[2], args[3]

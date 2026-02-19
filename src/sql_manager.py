@@ -608,7 +608,6 @@ class Instance:
 
     def delete_attachment(attachment) -> None:
         with SQLiteConnection() as c:
-            print('!!!!!!!!!!!!!!',attachment.get_name())
             c.cursor.execute(
                 "DELETE FROM attachment WHERE id=?", (attachment.get_name(),)
             )
