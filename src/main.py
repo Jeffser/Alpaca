@@ -271,17 +271,6 @@ def main(version):
 
     parser.add_argument('--live-chat', action='store_true', help='open Live Chat (DEPRECATED, USE --activity live-chat)')
 
-    # check for alpaca://
-    args_list = sys.argv[1:]
-    if args_list and args_list[0].startswith('alpaca://'):
-        url_data = urlparse(args_list[0])
-        params = parse_qs(url_data.query)
-        model_name = params.get('model', [None])[0]
-
-        if model_name:
-            del sys.argv[1]
-            sys.argv.extend(['--add-model', model_name])
-
     args = parser.parse_args()
 
     if args.version:
