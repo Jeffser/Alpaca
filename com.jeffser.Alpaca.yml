@@ -999,8 +999,8 @@ modules:
       - -Dvapi=false
     sources:
       - type: archive
-        url: https://gitlab.gnome.org/GNOME/vte/-/archive/0.80.0/vte-0.80.0.tar.gz
-        sha256: c81b765b0f2cd9e823684c3ae5bb6fb30f08b8e2e9ff31accc239ddfa7f07be3
+        url: https://gitlab.gnome.org/GNOME/vte/-/archive/0.78.0/vte-0.78.0.tar.gz
+        sha256: 82e19d11780fed4b66400f000829ce5ca113efbbfb7975815f26ed93e4c05f2d
   - name: libportal
     buildsystem: meson
     builddir: true
