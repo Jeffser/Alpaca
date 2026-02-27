@@ -39,12 +39,6 @@ class BaseInstance:
             del self.properties['seed']
         self.properties['url'] = self.instance_url
 
-        arguments = {
-            'api_key': self.properties.get('api')
-        }
-        if self.instance_type != 'chatgpt':
-            arguments['base_url'] = self.properties.get('url').strip()
-
         self.client = None
 
     def stop(self):
@@ -52,6 +46,12 @@ class BaseInstance:
 
     def start(self):
         if not self.client:
+            arguments = {
+                'api_key': self.properties.get('api')
+            }
+            if self.instance_type != 'chatgpt':
+                arguments['base_url'] = self.properties.get('url').strip()
+
             self.client = openai.OpenAI(**arguments)
 
     def get_active_lore(self, messages:list, lorebook:dict) -> str:
