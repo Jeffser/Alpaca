@@ -92,15 +92,15 @@ class WebSearch(Base):
         self.result = 0 # 0=loading | "TEXT"=ok | None=error |
         search_term = arguments.get("search_term", "").strip()
         if not search_term:
-            return "I could not find any results", "Error: Search term was not provided"
+            return "Error: Search term was not provided"
 
         GLib.idle_add(self.start_work, search_term, bot_message)
         while self.result == 0:
             continue
 
         if self.result:
-            return None, self.result
-        return "I could not find any results", 'An error occurred'
+            return self.result
+        return "Error: No results found"
 
 class Terminal(Base):
     display_name:str = _('Terminal')
@@ -128,9 +128,9 @@ class Terminal(Base):
     global_page = None
     current_commands = []
 
-    def run(self, arguments, messages, bot_message) -> tuple:
+    def run(self, arguments, messages, bot_message) -> str:
         if not arguments.get('command'):
-            return "I could not figure out what you want me to run", "Error: No command was provided"
+            return "Error: No command was provided"
 
         self.current_commands = [
             'clear',
@@ -155,7 +155,7 @@ class Terminal(Base):
         while self.waiting_terminal:
             continue
 
-        return "I ran the command successfully!", '```\n{}\n```'.format(self.global_page.get_text())
+        return '```\n{}\n```'.format(self.global_page.get_text())
 
 class BackgroundRemover(Base):
     display_name:str = _('Background Remover')
@@ -230,9 +230,9 @@ class BackgroundRemover(Base):
                 continue
 
             if self.status == 1:
-                return "Background removed successfully!", "Successful"
+                return "Background removed successfully"
             else:
-                return "Sorry, an error occurred", "An error occurred"
+                return "An error occurred"
         else:
-            return "Please provide an image and try again!", "Error: User didn't attach an image"
-        return "Sorry, an error occurred", "Error: Couldn't remove the background"
+            return "Error: User didn't attach an image"
+        return "Error: Couldn't remove the background"

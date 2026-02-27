@@ -180,7 +180,7 @@ class BaseInstance:
 
                 for call in tool_calls:
                     selected_tool = available_tools.get(call.function.name)
-                    message_response, tool_response = selected_tool.run(
+                    tool_response = selected_tool.run(
                         call.function.arguments,
                         messages,
                         bot_message
@@ -211,9 +211,6 @@ class BaseInstance:
                         SQL.insert_or_update_attachment(bot_message, attachment)
                     GLib.idle_add(add_attachment)
 
-                    if message_response:
-                        bot_message.block_container.set_content(str(message_response))
-                        break
         except ollama.ResponseError as e:
             logger.error(e)
             if e.status_code == 401:

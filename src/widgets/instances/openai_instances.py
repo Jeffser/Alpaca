@@ -126,7 +126,6 @@ class BaseInstance:
 
     def use_tools(self, bot_message, model:str, available_tools:dict):
         chat, messages = self.prepare_chat(bot_message, model)
-        generate_message = True
 
         if chat.chat_id and chat.get_name().startswith(_("New Chat")):
             threading.Thread(
@@ -139,7 +138,6 @@ class BaseInstance:
                 daemon=True
             ).start()
 
-        message_response = ''
         try:
             completion = self.client.chat.completions.create(
                 model=model,
@@ -153,8 +151,7 @@ class BaseInstance:
                         arguments = json.loads(call.function.arguments)
                         
                         if available_tools.get(call.function.name):
-                            message_response, tool_response = available_tools.get(call.function.name).run(arguments, messages, bot_message)
-                            generate_message = generate_message and not bool(message_response)
+                            tool_response = available_tools.get(call.function.name).run(arguments, messages, bot_message)
 
                             attachment_content = []
 
@@ -196,11 +193,7 @@ class BaseInstance:
             )
             logger.error(e)
 
-        if generate_message:
-            self.generate_response(bot_message, chat, messages, model)
-        else:
-            bot_message.block_container.set_content(str(message_response))
-            bot_message.finish_generation('')
+        self.generate_response(bot_message, chat, messages, model)
 
     def generate_response(self, bot_message, chat, messages:list, model:str):
         if 'no-system-messages' in self.limitations:
