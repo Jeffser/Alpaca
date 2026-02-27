@@ -110,6 +110,7 @@ class InstancePreferencesDialog(Adw.Dialog):
             val = self.instance.properties.get('keep_alive', -1)
             if val > 0:
                 selected_index = 0
+                self.keep_alive_preset_changed(self.keep_alive_selector_el)
             elif val < 0:
                 selected_index = 1
             else:
