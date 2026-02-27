@@ -207,7 +207,7 @@ mermaid.initialize({{ startOnLoad: true }});
                     runtime_code = runtime_code.replace('"', '\\"')
                     script.append(command.format(script=runtime_code))
             else:
-                runtime_code="ssh -t {}@{} -- '{}'".format(
+                runtime_code="ssh -t {}@{} -- {}".format(
                     settings.get_value('activity-terminal-username').unpack() or os.getenv('USER'),
                     settings.get_value('activity-terminal-ip').unpack() or '127.0.0.1',
                     runtime_code.replace("'", "\\'")
