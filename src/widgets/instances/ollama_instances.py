@@ -145,10 +145,10 @@ class BaseInstance:
         thought = ""
         content = ""
         try:
+            bot_message.block_container.clear()
             while chat.busy:
                 params['messages'] = messages
                 response = self.client.chat(**params)
-                bot_message.block_container.clear()
                 for chunk in response:
                     if chunk.message.thinking:
                         bot_message.update_thinking(chunk.message.thinking)

@@ -126,36 +126,69 @@ class Terminal(Base):
     required_libraries:list = ['gi.repository.Vte']
 
     global_page = None
-    current_commands = []
 
     def run(self, arguments, messages, bot_message) -> str:
         if not arguments.get('command'):
             return "Error: No command was provided"
 
-        self.current_commands = [
-            'clear',
-            'echo -e "🦙 {}" | fold -s -w "$(tput cols)"'.format(arguments.get('explanation'), _('No explanation was provided')),
-            'read -e -i "{}" cmd'.format(arguments.get('command').replace('"', '\\"')),
-            'clear',
-            'eval "$cmd"'
-        ]
+        self.waiting_confirmation = True
+        self.current_command = ""
+
+        def dialog_confirmation(cmd:str, confirmation:bool):
+            self.current_command = cmd if confirmation else ""
+            self.waiting_confirmation = False
+
+        options = {
+            _('Cancel'): {
+                'callback': lambda cmd: dialog_confirmation(cmd, False)
+            },
+            _('Run'): {
+                'appearance': 'suggested',
+                'callback': lambda cmd: dialog_confirmation(cmd, True),
+                'default': True
+            }
+        }
+        entry_dialog = dialog.Entry(
+            heading=_("Command Execution"),
+            body=arguments.get('explanation'),
+            close_response=list(options.keys())[0],
+            options=options,
+            entries={
+                'placeholder': _("Command"),
+                'css': ['black_background'],
+                'text': arguments.get('command')
+            }
+        )
+        GLib.idle_add(entry_dialog.show, bot_message.get_root())
+
+        while self.waiting_confirmation:
+            continue
+
+        if not self.current_command:
+            return 'The user chose not to execute the command'
+
+        self.waiting_confirmation = True
 
         if not self.global_page or not self.global_page.get_root():
             self.global_page = activities.Terminal(
                 language='auto',
-                code_getter=lambda: ';'.join(self.current_commands),
-                close_callback=lambda: setattr(self, 'waiting_terminal', False)
+                code_getter=lambda: ';'.join(['clear', self.current_command]),
+                close_callback=lambda: setattr(self, 'waiting_confirmation', False)
             )
             chat_element = bot_message.get_ancestor(chat.Chat)
             GLib.idle_add(activities.show_activity, self.global_page, bot_message.get_root(), not chat_element or not chat_element.chat_id)
 
-        self.waiting_terminal = True
         self.global_page.run()
 
-        while self.waiting_terminal:
+        while self.waiting_confirmation:
             continue
 
-        return '```\n{}\n```'.format(self.global_page.get_text())
+        result_text = self.global_page.get_text().strip('\n').split('\n')[:-1]
+
+        if len(result_text) == 0:
+            return "The command did not return any text"
+
+        return '```\n{}\n```'.format('\n'.join(result_text))
 
 class BackgroundRemover(Base):
     display_name:str = _('Background Remover')
