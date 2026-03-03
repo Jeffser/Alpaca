@@ -69,18 +69,21 @@ template $AlpacaCode: Gtk.Box {
 
   Gtk.Separator {}
 
-  GtkSource.View {
-    auto-indent: true;
-    indent-width: 4;
-    show-line-numbers: true;
-    editable: false;
-    top-margin: 6;
-    bottom-margin: 6;
-    left-margin: 12;
-    right-margin: 12;
-    styles [
-      "code_block"
-    ]
-    buffer: GtkSource.Buffer buffer {};
+  Gtk.ScrolledWindow {
+    vscrollbar-policy: never;
+    child: GtkSource.View {
+      auto-indent: true;
+      indent-width: 4;
+      show-line-numbers: true;
+      editable: false;
+      top-margin: 6;
+      bottom-margin: 6;
+      left-margin: 12;
+      right-margin: 12;
+      styles [
+        "code_block"
+      ]
+      buffer: GtkSource.Buffer buffer {};
+    };
   }
 }
