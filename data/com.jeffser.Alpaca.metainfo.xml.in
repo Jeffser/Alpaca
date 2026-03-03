@@ -89,6 +89,22 @@
   <url type="contribute">https://github.com/Jeffser/Alpaca/blob/main/CONTRIBUTING.md</url>
   <url type="vcs-browser">https://github.com/Jeffser/Alpaca</url>
   <releases>
+    <release version="9.2.1" date="2026-03-03">
+      <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/9.2.1</url>
+      <description>
+        <p>New</p>
+        <ul>
+          <li>Added horizontal scrolling to code blocks</li>
+          <li>Improvements to terminal activity and tool</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Fixed OpenAI instances not working sometimes</li>
+          <li>Fixed 'Keep Alive' option not being enabled on Ollama instances</li>
+          <li>Fixed SSH not working as expected when using the terminal tool</li>
+        </ul>
+      </description>
+    </release>
     <release version="9.2.0" date="2026-02-18">
       <url type="details">https://github.com/Jeffser/Alpaca/releases/tag/9.2.0</url>
       <description>
