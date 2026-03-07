@@ -55,14 +55,14 @@ class BaseInstance:
             self.client = openai.OpenAI(**arguments)
 
     def get_active_lore(self, messages:list, lorebook:dict) -> str:
-        if len(lorebook.get('entries', [])) == 0:
+        if len(lorebook.get('entries',[])) == 0:
             return
         messages_to_scan = messages[-lorebook.get('scan_depth', 100):]
         messages_str = '\n'.join([m.get('content') for m in messages_to_scan if m.get('role') != 'system'])
-        active_lore_content = []
+        active_lore_content =[]
 
         for entry in lorebook.get('entries'):
-            for key in entry.get('keys', []):
+            for key in entry.get('keys',[]):
                 clean_key = key.strip()
                 if clean_key:
                     pattern = rf"\b{re.escape(clean_key)}\b"
@@ -92,7 +92,7 @@ class BaseInstance:
         character_dict = SQL.get_model_preferences(model).get('character', {})
         if character_dict.get('data', {}).get('extensions', {}).get('com.jeffser.Alpaca', {}).get('enabled', False):
             character_book = character_dict.get('data', {}).get('character_book', {})
-            if len(character_book.get('entries', [])) > 0:
+            if len(character_book.get('entries',[])) > 0:
                 lore_message = {
                     'role': 'system',
                     'content': self.get_active_lore(messages, character_book)
@@ -153,17 +153,17 @@ class BaseInstance:
                         if available_tools.get(call.function.name):
                             tool_response = available_tools.get(call.function.name).run(arguments, messages, bot_message)
 
-                            attachment_content = []
+                            attachment_content =[]
 
                             if len(arguments) > 0:
-                                attachment_content += [
+                                attachment_content +=[
                                     '## {}'.format(_('Arguments')),
                                     '| {} | {} |'.format(_('Argument'), _('Value')),
                                     '| --- | --- |'
                                 ]
-                                attachment_content += ['| {} | {} |'.format(k, v) for k, v in arguments.items()]
+                                attachment_content +=['| {} | {} |'.format(k, v) for k, v in arguments.items()]
 
-                            attachment_content += [
+                            attachment_content +=[
                                 '## {}'.format(_('Result')),
                                 tool_response
                             ]
@@ -250,7 +250,7 @@ class BaseInstance:
             title: str
             emoji: str = ""
 
-        messages = [
+        messages =[
             {"role": "user" if 'no-system-messages' in self.limitations else "system", "content": TITLE_GENERATION_PROMPT_OPENAI},
             {"role": "user", "content": "Generate a title for this prompt:\n{}".format(prompt)}
         ]
@@ -297,7 +297,7 @@ class BaseInstance:
     def get_title_model(self):
         local_models = self.get_local_models()
         if len(local_models) > 0:
-            if self.properties.get('title_model') and not self.properties.get('title_model') in [m.get('name') for m in local_models]:
+            if self.properties.get('title_model') and not self.properties.get('title_model') in[m.get('name') for m in local_models]:
                 self.properties['title_model'] = local_models[0].get('name')
             return self.properties.get('title_model')
 
@@ -306,7 +306,7 @@ class BaseInstance:
             if not self.available_models or len(self.available_models) == 0:
                 self.available_models = {}
                 for m in self.client.models.list():
-                    if all(s not in m.id.lower() for s in ['embedding', 'davinci', 'dall', 'tts', 'whisper', 'image']):
+                    if all(s not in m.id.lower() for s in['embedding', 'davinci', 'dall', 'tts', 'whisper', 'image']):
                         self.available_models[m.id] = {}
             return self.available_models
         except Exception as e:
@@ -326,7 +326,7 @@ class BaseInstance:
         GLib.timeout_add(5000, lambda: model.update_progressbar(-1) and False)
 
     def get_local_models(self) -> list:
-        local_models = []
+        local_models =[]
         for model in SQL.get_online_instance_model_list(self.instance_id):
             local_models.append({'name': model})
         return local_models
@@ -360,8 +360,8 @@ class Gemini(BaseInstance):
             if not self.available_models or len(self.available_models) == 0:
                 self.available_models = {}
                 response = requests.get('https://generativelanguage.googleapis.com/v1beta/models?key={}'.format(self.properties.get('api')))
-                for model in response.json().get('models', []):
-                    if "generateContent" in model.get("supportedGenerationMethods", []) and 'deprecated' not in model.get('description', ''):
+                for model in response.json().get('models',[]):
+                    if isinstance(model, dict) and "generateContent" in model.get("supportedGenerationMethods",[]) and 'deprecated' not in model.get('description', ''):
                         model['name'] = model.get('name').removeprefix('models/')
                         self.available_models[model.get('name')] = model
             return self.available_models
@@ -375,13 +375,13 @@ class Gemini(BaseInstance):
             logger.error(e)
             if self.row:
                 self.row.get_parent().unselect_all()
-        return {}
+            return {}
 
     def get_model_info(self, model_name:str) -> dict:
         try:
             response = requests.get('https://generativelanguage.googleapis.com/v1beta/models/{}?key={}'.format(model_name, self.properties.get('api')))
             data = response.json()
-            data['capabilities'] = ['completion', 'vision']
+            data['capabilities'] =['completion', 'vision']
             return data
         except Exception as e:
             logger.error(e)
@@ -403,13 +403,12 @@ class Together(BaseInstance):
                         'authorization': 'Bearer {}'.format(self.properties.get('api'))
                     }
                 )
-                for model in response.json():
-                    if model.get('id') and model.get('type') == 'chat':
-                        self.available_models[model.get('id')] = {'display_name': model.get('display_name')}
+                data = response.json()
+                if isinstance(data, list):
+                    for model in data:
+                        if isinstance(model, dict) and model.get('id') and model.get('type') == 'chat':
+                            self.available_models[model.get('id')] = {'display_name': model.get('display_name')}
             return self.available_models
-
-
-            return models
         except Exception as e:
             dialog.simple_error(
                 parent = self.row.get_root() if self.row else None,
@@ -420,7 +419,7 @@ class Together(BaseInstance):
             logger.error(e)
             if self.row:
                 self.row.get_parent().unselect_all()
-        return {}
+            return {}
 
 class Venice(BaseInstance):
     instance_type = 'venice'
@@ -466,7 +465,7 @@ class OpenRouter(BaseInstance):
             if not self.available_models or len(self.available_models) == 0:
                 self.available_models = {}
                 response = requests.get('https://openrouter.ai/api/v1/models')
-                for model in response.json().get('data', []):
+                for model in response.json().get('data',[]):
                     if model.get('id'):
                         self.available_models[model.get('id')] = {'display_name': model.get('name')}
 
@@ -506,7 +505,7 @@ class Fireworks(BaseInstance):
                     }
                 )
                 for model in response.json().get('data', []):
-                    if model.get('id') and 'chat' in model.get('capabilities', []):
+                    if model.get('id') and 'chat' in model.get('capabilities',[]):
                         self.available_models[model.get('id')] = {'display_name': model.get('name')}
 
             return self.available_models
@@ -538,7 +537,7 @@ class LambdaLabs(BaseInstance):
                         'Authorization': f'Bearer {self.properties.get("api")}'
                     }
                 )
-                for model in response.json().get('data', []):
+                for model in response.json().get('data',[]):
                     if model.get('id'):
                         self.available_models[model.get('id')] = {'display_name': model.get('name')}
 
@@ -616,7 +615,7 @@ class CompactifAI(BaseInstance):
                         'Authorization': f'Bearer {self.properties.get("api")}'
                     }
                 )
-                for model in response.json().get('data', []):
+                for model in response.json().get('data',[]):
                     if model.get('id'):
                         self.available_models[model.get('id')] = {
                             'display_name': model.get('name', model.get('id'))
@@ -639,6 +638,21 @@ class Grok(BaseInstance):
     instance_type_display = 'Grok'
     instance_url = 'https://api.x.ai/v1'
     description = _('Grok instance from X.ai')
+
+class Sarvam(BaseInstance):
+    instance_type = 'sarvam'
+    instance_type_display = 'Sarvam AI'
+    instance_url = 'https://api.sarvam.ai/v1/'
+    description = _('Sarvam AI models')
+
+    def start(self):
+        if not self.client:
+            arguments = {
+                'api_key': self.properties.get('api') or 'dummy',
+                'base_url': self.properties.get('url').strip(),
+                'default_headers': {'API-Subscription-Key': self.properties.get('api')}
+            }
+            self.client = openai.OpenAI(**arguments)
 
 class GenericOpenAI(BaseInstance):
     instance_type = 'openai:generic'
