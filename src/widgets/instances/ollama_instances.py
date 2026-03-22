@@ -297,7 +297,7 @@ class BaseInstance:
                 chat.is_template
             )
         except Exception as e:
-            logger.error(e)
+            logger.exception(e)
 
     def get_default_model(self):
         local_models = self.get_local_models()
