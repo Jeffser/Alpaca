@@ -387,7 +387,7 @@ IN_SNAP = bool(os.getenv("FLATPAK_ID"))
 
 TITLE_GENERATION_PROMPT_OLLAMA = (
     "You are an assistant that generates short chat titles based on the "
-    "prompt. If you want to, you can add a single emoji."
+    "prompt. If you want to, you can add a single emoji. Respond with a single JSON object."
 )
 TITLE_GENERATION_PROMPT_OPENAI = (
     "You are an assistant that generates short chat titles based on the first "
