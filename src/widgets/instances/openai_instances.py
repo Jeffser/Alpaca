@@ -338,6 +338,7 @@ class BaseInstance:
     def get_model_info(self, model_name:str) -> dict:
         return {}
 
+
 class ChatGPT(BaseInstance):
     instance_type = 'chatgpt'
     instance_type_display = 'OpenAI ChatGPT'
@@ -407,9 +408,6 @@ class Together(BaseInstance):
                     if model.get('id') and model.get('type') == 'chat':
                         self.available_models[model.get('id')] = {'display_name': model.get('display_name')}
             return self.available_models
-
-
-            return models
         except Exception as e:
             dialog.simple_error(
                 parent = self.row.get_root() if self.row else None,
@@ -640,6 +638,24 @@ class Grok(BaseInstance):
     instance_url = 'https://api.x.ai/v1'
     description = _('Grok instance from X.ai')
 
+class SarvamAI(BaseInstance):
+    instance_type = 'sarvam'
+    instance_type_display = 'Sarvam AI'
+    instance_url = 'https://api.sarvam.ai/'
+    description = _('Sarvam AI instance')
+
+    def start(self):
+        """
+        Overrides start to pass the custom 'api-subscription-key' header 
+        required by Sarvam API for general API interactions.
+        """
+        if not self.client:
+            self.client = openai.OpenAI(
+                api_key=self.properties.get('api'),
+                base_url=self.properties.get('url').strip(),
+                default_headers={"api-subscription-key": self.properties.get('api')}
+            )
+
 class GenericOpenAI(BaseInstance):
     instance_type = 'openai:generic'
     instance_type_display = _('OpenAI Compatible Instance')
@@ -649,3 +665,4 @@ class GenericOpenAI(BaseInstance):
     def __init__(self, instance_id:str, properties:dict):
         self.instance_url = properties.get('url', '')
         super().__init__(instance_id, properties)
+
