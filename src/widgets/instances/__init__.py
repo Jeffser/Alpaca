@@ -75,7 +75,10 @@ class InstancePreferencesDialog(Adw.Dialog):
                     port = int(self.instance.properties.get('url').split(':')[-1])
                 except:
                     port = 11435
-                self.port_el.connect('notify::value', lambda el, gparam: self.url_el.set_text('http://127.0.0.1:{}'.format(int(el.get_value()))))
+                    
+                self.port_el.connect('notify::value', lambda el, gparam: self.url_el.set_text(self.url_el.get_text().rsplit(':', 1)[0]+':{}'.format(int(el.get_value()))))
+                self.expose_el.connect('notify::active', lambda el, gparam: self.url_el.set_text('http://0.0.0.0:{}'.format(int(self.port_el.get_value())) if self.expose_el.get_active() else 'http://127.0.0.1:{}'.format(int(self.port_el.get_value()))))
+                
                 self.port_el.set_value(port)
                 self.url_el.set_visible(False)
             else:
