@@ -279,7 +279,7 @@ class AttachmentCreator(Gtk.ScrolledWindow):
         attachment = attachments.Attachment(
             file_id='-1',
             file_name=name,
-            file_type=code if is_code else 'plain_text',
+            file_type='code' if is_code else 'plain_text',
             file_content=self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
         )
         self.get_root().get_application().get_main_window().global_footer.attachment_container.add_attachment(attachment)
