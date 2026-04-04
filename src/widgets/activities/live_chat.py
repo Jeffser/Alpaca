@@ -136,7 +136,7 @@ class LiveChat(Adw.Bin):
         tries = 0
         while tries < 6:
             if len(voice.library_waiting_queue) == 0:
-                self.global_footer.microphone_button.button.set_active(True)
+                GLib.idle_add(self.global_footer.microphone_button.button.set_active, True)
                 break
             else:
                 tries += 1
