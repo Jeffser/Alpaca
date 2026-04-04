@@ -1,7 +1,7 @@
 # inline_picture.py
 
 from gi.repository import Gtk, Gio, Adw, GLib, Gdk, GObject
-import logging, base64
+import logging, base64, re
 from .. import dialog, activities, attachments
 
 logger = logging.getLogger(__name__)
