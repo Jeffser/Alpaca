@@ -87,7 +87,7 @@ class Code(Gtk.Box):
 
         language = self.get_language()
         filename = 'script'
-        for d in language_properties:
+        for d in CODE_LANGUAGE_PROPERTIES:
             if d.get('id') == language.lower():
                 filename = d.get('filename')
 
