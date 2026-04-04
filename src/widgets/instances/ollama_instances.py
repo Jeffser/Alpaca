@@ -245,7 +245,7 @@ class BaseInstance:
                 )
                 logger.error(e)
             if self.row:
-                self.row.get_parent().unselect_all()
+                GLib.idle_add(self.row.get_parent().unselect_all)
 
         if not self.properties.get('show_response_metadata'):
             metadata_string = None
@@ -352,7 +352,7 @@ class BaseInstance:
                 )
                 logger.error(e)
             if self.row:
-                self.row.get_parent().unselect_all()
+                GLib.idle_add(self.row.get_parent().unselect_all)
         return []
 
     def get_available_models(self) -> dict:
@@ -732,7 +732,5 @@ class OllamaCloud(BaseInstance):
                 )
                 logger.error(e)
             if self.row:
-                self.row.get_parent().unselect_all()
+                GLib.idle_add(self.row.get_parent().unselect_all)
         return {}
-
-
