@@ -151,8 +151,11 @@ class WebBrowser(WebKit.WebView):
             try:
                 with tempfile.NamedTemporaryFile("w", suffix=".html", delete=False) as tmp_file:
                     tmp_file.write(raw_html)
-                    markdown_text = md.convert(tmp_file.name).text_content
-                    markdown_text = markdown_text.replace('![](data:image/svg+xml;base64...)', '')
+                    temp_name = tmp_file.name
+                markdown_text = md.convert(temp_name).text_content
+                markdown_text = markdown_text.replace('![](data:image/svg+xml;base64...)', '')
+                if os.path.exists(temp_name):
+                    os.remove(temp_name)
             except Exception as e:
                 print(e)
             save_func(markdown_text)
