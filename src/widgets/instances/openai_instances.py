@@ -242,7 +242,7 @@ class BaseInstance:
                 )
                 logger.error(e)
                 if self.row:
-                    self.row.get_parent().unselect_all()
+                    GLib.idle_add(self.row.get_parent().unselect_all)
         bot_message.finish_generation()
 
     def generate_chat_title(self, chat, prompt:str, fallback_model:str):
@@ -318,7 +318,7 @@ class BaseInstance:
             )
             logger.error(e)
             if self.row:
-                self.row.get_parent().unselect_all()
+                GLib.idle_add(self.row.get_parent().unselect_all)
             return {}
 
     def pull_model(self, model):
@@ -375,7 +375,7 @@ class Gemini(BaseInstance):
             )
             logger.error(e)
             if self.row:
-                self.row.get_parent().unselect_all()
+                GLib.idle_add(self.row.get_parent().unselect_all)
         return {}
 
     def get_model_info(self, model_name:str) -> dict:
@@ -417,7 +417,7 @@ class Together(BaseInstance):
             )
             logger.error(e)
             if self.row:
-                self.row.get_parent().unselect_all()
+                GLib.idle_add(self.row.get_parent().unselect_all)
         return {}
 
 class Venice(BaseInstance):
@@ -478,7 +478,7 @@ class OpenRouter(BaseInstance):
             )
             logger.error(e)
             if self.row:
-                self.row.get_parent().unselect_all()
+                GLib.idle_add(self.row.get_parent().unselect_all)
             return {}
 
 class Qwen(BaseInstance):
@@ -517,7 +517,7 @@ class Fireworks(BaseInstance):
             )
             logger.error(e)
             if self.row:
-                self.row.get_parent().unselect_all()
+                GLib.idle_add(self.row.get_parent().unselect_all)
             return {}
 
 class LambdaLabs(BaseInstance):
@@ -550,7 +550,7 @@ class LambdaLabs(BaseInstance):
             )
             logger.error(e)
             if self.row:
-                self.row.get_parent().unselect_all()
+                GLib.idle_add(self.row.get_parent().unselect_all)
             return {}
 
 class Cerebras(BaseInstance):
@@ -629,7 +629,7 @@ class CompactifAI(BaseInstance):
             )
             logger.error(e)
             if self.row:
-                self.row.get_parent().unselect_all()
+                GLib.idle_add(self.row.get_parent().unselect_all)
             return {}
 
 class Grok(BaseInstance):
@@ -661,4 +661,3 @@ class GenericOpenAI(BaseInstance):
     def __init__(self, instance_id:str, properties:dict):
         self.instance_url = properties.get('url', '')
         super().__init__(instance_id, properties)
-
