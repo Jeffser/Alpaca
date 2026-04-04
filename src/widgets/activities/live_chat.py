@@ -4,7 +4,7 @@ from gi.repository import Gtk, Gio, Adw, GLib, Gdk
 from ...constants import IN_FLATPAK, data_dir, REMBG_MODELS
 from .. import dialog, attachments, models, chat, message, instances, voice
 from ...sql_manager import generate_uuid, prettify_model_name, Instance as SQL
-import base64, os, threading, datetime
+import base64, os, threading, datetime ,time
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/activities/live_chat.ui')
 class LiveChat(Adw.Bin):
