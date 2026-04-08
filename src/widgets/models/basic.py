@@ -358,24 +358,30 @@ class BasicModelButton(Gtk.Button):
         #prc:float = -1 or 0 to 1
 
         if prc == -1:
-            GLib.idle_add(self.progressbar.set_visible, False)
-            if self.pulling_dialog and self.pulling_dialog.get_root():
-                self.pulling_dialog.close()
-            if self.row:
-                append_to_model_selector(self.row)
+            def finish_progress():
+                self.progressbar.set_visible(False)
+                if self.pulling_dialog and self.pulling_dialog.get_root():
+                    self.pulling_dialog.close()
+                if self.row:
+                    append_to_model_selector(self.row)
+            GLib.idle_add(finish_progress)
             if self.instance:
                 self.data = self.instance.get_model_info(self.get_name())
         else:
             GLib.idle_add(self.progressbar.set_visible, True)
 
         if prc == 1:
-            GLib.idle_add(self.progressbar.pulse)
-            if self.pulling_dialog:
-                GLib.idle_add(self.pulling_dialog.progressbar.pulse)
+            def pulse_progress():
+                self.progressbar.pulse()
+                if self.pulling_dialog:
+                    self.pulling_dialog.progressbar.pulse()
+            GLib.idle_add(pulse_progress)
         elif prc > 0 and prc < 1:
-            GLib.idle_add(self.progressbar.set_fraction, prc)
-            if self.pulling_dialog:
-                GLib.idle_add(self.pulling_dialog.progressbar.set_fraction, prc)
+            def set_progress():
+                self.progressbar.set_fraction(prc)
+                if self.pulling_dialog:
+                    self.pulling_dialog.progressbar.set_fraction(prc)
+            GLib.idle_add(set_progress)
 
     def append_progress_line(self, line:str=""):
         if line and line not in self.progress_lines:
