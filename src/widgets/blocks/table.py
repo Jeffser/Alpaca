@@ -37,7 +37,9 @@ class Row(GObject.GObject):
             self.raw_values.append(value)
 
     def get_column_value(self, index):
-        return self.values[index]
+        if index < len(self.values):
+            return self.values[index]
+        return ""
 
 @Gtk.Template(resource_path='/com/jeffser/Alpaca/widgets/blocks/table.ui')
 class Table(Gtk.Box):
