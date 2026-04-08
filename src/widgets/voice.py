@@ -85,7 +85,7 @@ class DictateButton(Gtk.Stack):
         if not models.common.tts_model_exists(voice):
             tts_path = models.common.get_tts_path()
             if tts_path:
-                model_element = message_element.get_root().get_application().get_main_window().model_manager.create_tts_model(os.path.join(tts_path, voice + '.pt'))
+                GLib.idle_add(message_element.get_root().get_application().get_main_window().model_manager.create_tts_model, os.path.join(tts_path, voice + '.pt'))
 
         # Generate TTS_ENGINE if needed
         if not tts_engine or tts_engine_language != voice[0]:
