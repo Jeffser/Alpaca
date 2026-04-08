@@ -59,7 +59,7 @@ class AlpacaSearchProvider:
                 app_service.Open(':'.join(identifier.split(':')[1:]))
             elif identifier.split(':')[0] == 'ask':
                 app_service.Ask(':'.join(identifier.split(':')[1:]))
-        except:
+        except Exception:
             argv = ['alpaca', self.opts[identifier.split(':')[0]]['option'], ':'.join(identifier.split(':')[1:])]
             (pid, _stdin, _stdout, _stderr) = GLib.spawn_async(
                 argv,
