@@ -652,6 +652,12 @@ class SarvamAI(BaseInstance):
                 default_headers={"api-subscription-key": self.properties.get('api')}
             )
 
+class AtlasCloud(BaseInstance):
+    instance_type = 'atlascloud'
+    instance_type_display = 'AtlasCloud'
+    instance_url = 'https://api.atlascloud.ai/v1'
+    description = _('AtlasCloud OpenAI-compatible API')
+    
 class GenericOpenAI(BaseInstance):
     instance_type = 'openai:generic'
     instance_type_display = _('OpenAI Compatible Instance')
