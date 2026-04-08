@@ -143,7 +143,10 @@ class OllamaManager(Adw.Dialog):
                 dctx = zstd.ZstdDecompressor()
                 with dctx.stream_reader(f) as reader:
                     with tarfile.open(fileobj=reader, mode="r|") as tar:
-                        tar.extractall(path=out_dir)
+                        for member in tar:
+                            if member.name.startswith('/') or '..' in member.name:
+                                continue
+                            tar.extract(member, path=out_dir)
 
             archive.unlink(missing_ok=True)
             return True
@@ -176,7 +179,10 @@ class OllamaManager(Adw.Dialog):
                 dctx = zstd.ZstdDecompressor()
                 with dctx.stream_reader(f) as reader:
                     with tarfile.open(fileobj=reader, mode="r|") as tar:
-                        tar.extractall(path=temp_dir)
+                        for member in tar:
+                            if member.name.startswith('/') or '..' in member.name:
+                                continue
+                            tar.extract(member, path=temp_dir)
 
             shutil.copytree(
                 temp_dir,
