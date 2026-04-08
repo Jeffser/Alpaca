@@ -383,13 +383,17 @@ class BaseInstance:
                 model=model.get_name(),
                 stream=True
             )
+            last_update = 0
             for chunk in response:
                 if not model.get_root():
                     break
                 if chunk.status:
                     model.append_progress_line(chunk.status)
                 if chunk.total and chunk.completed:
-                    model.update_progressbar(chunk.completed / chunk.total)
+                    current_time = time.time()
+                    if current_time - last_update > 0.05:
+                        model.update_progressbar(chunk.completed / chunk.total)
+                        last_update = current_time
                 if chunk.status == 'success':
                     model.update_progressbar(-1)
                     break
@@ -418,11 +422,15 @@ class BaseInstance:
                 parameters=data.get('parameters'),
                 stream=True
             )
+            last_update = 0
             for chunk in response:
                 if chunk.status:
                     model.append_progress_line(chunk.status)
                 if chunk.total and chunk.completed:
-                    model.update_progressbar(chunk.completed / chunk.total)
+                    current_time = time.time()
+                    if current_time - last_update > 0.05:
+                        model.update_progressbar(chunk.completed / chunk.total)
+                        last_update = current_time
                 if chunk.status == 'success':
                     model.update_progressbar(-1)
                     break
