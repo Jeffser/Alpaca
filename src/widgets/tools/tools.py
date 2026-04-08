@@ -148,18 +148,21 @@ class Terminal(Base):
                 'default': True
             }
         }
-        entry_dialog = dialog.Entry(
-            heading=_("Command Execution"),
-            body=arguments.get('explanation'),
-            close_response=list(options.keys())[0],
-            options=options,
-            entries={
-                'placeholder': _("Command"),
-                'css': ['black_background'],
-                'text': arguments.get('command')
-            }
-        )
-        GLib.idle_add(entry_dialog.show, bot_message.get_root())
+        def show_entry_dialog():
+            entry_dialog = dialog.Entry(
+                heading=_("Command Execution"),
+                body=arguments.get('explanation'),
+                close_response=list(options.keys())[0],
+                options=options,
+                entries={
+                    'placeholder': _("Command"),
+                    'css': ['black_background'],
+                    'text': arguments.get('command')
+                }
+            )
+            entry_dialog.show(bot_message.get_root())
+
+        GLib.idle_add(show_entry_dialog)
 
         while self.waiting_confirmation:
             continue
@@ -169,21 +172,29 @@ class Terminal(Base):
 
         self.waiting_confirmation = True
 
-        if not self.global_page or not self.global_page.get_root():
-            self.global_page = activities.Terminal(
-                language='auto',
-                code_getter=lambda: ';'.join(['clear', self.current_command]),
-                close_callback=lambda: setattr(self, 'waiting_confirmation', False)
-            )
-            chat_element = bot_message.get_ancestor(chat.Chat)
-            GLib.idle_add(activities.show_activity, self.global_page, bot_message.get_root(), not chat_element or not chat_element.chat_id)
+        def setup_and_run_terminal():
+            if not self.global_page or not self.global_page.get_root():
+                self.global_page = activities.Terminal(
+                    language='auto',
+                    code_getter=lambda: ';'.join(['clear', self.current_command]),
+                    close_callback=lambda: setattr(self, 'waiting_confirmation', False)
+                )
+                chat_element = bot_message.get_ancestor(chat.Chat)
+                activities.show_activity(self.global_page, bot_message.get_root(), not chat_element or not chat_element.chat_id)
+            self.global_page.run()
 
-        self.global_page.run()
+        GLib.idle_add(setup_and_run_terminal)
 
         while self.waiting_confirmation:
             continue
 
-        result_text = self.global_page.get_text().strip('\n').split('\n')[:-1]
+        result_queue = []
+        def fetch_text():
+            result_queue.append(self.global_page.get_text().strip('\n').split('\n')[:-1])
+        GLib.idle_add(fetch_text)
+        while not result_queue:
+            continue
+        result_text = result_queue[0]
 
         if len(result_text) == 0:
             return "The command did not return any text"
@@ -212,13 +223,15 @@ class BackgroundRemover(Base):
                 return
             self.image_requested = attachments.extract_image(file.get_path(), root.settings.get_value('max-image-size').unpack())
 
-        file_filter = Gtk.FileFilter()
-        file_filter.add_pixbuf_formats()
-        dialog.simple_file(
-            parent = root,
-            file_filters = [file_filter],
-            callback = on_attachment
-        )
+        def show_file_dialog():
+            file_filter = Gtk.FileFilter()
+            file_filter.add_pixbuf_formats()
+            dialog.simple_file(
+                parent = root,
+                file_filters = [file_filter],
+                callback = on_attachment
+            )
+        GLib.idle_add(show_file_dialog)
 
         while self.image_requested == 0:
             continue
@@ -246,18 +259,19 @@ class BackgroundRemover(Base):
         image_b64 = self.get_latest_image(messages, bot_message.get_root())
         if image_b64:
             self.status = 0 # 0 waiting, 1 finished, 2 canceled / empty image
-            page = activities.BackgroundRemover(
-                save_func=lambda data, bm=bot_message: self.on_save(data, bm),
-                close_callback=self.on_close
-            )
-            chat_element = bot_message.get_ancestor(chat.Chat)
-            GLib.idle_add(
-                activities.show_activity,
-                page,
-                bot_message.get_root(),
-                not chat_element or not chat_element.chat_id
-            )
-            page.load_image(image_b64)
+            def setup_bg_remover():
+                page = activities.BackgroundRemover(
+                    save_func=lambda data, bm=bot_message: self.on_save(data, bm),
+                    close_callback=self.on_close
+                )
+                chat_element = bot_message.get_ancestor(chat.Chat)
+                activities.show_activity(
+                    page,
+                    bot_message.get_root(),
+                    not chat_element or not chat_element.chat_id
+                )
+                page.load_image(image_b64)
+            GLib.idle_add(setup_bg_remover)
 
             while self.status == 0:
                 continue
