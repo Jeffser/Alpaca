@@ -1,20 +1,59 @@
-# ollama_instances.py
+# openai_instances.py
 
-from gi.repository import Adw, Gtk, GLib
+from gi.repository import Adw, GLib
 
-import json, logging, os, shutil, subprocess, threading, re, signal, pwd, getpass, datetime, time, ollama
-from .ollama_manager import OllamaManager, get_latest_ollama_tag
+import openai, requests, json, logging, threading, re
+from pydantic import BaseModel
+
 from .. import dialog, tools, chat
-from ...ollama_models import OLLAMA_MODELS
-from ...constants import data_dir, cache_dir, TITLE_GENERATION_PROMPT_OLLAMA, OLLAMA_BINARY_PATH, CAN_SELF_MANAGE_OLLAMA, is_ollama_installed
-from ...sql_manager import generate_uuid, dict_to_metadata_string, Instance as SQL
+from ...sql_manager import generate_uuid, Instance as SQL
+from ...constants import MAX_TOKENS_TITLE_GENERATION, TITLE_GENERATION_PROMPT_OPENAI
 
 logger = logging.getLogger(__name__)
 
 # Base instance, don't use directly
 class BaseInstance:
+    instance_id = None
     description = None
-    process = None
+    limitations = ()
+
+    default_properties = {
+        'name': _('Instance'),
+        'api': '',
+        'max_tokens': 2048,
+        'override_parameters': True,
+        'temperature': 0.7,
+        'seed': 0,
+        'default_model': None,
+        'title_model': None
+    }
+
+    def __init__(self, instance_id:str, properties:dict):
+        self.row = None
+        self.instance_id = instance_id
+        self.available_models = None
+        self.properties = {}
+        for key in self.default_properties:
+            self.properties[key] = properties.get(key, self.default_properties.get(key))
+        if 'no-seed' in self.limitations and 'seed' in self.properties:
+            del self.properties['seed']
+        self.properties['url'] = self.instance_url
+
+        self.client = None
+
+    def stop(self):
+        self.client = None
+
+    def start(self):
+        if not self.client:
+            api_key = self.properties.get('api')
+            arguments = {
+                'api_key': api_key if api_key else 'NOKEY'
+            }
+            if self.instance_type != 'chatgpt':
+                arguments['base_url'] = self.properties.get('url').strip()
+
+            self.client = openai.OpenAI(**arguments)
 
     def get_active_lore(self, messages:list, lorebook:dict) -> str:
         if len(lorebook.get('entries', [])) == 0:
@@ -45,7 +84,7 @@ class BaseInstance:
                 GLib.idle_add(bot_message.get_root().global_footer.toggle_action_button, False)
             except:
                 pass
-        
+
             chat_element.busy = True
             GLib.idle_add(chat_element.set_visible_child_name, 'content')
 
@@ -83,6 +122,7 @@ class BaseInstance:
                 ),
                 daemon=True
             ).start()
+
         self.generate_response(bot_message, chat, messages, model)
 
     def use_tools(self, bot_message, model:str, available_tools:dict):
@@ -99,144 +139,102 @@ class BaseInstance:
                 daemon=True
             ).start()
 
-        self.generate_response(bot_message, chat, messages, model, available_tools=available_tools)
+        try:
+            completion = self.client.chat.completions.create(
+                model=model,
+                messages=messages,
+                tools=[v.get_metadata() for v in available_tools.values()]
+            )
+            if completion.choices[0] and completion.choices[0].message:
+                if completion.choices[0].message.tool_calls:
+                    for call in completion.choices[0].message.tool_calls:
+                        # Parse arguments once
+                        arguments = json.loads(call.function.arguments)
+                        
+                        if available_tools.get(call.function.name):
+                            tool_response = available_tools.get(call.function.name).run(arguments, messages, bot_message)
 
-    def generate_response(self, bot_message, chat, messages:list, model:str, available_tools:dict={}):
-        if self.properties.get('share_name', 0) > 0:
-            user_display_name = None
-            if self.properties.get('share_name') == 1:
-                user_display_name = getpass.getuser().title()
-            elif self.properties.get('share_name') == 2:
-                gecos_temp = pwd.getpwnam(getpass.getuser()).pw_gecos.split(',')
-                if len(gecos_temp) > 0:
-                    user_display_name = pwd.getpwnam(getpass.getuser()).pw_gecos.split(',')[0].title()
+                            attachment_content = []
 
-            if user_display_name:
-                messages.insert(0, {
-                    'role': 'system',
-                    'content': 'The user is called {}'.format(user_display_name)
-                })
+                            if len(arguments) > 0:
+                                attachment_content += [
+                                    '## {}'.format(_('Arguments')),
+                                    '| {} | {} |'.format(_('Argument'), _('Value')),
+                                    '| --- | --- |'
+                                ]
+                                attachment_content += ['| {} | {} |'.format(k, v) for k, v in arguments.items()]
 
-        model_info = self.get_model_info(model)
-        if model_info:
-            if model_info.get('system'):
-                messages.insert(0, {
-                    'role': 'system',
-                    'content': model_info.get('system')
-                })
+                            attachment_content += [
+                                '## {}'.format(_('Result')),
+                                tool_response
+                            ]
 
+                            attachment = bot_message.add_attachment(
+                                file_id = generate_uuid(),
+                                name = available_tools.get(call.function.name).name,
+                                attachment_type = 'tool',
+                                content = '\n'.join(attachment_content)
+                            )
+                            SQL.insert_or_update_attachment(bot_message, attachment)
+                        else:
+                            tool_response = ''
+
+                        messages.append({
+                            "role": "tool",
+                            "tool_call_id": call.id,
+                            "content": str(tool_response)
+                        })
+
+        except Exception as e:
+            dialog.simple_error(
+                parent = bot_message.get_root(),
+                title = _('Tool Error'),
+                body = _('An error occurred while running tool'),
+                error_log = e
+            )
+            logger.error(e)
+
+        self.generate_response(bot_message, chat, messages, model)
+
+    def generate_response(self, bot_message, chat, messages:list, model:str):
+        if 'no-system-messages' in self.limitations:
+            for i in range(len(messages)):
+                if messages[i].get('role') == 'system':
+                    messages[i]['role'] = 'user'
+
+        if 'text-only' in self.limitations:
+            for i in range(len(messages)):
+                if 'images' in messages[i]:
+                    del messages[i]['images']
         params = {
             "model": model,
-            "stream": True,
-            "think": self.properties.get('think', False) and 'thinking' in model_info.get('capabilities', []),
-            "keep_alive": self.properties.get('keep_alive', 300),
-            "tools": [v.get_metadata() for v in available_tools.values()]
+            "messages": messages,
+            "stream": True
         }
 
+        if self.properties.get('max_tokens', 0) > 0:
+            if 'use_max_completion_tokens' in self.limitations:
+                params["max_completion_tokens"] = int(self.properties.get('max_tokens', 0))
+            else:
+                params["max_tokens"] = int(self.properties.get('max_tokens', 0))
+
         if self.properties.get("override_parameters"):
-            params["options"] = {}
-            params["options"]["temperature"] = self.properties.get('temperature', 0.7)
-            params["options"]["num_ctx"] = self.properties.get('num_ctx', 16384)
+            params["temperature"] = self.properties.get('temperature', 0.7)
             if self.properties.get('seed', 0) != 0:
-                params["options"]["seed"] = self.properties.get('seed')
+                params["seed"] = self.properties.get('seed')
 
-        metadata_string = ""
-        tool_calls = []
-        thought = ""
-        content = ""
-        try:
-            bot_message.block_container.clear()
-            while chat.busy:
-                params['messages'] = messages
-                response = self.client.chat(**params)
+        if chat.busy:
+            try:
+                bot_message.block_container.clear()
+                response = self.client.chat.completions.create(**params)
                 for chunk in response:
-                    if chunk.message.thinking:
-                        bot_message.update_thinking(chunk.message.thinking)
-                        thought += chunk.message.thinking
-                    if chunk.message.content:
-                        bot_message.update_message(chunk.message.content)
-                        content += chunk.message.content
-                    if chunk.message.tool_calls:
-                        tool_calls.extend(chunk.message.tool_calls)
-
-                    if chunk.done or not chat.busy:
-                        data = {
-                            'total_duration': chunk.total_duration,
-                            'load_duration': chunk.load_duration,
-                            'prompt_eval_count': chunk.prompt_eval_count,
-                            'prompt_eval_duration': chunk.prompt_eval_duration,
-                            'eval_count': chunk.eval_count,
-                            'eval_duration': chunk.eval_duration
-                        }
-                        metadata_string = dict_to_metadata_string(data)
+                    if chunk.choices and chunk.choices[0].delta:
+                        delta = chunk.choices[0].delta
+                        if delta.content:
+                            bot_message.update_message(delta.content)
+                    if not chat.busy:
                         break
-
-                GLib.idle_add(bot_message.remove_and_attach_thought)
-
-                if not tool_calls or not chat.busy:
-                    break
-
-                messages.append({'role': 'assistant', 'thinking': thought, 'content': content, 'tool_calls': tool_calls})
-
-                for call in tool_calls:
-                    selected_tool = available_tools.get(call.function.name)
-                    tool_response = selected_tool.run(
-                        call.function.arguments,
-                        messages,
-                        bot_message
-                    )
-                    messages.append({"role": "tool", "tool_name": call.function.name, "content": str(tool_response)})
-                    attachment_content = []
-
-                    if len(call.function.arguments) > 0:
-                        attachment_content += [
-                            '## {}'.format(_('Arguments')),
-                            '| {} | {} |'.format(_('Argument'), _('Value')),
-                            '| --- | --- |'
-                        ]
-                        attachment_content += ['| {} | {} |'.format(k, v) for k, v in call.function.arguments.items()]
-
-                    attachment_content += [
-                        '## {}'.format(_('Result')),
-                        str(tool_response)
-                    ]
-
-                    def add_attachment():
-                        attachment = bot_message.add_attachment(
-                            file_id = generate_uuid(),
-                            name = selected_tool.display_name,
-                            attachment_type = 'tool',
-                            content = '\n'.join(attachment_content)
-                        )
-                        SQL.insert_or_update_attachment(bot_message, attachment)
-                    GLib.idle_add(add_attachment)
-
-        except ollama.ResponseError as e:
-            logger.error(e)
-            if e.status_code == 401:
-                if self.instance_type == 'ollama:managed':
-                    with open(os.path.join(data_dir, '.ollama', 'id_ed25519'), 'rb') as f:
-                        signin_url = self.signin_request()
-                        attachment = bot_message.add_attachment(
-                            file_id = generate_uuid(),
-                            name = 'Ollama Login',
-                            attachment_type = 'link',
-                            content = signin_url
-                        )
-                        SQL.insert_or_update_attachment(bot_message, attachment)
-                        bot_message.update_message("🦙 Just a quick heads-up! To access the Ollama cloud models, you'll need to log into your Ollama account first.")
-                elif self.instance_type == 'ollama:cloud':
-                    bot_message.update_message("🦙 Please verify that the API key provided in the instance preferences is valid.")
-                else:
-                    attachment = bot_message.add_attachment(
-                        file_id = generate_uuid(),
-                        name = 'Ollama Login Tutorial',
-                        attachment_type = 'link',
-                        content = 'https://docs.ollama.com/api/authentication'
-                    )
-                    bot_message.update_message("🦙 Just a quick heads-up! To access the Ollama cloud models, you'll need to log into your Ollama account first from the server.")
-        except Exception as e:
-            if self.instance_type != 'ollama:managed' or is_ollama_installed():
+            except Exception as e:
                 dialog.simple_error(
                     parent = bot_message.get_root(),
                     title = _('Instance Error'),
@@ -244,60 +242,51 @@ class BaseInstance:
                     error_log = e
                 )
                 logger.error(e)
-            if self.row:
-                GLib.idle_add(self.row.get_parent().unselect_all)
-
-        if not self.properties.get('show_response_metadata'):
-            metadata_string = None
-        bot_message.finish_generation(metadata_string)
+                if self.row:
+                    GLib.idle_add(self.row.get_parent().unselect_all)
+        bot_message.finish_generation()
 
     def generate_chat_title(self, chat, prompt:str, fallback_model:str):
-        if not chat.row or not chat.row.get_parent():
-            return
+        class ChatTitle(BaseModel): # Pydantic
+            title: str
+            emoji: str = ""
+
+        messages = [
+            {"role": "user" if 'no-system-messages' in self.limitations else "system", "content": TITLE_GENERATION_PROMPT_OPENAI},
+            {"role": "user", "content": "Generate a title for this prompt:\n{}".format(prompt)}
+        ]
         model = self.get_title_model()
         params = {
-            "options": {
-                "temperature": 0.2
-            },
-            "model": model or fallback_model,
-            "stream": False,
-            "messages": [
-                {
-                    "role": "user",
-                    "content": '{}\n\n{}'.format(TITLE_GENERATION_PROMPT_OLLAMA, prompt)
-                }
-            ],
-            "format": {
-                "type": "object",
-                "properties": {
-                    "title": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "title"
-                ]
-            },
-            'think': False,
-            "keep_alive": 0
+            "temperature": 0.2,
+            "model": model if model else fallback_model,
+            "messages": messages,
+            "max_tokens": MAX_TOKENS_TITLE_GENERATION
         }
-        if self.properties.get("override_parameters"):
-            params["options"]["num_ctx"] = self.properties.get('num_ctx', 16384)
+        new_chat_title = chat.get_name()
+
         try:
-            response = self.client.chat(**params)
-            data = json.loads(response.message.content or '{"title": "New Chat"}')
-            generated_title = data.get('title').replace('\n', '').strip()
-
-            if len(generated_title) > 30:
-                generated_title = generated_title[:30].strip() + '...'
-
-            GLib.idle_add(
-                chat.row.edit,
-                generated_title,
-                chat.is_template
-            )
+            completion = self.client.chat.completions.parse(**params, response_format=ChatTitle)
+            response = completion.choices[0].message
+            if response.parsed:
+                emoji = response.parsed.emoji if len(response.parsed.emoji) == 1 else ''
+                new_chat_title = '{} {}'.format(emoji, response.parsed.title)
         except Exception as e:
-            logger.exception(e)
+            try:
+                response = self.client.chat.completions.create(**params)
+                new_chat_title = str(response.choices[0].message.content)
+            except Exception as e:
+                logger.error(e)
+        
+        new_chat_title = re.sub(r'<think>.*?</think>', '', new_chat_title).strip()
+
+        if len(new_chat_title) > 30:
+            new_chat_title = new_chat_title[:30].strip() + '...'
+
+        GLib.idle_add(
+            chat.row.edit,
+            new_chat_title,
+            chat.is_template
+        )
 
     def get_default_model(self):
         local_models = self.get_local_models()
@@ -313,389 +302,29 @@ class BaseInstance:
                 self.properties['title_model'] = local_models[0].get('name')
             return self.properties.get('title_model')
 
-    def stop(self):
-        self.client = None
-
-    def start(self):
-        if not self.client:
-            self.client = ollama.Client(
-                host=self.properties.get('url'),
-                headers={
-                    'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-                },
-                verify=not self.properties.get('allow_self_signed_ssl', False)
-            )
-
-    def get_local_models(self) -> list:
-        try:
-            model_list = []
-
-            for m in self.client.list().models:
-                model_list.append({
-                    'name': m.model,
-                    'modified_at': m.modified_at,
-                    'digest': m.digest,
-                    'size': m.size,
-                    'details': m.details
-                })
-
-            return model_list
-
-            return [{'name': m.model} for m in models if m.model]
-        except Exception as e:
-            if self.instance_type != 'ollama:managed' or is_ollama_installed():
-                dialog.simple_error(
-                    parent = self.row.get_root() if self.row else None,
-                    title = _('Instance Error'),
-                    body = _('Could not retrieve added models'),
-                    error_log = e
-                )
-                logger.error(e)
-            if self.row:
-                GLib.idle_add(self.row.get_parent().unselect_all)
-        return []
-
     def get_available_models(self) -> dict:
         try:
-            return OLLAMA_MODELS
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = {}
+                for m in self.client.models.list():
+                    if all(s not in m.id.lower() for s in ['embedding', 'davinci', 'dall', 'tts', 'whisper', 'image']):
+                        self.available_models[m.id] = {}
+            return self.available_models
         except Exception as e:
-            if self.instance_type != 'ollama:managed' or is_ollama_installed():
-                dialog.simple_error(
-                    parent = self.row.get_root() if self.row else None,
-                    title = _('Instance Error'),
-                    body = _('Could not retrieve available models'),
-                    error_log = e
-                )
-                logger.error(e)
-        return {}
-
-    def get_model_info(self, model_name:str) -> dict:
-        try:
-            response = self.client.show(model_name)
-            return response
-        except Exception as e:
-            logger.error(e)
-        return {}
-
-    def pull_model(self, model):
-        try:
-            response = self.client.pull(
-                model=model.get_name(),
-                stream=True
+            dialog.simple_error(
+                parent = self.row.get_root() if self.row else None,
+                title = _('Instance Error'),
+                body = _('Could not retrieve added models'),
+                error_log = e
             )
-            last_update = 0
-            for chunk in response:
-                if not model.get_root():
-                    break
-                if chunk.status:
-                    model.append_progress_line(chunk.status)
-                if chunk.total and chunk.completed:
-                    current_time = time.time()
-                    if current_time - last_update > 0.05:
-                        model.update_progressbar(chunk.completed / chunk.total)
-                        last_update = current_time
-                if chunk.status == 'success':
-                    model.update_progressbar(-1)
-                    break
-        except Exception as e:
-            if self.instance_type != 'ollama:managed' or is_ollama_installed():
-                dialog.simple_error(
-                    parent = self.row.get_root() if self.row else None,
-                    title = _('Error Pulling Model'),
-                    body = model.get_name(),
-                    error_log = e
-                )
-                logger.error(e)
-            model.get_parent().get_parent().remove(model.get_parent())
-
-    def upload_gguf(self, gguf_path:str):
-        digest = self.client.create_blob(gguf_path)
-        return digest
-
-    def create_model(self, data:dict, model):
-        try:
-            response = self.client.create(
-                model=data.get('model'),
-                from_=data.get('from'),
-                template=data.get('template'),
-                files=data.get('files'),
-                parameters=data.get('parameters'),
-                stream=True
-            )
-            last_update = 0
-            for chunk in response:
-                if chunk.status:
-                    model.append_progress_line(chunk.status)
-                if chunk.total and chunk.completed:
-                    current_time = time.time()
-                    if current_time - last_update > 0.05:
-                        model.update_progressbar(chunk.completed / chunk.total)
-                        last_update = current_time
-                if chunk.status == 'success':
-                    model.update_progressbar(-1)
-                    break
-        except Exception as e:
-            model.get_parent().get_parent().remove(model.get_parent())
             logger.error(e)
-
-    def delete_model(self, model_name:str):
-        try:
-            response = self.client.delete(model_name)
-            return response.status == 'success'
-        except Exception as e:
-            logger.error(e)
-        return False
-
-class OllamaManaged(BaseInstance):
-    instance_type = 'ollama:managed'
-    instance_type_display = _('Ollama (Managed)')
-    description = _('Local AI instance managed directly by Alpaca')
-
-    default_properties = {
-        'name': _('Instance'),
-        'url': 'http://0.0.0.0:11434',
-        'override_parameters': True,
-        'temperature': 0.7,
-        'seed': 0,
-        'num_ctx': 16384,
-        'keep_alive': 300,
-        'model_directory': os.path.join(data_dir, '.ollama', 'models'),
-        'default_model': None,
-        'title_model': None,
-        'overrides': {
-            'HSA_OVERRIDE_GFX_VERSION': '',
-            'CUDA_VISIBLE_DEVICES': '',
-            'ROCR_VISIBLE_DEVICES': '',
-            'HIP_VISIBLE_DEVICES': '',
-            'OLLAMA_VULKAN': ''
-        },
-        'think': False,
-        'expose': False,
-        'share_name': 0,
-        'show_response_metadata': False
-    }
-
-    def __init__(self, instance_id:str, properties:dict):
-        self.instance_id = instance_id
-        self.process = None
-        self.log_raw = ''
-        self.rocm_status = 0 # 0: no need, 1: using Vulkan 2: wants rocm, 3: rocm ok
-        self.version_number = ''
-        self.last_auto_version_check_time = 0
-
-        self.properties = {}
-        self.row = None
-        for key in self.default_properties:
-            if key == 'overrides':
-                self.properties[key] = {}
-                for override in self.default_properties.get(key):
-                    self.properties[key][override] = properties.get(key, {}).get(override, self.default_properties.get(key).get(override))
-            else:
-                self.properties[key] = properties.get(key, self.default_properties.get(key))
-
-        self.client = None
-
-    def signin_request(self) -> str:
-        # For use with cloud models, returns the url even though it also opens it
-        try:
-            params = {
-                "OLLAMA_HOST": self.properties.get('url')
-            }
-            result = subprocess.run(
-                [OLLAMA_BINARY_PATH, 'signin'],
-                capture_output=True,
-                text=True,
-                env={**os.environ, **params},
-            )
-            output = result.stdout + result.stderr
-            url_match = re.search(r'https://ollama\.com/connect\?\S+', output)
-            if url_match:
-                return url_match.group(0)
-        except Exception as e:
-            logger.error(e)
-        return ''
-
-    def log_output(self, pipe):
-        AMD_support_label = "\n<a href='https://jeffser.com/alpaca/installation-guide.html'>{}</a>".format(_('Alpaca Support'))
-        with pipe:
-            try:
-                for line in iter(pipe.readline, ''):
-                    self.log_raw += line
-                    print(line, end='')
-                    if 'msg="model request too large for system"' in line and self.row:
-                        dialog.show_toast(_("Model request too large for system"), self.row.get_root())
-                    elif 'library=cpu' in line:
-                        self.rocm_status = 0
-                    elif 'library=Vulkan' in line:
-                        self.rocm_status = 1
-                    elif 'msg="amdgpu is supported"' in line:
-                        self.rocm_status = 2
-                    elif 'library=ROCm' in line:
-                        self.rocm_status = 3
-            except Exception as e:
-                pass
-
-    def auto_check_version(self):
-        installed_tag = self.version_number.strip('v').strip()
-        available_tag = get_latest_ollama_tag().strip('v').strip()
-
-        if available_tag and installed_tag:
-            available_tag = available_tag.strip('v').strip()
-            if installed_tag != available_tag:
-                manager_dialog = OllamaManager(self)
-                manager_dialog.update_check_requested(None)
-                manager_dialog.navigation_view.replace_with_tags(["update_available"])
-                manager_dialog.present(self.row.get_root())
-
-    def stop(self):
-        if self.process:
-            logger.info("Stopping Alpaca's Ollama instance")
-            try:
-                # Check if process is still alive before trying to stop it
-                if self.process.poll() is None:
-                    os.killpg(os.getpgid(self.process.pid), signal.SIGTERM)
-                    # Wait with timeout to avoid hanging indefinitely
-                    try:
-                        self.process.wait(timeout=5)
-                    except subprocess.TimeoutExpired:
-                        logger.warning("Ollama process didn't stop gracefully, forcing kill")
-                        os.killpg(os.getpgid(self.process.pid), signal.SIGKILL)
-                        self.process.wait(timeout=2)
-            except (ProcessLookupError, OSError) as e:
-                logger.info(f"Process already stopped or not accessible: {e}")
-            except Exception as e:
-                logger.error(f"Error stopping Ollama process: {e}")
-            finally:
-                self.process = None
-                self.log_raw += '\nOllama stopped by Alpaca\n'
-                logger.info("Stopped Alpaca's Ollama instance")
-        self.client = None
-
-    def start(self):
-        if not self.process:
-            try:
-                logger.info("Starting Alpaca's Ollama instance...")
-                params = self.properties.get('overrides', {}).copy()
-                params["HOME"] = data_dir
-                params["OLLAMA_HOST"] = self.properties.get('url')
-                params["OLLAMA_MODELS"] = self.properties.get('model_directory')
-                if self.properties.get("expose"):
-                    params["OLLAMA_ORIGINS"] = "chrome-extension://*,moz-extension://*,safari-web-extension://*,http://0.0.0.0,http://127.0.0.1"
-                else:
-                    params["OLLAMA_ORIGINS"] = params.get("OLLAMA_HOST")
-                for key in list(params):
-                    if not params.get(key):
-                        del params[key]
-                self.process = subprocess.Popen(
-                    [OLLAMA_BINARY_PATH, "serve"],
-                    env={**os.environ, **params},
-                    stderr=subprocess.PIPE,
-                    stdout=subprocess.PIPE,
-                    text=True,
-                    preexec_fn=os.setsid
-                )
-
-                threading.Thread(target=self.log_output, args=(self.process.stdout,), daemon=True).start()
-                threading.Thread(target=self.log_output, args=(self.process.stderr,), daemon=True).start()
-                logger.info("Started Alpaca's Ollama instance")
-                self.version_number = subprocess.check_output([OLLAMA_BINARY_PATH, "-v"]).decode('utf-8')
-                self.version_number = self.version_number.split(' ')[-1].strip('v').strip()
-                if self.version_number:
-                    logger.info('Ollama version is {}'.format(self.version_number))
-                if CAN_SELF_MANAGE_OLLAMA and self.row and self.row.get_root().settings.get_value('ollama-managed-auto-check-update').unpack() and time.time() - self.last_auto_version_check_time > 300:
-                    self.last_auto_version_check_time = time.time()
-                    GLib.idle_add(self.auto_check_version)
-            except Exception as e:
-                logger.error(e)
-                if not is_ollama_installed():
-                    if self.row:
-                        GLib.idle_add(lambda: OllamaManager(self).present(self.row.get_root()))
-                else:
-                    dialog.simple_error(
-                        parent = self.row.get_root() if self.row else None,
-                        title = _('Instance Error'),
-                        body = _('Managed Ollama instance failed to start'),
-                        error_log = e
-                    )
-                if self.row:
-                    GLib.idle_add(self.row.get_parent().unselect_all)
-                self.stop()
-        if not self.client:
-            self.client = ollama.Client(
-                host=self.properties.get('url'),
-                headers={
-                    'Authorization': 'Bearer {}'.format(self.properties.get('api'))
-                },
-                verify=not self.properties.get('allow_self_signed_ssl', False)
-            )
-
-class Ollama(BaseInstance):
-    instance_type = 'ollama'
-    instance_type_display = _('Ollama (External)')
-    description = _('Local or remote AI instance not managed by Alpaca')
-
-    default_properties = {
-        'name': _('Instance'),
-        'url': 'http://0.0.0.0:11434',
-        'api': '',
-        'override_parameters': True,
-        'temperature': 0.7,
-        'seed': 0,
-        'num_ctx': 16384,
-        'keep_alive': 300,
-        'default_model': None,
-        'title_model': None,
-        'think': False,
-        'share_name': 0,
-        'show_response_metadata': False,
-        'allow_self_signed_ssl': False
-    }
-
-    def __init__(self, instance_id:str, properties:dict):
-        self.instance_id = instance_id
-        self.properties = {}
-        self.row = None
-        for key in self.default_properties:
-            self.properties[key] = properties.get(key, self.default_properties.get(key))
-
-        self.client = None
-
-class OllamaCloud(BaseInstance):
-    instance_type = 'ollama:cloud'
-    instance_type_display = _('Ollama (Cloud)')
-    description = _('Online instance directly managed by Ollama (Experimental)')
-
-    default_properties = {
-        'name': _('Instance'),
-        'url': 'https://ollama.com',
-        'api': '',
-        'override_parameters': True,
-        'temperature': 0.7,
-        'seed': 0,
-        'num_ctx': 16384,
-        'default_model': None,
-        'title_model': None,
-        'think': False,
-        'share_name': 0,
-        'show_response_metadata': False
-    }
-
-    def __init__(self, instance_id:str, properties:dict):
-        self.instance_id = instance_id
-        self.properties = {}
-        self.row = None
-        for key in self.default_properties:
-            self.properties[key] = properties.get(key, self.default_properties.get(key))
-
-        self.client = None
+            if self.row:
+                GLib.idle_add(self.row.get_parent().unselect_all)
+            return {}
 
     def pull_model(self, model):
         SQL.append_online_instance_model_list(self.instance_id, model.get_name())
         GLib.timeout_add(5000, lambda: model.update_progressbar(-1) and False)
-
-    def delete_model(self, model_name:str) -> bool:
-        SQL.remove_online_instance_model_list(self.instance_id, model_name)
-        return True
 
     def get_local_models(self) -> list:
         local_models = []
@@ -703,42 +332,338 @@ class OllamaCloud(BaseInstance):
             local_models.append({'name': model})
         return local_models
 
+    def delete_model(self, model_name:str) -> bool:
+        SQL.remove_online_instance_model_list(self.instance_id, model_name)
+        return True
+
+    def get_model_info(self, model_name:str) -> dict:
+        return {}
+
+
+class ChatGPT(BaseInstance):
+    instance_type = 'chatgpt'
+    instance_type_display = 'OpenAI ChatGPT'
+    instance_url = 'https://api.openai.com/v1/'
+    limitations = ('use_max_completion_tokens',)
+
+class Gemini(BaseInstance):
+    instance_type = 'gemini'
+    instance_type_display = 'Google Gemini'
+    instance_url = 'https://generativelanguage.googleapis.com/v1beta/openai/'
+    limitations = ('no-system-messages',)
+
+    def __init__(self, instance_id:str, properties:dict):
+        super().__init__(instance_id, properties)
+        if 'seed' in self.properties:
+            del self.properties['seed']
+
     def get_available_models(self) -> dict:
         try:
-            response = self.client.list()
-            available_models = {}
-            for model in response.models:
-                if ':' in model.model:
-                    model_name, model_tag = model.model.split(':')
-                else:
-                    model_name, model_tag = model.model, ''
-
-                model_metadata = OLLAMA_MODELS.get(model_name)
-                if model_metadata:
-                    available_models[model_name] = {
-                        'url': model_metadata.get('url'),
-                        'tags': [],
-                        'author': model_metadata.get('author'),
-                        'categories': [c for c in model_metadata.get('categories') if c not in ['small', 'medium', 'big', 'huge']],
-                        'languages': model_metadata.get('languages'),
-                        'description': model_metadata.get('description')
-                    }
-                else:
-                    available_models[model_name] = {
-                        'tags': [],
-                        'categories': ['cloud']
-                    }
-                available_models[model_name]['tags'].append([model_tag, 'cloud'])
-            return available_models
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = {}
+                response = requests.get('https://generativelanguage.googleapis.com/v1beta/models?key={}'.format(self.properties.get('api')))
+                for model in response.json().get('models', []):
+                    if "generateContent" in model.get("supportedGenerationMethods", []) and 'deprecated' not in model.get('description', ''):
+                        model['name'] = model.get('name').removeprefix('models/')
+                        self.available_models[model.get('name')] = model
+            return self.available_models
         except Exception as e:
-            if self.instance_type != 'ollama:managed' or is_ollama_installed():
-                dialog.simple_error(
-                    parent = self.row.get_root() if self.row else None,
-                    title = _('Instance Error'),
-                    body = _('Could not retrieve added models'),
-                    error_log = e
-                )
-                logger.error(e)
+            dialog.simple_error(
+                parent = self.row.get_root() if self.row else None,
+                title = _('Instance Error'),
+                body = _('Could not retrieve added models'),
+                error_log = e
+            )
+            logger.error(e)
             if self.row:
                 GLib.idle_add(self.row.get_parent().unselect_all)
         return {}
+
+    def get_model_info(self, model_name:str) -> dict:
+        try:
+            response = requests.get('https://generativelanguage.googleapis.com/v1beta/models/{}?key={}'.format(model_name, self.properties.get('api')))
+            data = response.json()
+            data['capabilities'] = ['completion', 'vision']
+            return data
+        except Exception as e:
+            logger.error(e)
+        return {}
+
+class Together(BaseInstance):
+    instance_type = 'together'
+    instance_type_display = 'Together AI'
+    instance_url = 'https://api.together.xyz/v1/'
+
+    def get_available_models(self) -> dict:
+        try:
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = {}
+                response = requests.get(
+                    'https://api.together.xyz/v1/models',
+                    headers={
+                        'accept': 'application/json',
+                        'authorization': 'Bearer {}'.format(self.properties.get('api'))
+                    }
+                )
+                data = response.json()
+                if isinstance(data, dict):
+                    if 'error' in data:
+                        raise Exception(data.get('error'))
+                    data = data.get('data',[])
+                for model in data:
+                    if isinstance(model, dict) and model.get('id') and model.get('type') in ('chat', 'language'):
+                        self.available_models[model.get('id')] = {'display_name': model.get('display_name', model.get('id'))}
+            return self.available_models
+        except Exception as e:
+            dialog.simple_error(
+                parent = self.row.get_root() if self.row else None,
+                title = _('Instance Error'),
+                body = _('Could not retrieve added models'),
+                error_log = e
+            )
+            logger.error(e)
+            if self.row:
+                GLib.idle_add(self.row.get_parent().unselect_all)
+        return {}
+
+class Venice(BaseInstance):
+    instance_type = 'venice'
+    instance_type_display = 'Venice'
+    instance_url = 'https://api.venice.ai/api/v1/'
+    limitations = ('no-system-messages',)
+
+    def __init__(self, instance_id:str, properties:dict):
+        super().__init__(instance_id, properties)
+        if 'seed' in self.properties:
+            del self.properties['seed']
+
+class Deepseek(BaseInstance):
+    instance_type = 'deepseek'
+    instance_type_display = 'Deepseek'
+    instance_url = 'https://api.deepseek.com/v1/'
+    limitations = ('text-only',)
+
+    def __init__(self, instance_id:str, properties:dict):
+        super().__init__(instance_id, properties)
+        if 'seed' in self.properties:
+            del self.properties['seed']
+
+class Groq(BaseInstance):
+    instance_type = 'groq'
+    instance_type_display = 'Groq Cloud'
+    instance_url = 'https://api.groq.com/openai/v1'
+    limitations = ('text-only',)
+
+class Anthropic(BaseInstance):
+    instance_type = 'anthropic'
+    instance_type_display = 'Anthropic'
+    instance_url = 'https://api.anthropic.com/v1/'
+    limitations = ('no-system-messages',)
+
+class OpenRouter(BaseInstance):
+    instance_type = 'openrouter'
+    instance_type_display = 'OpenRouter AI'
+    instance_url = 'https://openrouter.ai/api/v1/'
+
+    def get_available_models(self) -> dict:
+        try:
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = {}
+                response = requests.get('https://openrouter.ai/api/v1/models')
+                for model in response.json().get('data', []):
+                    if model.get('id'):
+                        self.available_models[model.get('id')] = {'display_name': model.get('name')}
+
+            return self.available_models
+        except Exception as e:
+            dialog.simple_error(
+                parent = self.row.get_root() if self.row else None,
+                title = _('Instance Error'),
+                body = _('Could not retrieve models'),
+                error_log = e
+            )
+            logger.error(e)
+            if self.row:
+                GLib.idle_add(self.row.get_parent().unselect_all)
+            return {}
+
+class Qwen(BaseInstance):
+    instance_type = 'qwen'
+    instance_type_display = 'Qwen (DashScope)'
+    instance_url = 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1'
+    description = _('Alibaba Cloud Qwen large language models via DashScope')
+    
+class Fireworks(BaseInstance):
+    instance_type = 'fireworks'
+    instance_type_display = 'Fireworks AI'
+    instance_url = 'https://api.fireworks.ai/inference/v1/'
+    description = _('Fireworks AI inference platform')
+
+    def get_available_models(self) -> dict:
+        try:
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = {}
+                response = requests.get(
+                    'https://api.fireworks.ai/inference/v1/models',
+                    headers={
+                        'Authorization': f'Bearer {self.properties.get("api")}'
+                    }
+                )
+                for model in response.json().get('data', []):
+                    if model.get('id') and 'chat' in model.get('capabilities', []):
+                        self.available_models[model.get('id')] = {'display_name': model.get('name')}
+
+            return self.available_models
+        except Exception as e:
+            dialog.simple_error(
+                parent = self.row.get_root() if self.row else None,
+                title = _('Instance Error'),
+                body = _('Could not retrieve models'),
+                error_log = e
+            )
+            logger.error(e)
+            if self.row:
+                GLib.idle_add(self.row.get_parent().unselect_all)
+            return {}
+
+class LambdaLabs(BaseInstance):
+    instance_type = 'lambda_labs'
+    instance_type_display = 'Lambda Labs'
+    instance_url = 'https://api.lambdalabs.com/v1/'
+    description = _('Lambda Labs cloud inference API')
+
+    def get_available_models(self) -> dict:
+        try:
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = {}
+                response = requests.get(
+                    'https://api.lambdalabs.com/v1/models',
+                    headers={
+                        'Authorization': f'Bearer {self.properties.get("api")}'
+                    }
+                )
+                for model in response.json().get('data', []):
+                    if model.get('id'):
+                        self.available_models[model.get('id')] = {'display_name': model.get('name')}
+
+            return self.available_models
+        except Exception as e:
+            dialog.simple_error(
+                parent = self.row.get_root() if self.row else None,
+                title = _('Instance Error'),
+                body = _('Could not retrieve models'),
+                error_log = e
+            )
+            logger.error(e)
+            if self.row:
+                GLib.idle_add(self.row.get_parent().unselect_all)
+            return {}
+
+class Cerebras(BaseInstance):
+    instance_type = 'cerebras'
+    instance_type_display = 'Cerebras AI'
+    instance_url = 'https://api.cerebras.ai/v1/'
+    description = _('Cerebras AI cloud inference API')
+
+class Klusterai(BaseInstance):
+    instance_type = 'klusterai'
+    instance_type_display = 'Kluster AI'
+    instance_url = 'https://api.kluster.ai/v1/'
+    description = _('Kluster AI cloud inference API')
+
+class Kimi(BaseInstance):
+    instance_type = 'kimi'
+    instance_type_display = 'Kimi (Moonshot AI)'
+    instance_url = 'https://api.moonshot.ai/v1/'
+    description = _('Kimi large language models by Moonshot AI')
+    limitations = ('no-seed',)
+
+class Mistral(BaseInstance):
+    instance_type = 'mistral'
+    instance_type_display = 'Mistral AI'
+    instance_url = 'https://api.mistral.ai/v1/'
+    description = _('Mistral AI large language models')
+    limitations = ('text-only',)
+
+class LlamaAPI(BaseInstance):
+    instance_type = 'llama-api'
+    instance_type_display = 'Llama API'
+    instance_url = 'https://api.llama.com/compat/v1/'
+    description = _('Meta AI Llama API')
+
+class NovitaAI(BaseInstance):
+    instance_type = 'novitaai'
+    instance_type_display = 'Novita AI'
+    instance_url = 'https://api.novita.ai/v3/openai/'
+    description = _('Novita AI cloud inference API')
+    limitations = ('no-seed',)
+
+class DeepInfra(BaseInstance):
+    instance_type = 'deepinfra'
+    instance_type_display = 'DeepInfra'
+    instance_url = 'https://api.deepinfra.com/v1/openai'
+    description = _('DeepInfra cloud inference API')
+
+class CompactifAI(BaseInstance):
+    instance_type = 'compactifai'
+    instance_type_display = 'CompactifAI'
+    instance_url = 'https://your-compactifai-api-endpoint/v1'
+    description = _('CompactifAI inference platform')
+
+    def get_available_models(self) -> dict:
+        try:
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = {}
+                response = requests.get(
+                    f'{self.instance_url}/models',
+                    headers={
+                        'Authorization': f'Bearer {self.properties.get("api")}'
+                    }
+                )
+                for model in response.json().get('data', []):
+                    if model.get('id'):
+                        self.available_models[model.get('id')] = {
+                            'display_name': model.get('name', model.get('id'))
+                        }
+            return self.available_models
+        except Exception as e:
+            dialog.simple_error(
+                parent=self.row.get_root() if self.row else None,
+                title=_('Instance Error'),
+                body=_('Could not retrieve CompactifAI models'),
+                error_log=e
+            )
+            logger.error(e)
+            if self.row:
+                GLib.idle_add(self.row.get_parent().unselect_all)
+            return {}
+
+class Grok(BaseInstance):
+    instance_type = 'grok'
+    instance_type_display = 'Grok'
+    instance_url = 'https://api.x.ai/v1'
+    description = _('Grok instance from X.ai')
+
+class SarvamAI(BaseInstance):
+    instance_type = 'sarvam'
+    instance_type_display = 'Sarvam AI'
+    instance_url = 'https://api.sarvam.ai/'
+    description = 'Sarvam AI'
+
+    def start(self):
+        if not self.client:
+            self.client = openai.OpenAI(
+                api_key=self.properties.get('api'),
+                base_url=self.properties.get('url').strip(),
+                default_headers={"api-subscription-key": self.properties.get('api')}
+            )
+
+class GenericOpenAI(BaseInstance):
+    instance_type = 'openai:generic'
+    instance_type_display = _('OpenAI Compatible Instance')
+    instance_url = ''
+    description = _('AI instance compatible with OpenAI library')
+
+    def __init__(self, instance_id:str, properties:dict):
+        self.instance_url = properties.get('url', '')
+        super().__init__(instance_id, properties)
