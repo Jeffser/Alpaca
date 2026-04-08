@@ -236,52 +236,53 @@ def simple_dropdown(parent:Gtk.Widget, heading:str, body:str, callback:callable,
     dialog.show(parent)
 
 def simple_error(parent:Gtk.Widget, title:str, body:str, error_log:str, callback:callable=None):
-    if get_dialog_showing(parent):
-        return
-    container = Gtk.Box(
-        hexpand=True,
-        vexpand=True,
-        orientation=1,
-        spacing=10,
-        css_classes=['p10']
-    )
-    container.append(Gtk.Label(
-        label=body,
-        wrap=True,
-        wrap_mode=2
-    ))
-    if error_log:
-        container.append(Gtk.ScrolledWindow(
-            min_content_width=300,
-            hscrollbar_policy=2,
-            propagate_natural_height=True,
-            propagate_natural_width=True,
-            css_classes=['card', 'undershoot-bottom'],
-            overflow=True,
-            child=Gtk.Label(
-                css_classes=['p10', 'monospace', 'error'],
-                label=error_log,
-                wrap=True,
-                wrap_mode=2,
-                selectable=True
-            )
+    def show_dialog():
+        if get_dialog_showing(parent):
+            return
+        container = Gtk.Box(
+            hexpand=True,
+            vexpand=True,
+            orientation=1,
+            spacing=10,
+            css_classes=['p10']
+        )
+        container.append(Gtk.Label(
+            label=body,
+            wrap=True,
+            wrap_mode=2
         ))
+        if error_log:
+            container.append(Gtk.ScrolledWindow(
+                min_content_width=300,
+                hscrollbar_policy=2,
+                propagate_natural_height=True,
+                propagate_natural_width=True,
+                css_classes=['card', 'undershoot-bottom'],
+                overflow=True,
+                child=Gtk.Label(
+                    css_classes=['p10', 'monospace', 'error'],
+                    label=str(error_log),
+                    wrap=True,
+                    wrap_mode=2,
+                    selectable=True
+                )
+            ))
 
-    tbv = Adw.ToolbarView()
-    tbv.add_top_bar(Adw.HeaderBar())
-    tbv.set_content(container)
+        tbv = Adw.ToolbarView()
+        tbv.add_top_bar(Adw.HeaderBar())
+        tbv.set_content(container)
 
-    dialog = Adw.Dialog(
-        title=title,
-        follows_content_size=True,
-        child=tbv
-    )
+        diag = Adw.Dialog(
+            title=title,
+            follows_content_size=True,
+            child=tbv
+        )
 
-    if callback:
-        dialog.connect('closed', lambda *_: callback())
+        if callback:
+            diag.connect('closed', lambda *_: callback())
 
-    GLib.idle_add(dialog.present, parent)
-
+        diag.present(parent)
+    GLib.idle_add(show_dialog)
 def simple_file(parent:Gtk.Widget, file_filters:list, callback:callable):
     filter_list = Gio.ListStore.new(Gtk.FileFilter)
 
@@ -319,25 +320,29 @@ def simple_directory(parent:Gtk.Widget, callback:callable):
     )
 
 def show_toast(message:str, root_widget, action:str=None, action_name:str=None):
-    try:
-        overlay = root_widget.toast_overlay
-    except Exception as e:
-        print(e, message)
-        return
-    toast = Adw.Toast(
-        title=message,
-        timeout=2
-    )
-    if action and action_name:
-        toast.set_action_name(action)
-        toast.set_button_label(action_name)
-    overlay.add_toast(toast)
+    def run_toast():
+        try:
+            overlay = root_widget.toast_overlay
+        except Exception as e:
+            print(e, message)
+            return
+        toast = Adw.Toast(
+            title=message,
+            timeout=2
+        )
+        if action and action_name:
+            toast.set_action_name(action)
+            toast.set_button_label(action_name)
+        overlay.add_toast(toast)
+    GLib.idle_add(run_toast)
 
 def show_notification(root_widget, title:str, body:str, icon:Gio.ThemedIcon=None):
-    if not root_widget.is_active():
-        body = body.replace('<span>', '').replace('</span>', '')
-        notification = Gio.Notification.new(title)
-        notification.set_body(body)
-        if icon:
-            notification.set_icon(icon)
-        root_widget.get_application().send_notification(None, notification)
+    def run_notification():
+        if not root_widget.is_active():
+            clean_body = body.replace('<span>', '').replace('</span>', '')
+            notification = Gio.Notification.new(title)
+            notification.set_body(clean_body)
+            if icon:
+                notification.set_icon(icon)
+            root_widget.get_application().send_notification(None, notification)
+    GLib.idle_add(run_notification)
