@@ -652,6 +652,26 @@ class SarvamAI(BaseInstance):
                 default_headers={"api-subscription-key": self.properties.get('api')}
             )
 
+class MiniMax(BaseInstance):
+    instance_type = 'minimax'
+    instance_type_display = 'MiniMax'
+    instance_url = 'https://api.minimax.io/v1'
+    description = _('MiniMax large language models')
+    limitations = ('no-seed',)     # limitations = ('text-only',) as of now image support is not availble for Openai api
+    
+class ZAI(BaseInstance):
+    instance_type = 'zai'
+    instance_type_display = 'Z.AI (GLM)'
+    instance_url = 'https://api.z.ai/api/paas/v4/'
+    description = _('Z.AI platform with GLM large language models')
+
+class XiaomiMiMo(BaseInstance):
+    instance_type = 'xiaomi_mimo'
+    instance_type_display = 'Xiaomi MiMo'
+    instance_url = 'https://api.xiaomimimo.com/v1'
+    description = _('Xiaomi MiMo large language models')
+    limitations = ('no-seed',)     # limitations = ('text-only',) as of now image support is not availble for Openai api
+    
 class GenericOpenAI(BaseInstance):
     instance_type = 'openai:generic'
     instance_type_display = _('OpenAI Compatible Instance')
