@@ -46,8 +46,9 @@ class BaseInstance:
 
     def start(self):
         if not self.client:
+            api_key = self.properties.get('api')
             arguments = {
-                'api_key': self.properties.get('api')
+                'api_key': api_key if api_key else 'NOKEY'
             }
             if self.instance_type != 'chatgpt':
                 arguments['base_url'] = self.properties.get('url').strip()
@@ -404,9 +405,14 @@ class Together(BaseInstance):
                         'authorization': 'Bearer {}'.format(self.properties.get('api'))
                     }
                 )
-                for model in response.json():
-                    if model.get('id') and model.get('type') == 'chat':
-                        self.available_models[model.get('id')] = {'display_name': model.get('display_name')}
+                data = response.json()
+                if isinstance(data, dict):
+                    if 'error' in data:
+                        raise Exception(data.get('error'))
+                    data = data.get('data',[])
+                for model in data:
+                    if isinstance(model, dict) and model.get('id') and model.get('type') in ('chat', 'language'):
+                        self.available_models[model.get('id')] = {'display_name': model.get('display_name', model.get('id'))}
             return self.available_models
         except Exception as e:
             dialog.simple_error(
