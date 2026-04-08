@@ -590,7 +590,7 @@ class OllamaManaged(BaseInstance):
                 threading.Thread(target=self.log_output, args=(self.process.stdout,), daemon=True).start()
                 threading.Thread(target=self.log_output, args=(self.process.stderr,), daemon=True).start()
                 logger.info("Started Alpaca's Ollama instance")
-                self.version_number = subprocess.check_output("{} -v".format(OLLAMA_BINARY_PATH), shell=True).decode('utf-8')
+                self.version_number = subprocess.check_output([OLLAMA_BINARY_PATH, "-v"]).decode('utf-8')
                 self.version_number = self.version_number.split(' ')[-1].strip('v').strip()
                 if self.version_number:
                     logger.info('Ollama version is {}'.format(self.version_number))
