@@ -16,7 +16,7 @@ from ...sql_manager import generate_uuid, Instance as SQL
 patterns = [
     r'(?P<online_picture>!\[(?P<label>[^\]]*)\]\((?P<url>.*?)\))',
     r'(?P<code>```(?P<language>[a-zA-Z0-9_+\-]*)\n(?P<code_content>.*?)\n\s*```)',
-    r'(?P<latex>\\\[\s*(?P<latex_content1>.*?)\s*\\\]|\$\$\s*(?P<latex_content2>.*?)\s*\$\$)',
+    r'(?P<latex>\\\[\s*(?P<latex_content1>.*?)\s*\\\]|(?P<delim>\${1,2})\s*(?P<latex_content2>.*?)\s*(?P=delim))',
     r'(?P<table>(?:^|(?<=\n))\|[^\n]*\|[\s\xa0]*\n\|[\s\xa0\-|:]*\|[\s\xa0]*\n(?:\|[^\n]*\|(?:[\s\xa0]*\n|$))+)',
     r'(?P<line>^\s*-{3,}\s*$|\n-{3,}\n)'
 ]
