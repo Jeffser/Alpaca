@@ -62,7 +62,8 @@ def text_to_block_list(raw_content:str):
                     )
 
         elif kind == 'latex':
-            content = match.group('latex_content1').strip() or match.group('latex_content2').strip()
+            rawcontent = match.group('latex_content1') or match.group('latex_content2') or ""
+            content = rawcontent.strip()
             if content:
                 if '\\' in content:
                     blocks.append(LatexRenderer(content=content))
