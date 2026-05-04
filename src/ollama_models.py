@@ -7225,4 +7225,34 @@ OLLAMA_MODELS = {
                 "en"
         ],
     },
+    "qwen3.6": {
+        "tags": [
+                [
+                        "latest",
+                        "24 GB"
+                ],
+                [
+                        "27b",
+                        "17 GB"
+                ],
+                [
+                        "35b",
+                        "24 GB"
+                ]
+        ],
+        "description": _("Qwen3.6 delivers substantial upgrades in agentic coding and thinking preservation than previous Qwen models."),
+        "url": "https://ollama.com/library/qwen3.6",
+        "categories": [
+                "vision",
+                "tools",
+                "thinking",
+                "big",
+                "huge",
+                "code"
+        ],
+        "author": "Alibaba Cloud",
+        "languages": [
+                "en"
+        ],
+    },
 }

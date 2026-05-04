@@ -15,7 +15,6 @@ def markdown_to_pango(text:str) -> str:
     text = text.replace("\n* ", "\n• ").replace("\n- ", "\n• ")
     text = text.replace("<|begin_of_solution|>", "")
     text = text.replace("<|end_of_solution|>", "")
-    text = re.sub(r'`([^`\n]*?)`', r'<tt>\1</tt>', text)
     text = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', text, flags=re.MULTILINE)
     text = re.sub(r'\*(.*?)\*', r'<i>\1</i>', text, flags=re.MULTILINE)
     text = re.sub(r'^####\s+(.*)', r'<span size="medium" weight="bold">\1</span>', text, flags=re.MULTILINE)
@@ -56,7 +55,7 @@ class GeneratingText(Gtk.Overlay):
         text = GLib.markup_escape_text(value)
         if text:
             self.buffer.insert_markup(self.buffer.get_end_iter(), text, len(text.encode('utf-8')))
-            GLib.idle_add(self.process_content, value)
+            self.process_content(value)
 
     def get_content(self) -> str:
         return self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
@@ -64,7 +63,7 @@ class GeneratingText(Gtk.Overlay):
     def set_content(self, value:str=None) -> None:
         self.buffer.delete(self.buffer.get_start_iter(), self.buffer.get_end_iter())
         if value:
-            self.append_content(value)
+            GLib.idle_add(self.append_content, value)
 
     def get_content_for_dictation(self) -> str:
         raw_text = self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), False)
@@ -130,7 +129,7 @@ class Text(Gtk.Label):
             focusable=True,
             selectable=True,
             xalign=0,
-            css_classes=['lh']
+            css_classes=['body']
         )
         self.raw_text=""
         if content:

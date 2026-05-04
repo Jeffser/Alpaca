@@ -167,18 +167,18 @@ class BlockContainer(Gtk.Box):
 
         for block in blocks.text_to_block_list(content):
             if len(list(self)) <= 1:
-                self.prepend(block)
+                GLib.idle_add(self.prepend, block)
             else:
                 if isinstance(list(self)[-2], blocks.Text) and isinstance(block, blocks.Text):
-                    if not list(self)[-2].get_content().endswith('\n') and not block.get_content().startswith('\n'):
+                    if not list(self)[-2].get_content().endswith('\n') or block.get_content().startswith('\n'):
                         GLib.idle_add(list(self)[-2].append_content, '\n{}'.format(block.get_content()))
                     else:
                         GLib.idle_add(list(self)[-2].append_content, block.get_content())
                 elif isinstance(list(self)[-2], blocks.Text) and not isinstance(block, blocks.Text):
-                    list(self)[-2].set_content(list(self)[-2].get_content().strip())
-                    self.insert_child_after(block, list(self)[-2])
+                    GLib.idle_add(list(self)[-2].set_content, list(self)[-2].get_content().strip())
+                    GLib.idle_add(self.insert_child_after, block, list(self)[-2])
                 else:
-                    self.insert_child_after(block, list(self)[-2])
+                    GLib.idle_add(self.insert_child_after, block, list(self)[-2])
         GLib.idle_add(self.check_if_should_tts)
 
     def get_content(self) -> list:
