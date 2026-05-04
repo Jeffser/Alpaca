@@ -92,7 +92,12 @@ class InstancePreferencesDialog(Adw.Dialog):
             unchanged_api_title = _('API Key (Unchanged)')
             self.api_el.set_title(unchanged_api_title if self.instance.properties.get('api') else normal_api_title)
             self.api_el.connect('changed', lambda el: el.set_title(normal_api_title if el.get_text() else unchanged_api_title))
-        self.set_simple_element_value(self.api_el)
+
+            if self.instance.instance_type == 'cloudflare':
+                self.api_el.set_placeholder_text("account_id:api_key")
+            else:
+                self.api_el.set_placeholder_text("") 
+            self.set_simple_element_value(self.api_el)
 
         # TWEAK GROUP
         self.set_simple_element_value(self.think_el)

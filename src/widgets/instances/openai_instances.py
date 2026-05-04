@@ -657,6 +657,90 @@ class AtlasCloud(BaseInstance):
     instance_type_display = 'AtlasCloud'
     instance_url = 'https://api.atlascloud.ai/v1'
     description = _('AtlasCloud OpenAI-compatible API')
+
+class Cloudflare(BaseInstance):
+    instance_type = 'cloudflare'
+    instance_type_display = 'Cloudflare Workers AI'
+    instance_url = ''
+    description = _('Enter credentials in the API Key field as: Account_ID:API_Key')
+
+    def start(self):
+        if not self.client:
+            # Get the text from the API Key field
+            api_prop = self.properties.get('api', '')
+            account_id = "ACCOUNT_ID"
+            api_key = api_prop
+            
+            # Split the string at the first colon
+            if ':' in api_prop:
+                account_id, api_key = api_prop.split(':', 1)
+            
+            # Connect using the extracted account_id and api_key
+            self.client = openai.OpenAI(
+                api_key=api_key or "NOKEY",
+                base_url=f"https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/v1"
+            )
+
+    def get_available_models(self) -> dict:
+        try:
+            if not self.available_models or len(self.available_models) == 0:
+                self.available_models = {}
+                
+                api_prop = self.properties.get('api', '')
+                account_id = ""
+                api_key = api_prop
+                
+                if ':' in api_prop:
+                    account_id, api_key = api_prop.split(':', 1)
+                    
+                if account_id and api_key:
+                    response = requests.get(
+                        f'https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/models/search',
+                        headers={'Authorization': f'Bearer {api_key}'}
+                    )
+                    if response.status_code == 200:
+                        data = response.json()
+                        if data.get('success'):
+                            for model in data.get('result',[]):
+                                if model.get('task', {}).get('name') in ('Text Generation', 'Chat Completions'):
+                                    self.available_models[model.get('name')] = {'display_name': model.get('name').split('/')[-1]}
+                                
+                if len(self.available_models) == 0 and getattr(self, 'client', None):
+                    for m in self.client.models.list():
+                        self.available_models[m.id] = {}
+                        
+            return self.available_models
+        except Exception as e:
+            dialog.simple_error(
+                parent = self.row.get_root() if self.row else None,
+                title = _('Instance Error'),
+                body = _('Could not retrieve models'),
+                error_log = e
+            )
+            logger.error(e)
+            if self.row:
+                GLib.idle_add(self.row.get_parent().unselect_all)
+            return {}
+
+class MiniMax(BaseInstance):
+    instance_type = 'minimax'
+    instance_type_display = 'MiniMax'
+    instance_url = 'https://api.minimax.io/v1'
+    description = _('MiniMax large language models')
+    limitations = ('no-seed',)     # limitations = ('text-only',) as of now image support is not availble for Openai api
+    
+class ZAI(BaseInstance):
+    instance_type = 'zai'
+    instance_type_display = 'Z.AI (GLM)'
+    instance_url = 'https://api.z.ai/api/paas/v4/'
+    description = _('Z.AI platform with GLM large language models')
+
+class XiaomiMiMo(BaseInstance):
+    instance_type = 'xiaomi_mimo'
+    instance_type_display = 'Xiaomi MiMo'
+    instance_url = 'https://api.xiaomimimo.com/v1'
+    description = _('Xiaomi MiMo large language models')
+    limitations = ('no-seed',)     # limitations = ('text-only',) as of now image support is not availble for Openai api
     
 class GenericOpenAI(BaseInstance):
     instance_type = 'openai:generic'
