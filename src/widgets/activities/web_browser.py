@@ -193,12 +193,15 @@ class WebBrowser(WebKit.WebView):
 
         # Use Different Thread
         def on_result_load():
-            query_hostname = urlparse(query_url).hostname.lower()
+            query_hostname = (urlparse(query_url).hostname or "").lower()
             if query_hostname.startswith('www.'):
                 query_hostname = query_hostname[4:]
-            current_hostname = urlparse(self.get_uri()).hostname.lower()
+
+            uri = self.get_uri() or ""
+            current_hostname = (urlparse(uri).hostname or "").lower()
             if current_hostname.startswith('www.'):
                 current_hostname = current_hostname[4:]
+
             if not query_hostname == current_hostname:
                 self.on_load_callback = lambda: None
                 GLib.idle_add(self.attachment_requested, save_func)
