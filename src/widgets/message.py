@@ -46,11 +46,13 @@ class OptionPopup(Gtk.Popover):
     def delete_message(self, button=None):
         message_element = self.get_ancestor(Message)
         chat_element = self.get_ancestor(chat.Chat)
-        message_id = message_element.message_id
         SQL.delete_message(message_element)
         message_element.unparent()
         if len(list(chat_element.container)) == 0:
             chat_element.set_visible_child_name('welcome-screen')
+        elif chat_element:
+            vadjustment = chat_element.scrolledwindow.get_vadjustment()
+            GLib.idle_add(vadjustment.set_value, vadjustment.get_value())
 
     @Gtk.Template.Callback()
     def copy_message(self, button=None):
