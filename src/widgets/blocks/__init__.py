@@ -16,7 +16,7 @@ from ...sql_manager import generate_uuid, Instance as SQL
 patterns = [
     r'(?P<online_picture>!\[(?P<label>[^\]]*)\]\((?P<url>.*?)\))',
     r'(?P<code>```(?P<language>[a-zA-Z0-9_+\-]*)\n(?P<code_content>.*?)\n\s*```)',
-    r'(?P<latex>\\\[\s*(?P<latex_content1>.*?)\s*\\\]|\$\$\s*(?P<latex_content2>.*?)\s*\$\$|\$\s*(?P<latex_content3>.*?)\s*\$)',
+    r'(?P<latex>\\\[\s*(?P<latex_content1>.*?)\s*\\\]|\$\$\s*(?P<latex_content2>.*?)\s*\$\$|(?<!\$)\$(?P<latex_content3>[^\s$](?:[^$\n]*[^\s$])?)\$(?!\$))',
     r'(?P<table>(?:^|(?<=\n))\|[^\n]*\|[\s\xa0]*\n\|[\s\xa0\-|:]*\|[\s\xa0]*\n(?:\|[^\n]*\|(?:[\s\xa0]*\n|$))+)',
     r'(?P<line>^\s*-{3,}\s*$|\n-{3,}\n)'
 ]
@@ -62,30 +62,18 @@ def text_to_block_list(raw_content:str):
                     )
 
         elif kind == 'latex':
-            rawcontent = match.group('latex_content3') or ""
+            rawcontent = match.group('latex_content1') or match.group('latex_content2') or match.group('latex_content3') or ""
             content = rawcontent.strip()
             if content:
                 if '\\' in content:
+                    blocks.append(LatexRenderer(content=content))
+                else:
                     if len(blocks) > 0 and isinstance(blocks[-1], Text):
-                        blocks[-1].append_content(LatexRenderer(content=content))
+                        blocks[-1].append_content(content)
                     else:
                         blocks.append(
-                            Text(content="")
+                           Text(content=content)
                         )
-                        blocks[-1].append_content(LatexRenderer(content=content))
-            else:
-                rawcontent = match.group('latex_content1') or match.group('latex_content2') or ""
-                content = rawcontent.strip()
-                if content:
-                    if '\\' in content:
-                        blocks.append(LatexRenderer(content=content))
-                    else:
-                        if len(blocks) > 0 and isinstance(blocks[-1], Text):
-                            blocks[-1].append_content(content)
-                        else:
-                            blocks.append(
-                                Text(content=content)
-                            )
 
         elif kind == 'table':
             content = match.group(0)
