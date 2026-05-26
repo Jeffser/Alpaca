@@ -78,10 +78,12 @@ class OptionPopup(Gtk.Popover):
         current_model = self.get_root().get_selected_model().get_name()
         self.popdown()
 
-        if not chat_element.busy and current_model:
+        if not chat_element.busy and current_model and message_element:
             for att in list(message_element.image_attachment_container.container) + list(message_element.attachment_container.container):
                 SQL.delete_attachment(att)
                 att.unparent()
+            for attachment in SQL.get_attachments(message_element):
+                SQL.delete_attachment(attachments.Attachment(file_id=attachment[0], file_name=attachment[2], file_type=attachment[1], file_content=attachment[3]))
 
             message_element.block_container.clear()
             message_element.author = current_model
