@@ -88,10 +88,17 @@ class InstancePreferencesDialog(Adw.Dialog):
             self.port_el.set_visible(False)
 
         if 'api' in self.instance.properties:
-            normal_api_title = _('API Key (Optional)' if self.instance.instance_type == 'ollama' else _('API Key'))
+            # Set the title based on the instance type to keep the Cloudflare hint
+            if self.instance.instance_type == 'cloudflare':
+                normal_api_title = _('API Key (account_id:api_key)')
+            else:
+                normal_api_title = _('API Key (Optional)' if self.instance.instance_type == 'ollama' else _('API Key'))
+            
             unchanged_api_title = _('API Key (Unchanged)')
+            
             self.api_el.set_title(unchanged_api_title if self.instance.properties.get('api') else normal_api_title)
             self.api_el.connect('changed', lambda el: el.set_title(normal_api_title if el.get_text() else unchanged_api_title))
+
             self.set_simple_element_value(self.api_el)
 
         # TWEAK GROUP
@@ -429,4 +436,3 @@ def update_instance_list(instance_listbox:Gtk.ListBox, selected_instance_id:str)
     if not instance_added:
         GLib.idle_add(instance_listbox.get_root().instance_manager_stack.set_visible_child_name, 'no-instances')
         GLib.idle_add(instance_listbox.append, InstanceRow(Empty()))
-
