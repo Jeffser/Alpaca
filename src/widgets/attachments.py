@@ -77,8 +77,9 @@ def extract_content(file_type:str, file_path:str) -> str:
         else:
             return "Fetching this URL is disallowed by robots.txt"
 
-def extract_online_image(image_url:str, max_size:int) -> str | None:
-    image_response = requests.get(image_url)
+def extract_online_image(image_url: str, max_size: int) -> str | None:
+    image_response = requests.get(url=image_url, headers={"User-Agent": "AlpacaBot"})
+    image_response.raise_for_status()
     if image_response.status_code == 200:
         image_data = None
         image_path = os.path.join(cache_dir, 'image_web.jpg')
