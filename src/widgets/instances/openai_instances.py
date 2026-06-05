@@ -189,9 +189,9 @@ class BaseInstance:
                 parent = bot_message.get_root(),
                 title = _('Tool Error'),
                 body = _('An error occurred while running tool'),
-                error_log = e
+                error_log = str(e)
             )
-            logger.error(e)
+            logger.exception(e)
 
         self.generate_response(bot_message, chat, messages, model)
 
@@ -238,9 +238,9 @@ class BaseInstance:
                     parent = bot_message.get_root(),
                     title = _('Instance Error'),
                     body = _('Message generation failed'),
-                    error_log = e
+                    error_log = str(e)
                 )
-                logger.error(e)
+                logger.exception(e)
                 if self.row:
                     GLib.idle_add(self.row.get_parent().unselect_all)
         bot_message.finish_generation()
@@ -314,9 +314,9 @@ class BaseInstance:
                 parent = self.row.get_root() if self.row else None,
                 title = _('Instance Error'),
                 body = _('Could not retrieve added models'),
-                error_log = e
+                error_log = str(e)
             )
-            logger.error(e)
+            logger.exception(e)
             if self.row:
                 GLib.idle_add(self.row.get_parent().unselect_all)
             return {}
@@ -371,9 +371,9 @@ class Gemini(BaseInstance):
                 parent = self.row.get_root() if self.row else None,
                 title = _('Instance Error'),
                 body = _('Could not retrieve added models'),
-                error_log = e
+                error_log = str(e)
             )
-            logger.error(e)
+            logger.exception(e)
             if self.row:
                 GLib.idle_add(self.row.get_parent().unselect_all)
         return {}
@@ -413,9 +413,9 @@ class Together(BaseInstance):
                 parent = self.row.get_root() if self.row else None,
                 title = _('Instance Error'),
                 body = _('Could not retrieve added models'),
-                error_log = e
+                error_log = str(e)
             )
-            logger.error(e)
+            logger.exception(e)
             if self.row:
                 GLib.idle_add(self.row.get_parent().unselect_all)
         return {}
@@ -474,9 +474,9 @@ class OpenRouter(BaseInstance):
                 parent = self.row.get_root() if self.row else None,
                 title = _('Instance Error'),
                 body = _('Could not retrieve models'),
-                error_log = e
+                error_log = str(e)
             )
-            logger.error(e)
+            logger.exception(e)
             if self.row:
                 GLib.idle_add(self.row.get_parent().unselect_all)
             return {}
@@ -513,9 +513,9 @@ class Fireworks(BaseInstance):
                 parent = self.row.get_root() if self.row else None,
                 title = _('Instance Error'),
                 body = _('Could not retrieve models'),
-                error_log = e
+                error_log = str(e)
             )
-            logger.error(e)
+            logger.exception(e)
             if self.row:
                 GLib.idle_add(self.row.get_parent().unselect_all)
             return {}
@@ -546,9 +546,9 @@ class LambdaLabs(BaseInstance):
                 parent = self.row.get_root() if self.row else None,
                 title = _('Instance Error'),
                 body = _('Could not retrieve models'),
-                error_log = e
+                error_log = str(e)
             )
-            logger.error(e)
+            logger.exception(e)
             if self.row:
                 GLib.idle_add(self.row.get_parent().unselect_all)
             return {}
@@ -625,9 +625,9 @@ class CompactifAI(BaseInstance):
                 parent=self.row.get_root() if self.row else None,
                 title=_('Instance Error'),
                 body=_('Could not retrieve CompactifAI models'),
-                error_log=e
+                error_log = str(e)
             )
-            logger.error(e)
+            logger.exception(e)
             if self.row:
                 GLib.idle_add(self.row.get_parent().unselect_all)
             return {}
@@ -715,9 +715,9 @@ class Cloudflare(BaseInstance):
                 parent = self.row.get_root() if self.row else None,
                 title = _('Instance Error'),
                 body = _('Could not retrieve models'),
-                error_log = e
+                error_log = str(e)
             )
-            logger.error(e)
+            logger.exception(e)
             if self.row:
                 GLib.idle_add(self.row.get_parent().unselect_all)
             return {}

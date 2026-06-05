@@ -207,9 +207,9 @@ class MicrophoneButton(Gtk.Stack):
                     parent = button.get_root(),
                     title = _('Speech Recognition Error'),
                     body = _('An error occurred while pulling speech recognition model'),
-                    error_log = e
+                    error_log = str(e)
                 )
-                logger.error(e)
+                logger.exception(e)
                 return
             button.get_parent().set_visible_child_name("button")
 
@@ -240,9 +240,9 @@ class MicrophoneButton(Gtk.Stack):
                         parent = button.get_root(),
                         title = _('Speech Recognition Error'),
                         body = _('An error occurred while using speech recognition'),
-                        error_log = e
+                        error_log = str(e)
                     )
-                    logger.error(e)
+                    logger.exception(e)
                 finally:
                     stream.stop_stream()
                     stream.close()

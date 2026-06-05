@@ -241,9 +241,9 @@ class BaseInstance:
                     parent = bot_message.get_root(),
                     title = _('Instance Error'),
                     body = _('Message generation failed'),
-                    error_log = e
+                    error_log = str(e)
                 )
-                logger.error(e)
+                logger.exception(e)
             if self.row:
                 GLib.idle_add(self.row.get_parent().unselect_all)
 
@@ -363,9 +363,9 @@ class BaseInstance:
                     parent = self.row.get_root() if self.row else None,
                     title = _('Instance Error'),
                     body = _('Could not retrieve available models'),
-                    error_log = e
+                    error_log = str(e)
                 )
-                logger.error(e)
+                logger.exception(e)
         return {}
 
     def get_model_info(self, model_name:str) -> dict:
@@ -398,9 +398,9 @@ class BaseInstance:
                     parent = self.row.get_root() if self.row else None,
                     title = _('Error Pulling Model'),
                     body = model.get_name(),
-                    error_log = e
+                    error_log = str(e)
                 )
-                logger.error(e)
+                logger.exception(e)
             model.get_parent().get_parent().remove(model.get_parent())
 
     def upload_gguf(self, gguf_path:str):
@@ -606,7 +606,7 @@ class OllamaManaged(BaseInstance):
                         parent = self.row.get_root() if self.row else None,
                         title = _('Instance Error'),
                         body = _('Managed Ollama instance failed to start'),
-                        error_log = e
+                        error_log = str(e)
                     )
                 if self.row:
                     GLib.idle_add(self.row.get_parent().unselect_all)
@@ -727,9 +727,9 @@ class OllamaCloud(BaseInstance):
                     parent = self.row.get_root() if self.row else None,
                     title = _('Instance Error'),
                     body = _('Could not retrieve added models'),
-                    error_log = e
+                    error_log = str(e)
                 )
-                logger.error(e)
+                logger.exception(e)
             if self.row:
                 GLib.idle_add(self.row.get_parent().unselect_all)
         return {}
