@@ -341,16 +341,15 @@ class BaseInstance:
 
             return model_list
 
-            return [{'name': m.model} for m in models if m.model]
         except Exception as e:
             if self.instance_type != 'ollama:managed' or is_ollama_installed():
                 dialog.simple_error(
                     parent = self.row.get_root() if self.row else None,
                     title = _('Instance Error'),
                     body = _('Could not retrieve added models'),
-                    error_log = e
+                    error_log = str(e)
                 )
-                logger.error(e)
+                logger.exception(e)
             if self.row:
                 GLib.idle_add(self.row.get_parent().unselect_all)
         return []
