@@ -480,7 +480,7 @@ class AttachmentContainer(Gtk.ScrolledWindow):
         if file.query_info("standard::content-type", 0, None).get_content_type() == 'text/plain':
             extension = 'txt'
         else:
-            extension = file.get_path().split(".")[-1]
+            extension = file.get_path().split(".")[-1].lower()
         found_types = [key for key, value in file_types.items() if extension in value]
         if len(found_types) == 0:
             file_type = 'plain_text'
