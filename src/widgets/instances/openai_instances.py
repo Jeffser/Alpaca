@@ -577,7 +577,40 @@ class Mistral(BaseInstance):
     instance_type_display = 'Mistral AI'
     instance_url = 'https://api.mistral.ai/v1/'
     description = _('Mistral AI large language models')
-    limitations = ('text-only',)
+
+    def get_model_info(self, model_name:str) -> dict:
+        try:
+            response = requests.get(
+                f'{self.instance_url}/models',
+                headers={
+                    'accept': 'application/json',
+                    'authorization': 'Bearer {}'.format(self.properties.get('api'))
+                }
+            )
+            data = response.json()
+
+            for m in data['data']:
+                if m.get('id', None) == model_name:
+                    model_info = {}
+                    model_info['capabilities'] = []
+                    print(m)
+
+                    for k, v in m['capabilities'].items():
+                        if not v:
+                            continue
+                        if k == 'completion_chat':
+                            model_info['capabilities'].append('completion')
+                        elif k == 'function_calling':
+                            model_info['capabilities'].append('tools')
+                        elif k == 'vision':
+                            model_info['capabilities'].append('vision')
+                        # TODO: Add others once used by Alpaca
+
+                    print(model_info)
+                    return model_info
+        except Exception as e:
+            logger.error(e)
+        return {}
 
 class LlamaAPI(BaseInstance):
     instance_type = 'llama-api'
