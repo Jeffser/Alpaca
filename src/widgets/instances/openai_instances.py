@@ -785,6 +785,31 @@ class LlamaCpp(BaseInstance):
         self.instance_url = properties.get('url', '')
         super().__init__(instance_id, properties)
 
+    def get_model_info(self, model_name:str) -> dict:
+        try:
+            response = requests.get(
+                f'{self.instance_url}/models',
+                headers={
+                    'accept': 'application/json',
+                    'authorization': 'Bearer {}'.format(self.properties.get('api'))
+                }
+            )
+            data = response.json()
+
+            for m in data['data']:
+                if m.get('id', None) == model_name:
+                    model_info = {}
+                    model_info['capabilities'] = ['completion', 'tools']
+                    for c in m['architecture']['input_modalities']:
+                        if c == 'image':
+                            model_info['capabilities'].append('vision')
+                        # TODO: Add others once used by Alpaca
+
+                    return model_info
+        except Exception as e:
+            logger.error(e)
+        return {}
+
 class GenericOpenAI(BaseInstance):
     instance_type = 'openai:generic'
     instance_type_display = _('OpenAI Compatible Instance')
