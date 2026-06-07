@@ -69,7 +69,7 @@ class InstancePreferencesDialog(Adw.Dialog):
         self.set_simple_element_value(self.name_el)
 
         self.set_simple_element_value(self.url_el)
-        if self.instance.instance_type in ('ollama', 'ollama:managed', 'openai:generic'):
+        if self.instance.instance_type in ('ollama', 'ollama:managed', 'openai:generic', 'llama_cpp'):
             if self.instance.instance_type == 'ollama:managed':
                 try:
                     port = int(self.instance.properties.get('url').split(':')[-1])

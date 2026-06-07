@@ -774,7 +774,17 @@ class XiaomiMiMo(BaseInstance):
     instance_url = 'https://api.xiaomimimo.com/v1'
     description = _('Xiaomi MiMo large language models')
     limitations = ('no-seed',)     # limitations = ('text-only',) as of now image support is not availble for Openai api
-    
+
+class LlamaCpp(BaseInstance):
+    instance_type = 'llama_cpp'
+    instance_type_display = 'llama.cpp'
+    instance_url = ''
+    description = _('llama.cpp instance')
+
+    def __init__(self, instance_id:str, properties:dict):
+        self.instance_url = properties.get('url', '')
+        super().__init__(instance_id, properties)
+
 class GenericOpenAI(BaseInstance):
     instance_type = 'openai:generic'
     instance_type_display = _('OpenAI Compatible Instance')
