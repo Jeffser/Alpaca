@@ -126,9 +126,9 @@ class Transcriber(Gtk.Stack):
                 parent = self.get_root(),
                 title = _('Transcription Error'),
                 body = _('An error occurred while pulling speech recognition model'),
-                error_log = e
+                error_log = str(e)
             )
-            logger.error(e)
+            logger.exception(e)
             GLib.idle_add(self.close)
             return
         try:
@@ -156,9 +156,9 @@ class Transcriber(Gtk.Stack):
                 parent = self.get_root(),
                 title = _('Transcription Error'),
                 body = _('An error occurred while transcribing audio'),
-                error_log = e
+                error_log = str(e)
             )
-            logger.error(e)
+            logger.exception(e)
             GLib.idle_add(self.close)
             return
 
