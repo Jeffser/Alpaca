@@ -87,7 +87,7 @@ class BaseInstance:
             chat_element.busy = True
             GLib.idle_add(chat_element.set_visible_child_name, 'content')
 
-        messages = chat_element.convert_to_ollama()[:list(chat_element.container).index(bot_message)]
+        messages = chat_element.convert_to_json()[:list(chat_element.container).index(bot_message)]
 
         character_dict = SQL.get_model_preferences(model).get('character', {})
         if character_dict.get('data', {}).get('extensions', {}).get('com.jeffser.Alpaca', {}).get('enabled', False):
