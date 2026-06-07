@@ -32,7 +32,7 @@ class InlinePicture(Gtk.ScrolledWindow):
             self.button.set_child(image)
             self.button.set_sensitive(True)
         except Exception as e:
-            logger.error(e)
+            logger.exception(e)
 
     def get_content(self) -> str:
         return '![]({})'.format(self.url)
