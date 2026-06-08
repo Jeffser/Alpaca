@@ -141,12 +141,12 @@ class BaseInstance:
                 params["options"]["seed"] = self.properties.get('seed')
 
         metadata_string = ""
-        tool_calls = []
         thought = ""
         content = ""
         try:
             bot_message.block_container.clear()
             while chat.busy:
+                tool_calls = []
                 params['messages'] = messages
                 response = self.client.chat(**params)
                 for chunk in response:
