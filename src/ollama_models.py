@@ -7219,6 +7219,7 @@ OLLAMA_MODELS = {
         "categories": [
                 "vision",
                 "tools",
+                "reasoning",
                 "medium",
                 "big",
                 "huge",
@@ -7249,7 +7250,7 @@ OLLAMA_MODELS = {
         "categories": [
                 "vision",
                 "tools",
-                "thinking",
+                "reasoning",
                 "big",
                 "huge",
                 "code"
