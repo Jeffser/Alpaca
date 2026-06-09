@@ -87,7 +87,7 @@ class BaseInstance:
             chat_element.busy = True
             GLib.idle_add(chat_element.set_visible_child_name, 'content')
 
-        messages = chat_element.convert_to_ollama()[:list(chat_element.container).index(bot_message)]
+        messages = chat_element.convert_to_json()[:list(chat_element.container).index(bot_message)]
 
         character_dict = SQL.get_model_preferences(model).get('character', {})
         if character_dict.get('data', {}).get('extensions', {}).get('com.jeffser.Alpaca', {}).get('enabled', False):
@@ -577,7 +577,40 @@ class Mistral(BaseInstance):
     instance_type_display = 'Mistral AI'
     instance_url = 'https://api.mistral.ai/v1/'
     description = _('Mistral AI large language models')
-    limitations = ('text-only',)
+
+    def get_model_info(self, model_name:str) -> dict:
+        try:
+            response = requests.get(
+                f'{self.instance_url}/models',
+                headers={
+                    'accept': 'application/json',
+                    'authorization': 'Bearer {}'.format(self.properties.get('api'))
+                }
+            )
+            data = response.json()
+
+            for m in data['data']:
+                if m.get('id', None) == model_name:
+                    model_info = {}
+                    model_info['capabilities'] = []
+                    print(m)
+
+                    for k, v in m['capabilities'].items():
+                        if not v:
+                            continue
+                        if k == 'completion_chat':
+                            model_info['capabilities'].append('completion')
+                        elif k == 'function_calling':
+                            model_info['capabilities'].append('tools')
+                        elif k == 'vision':
+                            model_info['capabilities'].append('vision')
+                        # TODO: Add others once used by Alpaca
+
+                    print(model_info)
+                    return model_info
+        except Exception as e:
+            logger.error(e)
+        return {}
 
 class LlamaAPI(BaseInstance):
     instance_type = 'llama-api'
@@ -741,7 +774,42 @@ class XiaomiMiMo(BaseInstance):
     instance_url = 'https://api.xiaomimimo.com/v1'
     description = _('Xiaomi MiMo large language models')
     limitations = ('no-seed',)     # limitations = ('text-only',) as of now image support is not availble for Openai api
-    
+
+class LlamaCpp(BaseInstance):
+    instance_type = 'llama_cpp'
+    instance_type_display = 'llama.cpp'
+    instance_url = ''
+    description = _('llama.cpp instance')
+
+    def __init__(self, instance_id:str, properties:dict):
+        self.instance_url = properties.get('url', '')
+        super().__init__(instance_id, properties)
+
+    def get_model_info(self, model_name:str) -> dict:
+        try:
+            response = requests.get(
+                f'{self.instance_url}/models',
+                headers={
+                    'accept': 'application/json',
+                    'authorization': 'Bearer {}'.format(self.properties.get('api'))
+                }
+            )
+            data = response.json()
+
+            for m in data['data']:
+                if m.get('id', None) == model_name:
+                    model_info = {}
+                    model_info['capabilities'] = ['completion', 'tools']
+                    for c in m['architecture']['input_modalities']:
+                        if c == 'image':
+                            model_info['capabilities'].append('vision')
+                        # TODO: Add others once used by Alpaca
+
+                    return model_info
+        except Exception as e:
+            logger.error(e)
+        return {}
+
 class GenericOpenAI(BaseInstance):
     instance_type = 'openai:generic'
     instance_type_display = _('OpenAI Compatible Instance')
