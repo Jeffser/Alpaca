@@ -7202,6 +7202,10 @@ OLLAMA_MODELS = {
                         "9.6 GB"
                 ],
                 [
+                        "12b",
+                        "7.6 GB"
+                ],
+                [
                         "26b",
                         "18 GB"
                 ],
@@ -7215,6 +7219,7 @@ OLLAMA_MODELS = {
         "categories": [
                 "vision",
                 "tools",
+                "reasoning",
                 "medium",
                 "big",
                 "huge",
@@ -7245,7 +7250,7 @@ OLLAMA_MODELS = {
         "categories": [
                 "vision",
                 "tools",
-                "thinking",
+                "reasoning",
                 "big",
                 "huge",
                 "code"
