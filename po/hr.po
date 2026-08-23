@@ -1,0 +1,4011 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Niko Košćina <nikokoscina@icloud.com>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: alpaca main\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-03 08:42-0600\n"
+"PO-Revision-Date: 2026-08-23 14:37+0200\n"
+"Last-Translator: Niko Košćina <nikokoscina@icloud.com>\n"
+"Language-Team: Croatian\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Gtranslator 50.0\n"
+
+#: data/com.jeffser.Alpaca.desktop.in:2
+#: data/com.jeffser.Alpaca.metainfo.xml.in:7
+msgid "Alpaca"
+msgstr "Alpaca"
+
+#: data/com.jeffser.Alpaca.desktop.in:8
+msgid "ai;ollama;llm"
+msgstr "ai;ollama;llm"
+
+#: data/com.jeffser.Alpaca.desktop.in:14 src/ui/quick_ask.blp:12
+#: src/ui/quick_ask.blp:33
+msgid "Quick Ask"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:8
+msgid "Chat with AI models"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:10
+msgid "A private AI client"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:11
+msgid "Features"
+msgstr "Značajke"
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:13
+msgid "Talk to multiple models in the same conversation"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:14
+msgid "Pull and delete models from the app"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:15
+msgid "Have multiple conversations"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:16
+msgid "Image recognition (Only available with compatible models)"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:17
+msgid "Plain text documents recognition"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:18
+msgid "Import and export chats"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:19
+msgid "Append YouTube transcripts to the prompt"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:20
+msgid "Append text from a website to the prompt"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:21
+msgid "PDF recognition"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:23
+msgid "Disclaimer"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:24
+msgid ""
+"This project is not affiliated at all with Ollama, I'm not responsible for "
+"any damages to your device or software caused by running code given by any "
+"models."
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:27
+msgid "Jeffry Samuel Eduarte Rojas"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:53
+msgid "A normal conversation with an AI Model"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:57
+msgid "Image recognition"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:61
+msgid "Custom model"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:65
+msgid "Picture background removal"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:69
+msgid "A Python script running inside integrated terminal"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:73
+msgid "A conversation with web search"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:77
+msgid "AI model being downloaded"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.metainfo.xml.in:81
+msgid "A Live Chat conversation with a character"
+msgstr ""
+
+#: data/com.jeffser.Alpaca.SearchProvider.desktop.in:3
+msgid "Alpaca Search Provider"
+msgstr ""
+
+#: src/ui/guide.blp:5
+msgid "Welcome"
+msgstr ""
+
+#: src/ui/guide.blp:22
+msgid "Welcome to Alpaca"
+msgstr ""
+
+#: src/ui/guide.blp:23
+msgid "Powering your potential"
+msgstr ""
+
+#: src/ui/guide.blp:25 src/ui/guide.blp:26
+msgid "Begin Guide"
+msgstr ""
+
+#: src/ui/guide.blp:41
+msgid "Instances"
+msgstr ""
+
+#: src/ui/guide.blp:42
+msgid ""
+"They are the bridge between you and AI models.\n"
+"\n"
+"Ollama can be used to run AI models locally in your device.\n"
+"\n"
+"You can modify or create new instances later by accessing the Instance "
+"Manager from the main dropdown menu."
+msgstr ""
+
+#: src/ui/guide.blp:50 src/ui/guide.blp:51
+msgid "Create Ollama Instance"
+msgstr ""
+
+#: src/ui/guide.blp:60 src/ui/guide.blp:61
+msgid "Connect to External Server"
+msgstr ""
+
+#: src/ui/guide.blp:76
+msgid "Models"
+msgstr "Modeli"
+
+#: src/ui/guide.blp:77
+msgid ""
+"Choose the right brain for the job. From lightning-fast replies to advanced "
+"coding and creative writing, Alpaca has a model tailored for whatever you "
+"might need.\n"
+"\n"
+"You can access the Model Manager later from the main dropdown menu"
+msgstr ""
+
+#: src/ui/guide.blp:80 src/ui/guide.blp:81
+#: src/ui/widgets/models/text_selector.blp:10
+msgid "Open Model Manager"
+msgstr ""
+
+#: src/ui/guide.blp:97
+msgid "Enjoy Alpaca"
+msgstr ""
+
+#: src/ui/guide.blp:98
+msgid ""
+"There are even more features waiting for you, explore the whole interface to "
+"find more functionality!"
+msgstr ""
+
+#: src/ui/guide.blp:101 src/ui/guide.blp:102
+msgid "Close Guide"
+msgstr ""
+
+#: src/ui/preferences.blp:6 src/ui/window.blp:305
+msgid "Preferences"
+msgstr "Osobitosti"
+
+#: src/ui/preferences.blp:10 src/ui/shortcuts.blp:6
+msgid "General"
+msgstr "Općenito"
+
+#: src/ui/preferences.blp:14
+msgid "Run Alpaca In Background"
+msgstr ""
+
+#: src/ui/preferences.blp:18
+msgid "Show Power Saver Warning"
+msgstr ""
+
+#: src/ui/preferences.blp:19
+msgid "When running an Ollama (Managed) instance"
+msgstr ""
+
+#: src/ui/preferences.blp:23
+msgid "Show Model Manager Shortcut"
+msgstr ""
+
+#: src/ui/preferences.blp:24
+msgid "You can also find the model manager in the main dropdown menu"
+msgstr ""
+
+#: src/ui/preferences.blp:28
+msgid "Include Messages on Search"
+msgstr ""
+
+#: src/ui/preferences.blp:29
+msgid "When searching for chats inside a folder"
+msgstr ""
+
+#: src/ui/preferences.blp:33
+msgid "Check for Ollama Updates"
+msgstr ""
+
+#: src/ui/preferences.blp:34
+msgid "When selecting an Ollama (Managed) instance"
+msgstr ""
+
+#: src/ui/preferences.blp:39
+msgid "Zoom"
+msgstr ""
+
+#: src/ui/preferences.blp:51
+msgid "Regenerate Response After Editing Message"
+msgstr ""
+
+#: src/ui/preferences.blp:52
+msgid "Applicable when the next message was generated by an AI model"
+msgstr ""
+
+#: src/ui/preferences.blp:56
+msgid "Max Image Attachment Size"
+msgstr ""
+
+#: src/ui/preferences.blp:57
+msgid "This might affect the performance of vision models"
+msgstr ""
+
+#: src/ui/preferences.blp:69 src/widgets/preferences.py:70
+msgid "Delete All Chats"
+msgstr ""
+
+#: src/ui/preferences.blp:80
+msgid "Audio"
+msgstr "Zvuk"
+
+#: src/ui/preferences.blp:84
+msgid "Speech Recognition Model"
+msgstr ""
+
+#: src/ui/preferences.blp:85
+msgid ""
+"Models are downloaded upon first use, you can delete them from the model "
+"manager"
+msgstr ""
+
+#: src/ui/preferences.blp:90
+msgid "Speech Recognition Language"
+msgstr ""
+
+#: src/ui/preferences.blp:96
+msgid "Auto Send Message After Talking"
+msgstr ""
+
+#: src/ui/preferences.blp:103
+msgid "Default Text to Speech Voice"
+msgstr ""
+
+#: src/ui/preferences.blp:104
+msgid ""
+"Voices are downloaded upon first use, each weighing around 1 MB, and you can "
+"delete them from the model manager"
+msgstr ""
+
+#: src/ui/preferences.blp:109
+msgid "Dictate New Messages Automatically"
+msgstr ""
+
+#: src/ui/preferences.blp:110
+msgid "Dictate new messages as they are generated"
+msgstr ""
+
+#: src/ui/preferences.blp:114
+msgid "Dictation Speed"
+msgstr ""
+
+#: src/ui/preferences.blp:115
+msgid "Modify the speed of the dictation voice"
+msgstr ""
+
+#: src/ui/preferences.blp:129 src/ui/widgets/activities/activity_manager.blp:8
+#: src/ui/widgets/activities/activity_manager.blp:44
+#: src/ui/widgets/activities/activity_manager.blp:53
+#: src/ui/widgets/activities/activity_tab_window.blp:5
+msgid "Activities"
+msgstr "Aktivnosti"
+
+#: src/ui/preferences.blp:133
+msgid "Default Tool"
+msgstr ""
+
+#: src/ui/preferences.blp:134
+msgid "Applied when a model is compatible with tools"
+msgstr ""
+
+#: src/ui/preferences.blp:137 src/widgets/tools/tools.py:53
+msgid "No Tool"
+msgstr ""
+
+#: src/ui/preferences.blp:138 src/widgets/tools/tools.py:59
+msgid "Auto Detect Tool"
+msgstr ""
+
+#: src/ui/preferences.blp:139 src/widgets/tools/tools.py:64
+msgid "Web Search"
+msgstr ""
+
+#: src/ui/preferences.blp:140 src/ui/preferences.blp:187
+#: src/widgets/activities/__init__.py:76 src/widgets/activities/terminal.py:110
+#: src/widgets/tools/tools.py:106
+msgid "Terminal"
+msgstr "Terminal"
+
+#: src/ui/preferences.blp:141 src/ui/preferences.blp:243
+#: src/widgets/activities/__init__.py:128
+#: src/widgets/activities/background_remover.py:126
+#: src/widgets/models/manager.py:261 src/widgets/tools/tools.py:194
+msgid "Background Remover"
+msgstr ""
+
+#: src/ui/preferences.blp:147
+msgid "Preferred Activity Mode"
+msgstr ""
+
+#: src/ui/preferences.blp:148
+msgid ""
+"This affects how terminals, attachments and other activities are represented "
+"in the main window"
+msgstr ""
+
+#: src/ui/preferences.blp:152
+msgid "Sidebar"
+msgstr "Bočna traka"
+
+#: src/ui/preferences.blp:153
+msgid "Dialog"
+msgstr "Dijalog"
+
+#: src/ui/preferences.blp:154
+msgid "Window"
+msgstr "Prozor"
+
+#. Activity
+#: src/ui/preferences.blp:161 src/widgets/activities/__init__.py:96
+#: src/widgets/activities/web_browser.py:53
+#: src/widgets/activities/web_browser.py:64
+msgid "Web Browser"
+msgstr "Web preglednik"
+
+#: src/ui/preferences.blp:164
+msgid "Search Engine"
+msgstr "Web pretraživač"
+
+#: src/ui/preferences.blp:172
+msgid "Custom"
+msgstr ""
+
+#: src/ui/preferences.blp:178
+msgid "Search Query URL"
+msgstr ""
+
+#: src/ui/preferences.blp:182
+msgid "Homepage URL"
+msgstr ""
+
+#: src/ui/preferences.blp:190
+msgid "Connection Type"
+msgstr ""
+
+#: src/ui/preferences.blp:191
+msgid "How Alpaca will connect to your device"
+msgstr ""
+
+#: src/ui/preferences.blp:203 src/ui/widgets/instances/preferences.blp:92
+msgid "Username"
+msgstr "Korisničko ime"
+
+#: src/ui/preferences.blp:207
+msgid "Device IP"
+msgstr ""
+
+#: src/ui/preferences.blp:212
+msgid "Alpaca needs an additional permission to use the terminal directly"
+msgstr ""
+
+#: src/ui/preferences.blp:245 src/ui/widgets/instances/preferences.blp:272
+msgid "Default Model"
+msgstr "Uobičajeni model"
+
+#: src/ui/quick_ask.blp:8
+msgid "Quick ask dialog"
+msgstr ""
+
+#: src/ui/quick_ask.blp:22
+msgid "Save Conversation to Alpaca"
+msgstr ""
+
+#: src/ui/shortcuts.blp:9
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr ""
+
+#: src/ui/shortcuts.blp:14
+msgctxt "shortcut window"
+msgid "Preferences"
+msgstr "Postavke"
+
+#: src/ui/shortcuts.blp:19
+msgctxt "shortcut window"
+msgid "Quick Ask"
+msgstr ""
+
+#: src/ui/shortcuts.blp:24
+msgctxt "shortcut window"
+msgid "Model Manager"
+msgstr ""
+
+#: src/ui/shortcuts.blp:29
+msgctxt "shortcut window"
+msgid "Instance Manager"
+msgstr ""
+
+#: src/ui/shortcuts.blp:34
+msgctxt "shortcut window"
+msgid "Toggle Sidebar"
+msgstr ""
+
+#: src/ui/shortcuts.blp:39
+msgctxt "shortcut window"
+msgid "Zoom In"
+msgstr ""
+
+#: src/ui/shortcuts.blp:44
+msgctxt "shortcut window"
+msgid "Zoom Out"
+msgstr ""
+
+#: src/ui/shortcuts.blp:49
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Odustani"
+
+#: src/ui/shortcuts.blp:55
+msgctxt "shortcut window"
+msgid "Chat Management"
+msgstr ""
+
+#: src/ui/shortcuts.blp:58
+msgctxt "shortcut window"
+msgid "Create Chat"
+msgstr "Stvori razgovor"
+
+#: src/ui/shortcuts.blp:63
+msgctxt "shortcut window"
+msgid "Delete Chat"
+msgstr "Ukloni razgovor"
+
+#: src/ui/shortcuts.blp:68
+msgctxt "shortcut window"
+msgid "Edit Chat"
+msgstr "Uredi razgovor"
+
+#: src/ui/shortcuts.blp:73
+msgctxt "shortcut window"
+msgid "Toggle Searchbars"
+msgstr ""
+
+#: src/ui/shortcuts.blp:79
+msgctxt "shortcut window"
+msgid "Message Entry"
+msgstr ""
+
+#: src/ui/shortcuts.blp:82
+msgid "Copy"
+msgstr "Kopiraj"
+
+#: src/ui/shortcuts.blp:87
+msgid "Paste"
+msgstr "Zalijepi"
+
+#: src/ui/shortcuts.blp:92
+msgid "Open Emoji Menu"
+msgstr ""
+
+#: src/ui/shortcuts.blp:97
+msgid "Insert new line"
+msgstr ""
+
+#: src/ui/shortcuts.blp:102
+msgid "Send Message as System"
+msgstr "Pošalji poruku kao sustav"
+
+#: src/ui/shortcuts.blp:103
+msgid "System messages are taken as literal instructions by models"
+msgstr ""
+
+#: src/ui/shortcuts.blp:108
+msgid "Send Message as User"
+msgstr "Pošalji poruku kao korisnik"
+
+#: src/ui/window.blp:45 src/window.py:349
+#: src/widgets/instances/ollama_instances.py:76
+#: src/widgets/instances/ollama_instances.py:91
+#: src/widgets/instances/openai_instances.py:114
+#: src/widgets/instances/openai_instances.py:130 src/widgets/chat.py:214
+#: src/widgets/chat.py:216 src/widgets/chat.py:471 src/widgets/chat.py:989
+#: src/widgets/chat.py:1017
+msgid "New Chat"
+msgstr "Novi razgovor"
+
+#: src/ui/window.blp:64
+msgid "Menu"
+msgstr "Meni"
+
+#: src/ui/window.blp:71
+msgid "Search Chats"
+msgstr "Pretraži razgovore"
+
+#: src/ui/window.blp:79
+msgid "Chat search bar"
+msgstr ""
+
+#: src/ui/window.blp:88 src/ui/window.blp:91
+msgid "Search chats"
+msgstr "Pretraži razgovore"
+
+#: src/ui/window.blp:121
+msgid "Toggle Sidebar"
+msgstr ""
+
+#: src/ui/window.blp:128
+msgid "Search Messages"
+msgstr "Pretraži poruke"
+
+#: src/ui/window.blp:135
+msgid "Toggle Activities Sidebar"
+msgstr ""
+
+#: src/ui/window.blp:143
+msgid "Chat Menu"
+msgstr ""
+
+#: src/ui/window.blp:155
+msgid "Message search bar"
+msgstr ""
+
+#: src/ui/window.blp:165 src/ui/window.blp:168
+msgid "Search messages"
+msgstr ""
+
+#: src/ui/window.blp:180 src/window.py:190 src/widgets/guide.py:123
+msgid "Close"
+msgstr "Zatvori"
+
+#: src/ui/window.blp:181
+msgid ""
+"Warning: Power saver mode is enabled, this will slow down message generation"
+msgstr ""
+"Opomena: Način Štednja energije je omogućeno, ovo će usporiti generiranje "
+"poruku"
+
+#: src/ui/window.blp:207
+msgid "Instance Manager"
+msgstr ""
+
+#: src/ui/window.blp:220
+msgid "No Instances Found"
+msgstr ""
+
+#: src/ui/window.blp:221
+msgid "It looks a bit empty in here. Try adding an instance get started!"
+msgstr ""
+
+#: src/ui/window.blp:224 src/ui/window.blp:235 src/ui/window.blp:252
+#: src/window.py:117
+msgid "Add Instance"
+msgstr ""
+
+#: src/ui/window.blp:246
+msgid "Added Instances"
+msgstr ""
+
+#: src/ui/window.blp:247
+msgid ""
+"Manage your AI instances, chats and messages are shared between instances "
+"when generating responses."
+msgstr ""
+
+#: src/ui/window.blp:283
+msgid "Import Chat"
+msgstr ""
+
+#: src/ui/window.blp:288
+msgid "Manage Instances"
+msgstr ""
+
+#: src/ui/window.blp:293 src/ui/widgets/message/global_footer.blp:46
+msgid "Manage Models"
+msgstr ""
+
+#: src/ui/window.blp:300
+msgid "Start Quick Ask"
+msgstr ""
+
+#: src/ui/window.blp:310
+msgid "Keyboard Shortcuts"
+msgstr ""
+
+#: src/ui/window.blp:315
+msgid "About Alpaca"
+msgstr ""
+
+#: src/ui/window.blp:324 src/widgets/chat.py:948 src/widgets/chat.py:1013
+msgid "Edit Chat"
+msgstr "Uredi razgovor"
+
+#: src/ui/window.blp:329 src/widgets/chat.py:953
+msgid "Duplicate Chat"
+msgstr ""
+
+#: src/ui/window.blp:334 src/widgets/chat.py:958 src/widgets/chat.py:1149
+msgid "Export Chat"
+msgstr ""
+
+#: src/ui/window.blp:341 src/widgets/chat.py:965 src/widgets/chat.py:1051
+msgid "Delete Chat"
+msgstr ""
+
+#: src/ui/widgets/activities/activity_manager.blp:34
+msgid "Create Activity"
+msgstr ""
+
+#: src/ui/widgets/activities/attachment_creator.blp:26
+#: src/widgets/attachments.py:269
+msgid "Save Attachment"
+msgstr ""
+
+#: src/ui/widgets/activities/background_remover.blp:19
+#: src/ui/widgets/activities/background_remover.blp:21
+#: src/ui/widgets/activities/background_remover.blp:79
+msgid "Select Image"
+msgstr "Odaberi sliku"
+
+#: src/ui/widgets/activities/background_remover.blp:37
+msgid "Original"
+msgstr "Original"
+
+#: src/ui/widgets/activities/background_remover.blp:41
+#: src/widgets/instances/ollama_instances.py:200
+#: src/widgets/instances/openai_instances.py:167
+msgid "Result"
+msgstr "Rezultat"
+
+#: src/ui/widgets/activities/background_remover.blp:53
+msgid "Input"
+msgstr "Ulaz"
+
+#: src/ui/widgets/activities/background_remover.blp:61
+#: src/widgets/tools/tools.py:232
+msgid "Output"
+msgstr "Izlaz"
+
+#: src/ui/widgets/activities/background_remover_image.blp:7
+msgid "Open in Image Viewer"
+msgstr ""
+
+#: src/ui/widgets/activities/camera.blp:19
+msgid "No Camera Detected"
+msgstr ""
+
+#: src/ui/widgets/activities/camera.blp:20
+msgid "Please check if camera is plugged in and turned on"
+msgstr ""
+
+#: src/ui/widgets/activities/camera.blp:25
+#: src/ui/widgets/activities/camera.blp:28
+msgid "Retry"
+msgstr "Ponovi"
+
+#: src/ui/widgets/activities/camera.blp:47
+msgid "Capture Picture"
+msgstr ""
+
+#: src/ui/widgets/activities/code_editor.blp:27
+msgid "Save Script"
+msgstr ""
+
+#: src/ui/widgets/activities/code_editor.blp:33
+#: src/ui/widgets/activities/latex_editor.blp:46
+msgid "Undo Changes"
+msgstr ""
+
+#: src/ui/widgets/activities/code_runner.blp:37
+msgid "Edit Code"
+msgstr "Uredi kod"
+
+#: src/ui/widgets/activities/file_viewer.blp:25 src/widgets/attachments.py:193
+#: src/widgets/attachments.py:293
+msgid "Remove Attachment"
+msgstr ""
+
+#: src/ui/widgets/activities/file_viewer.blp:36 src/widgets/attachments.py:202
+#: src/widgets/attachments.py:285
+msgid "Download Attachment"
+msgstr ""
+
+#: src/ui/widgets/activities/image_viewer.blp:27 src/widgets/attachments.py:402
+msgid "Remove Image"
+msgstr "Ukloni sliku"
+
+#: src/ui/widgets/activities/image_viewer.blp:38
+#: src/widgets/activities/background_remover.py:69
+#: src/widgets/blocks/inline_picture.py:92 src/widgets/attachments.py:397
+msgid "Download Image"
+msgstr "Preuzmi sliku"
+
+#: src/ui/widgets/activities/image_viewer.blp:46
+#: src/widgets/activities/background_remover.py:74
+msgid "Attach Image"
+msgstr ""
+
+#: src/ui/widgets/activities/image_viewer.blp:54
+msgid "Reset View"
+msgstr ""
+
+#: src/ui/widgets/activities/latex_editor.blp:40
+#: src/ui/widgets/characters/character_page.blp:25
+msgid "Save Changes"
+msgstr "Spremi promjene"
+
+#: src/ui/widgets/activities/latex_editor.blp:52
+#: src/widgets/blocks/latex.py:123
+msgid "Download as Image"
+msgstr "Preuzmi kao sliku"
+
+#. Activity
+#: src/ui/widgets/activities/live_chat.blp:11
+#: src/widgets/activities/__init__.py:110
+#: src/widgets/activities/live_chat.py:82
+msgid "Live Chat"
+msgstr ""
+
+#: src/ui/widgets/activities/live_chat.blp:68
+msgid "Show Messages"
+msgstr ""
+
+#: src/ui/widgets/activities/live_chat.blp:77
+#: src/widgets/activities/__init__.py:285
+msgid "Close Activity"
+msgstr ""
+
+#: src/ui/widgets/activities/terminal.blp:20
+msgid "Open Environment Directory"
+msgstr ""
+
+#: src/ui/widgets/activities/terminal.blp:27
+msgid "Reload Script"
+msgstr ""
+
+#: src/ui/widgets/activities/transcriber.blp:10
+#: src/widgets/activities/__init__.py:119
+#: src/widgets/activities/transcriber.py:37
+msgid "Transcriber"
+msgstr ""
+
+#: src/ui/widgets/activities/transcriber.blp:11
+msgid "Transcribe audio files or your voice"
+msgstr ""
+
+#: src/ui/widgets/activities/transcriber.blp:19
+#: src/ui/widgets/activities/transcriber.blp:24
+msgid "Microphone"
+msgstr "Mikrofon"
+
+#: src/ui/widgets/activities/transcriber.blp:31
+#: src/ui/widgets/activities/transcriber.blp:36
+msgid "File"
+msgstr "Datoteka"
+
+#: src/ui/widgets/activities/transcriber.blp:48
+msgid "Transcribing Audio"
+msgstr ""
+
+#: src/ui/widgets/activities/transcriber.blp:79
+#: src/ui/widgets/activities/web_browser.blp:48
+msgid "Attach"
+msgstr ""
+
+#: src/ui/widgets/activities/web_browser.blp:19
+msgid "Go Back"
+msgstr ""
+
+#: src/ui/widgets/activities/web_browser.blp:26
+msgid "Go Next"
+msgstr ""
+
+#: src/ui/widgets/activities/web_browser.blp:32
+msgid "Enter URL..."
+msgstr "Unesite URL..."
+
+#: src/ui/widgets/attachments/global_attachment_button.blp:7
+#: src/widgets/attachments.py:612
+msgid "Attach File"
+msgstr ""
+
+#: src/ui/widgets/attachments/image_attachment.blp:6
+#: src/ui/widgets/blocks/inline_picture.blp:10
+msgid "Missing Image"
+msgstr ""
+
+#: src/ui/widgets/blocks/code.blp:19
+msgid "Code Block"
+msgstr ""
+
+#: src/ui/widgets/blocks/code.blp:32
+msgid "Edit Script"
+msgstr "Uredi skript"
+
+#: src/ui/widgets/blocks/code.blp:41
+msgid "Copy Script"
+msgstr "Kopiraj skript"
+
+#: src/ui/widgets/blocks/code.blp:50
+msgid "Download Script"
+msgstr "Preuzmi skript"
+
+#: src/ui/widgets/blocks/code.blp:59
+msgid "Run Script"
+msgstr "Pokreni skript"
+
+#: src/ui/widgets/blocks/editing_text.blp:14
+#: src/ui/widgets/instances/preferences.blp:16
+#: src/ui/widgets/instances/preferences.blp:17
+#: src/ui/widgets/models/creator_dialog.blp:18
+#: src/ui/widgets/models/creator_dialog.blp:19
+#: src/ui/widgets/voice/podcast_dialog.blp:20
+#: src/ui/widgets/voice/podcast_dialog.blp:21 src/window.py:188
+#: src/widgets/models/text.py:282 src/widgets/tools/tools.py:142
+#: src/widgets/chat.py:247 src/widgets/chat.py:849 src/widgets/chat.py:1004
+#: src/widgets/dialog.py:201 src/widgets/dialog.py:214
+#: src/widgets/dialog.py:227
+msgid "Cancel"
+msgstr "Otkaži"
+
+#: src/ui/widgets/blocks/editing_text.blp:22
+#: src/ui/widgets/characters/character_page.blp:24
+#: src/ui/widgets/instances/preferences.blp:26
+#: src/ui/widgets/instances/preferences.blp:27
+#: src/ui/widgets/models/creator_dialog.blp:28
+#: src/ui/widgets/models/creator_dialog.blp:29
+msgid "Save"
+msgstr "Spremi"
+
+#: src/ui/widgets/blocks/latex_renderer.blp:5
+msgid "Edit Equation"
+msgstr ""
+
+#: src/ui/widgets/blocks/table.blp:22
+msgid "Spreadsheet"
+msgstr ""
+
+#: src/ui/widgets/blocks/table.blp:32
+msgid "Export Spreadsheet"
+msgstr ""
+
+#: src/ui/widgets/blocks/thinking.blp:27
+msgid "Thinking..."
+msgstr "Mislim..."
+
+#: src/ui/widgets/characters/character_book_entry_row.blp:9
+#: src/ui/widgets/characters/greeting_row.blp:11
+msgid "See Options"
+msgstr "Pogledaj opcije"
+
+#: src/ui/widgets/characters/character_book_entry_row.blp:20
+#: src/widgets/characters/character_page.py:38
+msgid "Edit Name"
+msgstr "Uredi ime"
+
+#: src/ui/widgets/characters/character_book_entry_row.blp:32
+msgid "Remove Entry"
+msgstr ""
+
+#: src/ui/widgets/characters/character_book_entry_row.blp:55
+#: src/widgets/characters/character_page.py:65
+msgid "Add Keyword"
+msgstr "Dodaj ključnu riječ"
+
+#: src/ui/widgets/characters/character_page.blp:6
+#: src/ui/widgets/models/text_dialog.blp:190
+#: src/widgets/characters/export_page.py:81
+msgid "Character Card"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:15
+#: src/widgets/characters/character_page.py:260
+msgid "Clear Character Card"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:34
+msgid ""
+"To use an active Character Card, start a new chat, select the model, and "
+"then choose 'Use Character' on the Welcome Screen"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:36
+msgid "Options"
+msgstr "Opcije"
+
+#: src/ui/widgets/characters/character_page.blp:39
+msgid "Enable Character"
+msgstr "Omogući karakter"
+
+#: src/ui/widgets/characters/character_page.blp:40
+msgid "Show the option to use the character in new chats"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:44
+#: src/ui/widgets/instances/preferences.blp:41
+#: src/ui/widgets/models/creator_dialog.blp:46
+msgid "Name"
+msgstr "Ime"
+
+#: src/ui/widgets/characters/character_page.blp:49
+#: src/widgets/models/text.py:122 src/widgets/chat.py:670
+msgid "Description"
+msgstr "Opis"
+
+#: src/ui/widgets/characters/character_page.blp:50
+msgid ""
+"Describes the character, their background and the world that they live in"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:55
+msgid "First Message"
+msgstr "Prva poruka"
+
+#: src/ui/widgets/characters/character_page.blp:56
+msgid ""
+"The opening message, it establishes the initial context, setting and tone of "
+"the conversation"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:61
+msgid "Alternative Greetings"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:62
+msgid ""
+"Optional greetings to be presented when starting a new chat with the "
+"character"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:66
+msgid "Add Greeting"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:75
+#: src/ui/widgets/characters/export_page.blp:38
+msgid "Character Book"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:76
+msgid "Information consulted by the model when a keyword is found in a message"
+msgstr ""
+
+#: src/ui/widgets/characters/character_page.blp:80
+msgid "Add Entry"
+msgstr ""
+
+#: src/ui/widgets/characters/export_page.blp:6
+msgid "Export Character Card"
+msgstr ""
+
+#: src/ui/widgets/characters/export_page.blp:15
+#: src/ui/widgets/characters/export_page.blp:16
+#: src/ui/widgets/models/text_dialog.blp:119
+msgid "Export"
+msgstr "Izvezi"
+
+#: src/ui/widgets/characters/export_page.blp:25
+msgid ""
+"Character Cards are distributed by adding the data to images, this way you "
+"can use your characters outside of Alpaca"
+msgstr ""
+
+#: src/ui/widgets/characters/export_page.blp:28
+msgid "Additional Metadata"
+msgstr ""
+
+#: src/ui/widgets/characters/export_page.blp:30
+msgid "Creator"
+msgstr "Kreator"
+
+#: src/ui/widgets/characters/export_page.blp:33
+msgid "Character Version"
+msgstr "Verzija karaktera"
+
+#: src/ui/widgets/characters/export_page.blp:34
+msgid "1.0"
+msgstr "1.0"
+
+#: src/ui/widgets/characters/export_page.blp:37
+msgid "Character Book Name"
+msgstr ""
+
+#: src/ui/widgets/characters/export_page.blp:41
+msgid "Character Book Description"
+msgstr ""
+
+#: src/ui/widgets/characters/export_page.blp:46
+msgid "Creator Notes"
+msgstr ""
+
+#: src/ui/widgets/characters/export_page.blp:51
+msgid "Tags"
+msgstr "Oznake"
+
+#: src/ui/widgets/characters/export_page.blp:60
+#: src/widgets/characters/export_page.py:108
+msgid "Add Tag"
+msgstr "Dodaj oznaku"
+
+#: src/ui/widgets/characters/greeting_row.blp:5
+msgid "Greeting"
+msgstr "Dobrodošlica"
+
+#: src/ui/widgets/characters/greeting_row.blp:22
+msgid "Remove Greeting"
+msgstr "Ukloni dobrodošlicu"
+
+#: src/ui/widgets/chat/character_greeting_selector.blp:5
+msgid "Greeting Selector"
+msgstr ""
+
+#: src/ui/widgets/chat/chat.blp:59
+msgid "Refresh Prompts"
+msgstr ""
+
+#: src/ui/widgets/chat/chat.blp:66 src/ui/widgets/chat/chat.blp:67
+msgid "Use Template"
+msgstr "Koristi predložak"
+
+#: src/ui/widgets/chat/chat.blp:71 src/ui/widgets/chat/chat.blp:72
+msgid "Use Character"
+msgstr "Koristi karakter"
+
+#: src/ui/widgets/chat/chat.blp:85
+msgid "No Messages Found"
+msgstr ""
+
+#: src/ui/widgets/chat/chat.blp:86
+msgid "Uh oh! No messages found for your search"
+msgstr ""
+
+#: src/ui/widgets/chat/folder.blp:51
+#: src/ui/widgets/chat/template_selector.blp:45
+msgid "No Results Found"
+msgstr ""
+
+#: src/ui/widgets/chat/folder.blp:59
+msgid "Folder is Empty"
+msgstr "Mapa je prazna"
+
+#: src/ui/widgets/chat/template_selector.blp:5
+msgid "Template Selector"
+msgstr ""
+
+#: src/ui/widgets/chat/template_selector.blp:12
+msgid "Search Template"
+msgstr "Pretraži predlošci"
+
+#: src/ui/widgets/chat/template_selector.blp:46
+msgid "Uh oh! No templates found for your search"
+msgstr ""
+
+#: src/ui/widgets/chat/template_selector.blp:53
+msgid "No Templates"
+msgstr "Nema predloške"
+
+#: src/ui/widgets/chat/template_selector.blp:54
+msgid "Add templates by editing a chat"
+msgstr ""
+
+#: src/ui/widgets/instances/ollama_manager.blp:10
+#: src/ui/widgets/instances/ollama_manager.blp:233
+msgid "Ollama Manager"
+msgstr "Upravitelj ollama"
+
+#: src/ui/widgets/instances/ollama_manager.blp:28
+msgid "GPU Status"
+msgstr "Stanje GPU-a"
+
+#: src/ui/widgets/instances/ollama_manager.blp:40
+msgid "See Logs"
+msgstr ""
+
+#: src/ui/widgets/instances/ollama_manager.blp:52
+msgid "Check For Update"
+msgstr ""
+
+#: src/ui/widgets/instances/ollama_manager.blp:64
+msgid "Delete Installation"
+msgstr ""
+
+#: src/ui/widgets/instances/ollama_manager.blp:80
+msgid "Logs"
+msgstr ""
+
+#: src/ui/widgets/instances/ollama_manager.blp:98
+#: src/ui/widgets/instances/ollama_manager.blp:125
+#: src/ui/widgets/instances/ollama_manager.blp:201
+#: src/ui/widgets/instances/ollama_manager.blp:215
+msgid "Installer"
+msgstr "Instalater"
+
+#: src/ui/widgets/instances/ollama_manager.blp:105
+msgid "Ollama is not Installed"
+msgstr "Ollama nije instalirano"
+
+#: src/ui/widgets/instances/ollama_manager.blp:106
+msgid ""
+"The selected instance requires Ollama to be installed and available for "
+"Alpaca"
+msgstr ""
+
+#: src/ui/widgets/instances/ollama_manager.blp:108
+#: src/ui/widgets/instances/ollama_manager.blp:116
+msgid "Install Ollama"
+msgstr "Instaliraj Ollama"
+
+#: src/ui/widgets/instances/ollama_manager.blp:138
+msgid "Deleter"
+msgstr "Brisač"
+
+#: src/ui/widgets/instances/ollama_manager.blp:145
+#: src/ui/widgets/instances/ollama_manager.blp:163
+#: src/ui/widgets/instances/ollama_manager.blp:164
+msgid "Delete Ollama"
+msgstr "Ukloni Ollama"
+
+#: src/ui/widgets/instances/ollama_manager.blp:146
+msgid ""
+"This action might make some instances not work, downloaded models will not "
+"be affected"
+msgstr ""
+
+#: src/ui/widgets/instances/ollama_manager.blp:152
+#: src/ui/widgets/instances/ollama_manager.blp:153
+msgid "Delete ROCm"
+msgstr "Ukloni ROCm"
+
+#: src/ui/widgets/instances/ollama_manager.blp:178
+msgid "Updater"
+msgstr "Ažuriratelj"
+
+#: src/ui/widgets/instances/ollama_manager.blp:185
+msgid "Ollama Update Available"
+msgstr ""
+
+#: src/ui/widgets/instances/ollama_manager.blp:188
+#: src/ui/widgets/instances/ollama_manager.blp:189
+msgid "Update"
+msgstr "Ažuriraj"
+
+#: src/ui/widgets/instances/ollama_manager.blp:208
+msgid "Installation Done"
+msgstr "Instalacija gotovo"
+
+#: src/ui/widgets/instances/ollama_manager.blp:209
+msgid "The instance was restarted, you can close this dialog"
+msgstr ""
+
+#: src/ui/widgets/instances/ollama_manager.blp:222
+msgid "Installing Ollama"
+msgstr "Instaliranje Ollama"
+
+#: src/ui/widgets/instances/ollama_manager.blp:223
+msgid ""
+"This package of Alpaca is not compatible with auto-installing Ollama, "
+"consult the wiki for more information"
+msgstr ""
+
+#: src/ui/widgets/instances/ollama_manager.blp:226
+msgid "Alpaca Wiki"
+msgstr "Alpaca Wiki"
+
+#: src/ui/widgets/instances/ollama_manager.blp:240
+msgid "Error"
+msgstr "Greška"
+
+#: src/ui/widgets/instances/ollama_manager.blp:241
+msgid "An error occurred, please try again later"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:46
+msgid "Port"
+msgstr "Ulaz"
+
+#: src/ui/widgets/instances/preferences.blp:47
+msgid "Which network port will Ollama use"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:60
+msgid "Instance URL"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:73
+msgid "Thought Processing"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:74
+msgid ""
+"Have compatible reasoning models think about their response before "
+"generating a message"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:79
+msgid "Expose Ollama to Network"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:80
+msgid "Make Ollama available for other devices and software in local network"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:85
+msgid "Share Name"
+msgstr "Podijeli ime"
+
+#: src/ui/widgets/instances/preferences.blp:86
+msgid "Automatically share your name with the AI models"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:91
+msgid "Do Not Share"
+msgstr "Nemoj dijeliti"
+
+#: src/ui/widgets/instances/preferences.blp:93
+msgid "Full Name"
+msgstr "Puno Ime"
+
+#: src/ui/widgets/instances/preferences.blp:99
+msgid "Show Response Metadata"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:100
+msgid "Add the option to show reply metadata in the message as an attachment"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:105
+msgid "Allow Self-Signed SSL Certificates"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:106
+msgid "Only use if you trust the server"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:111
+msgid "Max Tokens"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:112
+msgid ""
+"Defines the maximum number of tokens (words + spaces) the AI can generate in "
+"a response. More tokens allow longer replies but may take more time and cost "
+"more"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:129
+msgid "Override Parameters"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:130
+msgid "These parameters overrides the behavior of the instance and models"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:135
+msgid "Temperature"
+msgstr "Temperatura"
+
+#: src/ui/widgets/instances/preferences.blp:136
+msgid "Increasing the temperature will make the models answer more creatively"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:149
+msgid "Seed"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:150
+msgid ""
+"Setting this to a specific number other than 0 will make the model generate "
+"the same text for the same prompt"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:163
+#: src/ui/widgets/models/creator_dialog.blp:150
+msgid "Context Window Size"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:164
+#: src/ui/widgets/models/creator_dialog.blp:151
+msgid ""
+"Controls how many tokens (pieces of text) the model can process and remember "
+"at once"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:182
+msgid "Keep Alive Presets"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:183
+msgid "How the instance should handle idle models"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:190
+msgid "Set Timer"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:191
+msgid "Keep Alive Forever"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:192
+msgid "Unload After Use"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:198
+msgid "Minutes"
+msgstr "Minute"
+
+#: src/ui/widgets/instances/preferences.blp:199
+msgid ""
+"The amount of time the instance should keep models loaded after they go idle"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:210
+msgid "Overrides"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:211
+msgid ""
+"These entries are optional, they are used to troubleshoot GPU related "
+"problems with Ollama"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:244
+msgid "Use Vulkan (Experimental)"
+msgstr "Koristi Vulkan (Eksperimentalno)"
+
+#: src/ui/widgets/instances/preferences.blp:245
+msgid ""
+"Use Vulkan for hardware acceleration. May improve performance on some GPUs, "
+"but use with caution as it may be unstable"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:254
+msgid "Model Directory"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:260
+msgid "Select Directory"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:273
+msgid "Model to select when starting a new chat"
+msgstr ""
+
+#: src/ui/widgets/instances/preferences.blp:278
+msgid "Title Model"
+msgstr "Naslov modela"
+
+#: src/ui/widgets/instances/preferences.blp:279
+msgid "Model to use when generating a chat title"
+msgstr ""
+
+#: src/ui/widgets/message/global_action_stack.blp:8
+msgid "Send Message"
+msgstr "Pošalji poruku"
+
+#: src/ui/widgets/message/global_action_stack.blp:29
+msgid "Stop Message"
+msgstr "Zaustavi poruku"
+
+#: src/ui/widgets/message/popup.blp:14
+msgid "Show Model Dialog"
+msgstr ""
+
+#: src/ui/widgets/message/popup.blp:25
+msgid "Remove Message"
+msgstr "Ukloni poruku"
+
+#: src/ui/widgets/message/popup.blp:36
+msgid "Copy Message"
+msgstr "Kopiraj poruku"
+
+#: src/ui/widgets/message/popup.blp:47
+msgid "Edit Message"
+msgstr "Uredi poruku"
+
+#: src/ui/widgets/message/popup.blp:58
+msgid "Regenerate Message"
+msgstr "Regeneriraj poruku"
+
+#: src/ui/widgets/models/text_dialog.blp:15
+msgid "Model"
+msgstr "Model"
+
+#: src/ui/widgets/models/text_dialog.blp:23
+#: src/ui/widgets/models/basic_dialog.blp:16 src/widgets/models/basic.py:414
+msgid "Remove Model"
+msgstr "Ukloni model"
+
+#: src/ui/widgets/models/text_dialog.blp:32 src/widgets/models/basic.py:408
+msgid "Create Child"
+msgstr "Stvori dijete"
+
+#: src/ui/widgets/models/text_dialog.blp:40
+#: src/ui/widgets/models/available_dialog.blp:23
+msgid "Languages"
+msgstr "Jezici"
+
+#: src/ui/widgets/models/text_dialog.blp:83
+msgid "Set Profile Picture"
+msgstr "Postavi profilnu sliku"
+
+#: src/ui/widgets/models/text_dialog.blp:102
+msgid "Profile Picture"
+msgstr "Profilna slika"
+
+#: src/ui/widgets/models/text_dialog.blp:133
+msgid "Change"
+msgstr "Promijeni"
+
+#: src/ui/widgets/models/text_dialog.blp:147
+#: src/widgets/instances/__init__.py:367 src/widgets/models/basic.py:344
+msgid "Remove"
+msgstr "Ukloni"
+
+#: src/ui/widgets/models/text_dialog.blp:178
+msgid "Voice"
+msgstr "Glas"
+
+#: src/ui/widgets/models/text_dialog.blp:184
+msgid "Default"
+msgstr "Uobičajeno"
+
+#: src/ui/widgets/models/text_dialog.blp:225
+msgid "Files"
+msgstr "Datoteke"
+
+#: src/ui/widgets/models/text_selector.blp:9
+msgid "No Models"
+msgstr ""
+
+#: src/ui/widgets/models/available_dialog.blp:84
+msgid ""
+"By downloading this model you accept the license agreement available on the "
+"model's website"
+msgstr ""
+
+#: src/ui/widgets/models/creator_dialog.blp:9
+msgid "Create Model"
+msgstr "Stvori model"
+
+#: src/ui/widgets/models/creator_dialog.blp:40
+msgid "Identity"
+msgstr "Identitet"
+
+#: src/ui/widgets/models/creator_dialog.blp:42
+msgid "Base"
+msgstr "Baza"
+
+#: src/ui/widgets/models/creator_dialog.blp:49
+#: src/widgets/characters/export_page.py:111 src/widgets/models/text.py:104
+msgid "Tag"
+msgstr "Oznaka"
+
+#: src/ui/widgets/models/creator_dialog.blp:52
+msgid "Copy Character Card"
+msgstr ""
+
+#: src/ui/widgets/models/creator_dialog.blp:57 src/widgets/models/text.py:144
+msgid "Context"
+msgstr "Kontekst"
+
+#: src/ui/widgets/models/creator_dialog.blp:58
+msgid ""
+"Describe the desired behavior of the model in its primary language "
+"(typically English)."
+msgstr ""
+
+#: src/ui/widgets/models/creator_dialog.blp:60
+msgid "Add File"
+msgstr "Dodaj datoteku"
+
+#: src/ui/widgets/models/creator_dialog.blp:95
+msgid "Template"
+msgstr "Predložak"
+
+#: src/ui/widgets/models/creator_dialog.blp:96
+msgid ""
+"Some GGUF models require a template, please check the model's documentation "
+"for more information."
+msgstr ""
+
+#: src/ui/widgets/models/creator_dialog.blp:122
+msgid "Behavior"
+msgstr ""
+
+#: src/ui/widgets/models/creator_dialog.blp:124
+msgid "Imagination"
+msgstr ""
+
+#: src/ui/widgets/models/creator_dialog.blp:125
+msgid "A higher number results in more diverse answers from the model. (top_k)"
+msgstr ""
+
+#: src/ui/widgets/models/creator_dialog.blp:137
+msgid "Focus"
+msgstr "Fokus"
+
+#: src/ui/widgets/models/creator_dialog.blp:138
+msgid "A higher number widens the amount of possible answers. (top_p)"
+msgstr ""
+
+#: src/ui/widgets/models/model_manager.blp:5 src/widgets/models/manager.py:36
+msgid "Model Manager"
+msgstr ""
+
+#: src/ui/widgets/models/model_manager.blp:16
+msgid "Search Model"
+msgstr ""
+
+#: src/ui/widgets/models/model_manager.blp:23
+msgid "Filter Models"
+msgstr ""
+
+#: src/ui/widgets/models/model_manager.blp:36
+msgid "Model Manager Menu"
+msgstr ""
+
+#: src/ui/widgets/models/model_manager.blp:47
+msgid "Model search bar"
+msgstr ""
+
+#: src/ui/widgets/models/model_manager.blp:55
+msgid "Search models"
+msgstr ""
+
+#: src/ui/widgets/models/model_manager.blp:70 src/widgets/models/basic.py:169
+msgid "Added"
+msgstr "Dodano"
+
+#: src/ui/widgets/models/model_manager.blp:79
+#: src/ui/widgets/models/model_manager.blp:99
+#: src/ui/widgets/models/model_manager.blp:142
+#: src/ui/widgets/models/model_manager.blp:182
+msgid "No Models Found"
+msgstr ""
+
+#: src/ui/widgets/models/model_manager.blp:80
+msgid ""
+"It looks a bit empty in here. Try downloading some models or change your AI "
+"instance to get started!"
+msgstr ""
+
+#: src/ui/widgets/models/model_manager.blp:83
+#: src/ui/widgets/models/model_manager.blp:88
+msgid "Explore Available Models"
+msgstr ""
+
+#: src/ui/widgets/models/model_manager.blp:100
+#: src/ui/widgets/models/model_manager.blp:183
+msgid ""
+"Looks like we’re fresh out of models for that search. Try tweaking your "
+"keywords, or maybe explore something new!"
+msgstr ""
+
+#: src/ui/widgets/models/model_manager.blp:133
+msgid "Available"
+msgstr "Dostupno"
+
+#: src/ui/widgets/models/model_manager.blp:143
+msgid ""
+"It looks like your instance did not provide any models, try a different "
+"instance to continue!"
+msgstr ""
+
+#: src/ui/widgets/models/model_manager.blp:146
+#: src/ui/widgets/models/model_manager.blp:151
+#: src/ui/widgets/models/model_manager.blp:166
+#: src/ui/widgets/models/model_manager.blp:171
+msgid "Open Instance Manager"
+msgstr ""
+
+#: src/ui/widgets/models/model_manager.blp:162
+msgid "No Instance Selected"
+msgstr ""
+
+#: src/ui/widgets/models/model_manager.blp:163
+msgid "It appears that no instance is selected, please select one to continue!"
+msgstr ""
+
+#: src/ui/widgets/models/model_manager.blp:219
+msgid "Reload Added Models"
+msgstr ""
+
+#: src/ui/widgets/models/model_manager.blp:224
+msgid "Add Model by Name"
+msgstr ""
+
+#: src/ui/widgets/models/model_manager.blp:231
+msgid "Create Model from Existing"
+msgstr ""
+
+#: src/ui/widgets/models/model_manager.blp:236
+msgid "Create Model from GGUF File"
+msgstr ""
+
+#: src/ui/widgets/models/pulling_dialog.blp:16
+msgid "Stop Download"
+msgstr "Zaustavi preuzimanje"
+
+#: src/ui/widgets/voice/dictate_button.blp:11
+msgid "Dictate Message"
+msgstr ""
+
+#: src/ui/widgets/voice/microphone_button.blp:9
+msgid "Use Speech Recognition"
+msgstr ""
+
+#: src/ui/widgets/voice/podcast_dialog.blp:5
+msgid "Podcast Generator"
+msgstr ""
+
+#: src/ui/widgets/voice/podcast_dialog.blp:30
+#: src/ui/widgets/voice/podcast_dialog.blp:31
+msgid "Generate"
+msgstr "Generiraj"
+
+#: src/ui/widgets/voice/podcast_dialog.blp:40
+msgid "General Voices"
+msgstr ""
+
+#: src/ui/widgets/voice/podcast_dialog.blp:42
+msgid "Title Announcer Voice"
+msgstr ""
+
+#: src/ui/widgets/voice/podcast_dialog.blp:45
+msgid "User Voice"
+msgstr "Glas korisnika"
+
+#: src/ui/widgets/voice/podcast_dialog.blp:48
+msgid "System Voice"
+msgstr "Glas sustava"
+
+#: src/ui/widgets/voice/podcast_dialog.blp:52
+msgid "Model Voices"
+msgstr ""
+
+#: src/ui/widgets/voice/podcast_dialog.blp:66
+msgid "Generating Podcast"
+msgstr ""
+
+#: src/ui/widgets/voice/podcast_dialog.blp:80
+msgid "Podcast is Ready"
+msgstr ""
+
+#: src/ui/widgets/voice/podcast_dialog.blp:83
+#: src/ui/widgets/voice/podcast_dialog.blp:87
+msgid "Export Podcast"
+msgstr ""
+
+#: src/alpaca_search_provider.py.in:41
+msgid "Open chat"
+msgstr ""
+
+#: src/alpaca_search_provider.py.in:42
+msgid "Quick ask"
+msgstr ""
+
+#: src/constants.py:244
+msgid "Small"
+msgstr "Malo"
+
+#: src/constants.py:249
+msgid "Medium"
+msgstr "Srednje"
+
+#: src/constants.py:254
+msgid "Big"
+msgstr "Veliko"
+
+#: src/constants.py:259
+msgid "Huge"
+msgstr "Jako veliko"
+
+#: src/constants.py:264
+msgid "Multilingual"
+msgstr ""
+
+#: src/constants.py:269
+msgid "Code"
+msgstr "Kod"
+
+#: src/constants.py:274
+msgid "Math"
+msgstr "Matematika"
+
+#: src/constants.py:279
+msgid "Vision"
+msgstr "Vid"
+
+#: src/constants.py:284
+msgid "Embedding"
+msgstr ""
+
+#: src/constants.py:289
+msgid "Tools"
+msgstr "Alate"
+
+#: src/constants.py:294
+msgid "Reasoning"
+msgstr "Rasuđivanje"
+
+#: src/constants.py:299
+msgid "Cloud"
+msgstr "Oblak"
+
+#: src/main.py:239
+msgid "Documentation"
+msgstr ""
+
+#: src/main.py:240
+msgid "Become a Sponsor"
+msgstr "Postani sponzor"
+
+#: src/main.py:241
+msgid "Discussions"
+msgstr "Rasprave"
+
+#: src/ollama_models.py:34
+msgid ""
+"New state of the art 70B model. Llama 3.3 70B offers similar performance "
+"compared to the Llama 3.1 405B model."
+msgstr ""
+
+#: src/ollama_models.py:57
+msgid "QwQ is the reasoning model of the Qwen series."
+msgstr ""
+
+#: src/ollama_models.py:85
+msgid ""
+"Llama 3.2 Vision is a collection of instruction-tuned image reasoning "
+"generative models in 11B and 90B sizes."
+msgstr ""
+
+#: src/ollama_models.py:122
+msgid "Meta's Llama 3.2 goes small with 1B and 3B models."
+msgstr ""
+
+#: src/ollama_models.py:157
+msgid ""
+"Llama 3.1 is a new state-of-the-art model from Meta available in 8B, 70B and "
+"405B parameter sizes."
+msgstr ""
+
+#: src/ollama_models.py:184
+msgid "Meta Llama 3: The most capable openly available LLM to date"
+msgstr ""
+
+#: src/ollama_models.py:208
+msgid "The 7B model released by Mistral AI, updated to version 0.3."
+msgstr ""
+
+#: src/ollama_models.py:237
+msgid ""
+"A high-performing open embedding model with a large token context window."
+msgstr ""
+
+#: src/ollama_models.py:266
+msgid ""
+"Gemma is a family of lightweight, state-of-the-art open models built by "
+"Google DeepMind. Updated to version 1.1"
+msgstr ""
+
+#: src/ollama_models.py:322
+msgid ""
+"Qwen 1.5 is a series of large language models by Alibaba Cloud spanning from "
+"0.5B to 110B parameters"
+msgstr ""
+
+#: src/ollama_models.py:387
+msgid "Qwen2 is a new series of large language models from Alibaba group"
+msgstr ""
+
+#: src/ollama_models.py:416
+msgid ""
+"Phi-3 is a family of lightweight 3B (Mini) and 14B (Medium) state-of-the-art "
+"open models by Microsoft."
+msgstr ""
+
+#: src/ollama_models.py:448
+msgid ""
+"Llama 2 is a collection of foundation language models ranging from 7B to 70B "
+"parameters."
+msgstr ""
+
+#: src/ollama_models.py:511
+msgid ""
+"Qwen2.5 models are pretrained on Alibaba's latest large-scale dataset, "
+"encompassing up to 18 trillion tokens. The model supports up to 128K tokens "
+"and has multilingual support."
+msgstr ""
+
+#: src/ollama_models.py:543
+msgid ""
+"Google Gemma 2 is a high-performing and efficient model available in three "
+"sizes: 2B, 9B, and 27B."
+msgstr ""
+
+#: src/ollama_models.py:577
+msgid ""
+"🌋 LLaVA is a novel end-to-end trained large multimodal model that combines "
+"a vision encoder and Vicuna for general-purpose visual and language "
+"understanding. Updated to version 1.6."
+msgstr ""
+
+#: src/ollama_models.py:614
+msgid ""
+"A large language model that can use text prompts to generate and discuss "
+"code."
+msgstr ""
+
+#: src/ollama_models.py:660
+msgid ""
+"The latest series of Code-Specific Qwen models, with significant "
+"improvements in code generation, code reasoning, and code fixing."
+msgstr ""
+
+#: src/ollama_models.py:684
+msgid ""
+"A state-of-the-art 12B model with 128k context length, built by Mistral AI "
+"in collaboration with NVIDIA."
+msgstr ""
+
+#: src/ollama_models.py:706
+msgid ""
+"The TinyLlama project is an open endeavor to train a compact 1.1B Llama "
+"model on 3 trillion tokens."
+msgstr ""
+
+#: src/ollama_models.py:729
+msgid "State-of-the-art large embedding model from mixedbread.ai"
+msgstr ""
+
+#: src/ollama_models.py:762
+msgid ""
+"StarCoder2 is the next generation of transparently trained open code LLMs "
+"that comes in three sizes: 3B, 7B and 15B parameters."
+msgstr ""
+
+#: src/ollama_models.py:789
+msgid ""
+"A set of Mixture of Experts (MoE) model with open weights by Mistral AI in "
+"8x7b and 8x22b parameter sizes."
+msgstr ""
+
+#: src/ollama_models.py:815
+msgid ""
+"Uncensored, 8x7b and 8x22b fine-tuned models based on the Mixtral mixture of "
+"experts models that excels at coding tasks. Created by Eric Hartford."
+msgstr ""
+
+#: src/ollama_models.py:844
+msgid ""
+"CodeGemma is a collection of powerful, lightweight models that can perform a "
+"variety of coding tasks like fill-in-the-middle code completion, code "
+"generation, natural language understanding, mathematical reasoning, and "
+"instruction following."
+msgstr ""
+
+#: src/ollama_models.py:872
+msgid ""
+"An open-source Mixture-of-Experts code language model that achieves "
+"performance comparable to GPT4-Turbo in code-specific tasks."
+msgstr ""
+
+#: src/ollama_models.py:894
+msgid ""
+"Phi-2: a 2.7B language model by Microsoft Research that demonstrates "
+"outstanding reasoning and language understanding capabilities."
+msgstr ""
+
+#: src/ollama_models.py:921
+msgid "Uncensored Llama 2 model by George Sung and Jarrad Hope."
+msgstr ""
+
+#: src/ollama_models.py:956
+msgid ""
+"DeepSeek Coder is a capable coding model trained on two trillion code and "
+"natural language tokens."
+msgstr ""
+
+#: src/ollama_models.py:997
+msgid ""
+"A suite of text embedding models by Snowflake, optimized for performance."
+msgstr ""
+
+#: src/ollama_models.py:1025
+msgid ""
+"State of the art large language model from Microsoft AI with improved "
+"performance on complex chat, multilingual, reasoning and agent use cases."
+msgstr ""
+
+#: src/ollama_models.py:1048
+msgid ""
+"The uncensored Dolphin model based on Mistral that excels at coding tasks. "
+"Updated to version 2.8."
+msgstr ""
+
+#: src/ollama_models.py:1076
+msgid ""
+"Dolphin 2.9 is a new model with 8B and 70B sizes by Eric Hartford based on "
+"Llama 3 that has a variety of instruction, conversational, and coding skills."
+msgstr ""
+
+#: src/ollama_models.py:1110
+msgid "Yi 1.5 is a high-performing, bilingual language model."
+msgstr ""
+
+#: src/ollama_models.py:1134
+msgid ""
+"Command R is a Large Language Model optimized for conversational interaction "
+"and long context tasks."
+msgstr ""
+
+#: src/ollama_models.py:1171
+msgid ""
+"A general-purpose model ranging from 3 billion parameters to 70 billion, "
+"suitable for entry-level hardware."
+msgstr ""
+
+#: src/ollama_models.py:1194
+msgid ""
+"A LLaVA model fine-tuned from Llama 3 Instruct with better scores in several "
+"benchmarks."
+msgstr ""
+
+#: src/ollama_models.py:1221
+msgid ""
+"Zephyr is a series of fine-tuned versions of the Mistral and Mixtral models "
+"that are trained to act as helpful assistants."
+msgstr ""
+
+#: src/ollama_models.py:1243
+msgid ""
+"A lightweight AI model with 3.8 billion parameters with performance "
+"overtaking similarly and larger sized models."
+msgstr ""
+
+#: src/ollama_models.py:1271
+msgid "Embedding models on very large sentence level datasets."
+msgstr ""
+
+#: src/ollama_models.py:1294
+msgid ""
+"Codestral is Mistral AI’s first-ever code model designed for code generation "
+"tasks."
+msgstr ""
+
+#: src/ollama_models.py:1331
+msgid ""
+"StarCoder is a code generation model trained on 80+ programming languages."
+msgstr ""
+
+#: src/ollama_models.py:1363
+msgid ""
+"General use chat model based on Llama and Llama 2 with 2K to 16K context "
+"sizes."
+msgstr ""
+
+#: src/ollama_models.py:1400
+msgid "A family of open foundation models by IBM for Code Intelligence"
+msgstr ""
+
+#: src/ollama_models.py:1422
+msgid ""
+"Mistral OpenOrca is a 7 billion parameter model, fine-tuned on top of the "
+"Mistral 7B model using the OpenOrca dataset."
+msgstr ""
+
+#: src/ollama_models.py:1454
+msgid ""
+"🪐 A family of small models with 135M, 360M, and 1.7B parameters, trained on "
+"a new high-quality dataset."
+msgstr ""
+
+#: src/ollama_models.py:1486
+msgid ""
+"Wizard Vicuna Uncensored is a 7B, 13B, and 30B parameter model based on "
+"Llama 2 uncensored by Eric Hartford."
+msgstr ""
+
+#: src/ollama_models.py:1515
+msgid "Llama 2 based model fine tuned to improve Chinese dialogue ability."
+msgstr ""
+
+#: src/ollama_models.py:1538
+msgid ""
+"BGE-M3 is a new model from BAAI distinguished for its versatility in Multi-"
+"Functionality, Multi-Linguality, and Multi-Granularity."
+msgstr ""
+
+#: src/ollama_models.py:1563
+msgid ""
+"A versatile model for AI software development scenarios, including code "
+"completion."
+msgstr ""
+
+#: src/ollama_models.py:1586
+msgid ""
+"A family of open-source models trained on a wide variety of data, surpassing "
+"ChatGPT on various benchmarks. Updated to version 3.5-0106."
+msgstr ""
+
+#: src/ollama_models.py:1614
+msgid ""
+"Aya 23, released by Cohere, is a new family of state-of-the-art, "
+"multilingual models that support 23 languages."
+msgstr ""
+
+#: src/ollama_models.py:1637
+msgid ""
+"CodeQwen1.5 is a large language model pretrained on a large amount of code "
+"data."
+msgstr ""
+
+#: src/ollama_models.py:1665
+msgid ""
+"The powerful family of models by Nous Research that excels at scientific "
+"discussion and coding tasks."
+msgstr ""
+
+#: src/ollama_models.py:1688
+msgid ""
+"Command R+ is a powerful, scalable large language model purpose-built to "
+"excel at real-world enterprise use cases."
+msgstr ""
+
+#: src/ollama_models.py:1711
+msgid "State-of-the-art code generation model"
+msgstr ""
+
+#: src/ollama_models.py:1735
+msgid ""
+"Stable Code 3B is a coding model with instruct and code completion variants "
+"on par with models such as Code Llama 7B that are 2.5x larger."
+msgstr ""
+
+#: src/ollama_models.py:1757
+msgid ""
+"An experimental 1.1B parameter model trained on the new Dolphin 2.8 dataset "
+"by Eric Hartford and based on TinyLlama."
+msgstr ""
+
+#: src/ollama_models.py:1913
+msgid ""
+"OpenHermes 2.5 is a 7B model fine-tuned by Teknium on Mistral with fully "
+"open datasets."
+msgstr ""
+
+#: src/ollama_models.py:1937
+msgid ""
+"Mistral Large 2 is Mistral's new flagship model that is significantly more "
+"capable in code generation, mathematics, and reasoning with 128k context "
+"window and support for dozens of languages."
+msgstr ""
+
+#: src/ollama_models.py:1970
+msgid ""
+"Qwen2 Math is a series of specialized math language models built upon the "
+"Qwen2 LLMs, which significantly outperforms the mathematical capabilities of "
+"open-source models and even closed-source models (e.g., GPT4o)."
+msgstr ""
+
+#: src/ollama_models.py:1994
+msgid ""
+"A strong multi-lingual general language model with competitive performance "
+"to Llama 3."
+msgstr ""
+
+#: src/ollama_models.py:2028
+msgid ""
+"Stable LM 2 is a state-of-the-art 1.6B and 12B parameter language model "
+"trained on multilingual data in English, Spanish, German, Italian, French, "
+"Portuguese, and Dutch."
+msgstr ""
+
+#: src/ollama_models.py:2051
+msgid ""
+"BakLLaVA is a multimodal model consisting of the Mistral 7B base model "
+"augmented with the LLaVA architecture."
+msgstr ""
+
+#: src/ollama_models.py:2072
+msgid ""
+"A high-performing model trained with a new technique called Reflection-"
+"tuning that teaches a LLM to detect mistakes in its reasoning and correct "
+"course."
+msgstr ""
+
+#: src/ollama_models.py:2103
+msgid "An advanced language model crafted with 2 trillion bilingual tokens."
+msgstr ""
+
+#: src/ollama_models.py:2130
+msgid ""
+"This model extends LLama-3 8B's context length from 8k to over 1m tokens."
+msgstr ""
+
+#: src/ollama_models.py:2163
+msgid "Model focused on math and logic problems"
+msgstr ""
+
+#: src/ollama_models.py:2186
+msgid ""
+"moondream2 is a small vision language model designed to run efficiently on "
+"edge devices."
+msgstr ""
+
+#: src/ollama_models.py:2208
+msgid ""
+"A fine-tuned model based on Mistral with good coverage of domain and "
+"language."
+msgstr ""
+
+#: src/ollama_models.py:2235
+msgid ""
+"A model from NVIDIA based on Llama 3 that excels at conversational question "
+"answering (QA) and retrieval-augmented generation (RAG)."
+msgstr ""
+
+#: src/ollama_models.py:2262
+msgid ""
+"Conversational model based on Llama 2 that performs competitively on various "
+"benchmarks."
+msgstr ""
+
+#: src/ollama_models.py:2290
+msgid ""
+"SQLCoder is a code completion model fined-tuned on StarCoder for SQL "
+"generation tasks"
+msgstr ""
+
+#: src/ollama_models.py:2317
+msgid "General use models based on Llama and Llama 2 from Nous Research."
+msgstr ""
+
+#: src/ollama_models.py:2340
+msgid "Code generation model based on Code Llama."
+msgstr ""
+
+#: src/ollama_models.py:2367
+msgid "An extension of Llama 2 that supports a context of up to 128k tokens."
+msgstr ""
+
+#: src/ollama_models.py:2395
+msgid ""
+"A 7B and 15B uncensored variant of the Dolphin model family that excels at "
+"coding, based on StarCoder2."
+msgstr ""
+
+#: src/ollama_models.py:2703
+msgid "General use model based on Llama 2."
+msgstr ""
+
+#: src/ollama_models.py:2732
+msgid "A strong, economical, and efficient Mixture-of-Experts language model."
+msgstr ""
+
+#: src/ollama_models.py:2754
+msgid ""
+"Starling is a large language model trained by reinforcement learning from AI "
+"feedback focused on improving chatbot helpfulness."
+msgstr ""
+
+#: src/ollama_models.py:2776
+msgid ""
+"A companion assistant trained in philosophy, psychology, and personal "
+"relationships. Based on Mistral."
+msgstr ""
+
+#: src/ollama_models.py:2814
+msgid ""
+"Hermes 3 is the latest version of the flagship Hermes series of LLMs by Nous "
+"Research"
+msgstr ""
+
+#: src/ollama_models.py:2842
+msgid ""
+"Yi-Coder is a series of open-source code language models that delivers state-"
+"of-the-art coding performance with fewer than 10 billion parameters."
+msgstr ""
+
+#: src/ollama_models.py:2873
+msgid ""
+"A large language model built by the Technology Innovation Institute (TII) "
+"for use in summarization, text generation, and chat bots."
+msgstr ""
+
+#: src/ollama_models.py:2910
+msgid ""
+"InternLM2.5 is a 7B parameter model tailored for practical scenarios with "
+"outstanding reasoning capability."
+msgstr ""
+
+#: src/ollama_models.py:2932
+msgid ""
+"A compact, yet powerful 10.7B large language model designed for single-turn "
+"conversation."
+msgstr ""
+
+#: src/ollama_models.py:2956
+msgid ""
+"Athene-V2 is a 72B parameter model which excels at code completion, "
+"mathematics, and log extraction tasks."
+msgstr ""
+
+#: src/ollama_models.py:2979
+msgid "A new small LLaVA model fine-tuned from Phi 3 Mini."
+msgstr ""
+
+#: src/ollama_models.py:3007
+msgid ""
+"Orca 2 is built by Microsoft research, and are a fine-tuned version of "
+"Meta's Llama 2 models. The model is designed to excel particularly in "
+"reasoning."
+msgstr ""
+
+#: src/ollama_models.py:3038
+msgid ""
+"A series of multimodal LLMs (MLLMs) designed for vision-language "
+"understanding."
+msgstr ""
+
+#: src/ollama_models.py:3070
+msgid ""
+"Llama 2 based model fine tuned on an Orca-style dataset. Originally called "
+"Free Willy."
+msgstr ""
+
+#: src/ollama_models.py:3099
+msgid ""
+"Mistral Small 3 sets a new benchmark in the “small” Large Language Models "
+"category below 70B."
+msgstr ""
+
+#: src/ollama_models.py:3121
+msgid ""
+"2.7B uncensored Dolphin model by Eric Hartford, based on the Phi language "
+"model by Microsoft Research."
+msgstr ""
+
+#: src/ollama_models.py:3155
+msgid ""
+"SmolLM2 is a family of compact language models available in three size: "
+"135M, 360M, and 1.7B parameters."
+msgstr ""
+
+#: src/ollama_models.py:3177
+msgid "Uncensored version of Wizard LM model"
+msgstr ""
+
+#: src/ollama_models.py:3201
+msgid ""
+"A commercial-friendly small language model by NVIDIA optimized for roleplay, "
+"RAG QA, and function calling."
+msgstr ""
+
+#: src/ollama_models.py:3223
+msgid "An extension of Mistral to support context windows of 64K or 128K."
+msgstr ""
+
+#: src/ollama_models.py:3372
+msgid ""
+"An expansion of Llama 2 that specializes in integrating both general "
+"language understanding and domain-specific knowledge, particularly in "
+"programming and mathematics."
+msgstr ""
+
+#: src/ollama_models.py:3394
+msgid ""
+"Fine-tuned Llama 2 model to answer medical questions based on an open source "
+"medical dataset."
+msgstr ""
+
+#: src/ollama_models.py:3421
+msgid ""
+"Open-source medical large language model adapted from Llama 2 to the medical "
+"domain."
+msgstr ""
+
+#: src/ollama_models.py:3450
+msgid ""
+"A series of models from Groq that represent a significant advancement in "
+"open-source AI capabilities for tool use/function calling."
+msgstr ""
+
+#: src/ollama_models.py:3473
+msgid ""
+"Llama-3.1-Nemotron-70B-Instruct is a large language model customized by "
+"NVIDIA to improve the helpfulness of LLM generated responses to user queries."
+msgstr ""
+
+#: src/ollama_models.py:3495
+msgid ""
+"Nexus Raven is a 13B instruction tuned model for function calling tasks."
+msgstr ""
+
+#: src/ollama_models.py:3516
+msgid "The Nous Hermes 2 model from Nous Research, now trained over Mixtral."
+msgstr ""
+
+#: src/ollama_models.py:3539
+msgid "Great code generation model based on Llama2."
+msgstr ""
+
+#: src/ollama_models.py:3561
+msgid "Uncensored Llama2 based model with support for a 16K context window."
+msgstr ""
+
+#: src/ollama_models.py:3602
+msgid ""
+"The IBM Granite 2B and 8B models are designed to support tool-based use "
+"cases and support for retrieval augmented generation (RAG), streamlining "
+"code generation, translation and bug fixing."
+msgstr ""
+
+#: src/ollama_models.py:3625
+msgid ""
+"🎩 Magicoder is a family of 7B parameter models trained on 75K synthetic "
+"instruction data using OSS-Instruct, a novel approach to enlightening LLMs "
+"with open-source code snippets."
+msgstr ""
+
+#: src/ollama_models.py:3647
+msgid ""
+"A lightweight chat model allowing accurate, and responsive output without "
+"requiring high-end hardware."
+msgstr ""
+
+#: src/ollama_models.py:3670
+msgid ""
+"A high-performing code instruct model created by merging two existing code "
+"models."
+msgstr ""
+
+#: src/ollama_models.py:3693
+msgid ""
+"Falcon2 is an 11B parameters causal decoder-only model built by TII and "
+"trained over 5T tokens."
+msgstr ""
+
+#: src/ollama_models.py:3715
+msgid ""
+"Wizard Vicuna is a 13B parameter model based on Llama 2 trained by "
+"MelodysDreamj."
+msgstr ""
+
+#: src/ollama_models.py:3737
+msgid ""
+"MistralLite is a fine-tuned model based on Mistral with enhanced "
+"capabilities of processing long contexts."
+msgstr ""
+
+#: src/ollama_models.py:3760
+msgid ""
+"MathΣtral: a 7B model designed for math reasoning and scientific discovery "
+"by Mistral AI."
+msgstr ""
+
+#: src/ollama_models.py:3782
+msgid "7B parameter text-to-SQL model made by MotherDuck and Numbers Station."
+msgstr ""
+
+#: src/ollama_models.py:3803
+msgid ""
+"MegaDolphin-2.2-120b is a transformation of Dolphin-2.2-70b created by "
+"interleaving the model with itself."
+msgstr ""
+
+#: src/ollama_models.py:3825
+msgid ""
+"Solar Pro Preview: an advanced large language model (LLM) with 22 billion "
+"parameters designed to fit into a single GPU"
+msgstr ""
+
+#: src/ollama_models.py:3852
+msgid ""
+"A series of models that convert HTML content to Markdown content, which is "
+"useful for content conversion tasks."
+msgstr ""
+
+#: src/ollama_models.py:3873
+msgid ""
+"A top-performing mixture of experts model, fine-tuned with high-quality data."
+msgstr ""
+
+#: src/ollama_models.py:3895
+msgid "A 7B chat model fine-tuned with high-quality data and based on Zephyr."
+msgstr ""
+
+#: src/ollama_models.py:3918
+msgid ""
+"Merge of the Open Orca OpenChat model and the Garage-bAInd Platypus 2 model. "
+"Designed for chat and code generation."
+msgstr ""
+
+#: src/ollama_models.py:3995
+msgid ""
+"A language model created by combining two fine-tuned Llama 2 70B models into "
+"one."
+msgstr ""
+
+#: src/ollama_models.py:4036
+msgid ""
+"The IBM Granite 1B and 3B models are the first mixture of experts (MoE) "
+"Granite models from IBM designed for low latency usage."
+msgstr ""
+
+#: src/ollama_models.py:4058
+msgid ""
+"A 3.8B model fine-tuned on a private high-quality synthetic dataset for "
+"information extraction, based on Phi-3."
+msgstr ""
+
+#: src/ollama_models.py:4110
+msgid ""
+"Cohere For AI's language models trained to perform well across 23 different "
+"languages."
+msgstr ""
+
+#: src/ollama_models.py:4132
+msgid "DBRX is an open, general-purpose LLM created by Databricks."
+msgstr ""
+
+#: src/ollama_models.py:4154
+msgid ""
+"An open large reasoning model for real-world solutions by the Alibaba "
+"International Digital Commerce Group (AIDC-AI)."
+msgstr ""
+
+#: src/ollama_models.py:4177
+msgid "Embedding model from BAAI mapping texts to vectors."
+msgstr ""
+
+#: src/ollama_models.py:4200
+msgid ""
+"An open weights function calling model based on Llama 3, competitive with "
+"GPT-4o function calling capabilities."
+msgstr ""
+
+#: src/ollama_models.py:4221
+msgid ""
+"A robust conversational model designed to be used for both chat and instruct "
+"use cases."
+msgstr ""
+
+#: src/ollama_models.py:4243
+msgid ""
+"An upgraded version of DeekSeek-V2 that integrates the general and coding "
+"abilities of both DeepSeek-V2-Chat and DeepSeek-Coder-V2-Instruct."
+msgstr ""
+
+#: src/ollama_models.py:4276
+msgid ""
+"ShieldGemma is set of instruction tuned models for evaluating the safety of "
+"text prompt input and text output responses against a set of defined safety "
+"policies."
+msgstr ""
+
+#: src/ollama_models.py:4298
+msgid "A state-of-the-art fact-checking model developed by Bespoke Labs."
+msgstr ""
+
+#: src/ollama_models.py:4326
+msgid ""
+"Llama Guard 3 is a series of models fine-tuned for content safety "
+"classification of LLM inputs and responses."
+msgstr ""
+
+#: src/ollama_models.py:4350
+msgid ""
+"Sentence-transformers model that can be used for tasks like clustering or "
+"semantic search."
+msgstr ""
+
+#: src/ollama_models.py:4380
+msgid ""
+"OpenCoder is an open and reproducible code LLM family which includes 1.5B "
+"and 8B models, supporting chat in English and Chinese languages."
+msgstr ""
+
+#: src/ollama_models.py:4409
+msgid ""
+"Tülu 3 is a leading instruction following model family, offering fully open-"
+"source data, code, and recipes by the The Allen Institute for AI."
+msgstr ""
+
+#: src/ollama_models.py:4437
+msgid ""
+"Snowflake's frontier embedding model. Arctic Embed 2.0 adds multilingual "
+"support without sacrificing English performance or scalability."
+msgstr ""
+
+#: src/ollama_models.py:4465
+msgid ""
+"The IBM Granite Guardian 3.0 2B and 8B models are designed to detect risks "
+"in prompts and/or responses."
+msgstr ""
+
+#: src/ollama_models.py:4499
+msgid ""
+"EXAONE 3.5 is a collection of instruction-tuned bilingual (English and "
+"Korean) generative models ranging from 2.4B to 32B parameters, developed and "
+"released by LG AI Research."
+msgstr ""
+
+#: src/ollama_models.py:4547
+msgid ""
+"Sailor2 are multilingual language models made for South-East Asia. Available "
+"in 1B, 8B, and 20B parameter sizes."
+msgstr ""
+
+#: src/ollama_models.py:4585
+msgid ""
+"A family of efficient AI models under 10B parameters performant in science, "
+"math, and coding through innovative training techniques."
+msgstr ""
+
+#: src/ollama_models.py:4626
+msgid ""
+"The IBM Granite 2B and 8B models are text-only dense LLMs trained on over 12 "
+"trillion tokens of data, demonstrated significant improvements over their "
+"predecessors in performance and speed in IBM’s initial testing."
+msgstr ""
+
+#: src/ollama_models.py:4667
+msgid ""
+"The IBM Granite 1B and 3B models are long-context mixture of experts (MoE) "
+"Granite models from IBM designed for low latency usage."
+msgstr ""
+
+#: src/ollama_models.py:4708
+msgid ""
+"The IBM Granite Embedding 30M and 278M models models are text-only dense "
+"biencoder embedding models, with 30M available in English only and 278M "
+"serving multilingual use cases."
+msgstr ""
+
+#: src/ollama_models.py:4730
+msgid "Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft."
+msgstr ""
+
+#: src/ollama_models.py:4752
+msgid ""
+"A new small reasoning model fine-tuned from the Qwen 2.5 3B Instruct model."
+msgstr ""
+
+#: src/ollama_models.py:4776
+msgid ""
+"Dolphin 3.0 Llama 3.1 8B 🐬 is the next generation of the Dolphin series of "
+"instruct-tuned models designed to be the ultimate general purpose local "
+"model, enabling coding, math, agentic, function calling, and general use "
+"cases."
+msgstr ""
+
+#: src/ollama_models.py:4828
+msgid ""
+"DeepSeek-R1 is a family of open reasoning models with performance "
+"approaching that of leading models, such as O3 and Gemini 2.5 Pro."
+msgstr ""
+
+#: src/ollama_models.py:4849
+msgid ""
+"A strong Mixture-of-Experts (MoE) language model with 671B total parameters "
+"with 37B activated for each token."
+msgstr ""
+
+#: src/ollama_models.py:4876
+msgid ""
+"OLMo 2 is a new family of 7B and 13B models trained on up to 5T tokens. "
+"These models are on par with or better than equivalently sized fully open "
+"models, and competitive with open-weight models such as Llama 3.1 on English "
+"academic benchmarks."
+msgstr ""
+
+#: src/ollama_models.py:4924
+msgid ""
+"The smallest model in Cohere's R series delivers top-tier speed, efficiency, "
+"and quality to build powerful AI applications on commodity GPUs and edge "
+"devices."
+msgstr ""
+
+#: src/ollama_models.py:4951
+msgid ""
+"A fully open-source family of reasoning models built using a dataset derived "
+"by distilling DeepSeek-R1."
+msgstr ""
+
+#: src/ollama_models.py:4974
+msgid ""
+"A fine-tuned version of Deepseek-R1-Distilled-Qwen-1.5B that surpasses the "
+"performance of OpenAI’s o1-preview with just 1.5B parameters on popular math "
+"evaluations."
+msgstr ""
+
+#: src/ollama_models.py:5003
+msgid ""
+"A version of the DeepSeek-R1 model that has been post trained to provide "
+"unbiased, accurate, and factual information by Perplexity."
+msgstr ""
+
+#: src/ollama_models.py:5057
+msgid "The current, most capable model that runs on a single GPU."
+msgstr ""
+
+#: src/ollama_models.py:5105
+msgid ""
+"Phi-4-mini brings significant enhancements in multilingual support, "
+"reasoning, and mathematics, and now, the long-awaited function calling "
+"feature is finally supported."
+msgstr ""
+
+#: src/ollama_models.py:5130
+msgid ""
+"A compact and efficient vision-language model, specifically designed for "
+"visual document understanding, enabling automated content extraction from "
+"tables, charts, infographics, plots, diagrams, and more."
+msgstr ""
+
+#: src/ollama_models.py:5171
+msgid ""
+"Granite-3.2 is a family of long-context AI models from IBM Granite fine-"
+"tuned for thinking capabilities."
+msgstr ""
+
+#: src/ollama_models.py:5196
+msgid ""
+"A new state-of-the-art version of the lightweight Command R7B model that "
+"excels in advanced Arabic language capabilities for enterprises in the "
+"Middle East and Northern Africa."
+msgstr ""
+
+#: src/ollama_models.py:5242
+msgid ""
+"111 billion parameter model optimized for demanding enterprises that require "
+"fast, secure, and high-quality AI"
+msgstr ""
+
+#: src/ollama_models.py:5283
+msgid ""
+"Qwen3 is the latest generation of large language models in Qwen series, "
+"offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
+msgstr ""
+
+#: src/ollama_models.py:5430
+msgid "Devstral: the best open source model for coding agents"
+msgstr ""
+
+#: src/ollama_models.py:5458
+msgid "Meta's latest collection of multimodal models."
+msgstr ""
+
+#: src/ollama_models.py:5506
+msgid ""
+"Flagship vision-language model of Qwen and also a significant leap from the "
+"previous Qwen2-VL."
+msgstr ""
+
+#: src/ollama_models.py:5536
+msgid ""
+"DeepCoder is a fully open-Source 14B coder model at O3-mini level, with a "
+"1.5B version also available."
+msgstr ""
+
+#: src/ollama_models.py:5560
+msgid ""
+"Building upon Mistral Small 3, Mistral Small 3.1 (2503) adds state-of-the-"
+"art vision understanding and enhances long context capabilities up to 128k "
+"tokens without compromising text performance."
+msgstr ""
+
+#: src/ollama_models.py:5601
+msgid ""
+"Cogito v1 Preview is a family of hybrid reasoning models by Deep Cogito that "
+"outperform the best available open models of the same size, including "
+"counterparts from LLaMA, DeepSeek, and Qwen across most standard benchmarks."
+msgstr ""
+
+#: src/ollama_models.py:5631
+msgid ""
+"IBM Granite 2B and 8B models are 128K context length language models that "
+"have been fine-tuned for improved reasoning and instruction-following "
+"capabilities."
+msgstr ""
+
+#: src/ollama_models.py:5669
+msgid ""
+"Phi 4 reasoning and reasoning plus are 14-billion parameter open-weight "
+"reasoning models that rival much larger models on complex reasoning tasks."
+msgstr ""
+
+#: src/ollama_models.py:5701
+msgid ""
+"EXAONE Deep exhibits superior capabilities in various reasoning tasks "
+"including math and coding benchmarks, ranging from 2.4B to 32B parameters "
+"developed and released by LG AI Research."
+msgstr ""
+
+#: src/ollama_models.py:5727
+msgid ""
+"Phi 4 mini reasoning is a lightweight open model that balances efficiency "
+"with advanced reasoning ability."
+msgstr ""
+
+#: src/ollama_models.py:5754
+msgid ""
+"Gemma 3n models are designed for efficient execution on everyday devices "
+"such as laptops, tablets or phones."
+msgstr ""
+
+#: src/ollama_models.py:5777
+msgid "Magistral is a small, efficient reasoning model with 24B parameters."
+msgstr ""
+
+#: src/ollama_models.py:5825
+msgid ""
+"An update to Mistral Small that improves on function calling, instruction "
+"following, and less repetition errors."
+msgstr ""
+
+#: src/ollama_models.py:5862
+msgid ""
+"OpenAI’s open-weight models designed for powerful reasoning, agentic tasks, "
+"and versatile developer use cases."
+msgstr ""
+
+#: src/ollama_models.py:5896
+msgid "Alibaba's performant long context models for agentic and coding tasks."
+msgstr ""
+
+#: src/ollama_models.py:5921
+msgid "EmbeddingGemma is a 300M parameter embedding model from Google."
+msgstr ""
+
+#: src/ollama_models.py:5975
+msgid ""
+"DeepSeek-V3.1-Terminus is a hybrid model that supports both thinking mode "
+"and non-thinking mode."
+msgstr ""
+
+#: src/ollama_models.py:6028
+msgid ""
+"The most powerful vision-language model in the Qwen model family to date."
+msgstr ""
+
+#: src/ollama_models.py:6054
+msgid "Advanced agentic, reasoning and coding capabilities."
+msgstr ""
+
+#: src/ollama_models.py:6086
+msgid ""
+"Building upon the foundational models of the Qwen3 series, Qwen3 Embedding "
+"provides a comprehensive range of text embeddings models in various sizes"
+msgstr ""
+
+#: src/ollama_models.py:6132
+msgid ""
+"Granite 4 features improved instruction following (IF) and tool-calling "
+"capabilities, making them more effective in enterprise applications."
+msgstr ""
+
+#: src/ollama_models.py:6166
+msgid ""
+"A state-of-the-art mixture-of-experts (MoE) language model. Kimi K2-"
+"Instruct-0905 demonstrates significant improvements in performance on public "
+"benchmarks and real-world coding agent tasks."
+msgstr ""
+
+#: src/ollama_models.py:6185
+msgid ""
+"MiniMax M2 is a high-efficiency large language model built for coding and "
+"agentic workflows."
+msgstr ""
+
+#: src/ollama_models.py:6213
+msgid ""
+"DeepSeek-OCR is a vision-language model that can perform token-efficient OCR."
+msgstr ""
+
+#: src/ollama_models.py:6240
+msgid ""
+"gpt-oss-safeguard-20b and gpt-oss-safeguard-120b are safety reasoning models "
+"built-upon gpt-oss"
+msgstr ""
+
+#: src/ollama_models.py:6261
+msgid "Kimi K2 Thinking, Moonshot AI's best open-source thinking model."
+msgstr ""
+
+#: src/ollama_models.py:6290
+msgid ""
+"The Cogito v2.1 LLMs are instruction tuned generative models. All models are "
+"released under MIT license for commercial use."
+msgstr ""
+
+#: src/ollama_models.py:6332
+msgid ""
+"The Ministral 3 family is designed for edge deployment, capable of running "
+"on a wide range of hardware."
+msgstr ""
+
+#: src/ollama_models.py:6364
+msgid ""
+"Rnj-1 is a family of 8B parameter open-weight, dense models trained from "
+"scratch by Essential AI, optimized for code and STEM with capabilities on "
+"par with SOTA open-weight models."
+msgstr ""
+
+#: src/ollama_models.py:6394
+msgid ""
+"The first installment in the Qwen3-Next series with strong performance in "
+"terms of both parameter efficiency and inference speed."
+msgstr ""
+
+#: src/ollama_models.py:6427
+msgid ""
+"Nemotron-3-Nano is a new Standard for Efficient, Open, and Intelligent "
+"Agentic Models, now updated with a 4B parameter count model."
+msgstr ""
+
+#: src/ollama_models.py:6457
+msgid ""
+"24B model that excels at using tools to explore codebases, editing multiple "
+"files and power software engineering agents."
+msgstr ""
+
+#: src/ollama_models.py:6487 src/ollama_models.py:6578
+msgid ""
+"Olmo is a series of Open language models designed to enable the science of "
+"language models. These models are pre-trained on the Dolma 3 dataset and "
+"post-trained on the Dolci datasets."
+msgstr ""
+
+#: src/ollama_models.py:6520
+msgid ""
+"A new collection of open translation models built on Gemma 3, helping people "
+"communicate across 55 languages."
+msgstr ""
+
+#: src/ollama_models.py:6553
+msgid ""
+"As the strongest model in the 30B class, GLM-4.7-Flash offers a new option "
+"for lightweight deployment that balances performance and efficiency."
+msgstr ""
+
+#: src/ollama_models.py:6607
+msgid ""
+"123B model that excels at using tools to explore codebases, editing multiple "
+"files and power software engineering agents."
+msgstr ""
+
+#: src/ollama_models.py:6631
+msgid ""
+"FunctionGemma is a specialized version of Google's Gemma 3 270M model fine-"
+"tuned explicitly for function calling."
+msgstr ""
+
+#: src/ollama_models.py:6654
+msgid ""
+"Gemini 3 Flash offers frontier intelligence built for speed at a fraction of "
+"the cost."
+msgstr ""
+
+#: src/ollama_models.py:6675
+msgid ""
+"nomic-embed-text-v2-moe is a multilingual MoE text embedding model that "
+"excels at multilingual retrieval."
+msgstr ""
+
+#: src/ollama_models.py:6785
+msgid "Advancing the Coding Capability"
+msgstr ""
+
+#: src/ollama_models.py:6805
+msgid ""
+"DeepSeek-V3.2, a model that harmonizes high computational efficiency with "
+"superior reasoning and agent performance."
+msgstr ""
+
+#: src/ollama_models.py:6825
+msgid ""
+"A general-purpose multimodal mixture-of-experts model for production-grade "
+"tasks and enterprise workloads."
+msgstr ""
+
+#: src/ollama_models.py:6845
+msgid "Exceptional multilingual capabilities to elevate code engineering"
+msgstr ""
+
+#: src/ollama_models.py:6869
+msgid ""
+"LFM2.5 is a new family of hybrid models designed for on-device deployment."
+msgstr ""
+
+#: src/ollama_models.py:6895
+msgid ""
+"Kimi K2.5 is an open-source, native multimodal agentic model that seamlessly "
+"integrates vision and language understanding with advanced agentic "
+"capabilities, instant and thinking modes, as well as conversational and "
+"agentic paradigms."
+msgstr ""
+
+#: src/ollama_models.py:6928
+msgid ""
+"Qwen3-Coder-Next is a coding-focused language model from Alibaba's Qwen "
+"team, optimized for agentic coding workflows and local development."
+msgstr ""
+
+#: src/ollama_models.py:6956
+msgid ""
+"GLM-OCR is a multimodal OCR model for complex document understanding, built "
+"on the GLM-V encoder–decoder architecture."
+msgstr ""
+
+#: src/ollama_models.py:6978
+msgid ""
+"A strong reasoning and agentic model from Z.ai with 744B total parameters "
+"(40B active), built for complex systems engineering and long-horizon tasks."
+msgstr ""
+
+#: src/ollama_models.py:6998
+msgid ""
+"MiniMax-M2.5 is a state-of-the-art large language model designed for real-"
+"world productivity and coding tasks."
+msgstr ""
+
+#: src/ollama_models.py:7054
+msgid ""
+"Qwen 3.5 is a family of open-source multimodal models that delivers "
+"exceptional utility and performance."
+msgstr ""
+
+#: src/ollama_models.py:7096
+msgid ""
+"LFM2 is a family of hybrid models designed for on-device deployment. "
+"LFM2-24B-A2B is the largest model in the family, scaling the architecture to "
+"24 billion parameters while keeping inference efficient."
+msgstr ""
+
+#: src/ollama_models.py:7124
+msgid ""
+"NVIDIA Nemotron 3 Super is a 120B open MoE model activating just 12B "
+"parameters to deliver maximum compute efficiency and accuracy for complex "
+"multi-agent applications."
+msgstr ""
+
+#: src/ollama_models.py:7156
+msgid ""
+"An open 30B MoE model from NVIDIA with 3B activated parameters that delivers "
+"strong reasoning and agentic capabilities."
+msgstr ""
+
+#: src/ollama_models.py:7177
+msgid ""
+"MiniMax's M2-series model for coding, agentic workflows, and professional "
+"productivity."
+msgstr ""
+
+#: src/ollama_models.py:7213
+msgid ""
+"Gemma 4 models are designed to deliver frontier-level performance at each "
+"size. They are well-suited for reasoning, agentic workflows, coding, and "
+"multimodal understanding."
+msgstr ""
+
+#: src/quick_ask.py:65 src/widgets/activities/live_chat.py:155
+msgid "Please select an instance in Alpaca before chatting"
+msgstr ""
+
+#: src/quick_ask.py:70 src/widgets/activities/live_chat.py:160
+msgid "Please select add a model for this instance in Alpaca before chatting"
+msgstr ""
+
+#: src/sql_manager.py:60
+#, python-brace-format
+msgid "{} seconds"
+msgstr "{} sekundi"
+
+#: src/sql_manager.py:64
+msgid "Total Duration"
+msgstr ""
+
+#: src/sql_manager.py:65
+msgid "Load Duration"
+msgstr ""
+
+#: src/sql_manager.py:68
+msgid "Prompt Eval Count"
+msgstr ""
+
+#: src/sql_manager.py:68 src/sql_manager.py:73
+#, python-brace-format
+msgid "{} tokens"
+msgstr "{} tokeni"
+
+#: src/sql_manager.py:69
+msgid "Prompt Eval Duration"
+msgstr ""
+
+#: src/sql_manager.py:71
+msgid "Prompt Eval Rate"
+msgstr ""
+
+#: src/sql_manager.py:71 src/sql_manager.py:76
+#, python-brace-format
+msgid "{} tokens/s"
+msgstr "{} tokeni/s"
+
+#: src/sql_manager.py:73
+msgid "Eval Count"
+msgstr ""
+
+#: src/sql_manager.py:74
+msgid "Eval Duration"
+msgstr ""
+
+#: src/sql_manager.py:76
+msgid "Eval Rate"
+msgstr ""
+
+#: src/sql_manager.py:77
+msgid "Metric"
+msgstr ""
+
+#: src/sql_manager.py:77 src/widgets/instances/ollama_instances.py:194
+#: src/widgets/instances/openai_instances.py:161
+msgid "Value"
+msgstr "Vrijednost"
+
+#: src/window.py:118
+msgid "Select a type of instance to add"
+msgstr ""
+
+#: src/window.py:189
+msgid "Hide"
+msgstr "Sakri"
+
+#: src/window.py:193
+msgid "Close Alpaca?"
+msgstr "Zatvori Alpaca?"
+
+#: src/window.py:194
+msgid "A task is currently in progress. Are you sure you want to close Alpaca?"
+msgstr ""
+
+#: src/window.py:227
+msgid "Please select a model before chatting"
+msgstr ""
+
+#: src/window.py:301
+msgid "Chat imported successfully"
+msgstr ""
+
+#: src/window.py:353 src/widgets/chat.py:256 src/widgets/chat.py:260
+#: src/widgets/chat.py:829 src/widgets/chat.py:862
+msgid "New Folder"
+msgstr "Nova mapa"
+
+#: src/window.py:390
+msgid "Pull Model"
+msgstr ""
+
+#: src/window.py:391
+msgid "Please enter the model name following this template: name:tag"
+msgstr ""
+
+#: src/widgets/activities/__init__.py:86
+msgid "Attachment Creator"
+msgstr ""
+
+#: src/widgets/activities/__init__.py:91 src/widgets/activities/camera.py:26
+msgid "Camera"
+msgstr "Kamera"
+
+#. Activity
+#: src/widgets/activities/__init__.py:101
+#: src/widgets/activities/latex_editor.py:29
+msgid "Latex Editor"
+msgstr ""
+
+#: src/widgets/activities/__init__.py:151
+msgid "Attach Activity"
+msgstr ""
+
+#: src/widgets/activities/__init__.py:151
+msgid "Detach Activity"
+msgstr ""
+
+#: src/widgets/activities/background_remover.py:43
+#: src/widgets/blocks/inline_picture.py:59 src/widgets/attachments.py:381
+msgid "Save Image"
+msgstr "Spremi sliku"
+
+#: src/widgets/activities/background_remover.py:177
+msgid "Download Background Removal Model"
+msgstr ""
+
+#: src/widgets/activities/background_remover.py:178
+#, python-brace-format
+msgid "To use this tool you'll need to download a special model ({})"
+msgstr ""
+
+#: src/widgets/activities/camera.py:85
+msgid "Photo"
+msgstr ""
+
+#: src/widgets/activities/live_chat.py:31
+msgid "No Messages"
+msgstr ""
+
+#: src/widgets/activities/live_chat.py:32
+msgid "Begin by speaking to the model"
+msgstr ""
+
+#: src/widgets/activities/live_chat.py:163
+msgid "Selected model is not available"
+msgstr ""
+
+#: src/widgets/activities/terminal.py:16
+msgid "Setting up Python environment..."
+msgstr ""
+
+#: src/widgets/activities/terminal.py:28
+msgid "Using Python HTTP server..."
+msgstr ""
+
+#: src/widgets/activities/terminal.py:68
+msgid "Code Runner"
+msgstr ""
+
+#: src/widgets/activities/terminal.py:217
+msgid "Script Exited"
+msgstr ""
+
+#: src/widgets/activities/terminal.py:261
+msgid "New Attachment"
+msgstr ""
+
+#: src/widgets/activities/terminal.py:292
+msgid "Name the Attachment"
+msgstr ""
+
+#: src/widgets/activities/terminal.py:296
+#: src/widgets/activities/terminal.py:297
+msgid "New File"
+msgstr "Nova datoteka"
+
+#: src/widgets/activities/terminal.py:346
+msgid "Code Editor"
+msgstr ""
+
+#: src/widgets/activities/terminal.py:365
+msgid "Changes saved successfully"
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:26
+msgid "Transcription"
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:77 src/widgets/voice.py:270
+msgid "Download Speech Recognition Model"
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:78 src/widgets/voice.py:271
+#, python-brace-format
+msgid "To use speech recognition you'll need to download a special model ({})"
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:80 src/widgets/voice.py:273
+msgid "Download Model"
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:93
+msgid "Audio and video files"
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:127
+#: src/widgets/activities/transcriber.py:157
+msgid "Transcription Error"
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:128 src/widgets/voice.py:209
+msgid "An error occurred while pulling speech recognition model"
+msgstr ""
+
+#: src/widgets/activities/transcriber.py:158
+msgid "An error occurred while transcribing audio"
+msgstr ""
+
+#: src/widgets/activities/viewers.py:17 src/widgets/blocks/inline_picture.py:31
+#: src/widgets/blocks/inline_picture.py:71 src/widgets/models/text.py:271
+#: src/widgets/attachments.py:320
+msgid "Image"
+msgstr "Slika"
+
+#: src/widgets/activities/web_browser.py:33
+msgid "Reload Page"
+msgstr ""
+
+#: src/widgets/activities/web_browser.py:37
+msgid "Open in External Browser"
+msgstr ""
+
+#: src/widgets/activities/web_browser.py:41
+msgid "Go to Home"
+msgstr ""
+
+#: src/widgets/blocks/code.py:74
+msgid "Code copied to the clipboard"
+msgstr ""
+
+#: src/widgets/blocks/code.py:84
+msgid "Script saved successfully"
+msgstr ""
+
+#: src/widgets/blocks/latex.py:55
+msgid "Equation exported successfully"
+msgstr ""
+
+#: src/widgets/blocks/latex.py:61
+msgid "Save Equation"
+msgstr ""
+
+#: src/widgets/blocks/latex.py:62
+msgid "equation"
+msgstr ""
+
+#: src/widgets/blocks/latex.py:69
+msgid "Equation copied to the clipboard"
+msgstr ""
+
+#: src/widgets/blocks/latex.py:118
+msgid "Copy Equation"
+msgstr ""
+
+#: src/widgets/blocks/table.py:151
+msgid "Spreadsheet saved successfully"
+msgstr ""
+
+#: src/widgets/characters/character_page.py:41
+#: src/widgets/characters/character_page.py:181
+msgid "Entry Name"
+msgstr ""
+
+#: src/widgets/characters/character_page.py:56
+msgid "Remove Keyword"
+msgstr ""
+
+#: src/widgets/characters/character_page.py:68
+msgid "Keyword"
+msgstr ""
+
+#: src/widgets/characters/character_page.py:171
+msgid "Entry"
+msgstr ""
+
+#: src/widgets/characters/character_page.py:178
+msgid "Create Entry"
+msgstr ""
+
+#: src/widgets/characters/character_page.py:242
+msgid "Character Card Saved Successfully"
+msgstr ""
+
+#: src/widgets/characters/character_page.py:254
+msgid "Character Card Cleared Successfully"
+msgstr ""
+
+#: src/widgets/characters/character_page.py:261
+msgid "Are you sure you want to clear the character card?"
+msgstr ""
+
+#: src/widgets/characters/character_page.py:263
+msgid "Clear"
+msgstr ""
+
+#: src/widgets/characters/export_page.py:46
+msgid "Character Card Exported Successfully"
+msgstr ""
+
+#: src/widgets/characters/export_page.py:61
+msgid "Error Exporting Character Card"
+msgstr ""
+
+#: src/widgets/characters/export_page.py:101
+msgid "Remove Tag"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:62 src/widgets/instances/__init__.py:375
+msgid "Edit Instance"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:62
+msgid "Create Instance"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:91
+msgid "API Key"
+msgstr "API ključ"
+
+#: src/widgets/instances/__init__.py:91
+msgid "API Key (Optional)"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:92
+msgid "API Key (Unchanged)"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:141
+msgid "Use Current Model"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:314
+msgid "Fallback Instance"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:347
+msgid "Open Ollama Manager"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:357
+msgid "Remove Instance"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:364
+msgid "Remove Instance?"
+msgstr ""
+
+#: src/widgets/instances/__init__.py:365
+msgid "Are you sure you want to remove this instance?"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:193
+#: src/widgets/instances/openai_instances.py:160
+msgid "Arguments"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:194
+#: src/widgets/instances/openai_instances.py:161
+msgid "Argument"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:242
+#: src/widgets/instances/ollama_instances.py:349
+#: src/widgets/instances/ollama_instances.py:365
+#: src/widgets/instances/ollama_instances.py:608
+#: src/widgets/instances/ollama_instances.py:729
+#: src/widgets/instances/openai_instances.py:239
+#: src/widgets/instances/openai_instances.py:315
+#: src/widgets/instances/openai_instances.py:372
+#: src/widgets/instances/openai_instances.py:414
+#: src/widgets/instances/openai_instances.py:475
+#: src/widgets/instances/openai_instances.py:514
+#: src/widgets/instances/openai_instances.py:547
+#: src/widgets/instances/openai_instances.py:626
+msgid "Instance Error"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:243
+#: src/widgets/instances/openai_instances.py:240
+msgid "Message generation failed"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:350
+#: src/widgets/instances/ollama_instances.py:730
+#: src/widgets/instances/openai_instances.py:316
+#: src/widgets/instances/openai_instances.py:373
+#: src/widgets/instances/openai_instances.py:415
+msgid "Could not retrieve added models"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:366
+msgid "Could not retrieve available models"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:400
+msgid "Error Pulling Model"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:443
+msgid "Ollama (Managed)"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:444
+msgid "Local AI instance managed directly by Alpaca"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:447
+#: src/widgets/instances/ollama_instances.py:630
+#: src/widgets/instances/ollama_instances.py:661
+#: src/widgets/instances/openai_instances.py:21
+msgid "Instance"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:511
+msgid "Alpaca Support"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:518
+msgid "Model request too large for system"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:609
+msgid "Managed Ollama instance failed to start"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:626
+msgid "Ollama (External)"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:627
+msgid "Local or remote AI instance not managed by Alpaca"
+msgstr ""
+
+#: src/widgets/instances/ollama_instances.py:657
+msgid "Ollama (Cloud)"
+msgstr "Ollama (Oblak)"
+
+#: src/widgets/instances/ollama_instances.py:658
+msgid "Online instance directly managed by Ollama (Experimental)"
+msgstr ""
+
+#: src/widgets/instances/ollama_manager.py:34
+#: src/widgets/instances/ollama_manager.py:249
+msgid "Version"
+msgstr "Verzija"
+
+#: src/widgets/instances/ollama_manager.py:37
+msgid "Not Running"
+msgstr ""
+
+#: src/widgets/instances/ollama_manager.py:46
+msgid "ROCm is available for download (might not work with your GPU)"
+msgstr ""
+
+#: src/widgets/instances/ollama_manager.py:47
+msgid "GPU is using Vulkan"
+msgstr "GPU koristi Vulkan"
+
+#: src/widgets/instances/ollama_manager.py:48
+msgid "ROCm is available for download"
+msgstr "ROCm je dostupno za preuzimanje"
+
+#: src/widgets/instances/ollama_manager.py:49
+msgid "ROCm is in use"
+msgstr ""
+
+#: src/widgets/instances/ollama_manager.py:52
+msgid "Incompatible GPU, Vulkan might work"
+msgstr ""
+
+#: src/widgets/instances/ollama_manager.py:87
+msgid "Unknown"
+msgstr "Nepoznato"
+
+#: src/widgets/instances/ollama_manager.py:130
+msgid "Downloading Ollama"
+msgstr "Preuzimanje Ollama"
+
+#: src/widgets/instances/ollama_manager.py:136
+#: src/widgets/instances/ollama_manager.py:165
+msgid "Installing…"
+msgstr "Instliranje..."
+
+#: src/widgets/instances/ollama_manager.py:159
+msgid "Downloading ROCm"
+msgstr "Preuzimanje ROCm"
+
+#: src/widgets/instances/ollama_manager.py:244
+#, python-brace-format
+msgid "Latest Version Installed ({})"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:190
+msgid "Tool Error"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:191
+msgid "An error occurred while running tool"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:476
+#: src/widgets/instances/openai_instances.py:515
+#: src/widgets/instances/openai_instances.py:548
+msgid "Could not retrieve models"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:488
+msgid "Alibaba Cloud Qwen large language models via DashScope"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:494
+msgid "Fireworks AI inference platform"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:527
+msgid "Lambda Labs cloud inference API"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:560
+msgid "Cerebras AI cloud inference API"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:566
+msgid "Kluster AI cloud inference API"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:572
+msgid "Kimi large language models by Moonshot AI"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:579
+msgid "Mistral AI large language models"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:586
+msgid "Meta AI Llama API"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:592
+msgid "Novita AI cloud inference API"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:599
+msgid "DeepInfra cloud inference API"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:605
+msgid "CompactifAI inference platform"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:627
+msgid "Could not retrieve CompactifAI models"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:639
+msgid "Grok instance from X.ai"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:657
+msgid "OpenAI Compatible Instance"
+msgstr ""
+
+#: src/widgets/instances/openai_instances.py:659
+msgid "AI instance compatible with OpenAI library"
+msgstr ""
+
+#: src/widgets/models/text.py:105
+msgid "Family"
+msgstr ""
+
+#: src/widgets/models/text.py:106
+msgid "Parameter Size"
+msgstr ""
+
+#: src/widgets/models/text.py:107
+msgid "Quantization Level"
+msgstr ""
+
+#: src/widgets/models/text.py:110
+msgid "Parent Model"
+msgstr ""
+
+#: src/widgets/models/text.py:113 src/widgets/models/text.py:115
+msgid "Modified At"
+msgstr ""
+
+#: src/widgets/models/text.py:219
+msgid "Character Card Detected"
+msgstr ""
+
+#: src/widgets/models/text.py:220
+msgid "Import character card data from picture?"
+msgstr ""
+
+#: src/widgets/models/text.py:266
+msgid "Profile Picture Exported Successfully"
+msgstr ""
+
+#: src/widgets/models/text.py:283
+msgid "Include Character Card"
+msgstr ""
+
+#: src/widgets/models/text.py:286
+msgid "Only Export Picture"
+msgstr ""
+
+#: src/widgets/models/text.py:294
+msgid "Export Profile Picture"
+msgstr ""
+
+#: src/widgets/models/text.py:295
+msgid ""
+"Do you want to include the character card data for use outside of Alpaca?"
+msgstr ""
+
+#: src/widgets/models/basic.py:83
+msgid "Already Added"
+msgstr ""
+
+#: src/widgets/models/basic.py:85
+#, python-brace-format
+msgid "Pull '{}'"
+msgstr ""
+
+#: src/widgets/models/basic.py:87
+msgid "Add Model"
+msgstr ""
+
+#: src/widgets/models/basic.py:127
+msgid "Stop Pull"
+msgstr ""
+
+#: src/widgets/models/basic.py:128
+#, python-brace-format
+msgid "Are you sure you want to stop pulling '{}'?"
+msgstr ""
+
+#: src/widgets/models/basic.py:130 src/widgets/voice.py:471
+msgid "Stop"
+msgstr "Zaustavi"
+
+#: src/widgets/models/basic.py:169
+msgid "Add"
+msgstr "Dodaj"
+
+#: src/widgets/models/basic.py:341
+msgid "Remove Model?"
+msgstr "Ukloni model?"
+
+#: src/widgets/models/basic.py:342
+#, python-brace-format
+msgid "Are you sure you want to remove '{}'?"
+msgstr ""
+
+#: src/widgets/models/creator.py:131
+msgid "Please add a name"
+msgstr ""
+
+#: src/widgets/models/creator.py:145
+msgid "Model name is already in use"
+msgstr ""
+
+#: src/widgets/models/manager.py:214
+msgid "Speech to Text"
+msgstr ""
+
+#: src/widgets/models/manager.py:218
+msgid "Local speech to text model provided by OpenAI Whisper"
+msgstr ""
+
+#: src/widgets/models/manager.py:239
+msgid "Text to Speech"
+msgstr ""
+
+#: src/widgets/models/manager.py:243
+msgid "Local text to speech model provided by Kokoro"
+msgstr ""
+
+#: src/widgets/models/manager.py:265
+#, python-brace-format
+msgid "Local background removal model provided by {}."
+msgstr ""
+
+#: src/widgets/tools/__init__.py:26
+msgid "Select a Tool To Use"
+msgstr ""
+
+#: src/widgets/tools/__init__.py:30
+msgid "Selected Model is Not Compatible With Tools"
+msgstr ""
+
+#: src/widgets/tools/tools.py:145
+msgid "Run"
+msgstr "Pokreni"
+
+#: src/widgets/tools/tools.py:152
+msgid "Command Execution"
+msgstr ""
+
+#: src/widgets/tools/tools.py:157
+msgid "Command"
+msgstr "Naredba"
+
+#: src/widgets/tools/tools.py:245
+msgid "Loading Image..."
+msgstr "Učitavanje sliku..."
+
+#: src/widgets/attachments.py:237
+msgid "Delete Attachment?"
+msgstr ""
+
+#: src/widgets/attachments.py:238 src/widgets/attachments.py:359
+#: src/widgets/chat.py:1052
+#, python-brace-format
+msgid "Are you sure you want to delete '{}'?"
+msgstr ""
+
+#: src/widgets/attachments.py:240 src/widgets/attachments.py:361
+#: src/widgets/chat.py:893 src/widgets/chat.py:1054
+msgid "Delete"
+msgstr "Izbriši"
+
+#: src/widgets/attachments.py:358
+msgid "Delete Image?"
+msgstr "Izbriši sliku?"
+
+#: src/widgets/attachments.py:492 src/widgets/message.py:457
+msgid "This model might not be compatible with image recognition"
+msgstr ""
+
+#: src/widgets/attachments.py:517
+msgid "Any compatible Alpaca attachment"
+msgstr ""
+
+#: src/widgets/attachments.py:617
+msgid "Attach Website"
+msgstr ""
+
+#: src/widgets/attachments.py:620 src/widgets/message.py:445
+msgid "Attach Website? (Experimental)"
+msgstr ""
+
+#: src/widgets/attachments.py:621
+msgid "Please enter a website URL"
+msgstr ""
+
+#: src/widgets/attachments.py:628
+msgid "Attach YouTube Captions"
+msgstr ""
+
+#: src/widgets/attachments.py:631
+msgid "Attach YouTube Captions?"
+msgstr ""
+
+#: src/widgets/attachments.py:632
+msgid "Please enter a YouTube video URL"
+msgstr ""
+
+#: src/widgets/attachments.py:639
+msgid "Attach Screenshot"
+msgstr ""
+
+#: src/widgets/attachments.py:644
+msgid "Attach Photo From Camera"
+msgstr ""
+
+#: src/widgets/chat.py:30 src/widgets/chat.py:721
+msgid "Root"
+msgstr ""
+
+#: src/widgets/chat.py:248 src/widgets/chat.py:850 src/widgets/chat.py:1005
+#: src/widgets/dialog.py:199 src/widgets/dialog.py:212
+#: src/widgets/dialog.py:225
+msgid "Accept"
+msgstr "Prihvati"
+
+#: src/widgets/chat.py:358
+#, python-brace-format
+msgid "Use '{}'"
+msgstr ""
+
+#: src/widgets/chat.py:405
+#, python-brace-format
+msgid "Greeting #{}"
+msgstr ""
+
+#: src/widgets/chat.py:425
+msgid "Use Greeting"
+msgstr ""
+
+#: src/widgets/chat.py:630
+#, python-brace-format
+msgid "Send prompt: '{}'"
+msgstr ""
+
+#: src/widgets/chat.py:699
+msgid "The selected model does not have a character card"
+msgstr ""
+
+#: src/widgets/chat.py:800 src/widgets/chat.py:858
+msgid "Edit Folder"
+msgstr "Uredi mapu"
+
+#: src/widgets/chat.py:807 src/widgets/chat.py:890
+msgid "Delete Folder"
+msgstr "Ukloni mapu"
+
+#: src/widgets/chat.py:859 src/widgets/chat.py:1014
+#, python-brace-format
+msgid "Editing '{}'"
+msgstr ""
+
+#: src/widgets/chat.py:891
+#, python-brace-format
+msgid ""
+"Are you sure you want to delete '{}' and all it's sub-folders and chats?"
+msgstr ""
+
+#: src/widgets/chat.py:973
+msgid "Generate Podcast"
+msgstr ""
+
+#: src/widgets/chat.py:1020
+msgid "Use as Template"
+msgstr ""
+
+#: src/widgets/chat.py:1059
+#, python-brace-format
+msgid "Copy of {}"
+msgstr ""
+
+#: src/widgets/chat.py:1071
+msgid "Chat exported successfully"
+msgstr ""
+
+#: src/widgets/chat.py:1091
+msgid "User"
+msgstr "Korisnik"
+
+#: src/widgets/chat.py:1095
+msgid "System"
+msgstr "Sustav"
+
+#: src/widgets/chat.py:1141
+msgid "Importable (.db)"
+msgstr ""
+
+#: src/widgets/chat.py:1142
+msgid "Markdown"
+msgstr "Markdown"
+
+#: src/widgets/chat.py:1143
+msgid "Markdown (Obsidian Style)"
+msgstr ""
+
+#: src/widgets/chat.py:1144
+msgid "JSON"
+msgstr "JSON"
+
+#: src/widgets/chat.py:1145
+msgid "JSON (Include Metadata)"
+msgstr ""
+
+#: src/widgets/chat.py:1150
+msgid "Select a method to export the chat"
+msgstr ""
+
+#: src/widgets/guide.py:83
+msgid "Uninstall Ollama Command"
+msgstr ""
+
+#: src/widgets/guide.py:89 src/widgets/guide.py:106
+msgid "Copy Command"
+msgstr "Kopiraj naredbu"
+
+#: src/widgets/guide.py:100
+msgid "Uninstall ROCm Command"
+msgstr ""
+
+#: src/widgets/guide.py:116
+msgid "Deprecated Extension Found"
+msgstr ""
+
+#: src/widgets/guide.py:117
+msgid ""
+"As of Alpaca 9, the Flatpak extensions are no longer used, make sure to "
+"uninstall them to save space in your device and to stop this dialog from "
+"appearing."
+msgstr ""
+
+#: src/widgets/message.py:60
+msgid "Message copied to the clipboard"
+msgstr ""
+
+#: src/widgets/message.py:117
+msgid "Message cannot be regenerated while receiving a response"
+msgstr ""
+
+#: src/widgets/message.py:315
+msgid "Thought"
+msgstr ""
+
+#: src/widgets/message.py:359
+msgid "Chat"
+msgstr ""
+
+#: src/widgets/message.py:387
+msgid "Metadata"
+msgstr "Metapodaci"
+
+#: src/widgets/message.py:438
+msgid "Attach YouTube Video?"
+msgstr ""
+
+#: src/widgets/message.py:439
+msgid "Note that YouTube might block access to captions, please check output"
+msgstr ""
+
+#: src/widgets/message.py:446
+#, python-brace-format
+msgid ""
+"Are you sure you want to attach\n"
+"'{}'?"
+msgstr ""
+
+#: src/widgets/message.py:517
+msgid "Send as User"
+msgstr "Pošalji kao korisnik"
+
+#: src/widgets/message.py:522
+msgid "Send as System"
+msgstr "Pošalji kao sustav"
+
+#: src/widgets/preferences.py:71
+msgid "Are you sure you want to delete every chat and folder?"
+msgstr ""
+
+#: src/widgets/voice.py:208 src/widgets/voice.py:241
+msgid "Speech Recognition Error"
+msgstr ""
+
+#: src/widgets/voice.py:242
+msgid "An error occurred while using speech recognition"
+msgstr ""
+
+#. for model voices
+#. for general voices
+#: src/widgets/voice.py:313
+msgid "Skip"
+msgstr "Preskoči"
+
+#: src/widgets/voice.py:345
+msgid "This chat has no model messages"
+msgstr ""
+
+#: src/widgets/voice.py:445
+msgid "Podcast exported successfully"
+msgstr ""
+
+#: src/widgets/voice.py:468
+msgid "Stop Generation"
+msgstr ""
+
+#: src/widgets/voice.py:469
+msgid "Are you sure you want to stop the podcast generation?"
+msgstr ""
