@@ -129,7 +129,7 @@ class BaseInstance:
             "model": model,
             "stream": True,
             "think": self.properties.get('think', False) and 'thinking' in model_info.get('capabilities', []),
-            "keep_alive": self.properties.get('keep_alive', 300),
+            "keep_alive": self.properties.get('keep_alive', 5) * 60,
             "tools": [v.get_metadata() for v in available_tools.values()]
         }
 
@@ -449,7 +449,7 @@ class OllamaManaged(BaseInstance):
         'temperature': 0.7,
         'seed': 0,
         'num_ctx': 16384,
-        'keep_alive': 300,
+        'keep_alive': 5,
         'model_directory': os.path.join(data_dir, '.ollama', 'models'),
         'default_model': None,
         'title_model': None,
@@ -633,7 +633,7 @@ class Ollama(BaseInstance):
         'temperature': 0.7,
         'seed': 0,
         'num_ctx': 16384,
-        'keep_alive': 300,
+        'keep_alive': 5,
         'default_model': None,
         'title_model': None,
         'think': False,
