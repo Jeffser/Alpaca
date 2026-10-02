@@ -377,9 +377,11 @@ class Message(Gtk.Box):
         if chat_element and root:
             chat_element.stop_message()
         self.dt = datetime.datetime.now()
-        buffer = self.block_container.generating_block.buffer
-        final_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
-        GLib.idle_add(self.block_container.add_content, final_text)
+
+        def add_buffer_content(buffer:Gtk.TextBuffer):
+            final_text = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), False)
+            self.block_container.add_content(final_text)
+        GLib.idle_add(add_buffer_content, self.block_container.generating_block.buffer)
         GLib.idle_add(self.block_container.remove_generating_block)
         GLib.idle_add(self.update_profile_picture)
         GLib.idle_add(send_notification)
