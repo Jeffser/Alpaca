@@ -278,8 +278,9 @@ class InstancePreferencesDialog(Adw.Dialog):
         index = combo.get_selected()
         self.keep_alive_minutes_el.set_visible(index == 0)
         if index == 0:
+            minutes = self.instance.properties.get('keep_alive', 5)
             self.keep_alive_minutes_el.set_adjustment(Gtk.Adjustment(
-                value=int(self.instance.properties.get('keep_alive', 60) / 60),
+                value=minutes if minutes > 0 else 5,
                 lower=1,
                 upper=1440,
                 step_increment=1
