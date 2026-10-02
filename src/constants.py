@@ -40,7 +40,8 @@ TRANSLATORS = [
     "Ahmed Najmawi (Arabic) https://github.com/x9a",
     "Aliaksandr Kliujeŭ (Belarusian) https://github.com/PlagaMedicum",
     "Athmane MOKRAOUI (Kabyle) https://github.com/BoFFire",
-    "MoonShadow (Kabyle) https://github.com/ZiriSut"
+    "MoonShadow (Kabyle) https://github.com/ZiriSut",
+    "Niko Košćina (Croatian) https://github.com/20NikoK10"
 ]
 
 # Used to populate SR language in preferences

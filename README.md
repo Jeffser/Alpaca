@@ -71,6 +71,7 @@ Kannada              | [Jeethan Roche](https://github.com/roche-jeethan)
 Arabic               | [Ahmed Najmawi](https://github.com/x9a)
 Belarusian           | [Aliaksandr Kliujeŭ](https://github.com/PlagaMedicum)
 Kabyle               | [Athmane MOKRAOUI](https://github.com/BoFFire) , [MoonShadow](https://github.com/ZiriSut)
+Croatian             | [Niko Košćina](https://github.com/20NikoK10)
 
 Want to add a language? Visit [this wiki page](https://jeffser.com/alpaca/contributing-translations.html) to get started!
 
