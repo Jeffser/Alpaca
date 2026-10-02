@@ -229,6 +229,9 @@ class BaseInstance:
                 for chunk in response:
                     if chunk.choices and chunk.choices[0].delta:
                         delta = chunk.choices[0].delta
+                        reasoning = getattr(delta, "reasoning_content", None)
+                        if reasoning:
+                            bot_message.update_thinking(reasoning)
                         if delta.content:
                             bot_message.update_message(delta.content)
                     if not chat.busy:
