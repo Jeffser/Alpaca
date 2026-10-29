@@ -778,6 +778,12 @@ class XiaomiMiMo(BaseInstance):
     description = _('Xiaomi MiMo large language models')
     limitations = ('no-seed',)     # limitations = ('text-only',) as of now image support is not availble for Openai api
 
+class CheaperInference(BaseInstance):
+    instance_type = 'cheaperinference'
+    instance_type_display = 'Cheaper Inference'
+    instance_url = 'https://api.cheaperinference.com/v1'
+    description = _('Cheaper Inference OpenAI-compatible API')
+
 class LlamaCpp(BaseInstance):
     instance_type = 'llama_cpp'
     instance_type_display = 'llama.cpp'
