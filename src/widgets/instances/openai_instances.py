@@ -235,6 +235,7 @@ class BaseInstance:
                         if delta.content:
                             bot_message.update_message(delta.content)
                     if not chat.busy:
+                        response.close()
                         break
             except Exception as e:
                 dialog.simple_error(
