@@ -534,8 +534,7 @@ OLLAMA_MODELS = {
         "categories": [
                 "medium",
                 "small",
-                "big",
-                "huge"
+                "big"
         ],
         "languages": [
                 "en"
@@ -651,7 +650,6 @@ OLLAMA_MODELS = {
                 "small",
                 "medium",
                 "big",
-                "huge",
                 "code"
         ],
         "languages": [
@@ -753,7 +751,6 @@ OLLAMA_MODELS = {
                 "small",
                 "medium",
                 "big",
-                "huge",
                 "code"
         ],
         "languages": [
@@ -1284,8 +1281,8 @@ OLLAMA_MODELS = {
         ],
         "author": "Mistral AI",
         "categories": [
+                "medium",
                 "big",
-                "huge",
                 "code"
         ],
         "languages": [
@@ -1322,7 +1319,6 @@ OLLAMA_MODELS = {
                 "small",
                 "medium",
                 "big",
-                "huge",
                 "code"
         ],
         "languages": [
@@ -1391,7 +1387,6 @@ OLLAMA_MODELS = {
                 "small",
                 "medium",
                 "big",
-                "huge",
                 "code"
         ],
         "languages": [
@@ -1444,9 +1439,7 @@ OLLAMA_MODELS = {
         "author": "Hugging Face TB",
         "categories": [
                 "small",
-                "medium",
-                "big",
-                "huge"
+                "medium"
         ],
         "languages": [
                 "en"
@@ -1656,7 +1649,6 @@ OLLAMA_MODELS = {
         "categories": [
                 "medium",
                 "big",
-                "huge",
                 "code"
         ],
         "languages": [
@@ -2064,6 +2056,7 @@ OLLAMA_MODELS = {
         ],
         "author": "Matt Shumer",
         "categories": [
+                "big",
                 "huge"
         ],
         "languages": [
@@ -3087,6 +3080,7 @@ OLLAMA_MODELS = {
         ],
         "author": "Mistral AI",
         "categories": [
+                "multilingual",
                 "tools",
                 "big",
                 "huge",
@@ -3145,8 +3139,6 @@ OLLAMA_MODELS = {
                 "tools",
                 "small",
                 "medium",
-                "big",
-                "huge",
                 "code"
         ],
         "languages": [
@@ -5043,11 +5035,11 @@ OLLAMA_MODELS = {
         ],
         "url": "https://ollama.com/library/gemma3",
         "categories": [
+                "multilingual",
                 "vision",
                 "small",
                 "medium",
                 "big",
-                "huge",
                 "cloud"
         ],
         "author": "Google DeepMind",
@@ -5669,8 +5661,8 @@ OLLAMA_MODELS = {
         "description": _("Phi 4 reasoning and reasoning plus are 14-billion parameter open-weight reasoning models that rival much larger models on complex reasoning tasks."),
         "url": "https://ollama.com/library/phi4-reasoning",
         "categories": [
+                "medium",
                 "big",
-                "huge",
                 "math",
                 "code"
         ],
@@ -5825,10 +5817,11 @@ OLLAMA_MODELS = {
         "description": _("An update to Mistral Small that improves on function calling, instruction following, and less repetition errors."),
         "url": "https://ollama.com/library/mistral-small3.2",
         "categories": [
+                "multilingual",
                 "vision",
                 "tools",
+                "medium",
                 "big",
-                "huge",
                 "code"
         ],
         "author": "Mistral AI",
@@ -6135,8 +6128,6 @@ OLLAMA_MODELS = {
                 "tools",
                 "small",
                 "medium",
-                "big",
-                "huge",
                 "code",
                 "multilingual"
         ],
@@ -6336,14 +6327,22 @@ OLLAMA_MODELS = {
                 "tools",
                 "medium",
                 "small",
-                "big",
-                "huge",
                 "cloud",
                 "code"
         ],
         "author": "Mistral AI",
         "languages": [
-                "en"
+                "en",
+                "de",
+                "fr",
+                "it",
+                "pt",
+                "es",
+                "nl",
+                "jp",
+                "cn",
+                "ko",
+                "ar"
         ],
     },
     "rnj-1": {
@@ -6429,8 +6428,8 @@ OLLAMA_MODELS = {
         "categories": [
                 "tools",
                 "reasoning",
-                "huge",
                 "small",
+                "medium",
                 "cloud",
                 "code"
         ],
@@ -7221,8 +7220,6 @@ OLLAMA_MODELS = {
                 "tools",
                 "reasoning",
                 "medium",
-                "big",
-                "huge",
                 "code"
         ],
         "author": "Google DeepMind",
