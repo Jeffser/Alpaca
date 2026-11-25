@@ -394,7 +394,7 @@ TITLE_GENERATION_PROMPT_OPENAI = (
     "You are an assistant that generates short chat titles based on the first "
     "message from a user. If you want to, you can add a single emoji."
 )
-MAX_TOKENS_TITLE_GENERATION = 31
+MAX_TOKENS_TITLE_GENERATION = 200
 
 LEGAL_NOTICE = """Alpaca is an independent client interface designed to connect to various third-party AI services.
 All underlying AI models and instances are the intellectual property of their respective providers.
