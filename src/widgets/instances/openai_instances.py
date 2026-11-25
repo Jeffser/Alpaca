@@ -267,7 +267,7 @@ class BaseInstance:
         new_chat_title = chat.get_name()
 
         try:
-            completion = self.client.chat.completions.parse(**params, response_format=ChatTitle)
+            completion = self.client.beta.chat.completions.parse(**params, response_format=ChatTitle)
             response = completion.choices[0].message
             if response.parsed:
                 emoji = response.parsed.emoji if len(response.parsed.emoji) == 1 else ''
@@ -277,7 +277,7 @@ class BaseInstance:
                 response = self.client.chat.completions.create(**params)
                 new_chat_title = str(response.choices[0].message.content)
             except Exception as e:
-                logger.error(e)
+                logger.exception(e)
         
         new_chat_title = re.sub(r'<think>.*?</think>', '', new_chat_title).strip()
 
